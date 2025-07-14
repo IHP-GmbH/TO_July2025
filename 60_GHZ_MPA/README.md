@@ -10,7 +10,7 @@ This project is an **extension of the** [IHP Analog Academy](https://github.com/
 While the **complete design methodology** (including schematic, layout, EM simulation, and post-layout analysis) is detailed in the Analog Academy repository, this repo contains:
 - The **Non linear simulation setup (with description from analog academy)**
 - **OpenEMS simulation setup for the BJT core**
-- **Adapted layouts and tapeout-ready blocks** 
+- **Adapted layout** 
 used to validate and expand upon the original design flow.
 
 Check especially [module 2](https://github.com/IHP-GmbH/IHP-AnalogAcademy/tree/main/modules/module_2_50GHz_MPA):
