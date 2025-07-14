@@ -21,7 +21,7 @@ Additionally, we need to instantiate two key components:
 
 The setup for these components is illustrated in the image below:
 
-<p align="center"> <img src="media/module_2/harm_balance_1.png" width="300" height="200" /> </p> 
+<p align="center"> <img src=".media/module_2/harm_balance_1.png" width="300" height="200" /> </p> 
 
 ### Configuring the Parameter Sweep and Harmonic Balance
 
@@ -48,7 +48,7 @@ $$n=5n$$
 
 The complete schematic setup for the non-linear analysis, including all relevant components, is shown in the image below:
 
-<p align="center"> <img src="media/module_2/harm_balance_2.png" width="600" height="500" /> </p> 
+<p align="center"> <img src=".media/module_2/harm_balance_2.png" width="600" height="500" /> </p> 
 
 _(Remember to set the frequency of sources and components accordingly.)_
 
@@ -67,7 +67,7 @@ In the table, we should observe **10 data points** for each swept parameter, cor
 
 The expected table output is shown below:
 
-<p align="center"> <img src="media/module_2/harm_balance_3.png" width="350" height="400" /> </p> 
+<p align="center"> <img src=".media/module_2/harm_balance_3.png" width="350" height="400" /> </p> 
 
 ### Processing the Simulation Data
 
@@ -107,9 +107,9 @@ If the naming conventions of the variables differ in your schematic, use the fol
 python3 ../../python/plot_xyce.py load_pull.dat.xyce
 ```
 Once the script runs successfully, the **gain vs. input power** plot should resemble the following:
-<p align="center"> <img src="media/module_2/gain_vs_input_power_2.png" width="600" height="500" /> </p> 
+<p align="center"> <img src=".media/module_2/gain_vs_input_power_2.png" width="600" height="500" /> </p> 
 
-<p align="center"> <img src="media/module_2/output_power_vs_input_power.png" width="600" height="500" /> </p> 
+<p align="center"> <img src=".media/module_2/output_power_vs_input_power.png" width="600" height="500" /> </p> 
 
 
 ## Performing Load Pull
@@ -119,11 +119,11 @@ As observed in the previous simulation using ideal output components, the **1 dB
 While this approach requires some manual adjustments, the **Python script** can assist in processing the results. The exact method is left to the user’s preference. In the following example, we analyze the compression point around a **50Ω termination** and identify the most suitable resistance.
 
 It is important to avoid **excessively low resistance values**, as this would degrade the amplifier’s characteristics significantly. Below, the schematic illustrates the setup for a **40Ω termination**:
-<p align="center"> <img src="media/module_2/harm_balance_4.png" width="600" height="400" /> </p> 
+<p align="center"> <img src=".media/module_2/harm_balance_4.png" width="600" height="400" /> </p> 
 
 
 Gain curve and compression point was seen as the following:
-<p align="center"> <img src="media/module_2/gain_vs_input_power_2.png" width="600" height="500" /> </p> 
+<p align="center"> <img src=".media/module_2/gain_vs_input_power_2.png" width="600" height="500" /> </p> 
 
 
 ### Evaluating the Compression Point Shift
@@ -140,9 +140,9 @@ This result suggests that **matching to a 40Ω termination improves the circuit�
 - **Gradually tune** the network components to achieve the highest possible **P1dB** while maintaining a good match.
 
 The schematic below illustrates the circuit configuration that will be used in further analysis. The corresponding **gain response** is shown in the final image.
-<p align="center"> <img src="media/module_2/harm_balance_5.png" width="600" height="400" /> </p> 
+<p align="center"> <img src=".media/module_2/harm_balance_5.png" width="600" height="400" /> </p> 
 
 ![[harm_balance_5.png]]
-<p align="center"> <img src="media/module_2/gain_vs_input_power_3.png" width="600" height="500" /> </p> 
+<p align="center"> <img src=".media/module_2/gain_vs_input_power_3.png" width="600" height="500" /> </p> 
 
 ![[gain_vs_input_power_3.png]]
