@@ -29,7 +29,7 @@ We also need to instantiate two key components for the non-linear simulation:
 The setup for these components is shown below:
 
 <p align="center"> 
-  <img src=".media/harm_balance_1.png" width="300" height="250" /> 
+  <img src="/../../.media/harm_balance_1.png" width="300" height="250" /> 
 </p>
 
 ---
@@ -60,7 +60,7 @@ $$n=5$$
 Below is the complete schematic setup for the non-linear analysis, including all relevant components:
 
 <p align="center"> 
-  <img src=".media/harm_balance_2.png" width="600" height="500" /> 
+  <img src="/../../.media/harm_balance_2.png" width="600" height="500" /> 
 </p>
 
 _(Remember to adjust the frequency of sources and components accordingly.)_
@@ -82,7 +82,7 @@ In the table, we should observe **10 data points** for each swept parameter, cor
 The expected table output is shown below:
 
 <p align="center"> 
-  <img src=".media/harm_balance_3.png" width="350" height="400" /> 
+  <img src="/../../.media/harm_balance_3.png" width="350" height="400" /> 
 </p>
 
 ---
@@ -96,25 +96,25 @@ Within the **part_3_non_linear_analysis** folder, a **python** folder contains a
 To use the script, you will need to extract the **I/O current** and **voltages** by instantiating a **Cartesian plot** under the diagrams section:
 
 <p align="center"> 
-  <img src=".media/diagram_main_dock.png" width="350" height="550" /> 
+  <img src="/../../.media/diagram_main_dock.png" width="350" height="550" /> 
 </p>
 
 To plot the I/O current and voltages, simply double-click the plot and select the appropriate data:
 
 <p align="center"> 
-  <img src=".media/edit_diagram_properties.png" width="500" height="450" /> 
+  <img src="/../../.media/edit_diagram_properties.png" width="500" height="450" /> 
 </p>
 
 The extracted data should be in the following format (note the selection of arrows in the style) :
 
 <p align="center"> 
-  <img src=".media/arrow_cartesian_plot.png" width="600" height="400" /> 
+  <img src="/../../.media/arrow_cartesian_plot.png" width="600" height="400" /> 
 </p>
 
 After obtaining the data, navigate to the **Jupyter Lab** script, ensuring that the data is properly pointed to as shown below:
 
 <p align="center"> 
-  <img src=".media/jupyter_lab_setup.png" width="600" height="400" /> 
+  <img src="/../../.media/jupyter_lab_setup.png" width="600" height="400" /> 
 </p>
 Using the script you will optain plots like seen in the last image in the following markdown file.
 **Note:** There may be potential issues with the script, and you might need to adjust it based on the specific data format or cases encountered.
@@ -130,7 +130,7 @@ While this approach requires some manual adjustments, a **Python script** can as
 It is important to avoid **excessively low resistance values**, as these will degrade the amplifier’s performance. Below is the schematic showing the setup for a **40Ω termination**:
 
 <p align="center"> 
-  <img src=".media/harm_balance_4.png" width="600" height="400" /> 
+  <img src="/../../.media/harm_balance_4.png" width="600" height="400" /> 
 </p>
 
 ### Recommended Approach
@@ -141,10 +141,10 @@ It is important to avoid **excessively low resistance values**, as these will de
 The schematic below shows the configuration used for further analysis, and the corresponding **gain response** is depicted in the final image:
 
 <p align="center"> 
-  <img src=".media/harm_balance_5.png" width="600" height="400" /> 
+  <img src="/../../.media/harm_balance_5.png" width="600" height="400" /> 
 </p>
 
 <p align="center"> 
-  <img src=".media/compression_point_plot.png" width="600" height="600" /> 
+  <img src="/../../.media/compression_point_plot.png" width="600" height="600" /> 
 </p>
 
