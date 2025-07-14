@@ -28,7 +28,7 @@ postprocess_only = False
 # ===================== input files and path settings =======================
 
 # GDS filename
-gds_filename = "../layout_gds/50_ghz_mpa_core_no_BJT.gds"      # geometries
+gds_filename = "../../../klayout/openems_gds/50_ghz_mpa_core_no_BJT.gds"      # geometries
 XML_filename = "SG13G2.xml"       # stackup
 
 # preprocess GDSII for safe handling of cutouts/holes?
