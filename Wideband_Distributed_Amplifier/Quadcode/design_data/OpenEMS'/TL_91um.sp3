@@ -1,0 +1,75 @@
+* Momentum eesofbbs_64 2022.00 (*) built: Jul  2 2021
+**************************************************
+
+***************************************
+
+*bbspice subcircuit with consecutive port numbers.
+.SUBCKT bbspice_TL_91um_subckt	  port_1  port_2  gnd_0
+
+* PORT_1
+vi_1	port_1	_net_1	0.00000000000000e+00
+vb_1	_net_4	_net_5	0.00000000000000e+00
+R_Z0_1 	_net_1 	_net_2 	5.00000000000000e+01	NOISE=0
+H_b_1	_net_2	gnd_0	vb_1	1.41421356237310e+01
+E_v_1	_net_3	gnd_0	port_1	gnd_0	7.07106781186548e-02
+H_i_1	_net_4	_net_3	vi_1	3.53553390593274e+00
+
+
+G_C_1_1 	_net_5 	gnd_0 	_net_11 	gnd_0 	-2.96096196501611e+09
+G_C_1_2 	_net_5 	gnd_0 	_net_12 	gnd_0 	-1.96797911453021e+10
+G_C_1_3 	_net_5 	gnd_0 	_net_13 	gnd_0 	-1.63816909454411e+12
+G_C_1_4 	_net_5 	gnd_0 	_net_14 	gnd_0 	-5.68360040589271e+12
+
+* PORT_2
+vi_2	port_2	_net_6	0.00000000000000e+00
+vb_2	_net_9	_net_10	0.00000000000000e+00
+R_Z0_2 	_net_6 	_net_7 	5.00000000000000e+01	NOISE=0
+H_b_2	_net_7	gnd_0	vb_2	1.41421356237310e+01
+E_v_2	_net_8	gnd_0	port_2	gnd_0	7.07106781186548e-02
+H_i_2	_net_9	_net_8	vi_2	3.53553390593274e+00
+
+
+G_C_2_1 	_net_10 	gnd_0 	_net_11 	gnd_0 	-1.63816909454411e+12
+G_C_2_2 	_net_10 	gnd_0 	_net_12 	gnd_0 	-5.68360040589271e+12
+G_C_2_3 	_net_10 	gnd_0 	_net_13 	gnd_0 	-4.85545995362002e+09
+G_C_2_4 	_net_10 	gnd_0 	_net_14 	gnd_0 	-2.45751419881015e+10
+
+* STATE_1
+C_1 	_net_11 	gnd_0 	1.00000000000000e-11
+G_A_1_1 	_net_11 	gnd_0 	_net_11 	gnd_0 	3.14554381030529e+01
+G_A_1_2 	_net_11 	gnd_0 	_net_12 	gnd_0 	-2.19141785440696e+01
+G_B_1_1 	_net_11 	gnd_0 	_net_4 	gnd_0 	-2.00000000000000e-11
+
+* STATE_2
+C_2 	_net_12 	gnd_0 	1.00000000000000e-11
+G_A_2_2 	_net_12 	gnd_0 	_net_12 	gnd_0 	3.14554381030529e+01
+G_A_2_1 	_net_12 	gnd_0 	_net_11 	gnd_0 	2.19141785440696e+01
+
+* STATE_3
+C_3 	_net_13 	gnd_0 	1.00000000000000e-11
+G_A_3_3 	_net_13 	gnd_0 	_net_13 	gnd_0 	3.14554381030529e+01
+G_A_3_4 	_net_13 	gnd_0 	_net_14 	gnd_0 	-2.19141785440696e+01
+G_B_3_2 	_net_13 	gnd_0 	_net_9 	gnd_0 	-2.00000000000000e-11
+
+* STATE_4
+C_4 	_net_14 	gnd_0 	1.00000000000000e-11
+G_A_4_4 	_net_14 	gnd_0 	_net_14 	gnd_0 	3.14554381030529e+01
+G_A_4_3 	_net_14 	gnd_0 	_net_13 	gnd_0 	2.19141785440696e+01
+
+
+.ENDS  bbspice_TL_91um_subckt
+***************************************
+
+
+***************************************
+* S-based subckt
+
+ 
+*bbspice subcircuit with external port numbers.
+
+.SUBCKT bbspice_TL_91um		1 	2 	0 
+
+x_ 	1 	2 	0 	bbspice_TL_91um_subckt
+
+.ENDS  bbspice_TL_91um
+***************************************
