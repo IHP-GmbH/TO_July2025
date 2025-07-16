@@ -2,9 +2,9 @@
 
 # -- Project information
 
-project = 'Amazing Design'
+project = 'Wideband Distributed Amplifier'
 copyright = '2024, IHP Open PDK'
-author = 'Amazing Design Authors'
+author = 'Sultan Mohammad Ikram'
 
 release = '0.1'
 version = '0.1.0'
