@@ -3,7 +3,7 @@
 # -- Project information
 
 project = 'Wideband Distributed Amplifier'
-copyright = '2024, IHP Open PDK'
+copyright = '2025, IHP Open PDK'
 author = 'Sultan Mohammad Ikram'
 
 release = '0.1'
