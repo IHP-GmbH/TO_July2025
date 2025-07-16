@@ -3,7 +3,7 @@ Validation  of the Design
 
 
 Simulated Result
-############################
+#######################################
 Tricode
 --------------------------------
 .. image:: _static/tricode_sparameter.png
