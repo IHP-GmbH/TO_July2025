@@ -160,7 +160,7 @@ N 5050 -2800 5170 -2800 {lab=#net12}
 N 5850 -2840 5850 -2740 {lab=#net12}
 N 5210 -3240 5210 -3110 {lab=VOUT}
 N 6070 -2650 6070 -2340 {lab=AVSS}
-N 5210 -3110 6450 -3110 {lab=VOUT}
+N 6620 -3110 6770 -3110 {lab=VOUT}
 N 4710 -2340 5210 -2340 {lab=AVSS}
 N 5400 -2340 5760 -2340 {lab=AVSS}
 N 3640 -3700 3710 -3700 {lab=AVDD}
@@ -271,6 +271,10 @@ N 1660 -2820 1660 -2680 {lab=IBIAS}
 N 1560 -2680 1660 -2680 {lab=IBIAS}
 N 1520 -2820 1660 -2820 {lab=IBIAS}
 N 1520 -3180 1520 -2820 {lab=IBIAS}
+N 6620 -3110 6620 -2900 {lab=VOUT}
+N 5210 -3110 6620 -3110 {lab=VOUT}
+N 6620 -2840 6620 -2340 {lab=AVSS}
+N 6350 -2340 6620 -2340 {lab=AVSS}
 C {ipin.sym} 400 -2340 0 0 {name=p5 lab=AVSS}
 C {ipin.sym} 400 -3180 0 0 {name=p1 lab=IBIAS}
 C {ipin.sym} 400 -3700 0 0 {name=p2 lab=AVDD}
@@ -381,7 +385,7 @@ spiceprefix=X
 C {ipin.sym} 4120 -2980 0 0 {name=p3 lab=PLUS}
 C {ipin.sym} 4890 -2980 0 1 {name=p4 lab=MINUS
 }
-C {opin.sym} 6450 -3110 0 0 {name=p7 lab=VOUT}
+C {opin.sym} 6770 -3110 0 0 {name=p7 lab=VOUT}
 C {sg13g2_pr/sg13_lv_nmos.sym} 4670 -2980 0 1 {name=M37
 l=1u
 w=6u
@@ -543,3 +547,9 @@ m=1
 model=sg13_lv_nmos
 spiceprefix=X
 }
+C {sg13g2_pr/cap_cmim.sym} 6620 -2870 0 0 {name=C2
+model=cap_cmim
+w=25.82e-6
+l=25.82e-6
+m=1
+spiceprefix=X}

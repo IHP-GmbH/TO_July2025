@@ -39,5 +39,6 @@ XM27 net3 AVSS AVSS AVSS sg13_lv_nmos w=3u l=2u ng=2 m=1
 XM26 net2 AVSS AVSS AVSS sg13_lv_nmos w=3u l=2u ng=2 m=1
 XM35 net1 AVDD AVDD AVDD sg13_lv_pmos w=7u l=2u ng=2 m=1
 XM31 net11 AVSS AVSS AVSS sg13_lv_nmos w=3u l=2u ng=2 m=1
+XC2 VOUT AVSS cap_cmim w=25.82e-6 l=25.82e-6 m=1
 **.ends
 .end
