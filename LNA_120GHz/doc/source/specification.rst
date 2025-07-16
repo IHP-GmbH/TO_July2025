@@ -15,7 +15,7 @@ Specifications of the design
 | DC consumption | 27 mW            | 
 +----------------+------------------+
 
-The aim of this project is the conception of 122 GHz LNA (Low Noise Amplifier). The design of transmission lines has enabled the adaptation allowing to reach the performances exposed in the above table. 
+The aim of this project is the design of 122 GHz LNA (Low Noise Amplifier). The design of transmission lines has enabled the matching allowing the performance targets shown in the table above to be achieved. 
 
 Schematic of the designed LNA:
 
