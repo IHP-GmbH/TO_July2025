@@ -1,0 +1,19 @@
+** sch_path: /home/pedersen/projects/design_space/tapeouts/TO_July2025/ExampleDesign/design_data/lvs/60_ghz_mpa.sch
+.SUBCKT 60_ghz_mpa VCC GND BIAS VIN VOUT
+*.PININFO VCC:B GND:B BIAS:B VIN:I VOUT:O
+Q1 VCC net2 GND net1 npn13G2 le=900e-9 we=70.0n m=10
+R1 GND net1 ptap1 A=6.084e-13 P=3.12e-06
+R2 GND net1 ptap1 A=6.084e-13 P=3.12e-06
+R3 GND net1 ptap1 A=6.084e-13 P=3.12e-06
+R4 GND net1 ptap1 A=6.084e-13 P=3.12e-06
+C1 VCC GND cap_cmim w=18.2e-6 l=18.2e-6 m=1
+C2 net2 net3 cap_cmim w=8.1e-6 l=8.1e-6 m=1
+R5 net3 net2 rppd w=3e-6 l=11.29e-6 m=1 b=0
+C3 net3 GND cap_cmim w=18.19e-6 l=18.2e-6 m=1
+R7 net3 BIAS rppd w=2.5e-6 l=22.86e-6 m=1 b=0
+C4 VCC VOUT cap_cmim w=9.26e-6 l=9.26e-6 m=1
+R6 GND net3 rhigh w=5e-6 l=18.12e-6 m=1 b=0
+C5 net3 VIN cap_cmim w=13.6e-6 l=13.6e-6 m=1
+C6 VCC GND cap_cmim w=14.08e-6 l=14.08e-6 m=1
+C7 VCC GND cap_cmim w=14.08e-6 l=14.08e-6 m=1
+.ENDS
