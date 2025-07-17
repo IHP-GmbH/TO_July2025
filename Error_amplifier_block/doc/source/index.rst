@@ -5,8 +5,7 @@ Welcome to Amazing Design Open Source PDK documentation!
 
 
 .. toctree::
-    :maxdepth: 2
-    :caption: Contents:
+    :hidden:
     
     specification
     designdata
