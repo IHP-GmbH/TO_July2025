@@ -1,0 +1,35 @@
+v {xschem version=3.4.6 file_version=1.2}
+G {}
+K {type=port_diff
+format="@name @@p @@n @DCval port=@portnum Z0=@Z0 AC @ACmag @ACphase @TRANval"
+template="name=P1 portnum=1 Z0=50 DCval=0 ACmag=0 ACphase=0 TRANval=\\"\\""}
+V {}
+S {type=port
+format="@name @@p @@n DC @DCval port=@portnum Z0=@Z0 AC @ACmag @ACphase @TRANval"
+template="name=P1 DCval=0 portnum=1 Z0=100 ACmag=0 ACphase=0 TRANval="""}
+E {}
+L 4 -30 -35 -30 -25 {}
+L 4 -30 20 -20 30 {}
+L 4 -30 40 -20 30 {}
+L 4 -25 20 -15 30 {}
+L 4 -25 40 -15 30 {}
+L 4 -35 -30 -25 -30 {}
+L 4 -25 -40 -15 -30 {}
+L 4 -25 -20 -15 -30 {}
+L 4 -30 -40 -20 -30 {}
+L 4 -30 -20 -20 -30 {}
+L 4 -30 25 -30 35 {}
+L 4 -15 30 0 30 {}
+L 4 -15 -30 0 -30 {}
+L 4 -40 -45 -40 45 {}
+L 4 -40 45 5 45 {}
+L 4 5 -45 5 45 {}
+L 4 -40 -45 5 -45 {}
+B 5 -2.5 27.5 2.5 32.5 {name=n dir=inout}
+B 5 -2.5 -32.5 2.5 -27.5 {name=p dir=inout}
+T {@name} -40 -30 2 0 0.2 0.2 {}
+T {Z0=@Z0} -40 -15 2 0 0.2 0.2 {}
+T {PORTNUM=@portnum} -40 0 2 0 0.2 0.2 {}
+T {DC=@DCval} -40 15 2 0 0.2 0.2 {}
+T {AC=@ACmag @ACphase} -40 30 2 0 0.2 0.2 {}
+T {TRAN=@TRANval} -40 45 2 0 0.2 0.2 {}
