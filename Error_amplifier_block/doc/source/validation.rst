@@ -1,6 +1,14 @@
 Validation  of the Amazing Design
 #################################
 
+Layout
+======
+.. image:: _static/chip_layout.png
+   :align: center
+   :alt: Final Layout
+   :width: 600
+
+-  Final Layout
 
 
 Simulation of the OTA
@@ -15,6 +23,14 @@ Now that the circuit is finalized, we proceed to test its **AC behavior**, **tra
    :width: 600
 
 -  AC Analysis
+  
+.. image:: _static/_fig_ac_simulation.png
+   :align: center
+   :alt: AC simulation
+   :width: 600
+
+-  AC simulation
+
 
 
 .. image:: _static/_fig_tran.svg
@@ -23,6 +39,14 @@ Now that the circuit is finalized, we proceed to test its **AC behavior**, **tra
    :width: 600
 
 -  Transient Analysis
+  
+.. image:: _static/_fig_tran_simulation.png
+   :align: center
+   :alt: Transient simulation
+   :width: 600
+
+-  Transient simulation
+
 
 
 .. image:: _static/_fig_loopgain.svg
