@@ -1,0 +1,34 @@
+** sch_path: /ALL/Xschem/LC_VCO/LC_tank_03.sch
+.subckt LC_tank_03 LC0 LC1 d0 d1 d2 d3 vco
+*.PININFO LC0:B LC1:B d0:I d1:I d2:I d3:I vco:I
+R68 vco net20  rppd w=0.5e-6 l=20e-6 m=1 b=0
+C59 net5 net2 cap_cmim w=20.0e-6 l=16.0e-6
+M43 net2 net7 LC0 VSS sg13_lv_nmos w=240u l=.13u m=1 ng=1
+M44 net5 net6 LC1 VSS sg13_lv_nmos w=240u l=.13u m=1 ng=1
+C65 net6 LC1 cap_cmim w=24.0e-6 l=16.0e-6
+C69 net7 LC0 cap_cmim w=24.0e-6 l=16.0e-6
+C73 net9 net8 cap_cmim w=20.0e-6 l=8.0e-6
+M88 net8 net11 LC0 VSS sg13_lv_nmos w=120u l=.13u m=1 ng=1
+M89 net9 net10 LC1 VSS sg13_lv_nmos w=120u l=.13u m=1 ng=1
+C74 net10 LC1 cap_cmim w=24.0e-6 l=8.0e-6
+C75 net11 LC0 cap_cmim w=24.0e-6 l=8.0e-6
+C2 net13 net12 cap_cmim w=20.0e-6 l=4.0e-6
+M2 net12 net15 LC0 VSS sg13_lv_nmos w=60u l=.13u m=1 ng=1
+M3 net13 net14 LC1 VSS sg13_lv_nmos w=60u l=.13u m=1 ng=1
+C10 net14 LC1 cap_cmim w=24.0e-6 l=4.0e-6
+C11 net15 LC0 cap_cmim w=24.0e-6 l=4.0e-6
+C12 net17 net16 cap_cmim w=10.0e-6 l=4.0e-6
+M4 net16 net19 LC0 VSS sg13_lv_nmos w=60u l=.13u m=1 ng=1
+M5 net17 net18 LC1 VSS sg13_lv_nmos w=60u l=.13u m=1 ng=1
+C13 net18 LC1 cap_cmim w=24.0e-6 l=4e-6
+C14 net19 LC0 cap_cmim w=24.0e-6 l=4e-6
+R2 net19 d0  rppd w=0.5e-6 l=20e-6 m=1 b=0
+R3 d0 net18  rppd w=0.5e-6 l=20e-6 m=1 b=0
+R4 net15 d1  rppd w=0.5e-6 l=20e-6 m=1 b=0
+R5 d1 net14  rppd w=0.5e-6 l=20e-6 m=1 b=0
+R6 net11 d2  rppd w=0.5e-6 l=20e-6 m=1 b=0
+R7 d2 net10  rppd w=0.5e-6 l=20e-6 m=1 b=0
+R8 net7 d3  rppd w=0.5e-6 l=20e-6 m=1 b=0
+R9 d3 net6  rppd w=0.5e-6 l=20e-6 m=1 b=0
+C1 LC0 net20 LC1 VSS sg13_hv_svaricap w=9.74e-6 l=0.8e-6 Nx=30
+.ends
