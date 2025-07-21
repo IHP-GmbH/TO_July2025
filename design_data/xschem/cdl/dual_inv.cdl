@@ -1,0 +1,17 @@
+** sch_path: /ALL/Xschem/LC_VCO/dual_inv.sch
+.subckt dual_inv VDD out_p out_n in_n in_p VSS
+*.PININFO out_p:B out_n:B in_p:B in_n:B VSS:B VDD:B
+
+*** nw=3e-05 nl=1.3e-07 pw=9e-05 pl=1.3e-07
+
+M31 out_p in_n VSS VSS sg13_lv_nmos w=30u l=0.13u m=1 ng=20
+M32 out_p in_n VDD VDD sg13_lv_pmos w=90u l=0.13u m=1 ng=20
+M49 out_n in_p VSS VSS sg13_lv_nmos w=30u l=0.13u m=1 ng=20
+M50 out_n in_p VDD VDD sg13_lv_pmos w=90u l=0.13u m=1 ng=20
+**** begin user architecture code
+
+
+
+
+**** end user architecture code
+.ends
