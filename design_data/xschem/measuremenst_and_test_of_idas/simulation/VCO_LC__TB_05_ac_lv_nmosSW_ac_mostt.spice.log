@@ -1,0 +1,82 @@
+
+*****
+***** Welcome to the Xyce(TM) Parallel Electronic Simulator
+*****
+***** This is version Xyce DEVELOPMENT-202409220015-(Public_Release-7.8.0-128-g5b74b0d5)-opensource
+***** Date: Sun Jul 20 02:12:55 CEST 2025
+
+
+***** Executing netlist /ALL/Xschem/LC_VCO/measuremenst_and_test_of_idas/simulation/VCO_LC__TB_05_ac_lv_nmosSW_ac_mostt.spice
+
+***** Reading and parsing netlist...
+Netlist warning in file
+ /home/ich/share/pdk/dev/IHP-Open-PDK/ihp-sg13g2/libs.tech/xyce/models/sg13g2_bondpad.lib
+ at or near line 22
+ Unrecognized dot line will be ignored
+Netlist warning in file
+ /home/ich/share/pdk/dev/IHP-Open-PDK/ihp-sg13g2/libs.tech/xyce/models/sg13g2_moslv_parm.lib
+ at or near line 61
+ No model parameter MUNQSO found for model SG13G2_LV_NMOS_PSP of type
+ PSP103_VA, parameter ignored.
+Netlist warning in file
+ /home/ich/share/pdk/dev/IHP-Open-PDK/ihp-sg13g2/libs.tech/xyce/models/sg13g2_moslv_parm.lib
+ at or near line 61
+ No model parameter SWNQS found for model SG13G2_LV_NMOS_PSP of type
+ PSP103_VA, parameter ignored.
+***** Setting up topology...
+
+***** Device Count Summary ...
+       C level 1 (Capacitor)                   57
+       D level 1,2 (Diode)                      4
+       I level 1 (Independent Current Source)   8
+       L level 1 (Inductor)                     8
+       PSP103_VA level 1 (ADMS PSP103_VA)      27
+       R level 1 (Resistor)                   105
+       V level 1 (Independent Voltage Source)  16
+       ------------------------------------------
+       Total Devices                          225
+***** Setting up matrix structure...
+***** Number of Unknowns = 256
+***** Initializing...
+
+
+***** Solution Summary *****
+	Number Successful Steps Taken:		445
+	Number Failed Steps Attempted:		0
+	Number Jacobians Evaluated:		7
+	Number Linear Solves:			7
+	Number Failed Linear Solves:		0
+	Number Residual Evaluations:		8
+	Number Nonlinear Convergence Failures:	0
+	Total Residual Load Time:		0.000858068 seconds
+	Total Jacobian Load Time:		8.7738e-05 seconds
+	Total Linear Solution Time:		0.000323296 seconds
+
+
+***** Total Simulation Solvers Run Time: 0.0923939 seconds
+***** Total Elapsed Run Time:            0.135722 seconds
+*****
+***** End of Xyce(TM) Simulation
+*****
+
+Timing summary of 1 processor
+                 Stats                   Count       CPU Time              Wall Time
+---------------------------------------- ----- --------------------- ---------------------
+Xyce                                         1        0.135 (100.0%)        0.137 (100.0%)
+  Analysis                                   1        0.091 (67.86%)        0.092 (67.51%)
+    AC                                       1        0.091 (67.86%)        0.092 (67.50%)
+      DC Nonlinear Solve                     1        0.002 ( 1.18%)        0.002 ( 1.18%)
+        Residual                             8        0.001 ( 0.62%)        0.001 ( 0.63%)
+        Jacobian                             7        0.000 ( 0.06%)        0.000 ( 0.07%)
+        Linear Solve                         7        0.000 ( 0.24%)        0.000 ( 0.24%)
+      AC Linear Solve                      445        0.040 (29.70%)        0.040 (29.46%)
+        Linear Solve                       445        0.040 (29.44%)        0.040 (29.26%)
+  Netlist Import                             1        0.039 (28.64%)        0.039 (28.79%)
+    Parse Context                            1        0.012 ( 9.08%)        0.012 ( 8.94%)
+    Distribute Devices                       1        0.025 (18.24%)        0.025 (18.52%)
+    Verify Devices                           1        0.000 (<0.01%)        0.000 (<0.01%)
+    Instantiate                              1        0.001 ( 0.77%)        0.001 ( 0.77%)
+  Late Initialization                        1        0.003 ( 2.33%)        0.003 ( 2.32%)
+    Global Indices                           1        0.000 ( 0.19%)        0.000 ( 0.22%)
+  Setup Matrix Structure                     1        0.000 ( 0.30%)        0.000 ( 0.30%)
+

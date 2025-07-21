@@ -1,0 +1,147 @@
+** sch_path: /ALL/Xschem/LC_VCO/FMD_QNC_MOS_VCO_LC.sch
+.subckt FMD_QNC_MOS_VCO_LC
+
+x7 net1 net2 v_freq d0 d1 d2 d3 VSS LC_tank_03
+x12 out_n out_p VDD VSS net1 net2 v_gain VCO_LC_core
+X1 v_gain bondpad
+D3 VDD v_freq VSS diodevdd_2kv m=1
+D4 VDD v_freq VSS diodevss_2kv m=1
+X2 v_freq bondpad
+D5 VDD d0 VSS diodevdd_2kv m=1
+D6 VDD d0 VSS diodevss_2kv m=1
+X3 d0 bondpad
+D7 VDD d1 VSS diodevdd_2kv m=1
+D8 VDD d1 VSS diodevss_2kv m=1
+X4 d1 bondpad
+D9 VDD d2 VSS diodevdd_2kv m=1
+D10 VDD d2 VSS diodevss_2kv m=1
+X5 d2 bondpad
+D11 VDD d3 VSS diodevdd_2kv m=1
+D12 VDD d3 VSS diodevss_2kv m=1
+X6 d3 bondpad
+X8 VDD bondpad
+X9 VSS bondpad
+X10 out_n bondpad
+X11 out_p bondpad
+X13 VSS bondpad
+X14 VSS bondpad
+X15 VSS bondpad
+X16 VSS bondpad
+X17 VSS bondpad
+**** begin user architecture code
+
+
+
+
+
+
+**** end user architecture code
+.ends
+
+* expanding   symbol:  /ALL/Xschem/LC_VCO/LC_tank_02.sym # of pins=8
+** sym_path: /ALL/Xschem/LC_VCO/LC_tank_02.sym
+** sch_path: /ALL/Xschem/LC_VCO/LC_tank_02.sch
+.subckt LC_tank_02 LC0 LC1 vco d0 d1 d2 d3 VSS
+*.PININFO LC0:B LC1:B d0:I d1:I d2:I d3:I vco:I
+R68 vco net20 rppd w=0.5e-6 l=20e-6 m=1 b=0
+C59 net5 net2 cap_cmim w=20.0e-6 l=16.0e-6 m=1
+M43 net2 net7 LC0 VSS sg13_lv_nmos w=480u l=.13u m=1 ng=1
+M44 net5 net6 LC1 VSS sg13_lv_nmos w=480u l=.13u m=1 ng=1
+C65 net6 LC1 cap_cmim w=24.0e-6 l=16.0e-6 m=1
+C69 net7 LC0 cap_cmim w=24.0e-6 l=16.0e-6 m=1
+C73 net9 net8 cap_cmim w=20.0e-6 l=8.0e-6 m=1
+M88 net8 net11 LC0 VSS sg13_lv_nmos w=240u l=.13u m=1 ng=1
+M89 net9 net10 LC1 VSS sg13_lv_nmos w=240u l=.13u m=1 ng=1
+C74 net10 LC1 cap_cmim w=24.0e-6 l=8.0e-6 m=1
+C75 net11 LC0 cap_cmim w=24.0e-6 l=8.0e-6 m=1
+C2 net13 net12 cap_cmim w=20.0e-6 l=4.0e-6 m=1
+M2 net12 net15 LC0 VSS sg13_lv_nmos w=120u l=.13u m=1 ng=1
+M3 net13 net14 LC1 VSS sg13_lv_nmos w=120u l=.13u m=1 ng=1
+C10 net14 LC1 cap_cmim w=24.0e-6 l=4.0e-6 m=1
+C11 net15 LC0 cap_cmim w=24.0e-6 l=4.0e-6 m=1
+C12 net17 net16 cap_cmim w=10.0e-6 l=4.0e-6 m=1
+M4 net16 net19 LC0 VSS sg13_lv_nmos w=120u l=.13u m=1 ng=1
+M5 net17 net18 LC1 VSS sg13_lv_nmos w=120u l=.13u m=1 ng=1
+C13 net18 LC1 cap_cmim w=24.0e-6 l=4e-6 m=1
+C14 net19 LC0 cap_cmim w=24.0e-6 l=4e-6 m=1
+R2 net19 d0 rppd w=0.5e-6 l=20e-6 m=1 b=0
+R3 d0 net18 rppd w=0.5e-6 l=20e-6 m=1 b=0
+R4 net15 d1 rppd w=0.5e-6 l=20e-6 m=1 b=0
+R5 d1 net14 rppd w=0.5e-6 l=20e-6 m=1 b=0
+R6 net11 d2 rppd w=0.5e-6 l=20e-6 m=1 b=0
+R7 d2 net10 rppd w=0.5e-6 l=20e-6 m=1 b=0
+R8 net7 d3 rppd w=0.5e-6 l=20e-6 m=1 b=0
+R9 d3 net6 rppd w=0.5e-6 l=20e-6 m=1 b=0
+.ends
+
+
+* expanding   symbol:  /ALL/Xschem/LC_VCO/VCO_LC_core.sym # of pins=7
+** sym_path: /ALL/Xschem/LC_VCO/VCO_LC_core.sym
+** sch_path: /ALL/Xschem/LC_VCO/VCO_LC_core.sch
+.subckt VCO_LC_core out_n out_p VDD VSS c2 c1 v_gain
+*.PININFO VSS:B VDD:B c1:B c2:B out_p:B out_n:B v_gain:B
+**** begin user architecture code
+
+
+**** end user architecture code
+x2 v_gain c1 c2 c2 c1 VSS dual_inv nw=3e-05 nl=1.3e-07 pw=9e-05 pl=1.3e-07
+C2 VSS v_gain cap_cmim w=28e-6 l=18e-6 m=1
+x1 VDD out_p out_n c1 c2 VSS dual_inv nw=3e-05 nl=1.3e-07 pw=9e-05 pl=1.3e-07
+C1 VSS VDD cap_cmim w=28e-6 l=16e-6 m=1
+.ends
+
+
+* expanding   symbol:  /ALL/Xschem/LC_VCO/LC_tank_03.sym # of pins=8
+** sym_path: /ALL/Xschem/LC_VCO/LC_tank_02.sym
+** sch_path: /ALL/Xschem/LC_VCO/LC_tank_03.sch
+.subckt LC_tank_03 LC0 LC1 vco d0 d1 d2 d3 VSS
+*.PININFO LC0:B LC1:B d0:I d1:I d2:I d3:I vco:I VSS:B
+R68 vco net20 rppd w=0.5e-6 l=20e-6 m=1 b=0
+C59 net5 net2 cap_cmim w=20.0e-6 l=16.0e-6 m=1
+M43 net2 net7 LC0 VSS sg13_lv_nmos w=240u l=.13u m=1 ng=1
+M44 net5 net6 LC1 VSS sg13_lv_nmos w=240u l=.13u m=1 ng=1
+C65 net6 LC1 cap_cmim w=24.0e-6 l=16.0e-6 m=1
+C69 net7 LC0 cap_cmim w=24.0e-6 l=16.0e-6 m=1
+C73 net9 net8 cap_cmim w=20.0e-6 l=8.0e-6 m=1
+M88 net8 net11 LC0 VSS sg13_lv_nmos w=120u l=.13u m=1 ng=1
+M89 net9 net10 LC1 VSS sg13_lv_nmos w=120u l=.13u m=1 ng=1
+C74 net10 LC1 cap_cmim w=24.0e-6 l=8.0e-6 m=1
+C75 net11 LC0 cap_cmim w=24.0e-6 l=8.0e-6 m=1
+C2 net13 net12 cap_cmim w=20.0e-6 l=4.0e-6 m=1
+M2 net12 net15 LC0 VSS sg13_lv_nmos w=60u l=.13u m=1 ng=1
+M3 net13 net14 LC1 VSS sg13_lv_nmos w=60u l=.13u m=1 ng=1
+C10 net14 LC1 cap_cmim w=24.0e-6 l=4.0e-6 m=1
+C11 net15 LC0 cap_cmim w=24.0e-6 l=4.0e-6 m=1
+C12 net17 net16 cap_cmim w=10.0e-6 l=4.0e-6 m=1
+M4 net16 net19 LC0 VSS sg13_lv_nmos w=60u l=.13u m=1 ng=1
+M5 net17 net18 LC1 VSS sg13_lv_nmos w=60u l=.13u m=1 ng=1
+C13 net18 LC1 cap_cmim w=24.0e-6 l=4e-6 m=1
+C14 net19 LC0 cap_cmim w=24.0e-6 l=4e-6 m=1
+R2 net19 d0 rppd w=0.5e-6 l=20e-6 m=1 b=0
+R3 d0 net18 rppd w=0.5e-6 l=20e-6 m=1 b=0
+R4 net15 d1 rppd w=0.5e-6 l=20e-6 m=1 b=0
+R5 d1 net14 rppd w=0.5e-6 l=20e-6 m=1 b=0
+R6 net11 d2 rppd w=0.5e-6 l=20e-6 m=1 b=0
+R7 d2 net10 rppd w=0.5e-6 l=20e-6 m=1 b=0
+R8 net7 d3 rppd w=0.5e-6 l=20e-6 m=1 b=0
+R9 d3 net6 rppd w=0.5e-6 l=20e-6 m=1 b=0
+******************************************33C1 LC0 net20 LC1 VSS sg13_hv_svaricap w=9.74e-6 l=0.8e-6 Nx=30
+.ends
+
+
+* expanding   symbol:  /ALL/Xschem/LC_VCO/dual_inv.sym # of pins=6
+** sym_path: /ALL/Xschem/LC_VCO/dual_inv.sym
+** sch_path: /ALL/Xschem/LC_VCO/dual_inv.sch
+.subckt dual_inv VDD out_p out_n in_n in_p VSS  symname=diffamp nw=1u nl=1u pw=2u pl=1u
+*.PININFO out_p:B out_n:B in_p:B in_n:B VSS:B VDD:B
+**** begin user architecture code
+
+
+**** end user architecture code
+M31 out_p in_n VSS VSS sg13_lv_nmos w={nw} l={nl} m=1 ng=1
+M32 out_p in_n VDD VDD sg13_lv_pmos w={pw} l={pl} m=1 ng=1
+M49 out_n in_p VSS VSS sg13_lv_nmos w={nw} l={nl} m=1 ng=1
+M50 out_n in_p VDD VDD sg13_lv_pmos w={pw} l={pl} m=1 ng=1
+.ends
+
+.GLOBAL GND
