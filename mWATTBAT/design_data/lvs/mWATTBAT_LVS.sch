@@ -234,12 +234,12 @@ N 210 -160 210 -140 {lab=sub!}
 N 310 -160 310 -140 {lab=sub!}
 N 410 -160 410 -140 {lab=sub!}
 N 310 -160 410 -160 {lab=sub!}
-N 410 -80 410 -60 {lab=#net21}
-N 310 -60 410 -60 {lab=#net21}
-N 310 -80 310 -60 {lab=#net21}
-N 210 -60 310 -60 {lab=#net21}
-N 210 -80 210 -60 {lab=#net21}
-N 310 -60 310 -40 {lab=#net21}
+N 410 -80 410 -60 {lab=sub!}
+N 310 -60 410 -60 {lab=sub!}
+N 310 -80 310 -60 {lab=sub!}
+N 210 -60 310 -60 {lab=sub!}
+N 210 -80 210 -60 {lab=sub!}
+N 310 -60 310 -40 {lab=sub!}
 N 90 -160 210 -160 {lab=sub!}
 C {title.sym} 160 -30 0 0 {name=l1 author="Ghaith AL SABAGH" lock=true}
 C {WILKINSON_LVS.sym} 1380 -950 0 0 {name=x5}
@@ -520,5 +520,4 @@ spiceprefix=X
 w=2e-6
 l=2e-6
 spice_ignore=true}
-C {sg13g2_pr/sub.sym} 310 -40 0 0 {name=l6 lab=sub!
-spice_ignore=true}
+C {sg13g2_pr/sub.sym} 310 -40 0 0 {name=l6 lab=sub!}

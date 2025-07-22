@@ -27,4 +27,4 @@ A modified schematics set could be found in the lvs folder.
 Unwanted components are not deleted, but marked with spice_ignore=true/short (this provides also lvs_ignore).  
 Resistiors lengths and widths are keeped the same, bends are set to zero.  
 
-To do not confuse the submit system with many gds files, the special LVS-friendly GDS version would be uploaded later.
+The Layout-Version for gds is named with mWATTBAT.gds and the netlist is in simulations/ folder.

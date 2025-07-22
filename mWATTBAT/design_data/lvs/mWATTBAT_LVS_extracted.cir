@@ -1,0 +1,268 @@
+* Extracted by KLayout with SG13G2 LVS runset on : 22/07/2025 12:33
+
+.SUBCKT mWATTBAT_LVS RFIN 2V4 1V65 IFP IFN 2V0 IFOUT
+1$1 \$47 \$38 res_topmetal2 R=1 L=8u W=8u A=64p P=32u
+2$2 \$38 \$44 res_topmetal2 R=1 L=8u W=8u A=64p P=32u
+3$3 \$39 \$50 res_topmetal2 R=1 L=8u W=8u A=64p P=32u
+4$4 \$39 \$53 res_topmetal2 R=1 L=8u W=8u A=64p P=32u
+5$5 \$I112274 \$49 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+6$6 \$I112273 \$I112269 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+7$7 \$I112270 \$I112272 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+8$8 \$53 \$I112271 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+9$9 \$42 \$I112273 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+10$10 \$I112271 \$I112272 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+11$11 \$44 \$I112270 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+12$12 \$I112274 \$I112269 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+13$13 \$I280470 2V4 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+14$14 2V4 \$I280471 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+15$15 \$I280469 \$I280467 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+16$16 \$I280467 \$I280468 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+17$17 \$I112175 \$I280468 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+18$18 \$I112176 \$I280469 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+19$19 \$19 1V65 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+20$20 1V65 \$I280485 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+21$21 \$I280489 1V65 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+22$22 \$I280487 \$36 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+23$23 1V65 \$I280490 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+24$24 \$I280488 \$I280487 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+25$25 2V4 \$I280497 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+26$26 \$I280496 \$I280494 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+27$27 \$15 \$I280494 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+28$28 \$24 2V4 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+C$29 \$1 \$I112269 cap_cmim w=30u l=30u A=900p P=120u m=1
+R$30 2V4 \$I112272 rppd w=3u l=27.48u ps=0 b=0 m=1
+C$31 \$49 \$1 cap_cmim w=2.3u l=2.3u A=5.29p P=9.2u m=1
+C$32 \$42 \$1 cap_cmim w=2.3u l=2.3u A=5.29p P=9.2u m=1
+C$33 \$53 \$1 cap_cmim w=3u l=3u A=9p P=12u m=1
+C$34 \$44 \$1 cap_cmim w=3u l=3u A=9p P=12u m=1
+C$35 2V4 \$I112272 cap_cmim w=30u l=30u A=900p P=120u m=1
+D$36 \$1 2V4 nmoscl_4 m=6
+D$37 \$1 1V65 nmoscl_4 m=2
+D$40 \$1 2V0 nmoscl_4 m=1
+45$45 \$I280531 2V4 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+46$46 2V4 \$I280532 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+47$47 \$I280529 \$I280528 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+48$48 \$I280528 \$I280530 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+49$49 \$50 \$I280529 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+50$50 \$47 \$I280530 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+51$51 \$43 \$51 res_topmetal2 R=0.159744408946 L=100u W=626u A=62600p P=1452u
+52$52 \$I280539 2V4 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+53$53 2V4 \$I280540 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+54$54 \$I280537 \$I280536 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+55$55 \$I280536 \$I280538 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+56$56 \$I280480 \$I280537 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+57$57 \$I280479 \$I280538 res_topmetal2 R=1 L=2.5u W=2.5u A=6.25p P=10u
+58$58 \$I280480 \$I280479 res_topmetal2 R=0.159744408946 L=100u W=626u A=62600p
++ P=1452u
+R$59 \$56 IFOUT rppd w=2u l=71.25u ps=0 b=0 m=1
+R$60 IFP \$55 rppd w=2.5u l=11.255u ps=0 b=0 m=1
+R$61 IFN \$56 rppd w=2.5u l=11.255u ps=0 b=0 m=1
+R$62 IFOUT \$I280481 rppd w=2.21u l=10u ps=0 b=0 m=1
+R$63 \$55 \$1 rppd w=2u l=89.64u ps=0 b=0 m=1
+C$64 1V65 \$1 cap_cmim w=5u l=20u A=100p P=50u m=1
+C$65 1V65 \$I280482 cap_cmim w=23u l=25u A=575p P=96u m=1
+C$66 1V65 \$I280486 cap_cmim w=170u l=25u A=4250p P=390u m=1
+C$67 \$I280483 \$1 cap_cmim w=7.8u l=7.8u A=60.84p P=31.2u m=1
+68$68 \$19 \$I280482 \$I280484 \$1 npn13G2l AE=0.07p PE=2.14u AB=2.3088p
++ PB=6.08u AC=2.3088p PC=6.08u NE=4 m=4
+72$72 \$I280485 \$I280483 \$I280484 \$1 npn13G2l AE=0.07p PE=2.14u AB=2.3088p
++ PB=6.08u AC=2.3088p PC=6.08u NE=4 m=4
+76$76 \$I280484 \$I280486 \$1 \$1 npn13G2l AE=0.07p PE=2.14u AB=2.3088p
++ PB=6.08u AC=2.3088p PC=6.08u NE=4 m=4
+C$80 \$15 \$I280485 cap_cmim w=4.7u l=4.7u A=22.09p P=18.8u m=1
+C$81 \$I280483 RFIN cap_cmim w=12u l=12u A=144p P=48u m=1
+82$82 \$I280486 \$I280486 \$1 \$1 npn13G2l AE=0.07p PE=2.14u AB=2.3088p
++ PB=6.08u AC=2.3088p PC=6.08u NE=1 m=1
+C$83 \$I112176 \$I280489 cap_cmim w=2.9u l=2.9u A=8.41p P=11.6u m=1
+C$84 \$I112175 \$I280490 cap_cmim w=2.9u l=2.9u A=8.41p P=11.6u m=1
+C$85 \$24 \$I280488 cap_cmim w=6.75u l=6.75u A=45.5625p P=27u m=1
+C$86 1V65 \$I280487 cap_cmim w=75u l=20u A=1500p P=190u m=1
+C$87 2V4 \$I280494 cap_cmim w=50u l=23u A=1150p P=146u m=1
+C$88 2V4 \$1 cap_cmim w=3.5u l=10u A=35p P=27u m=1
+C$89 \$36 \$I280497 cap_cmim w=3.5u l=3.5u A=12.25p P=14u m=1
+C$90 \$19 \$I280496 cap_cmim w=6.5u l=6.5u A=42.25p P=26u m=1
+R$91 \$44 \$47 rppd w=3u l=12.51u ps=0 b=0 m=13
+R$104 \$53 \$50 rppd w=3u l=12.51u ps=0 b=0 m=13
+R$117 \$I280483 \$I280482 rppd w=2u l=6.67u ps=0 b=0 m=3
+R$120 1V65 \$I280482 rppd w=2u l=6.67u ps=0 b=0 m=6
+R$126 \$I280482 \$I280486 rppd w=2u l=6.67u ps=0 b=0 m=6
+R$132 2V4 \$I280495 rppd w=3u l=13.6u ps=0 b=0 m=1
+R$133 \$I280495 \$1 rppd w=3u l=13.6u ps=0 b=0 m=1
+D$134 2V0 \$1 IFP diodevss_4kv m=1
+D$135 2V0 \$1 IFN diodevss_4kv m=1
+D$136 2V0 \$1 IFOUT diodevss_4kv m=1
+D$137 \$1 2V0 IFP diodevdd_4kv m=1
+D$138 \$1 2V0 IFN diodevdd_4kv m=1
+D$139 \$1 2V0 IFOUT diodevdd_4kv m=1
+C$140 2V4 \$I280467 cap_cmim w=100u l=20u A=2000p P=240u m=1
+C$141 2V4 \$I280528 cap_cmim w=100u l=20u A=2000p P=240u m=1
+C$142 2V4 \$I280536 cap_cmim w=100u l=20u A=2000p P=240u m=1
+C$143 \$38 \$I280471 cap_cmim w=2.7u l=2.7u A=7.29p P=10.8u m=1
+C$144 \$39 \$I280470 cap_cmim w=2.7u l=2.7u A=7.29p P=10.8u m=1
+C$145 \$43 \$I280532 cap_cmim w=2.7u l=2.7u A=7.29p P=10.8u m=1
+C$146 \$51 \$I280531 cap_cmim w=2.7u l=2.7u A=7.29p P=10.8u m=1
+C$147 \$42 \$I280540 cap_cmim w=2.7u l=2.7u A=7.29p P=10.8u m=1
+C$148 \$49 \$I280539 cap_cmim w=2.7u l=2.7u A=7.29p P=10.8u m=1
+C$149 \$I112175 \$1 cap_cmim w=4.05u l=4.05u A=16.4025p P=16.2u m=1
+C$150 \$I112176 \$1 cap_cmim w=4.05u l=4.05u A=16.4025p P=16.2u m=1
+C$151 \$50 \$1 cap_cmim w=4.05u l=4.05u A=16.4025p P=16.2u m=1
+C$152 \$47 \$1 cap_cmim w=4.05u l=4.05u A=16.4025p P=16.2u m=1
+C$153 \$I280480 \$1 cap_cmim w=4.05u l=4.05u A=16.4025p P=16.2u m=1
+C$154 \$I280479 \$1 cap_cmim w=4.05u l=4.05u A=16.4025p P=16.2u m=1
+R$155 1V65 \$I280491 rppd w=3u l=10.14u ps=0 b=0 m=18
+R$173 1V65 \$I280487 rppd w=3u l=10.14u ps=0 b=0 m=3
+R$176 \$I280494 2V4 rppd w=2.5u l=19u ps=0 b=0 m=2
+M$178 2V0 \$I280544 2V0 2V0 sg13_lv_pmos L=5u W=18.55u AS=3.922p AD=3.922p
++ PS=27.12u PD=27.12u
+M$192 2V0 \$I280549 \$I280544 2V0 sg13_lv_pmos L=5u W=26.5u AS=5.23375p
++ AD=5.23375p PS=35.725u PD=35.725u
+M$212 2V0 \$I280544 2V0 2V0 sg13_lv_pmos L=0.25u W=230u AS=44p AD=44p PS=320u
++ PD=320u
+M$442 2V0 \$I280543 2V0 2V0 sg13_lv_pmos L=6u W=5.04u AS=1.5228p AD=1.5228p
++ PS=18.96u PD=18.96u
+M$466 \$I280544 \$I280543 \$I280543 2V0 sg13_lv_pmos L=6u W=0.84u AS=0.2838p
++ AD=0.2838p PS=3.56u PD=3.56u
+M$470 \$1 \$I280543 \$1 \$1 sg13_lv_nmos L=1u W=30.5u AS=7.715p AD=7.715p
++ PS=91.48u PD=91.48u
+M$592 \$1 \$I280543 \$1 \$1 sg13_lv_nmos L=5u W=10.5u AS=2.22p AD=2.22p
++ PS=17.92u PD=17.92u
+M$606 \$I280545 \$I280543 \$I280543 \$1 sg13_lv_nmos L=5u W=15u AS=2.9625p
++ AD=2.9625p PS=23.65u PD=23.65u
+M$626 2V0 \$I280549 2V0 2V0 sg13_lv_pmos L=5u W=31.8u AS=6.4395p AD=6.4395p
++ PS=44.17u PD=44.17u
+M$650 2V0 \$I280549 \$I280549 2V0 sg13_lv_pmos L=5u W=13.25u AS=2.71625p
++ AD=2.71625p PS=18.675u PD=18.675u
+M$660 \$1 \$I280549 \$1 \$1 sg13_lv_nmos L=5u W=5.2u AS=1.624p AD=1.624p
++ PS=20.44u PD=20.44u
+M$686 \$1 \$I280550 \$1 \$1 sg13_lv_nmos L=5u W=5.2u AS=1.624p AD=1.624p
++ PS=20.44u PD=20.44u
+M$712 \$I280550 \$I280549 \$I280549 \$1 sg13_lv_nmos L=5u W=1.6u AS=0.517p
++ AD=0.517p PS=6.52u PD=6.52u
+M$720 \$I280550 \$I280550 \$1 \$1 sg13_lv_nmos L=5u W=1.6u AS=0.517p AD=0.517p
++ PS=6.52u PD=6.52u
+M$728 \$1 \$I280545 \$1 \$1 sg13_lv_nmos L=6u W=5.2u AS=1.624p AD=1.624p
++ PS=20.44u PD=20.44u
+M$754 \$I280545 \$I280545 \$1 \$1 sg13_lv_nmos L=6u W=0.4u AS=0.163p AD=0.163p
++ PS=2.08u PD=2.08u
+M$756 2V0 \$I280545 2V0 2V0 sg13_lv_pmos L=0.25u W=44u AS=13.07p AD=13.07p
++ PS=164u PD=164u
+C$976 2V4 \$I280472 cap_cmim w=100u l=15u A=1500p P=230u m=1
+C$977 1V65 \$I280491 cap_cmim w=100u l=15u A=1500p P=230u m=1
+C$978 2V4 \$I280495 cap_cmim w=100u l=15u A=1500p P=230u m=1
+C$979 2V4 \$I280535 cap_cmim w=100u l=15u A=1500p P=230u m=1
+C$980 2V4 \$I280541 cap_cmim w=100u l=15u A=1500p P=230u m=1
+981$981 IFP \$I112270 \$I112276 \$1 npn13G2l AE=0.17493p PE=5.138u AB=4.52732p
++ PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+985$985 IFN \$I112270 \$I112275 \$1 npn13G2l AE=0.17493p PE=5.138u AB=4.52732p
++ PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+989$989 IFN \$I112271 \$I112276 \$1 npn13G2l AE=0.17493p PE=5.138u AB=4.52732p
++ PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+993$993 \$I112276 \$I112274 \$1 \$1 npn13G2l AE=0.17493p PE=5.138u AB=4.52732p
++ PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+997$997 IFP \$I112271 \$I112275 \$1 npn13G2l AE=0.17493p PE=5.138u AB=4.52732p
++ PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1001$1001 \$I112275 \$I112273 \$1 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1005$1005 \$I280525 \$I280468 \$I280527 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1009$1009 \$I280526 \$I280469 \$I280527 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1013$1013 \$I280471 \$I280472 \$I280525 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1017$1017 \$I280470 \$I280472 \$I280526 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1021$1021 \$I280556 \$36 \$I280558 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1025$1025 \$I280557 \$I280488 \$I280558 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1029$1029 \$I280490 \$I280491 \$I280556 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1033$1033 \$I280489 \$I280491 \$I280557 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1037$1037 \$I280559 \$15 \$I280561 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1041$1041 \$I280560 \$I280496 \$I280561 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1045$1045 \$I280497 \$I280495 \$I280559 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1049$1049 \$24 \$I280495 \$I280560 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1053$1053 \$I280574 \$I280530 \$I280576 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1057$1057 \$I280575 \$I280529 \$I280576 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1061$1061 \$I280532 \$I280535 \$I280574 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1065$1065 \$I280531 \$I280535 \$I280575 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1069$1069 \$I280578 \$I280538 \$I280580 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1073$1073 \$I280579 \$I280537 \$I280580 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1077$1077 \$I280540 \$I280541 \$I280578 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1081$1081 \$I280539 \$I280541 \$I280579 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=4 m=4
+1085$1085 \$I112269 \$I112269 \$1 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=1 m=1
+1086$1086 \$I112272 \$I112272 \$I112269 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=1 m=1
+1087$1087 \$I280467 \$I280467 \$I280524 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=1 m=1
+1088$1088 \$I280487 \$I280487 \$I280555 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=1 m=1
+1089$1089 \$I280494 \$I280494 \$I280562 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=1 m=1
+1090$1090 \$I280528 \$I280528 \$I280573 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=1 m=1
+1091$1091 \$I280536 \$I280536 \$I280577 \$1 npn13G2l AE=0.17493p PE=5.138u
++ AB=4.52732p PB=9.078u AC=4.52732p PC=9.078u NE=1 m=1
+R$1092 \$1 \$I280524 rppd w=2.5u l=10.53u ps=0 b=0 m=14
+R$1106 \$1 \$I280555 rppd w=2.5u l=10.53u ps=0 b=0 m=14
+R$1120 \$1 \$I280562 rppd w=2.5u l=10.53u ps=0 b=0 m=14
+R$1134 \$1 \$I280573 rppd w=2.5u l=10.53u ps=0 b=0 m=14
+R$1148 \$1 \$I280577 rppd w=2.5u l=10.53u ps=0 b=0 m=14
+R$1162 IFN 2V4 rppd w=3u l=18.23u ps=0 b=0 m=2
+R$1164 IFP 2V4 rppd w=3u l=18.23u ps=0 b=0 m=2
+R$1166 2V4 \$I280472 rppd w=3u l=18.23u ps=0 b=0 m=2
+R$1167 \$I280472 \$1 rppd w=3u l=18.23u ps=0 b=0 m=1
+R$1169 \$I280491 \$1 rppd w=3u l=18.23u ps=0 b=0 m=1
+R$1170 2V4 \$I280467 rppd w=3u l=18.23u ps=0 b=0 m=2
+R$1172 2V4 \$I280535 rppd w=3u l=18.23u ps=0 b=0 m=2
+R$1173 \$I280535 \$1 rppd w=3u l=18.23u ps=0 b=0 m=1
+R$1175 2V4 \$I280541 rppd w=3u l=18.23u ps=0 b=0 m=2
+R$1176 \$I280541 \$1 rppd w=3u l=18.23u ps=0 b=0 m=1
+R$1178 2V4 \$I280528 rppd w=3u l=18.23u ps=0 b=0 m=2
+R$1180 2V4 \$I280536 rppd w=3u l=18.23u ps=0 b=0 m=2
+R$1182 \$1 \$I280527 rsil w=7u l=38.8u ps=0 b=0 m=4
+R$1186 \$1 \$I280576 rsil w=7u l=38.8u ps=0 b=0 m=4
+R$1190 \$I280558 \$1 rsil w=7u l=38.8u ps=0 b=0 m=4
+R$1194 \$I280561 \$1 rsil w=7u l=38.8u ps=0 b=0 m=4
+R$1198 \$I280580 \$1 rsil w=7u l=38.8u ps=0 b=0 m=4
+M$1202 \$1 \$I280546 \$I280547 \$1 sg13_lv_nmos L=1u W=0.5u AS=0.17p AD=0.17p
++ PS=1.68u PD=1.68u
+M$1203 \$1 \$1 \$1 \$1 sg13_lv_nmos L=1u W=86u AS=29.24p AD=29.24p PS=288.96u
++ PD=288.96u
+M$1375 \$1 \$I280546 \$I280548 \$1 sg13_lv_nmos L=1u W=0.5u AS=0.17p AD=0.17p
++ PS=1.68u PD=1.68u
+M$1376 \$I280552 \$55 \$I280544 2V0 sg13_lv_pmos L=0.25u W=29u AS=5.66p
++ AD=5.66p PS=41.32u PD=41.32u
+M$1405 \$I280551 \$56 \$I280544 2V0 sg13_lv_pmos L=0.25u W=29u AS=5.66p
++ AD=5.66p PS=41.32u PD=41.32u
+M$1434 \$I280548 \$I280543 \$I280481 \$1 sg13_lv_nmos L=1u W=0.5u AS=0.17p
++ AD=0.17p PS=2.08u PD=2.08u
+M$1436 \$I280547 \$I280543 \$I280546 \$1 sg13_lv_nmos L=1u W=0.5u AS=0.17p
++ AD=0.17p PS=2.08u PD=2.08u
+M$1438 \$I280546 \$I280545 \$I280552 2V0 sg13_lv_pmos L=0.25u W=4u AS=1.225p
++ AD=1.225p PS=15.4u PD=15.4u
+M$1458 \$I280481 \$I280545 \$I280551 2V0 sg13_lv_pmos L=0.25u W=4u AS=1.225p
++ AD=1.225p PS=15.4u PD=15.4u
+M$1478 \$1 2V0 \$1 \$1 sg13_hv_nmos L=0.6u W=470.4u AS=94.416p AD=94.416p
++ PS=818.72u PD=818.72u
+M$2262 IFOUT \$I280481 \$1 \$1 sg13_hv_nmos L=0.6u W=8.4u AS=1.686p AD=1.686p
++ PS=14.62u PD=14.62u
+M$2276 2V0 \$1 2V0 2V0 sg13_hv_pmos L=0.6u W=33.6u AS=11.424p AD=11.424p
++ PS=105.28u PD=105.28u
+M$2332 IFOUT \$I280481 2V0 2V0 sg13_hv_pmos L=0.6u W=0.6u AS=0.204p AD=0.204p
++ PS=1.88u PD=1.88u
+.ENDS mWATTBAT_LVS
