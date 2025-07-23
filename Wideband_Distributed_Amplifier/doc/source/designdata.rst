@@ -15,7 +15,7 @@ Fig 1 - Schematic
     :align: center
     :alt: IHP Logo Image.
     :width: 800
-    :height: 800
+    :height: 700
 
 Fig 2 - DA GDS View
 
@@ -24,7 +24,7 @@ Fig 2 - DA GDS View
     :align: center
     :alt: IHP Logo Image.
     :width: 800
-    :height: 800
+    :height: 700
 
 
 Fig 3 - GDS Filled
