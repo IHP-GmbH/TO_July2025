@@ -21,9 +21,23 @@ Tricode
     :width: 800
     :height: 500
 
+############################################
+
+.. image:: _static/Pout_Tricode.png
+    :align: center
+    :alt: IHP Logo Image.
+    :width: 800
+    :height: 500
 
 
 
+#################################################
+
+.. image:: _static/Gain_Tricode.png
+    :align: center
+    :alt: IHP Logo Image.
+    :width: 800
+    :height: 500
 
 
 
@@ -43,3 +57,26 @@ Quadcode
     :alt: IHP Logo Image.
     :width: 1000
     :height: 600
+
+
+
+#######################################################
+
+.. image:: _static/Pout_Quadcode.png
+    :align: center
+    :alt: IHP Logo Image.
+    :width: 800
+    :height: 500
+
+
+######################################################
+
+.. image:: _static/Gain_Quadcode.png
+    :align: center
+    :alt: IHP Logo Image.
+    :width: 800
+    :height: 500
+
+
+*Measurement Awaits*
+########################################################
