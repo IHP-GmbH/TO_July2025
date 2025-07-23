@@ -11,7 +11,7 @@ Tricode
 
 Fig 1 - Schematic
  
-.. image:: _static/Tricode_DA.png
+.. image:: _static/Tricode_DA.PNG
     :align: center
     :alt: IHP Logo Image.
     :width: 800
@@ -20,7 +20,7 @@ Fig 1 - Schematic
 Fig 2 - DA GDS View
 
 
-.. image:: _static/Tricode_Distributed_Amplifier.png
+.. image:: _static/Tricode_Distributed_Amplifier.PNG
     :align: center
     :alt: IHP Logo Image.
     :width: 800
