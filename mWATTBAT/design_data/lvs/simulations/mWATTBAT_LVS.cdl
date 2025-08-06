@@ -1,0 +1,318 @@
+** sch_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/mWATTBAT_LVS.sch
+.SUBCKT mWATTBAT_LVS RFIN 2V0 2V4 1V65 IFOUT IFP IFN
+*.PININFO RFIN:B 2V0:B 2V4:B 1V65:B IFOUT:B IFP:B IFN:B
+x5 net9 net10 net11 net12 net7 net8 WILKINSON_LVS
+x6 net13 net14 net7 net8 IFN IFP 2V4 sub! MIXER_LVS
+x7 2V0 net15 net16 IFOUT sub! IFAMP_LVS
+x8 net20 net17 TRX_LVS
+x9 net18 net19 TRX_LVS
+X10 sub! bondpad
+X11 sub! bondpad
+X15 RFIN bondpad
+X16 IFOUT bondpad
+X17 1V65 bondpad
+X18 2V4 bondpad
+X19 2V0 bondpad
+x1 net1 net4 1V65 RFIN sub! BALUN_MULT_10GSE_50GD_LVS
+x2 net2 net5 2V4 net1 sub! net4 RFAMP_50GD_LVS
+x3 net3 net6 1V65 net2 sub! net5 MULT_50GD_150GD_LVS
+x4 net9 net10 2V4 net3 sub! net6 RFAMP_150GD_LVS
+x26 net20 net17 2V4 net11 sub! net12 TXAMP_150GD_LVS
+x27 net14 net13 2V4 net18 sub! net19 RXAMP_150GD_LVS
+X20 sub! bondpad
+X21 sub! bondpad
+X22 sub! bondpad
+X12 sub! bondpad
+X13 sub! bondpad
+X14 sub! bondpad
+X23 sub! bondpad
+X24 sub! bondpad
+X25 2V4 bondpad
+X28 2V4 bondpad
+X29 2V4 bondpad
+X30 2V4 bondpad
+X31 2V4 bondpad
+X32 IFP bondpad
+X33 IFN bondpad
+X34 1V65 bondpad
+D1 1V65 sub! nmoscl_4 m=2
+D3 2V0 sub! nmoscl_4 m=1
+D4 2V0 IFOUT sub! diodevdd_4kv m=1
+D5 2V0 IFOUT sub! diodevss_4kv m=1
+D2 2V4 sub! nmoscl_4 m=6
+R25 net16 IFOUT rppd w=2.0e-6 l=71.25e-6 m=1 b=0
+R24 net15 sub! rppd w=2.0e-6 l=89.64e-6 m=1 b=0
+R22 net16 IFN rppd w=2.5e-6 l=11.255e-6 m=1 b=0
+R23 net15 IFP rppd w=2.5e-6 l=11.255e-6 m=1 b=0
+D6 2V0 IFP sub! diodevdd_4kv m=1
+D7 2V0 IFP sub! diodevss_4kv m=1
+D8 2V0 IFN sub! diodevdd_4kv m=1
+D9 2V0 IFN sub! diodevss_4kv m=1
+.ENDS
+
+* expanding   symbol:  WILKINSON_LVS.sym # of pins=6
+** sym_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/WILKINSON_LVS.sym
+** sch_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/WILKINSON_LVS.sch
+.SUBCKT WILKINSON_LVS INP INN OUT1P OUT1N OUT2P OUT2N
+*.PININFO INP:B INN:B OUT1P:B OUT2N:B OUT1N:B OUT2P:B
+R19 OUT2P OUT1P rppd w=3e-6 l=12.51e-6 m=13 b=0
+R20 OUT2N OUT1N rppd w=3e-6 l=12.51e-6 m=13 b=0
+Rm17 INP OUT1P res_topmetal2 w=8e-6 l=8e-6
+Rm18 INP OUT2P res_topmetal2 w=8e-6 l=8e-6
+Rm19 INN OUT1N res_topmetal2 w=8e-6 l=8e-6
+Rm20 INN OUT2N res_topmetal2 w=8e-6 l=8e-6
+.ENDS
+
+
+* expanding   symbol:  MIXER_LVS.sym # of pins=8
+** sym_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/MIXER_LVS.sym
+** sch_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/MIXER_LVS.sch
+.SUBCKT MIXER_LVS RFP RFN LOP LON IFN IFP 2V4 GND
+*.PININFO 2V4:B LOP:B LON:B RFP:B RFN:B GND:B IFP:B IFN:B
+Q22 IFP net1 net4 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q23 IFN net2 net4 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q24 IFP net2 net3 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q25 IFN net1 net3 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q20 net4 net6 GND sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q21 net3 net5 GND sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q27 RFBIAS RFBIAS GND sub! npn13G2l le=2.499e-06 we=70.0n m=1
+Q26 LOBIAS LOBIAS RFBIAS sub! npn13G2l le=2.499e-06 we=70.0n m=1
+R21 IFP 2V4 rppd w=3e-6 l=18.23e-6 m=2 b=0
+R22 IFN 2V4 rppd w=3e-6 l=18.23e-6 m=2 b=0
+C42 GND RFBIAS cap_cmim w=30e-6 l=30e-6 m=1
+C37 LOP GND cap_cmim w=3e-6 l=3e-6 m=1
+C38 LON GND cap_cmim w=3e-6 l=3e-6 m=1
+C39 RFP GND cap_cmim w=2.3e-6 l=2.3e-6 m=1
+C40 RFN GND cap_cmim w=2.3e-6 l=2.3e-6 m=1
+R23 LOBIAS 2V4 rppd w=3e-6 l=27.48e-6 m=1 b=0
+C41 2V4 LOBIAS cap_cmim w=30e-6 l=30e-6 m=1
+Rm21 LOBIAS net1 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm22 LOP net1 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm23 LOBIAS net2 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm24 LON net2 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm25 RFBIAS net6 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm26 RFP net6 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm27 RFBIAS net5 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm28 RFN net5 res_topmetal2 w=2.5e-6 l=2.5e-6
+.ENDS
+
+
+* expanding   symbol:  IFAMP_LVS.sym # of pins=5
+** sym_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/IFAMP_LVS.sym
+** sch_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/IFAMP_LVS.sch
+.SUBCKT IFAMP_LVS 2V0 INP INN OUT GND
+*.PININFO INP:B INN:B OUT:B 2V0:B GND:B
+M1 vs_1c INP vs_1_2 2V0 sg13_lv_pmos w=29u l=0.25u ng=29 m=1
+M2 vs_2c INN vs_1_2 2V0 sg13_lv_pmos w=29u l=0.25u ng=29 m=1
+M1C vg_3_4 vg_1c_2c vs_1c 2V0 sg13_lv_pmos w=4u l=0.25u ng=20 m=1
+M2C OUT1 vg_1c_2c vs_2c 2V0 sg13_lv_pmos w=4u l=0.25u ng=20 m=1
+M3C vg_3_4 vg_3c_4c vs_3c GND sg13_lv_nmos w=0.5u l=1u ng=2 m=1
+M4C OUT1 vg_3c_4c vs_4c GND sg13_lv_nmos w=0.5u l=1u ng=2 m=1
+M3 vs_3c vg_3_4 GND GND sg13_lv_nmos w=0.5u l=1u ng=1 m=1
+M4 vs_4c vg_3_4 GND GND sg13_lv_nmos w=0.5u l=1u ng=1 m=1
+M5 vs_1_2 vg_5_6 2V0 2V0 sg13_lv_pmos w=26.5u l=5u ng=20 m=1
+M6 vg_5_6 vg_5_6 2V0 2V0 sg13_lv_pmos w=13.25u l=5u ng=10 m=1
+M7 OUT OUT1 GND GND sg13_hv_nmos w=8.4u l=0.6u ng=14 m=1
+M8 OUT OUT1 2V0 2V0 sg13_hv_pmos w=0.6u l=0.6u ng=1 m=1
+M9 vg_3c_4c vg_3c_4c vs_1_2 2V0 sg13_lv_pmos w=0.84u l=6u ng=4 m=1
+M10 vg_3c_4c vg_3c_4c vg_1c_2c GND sg13_lv_nmos w=15u l=5u ng=20 m=1
+M11 vg_1c_2c vg_1c_2c GND GND sg13_lv_nmos w=0.4u l=6u ng=2 m=1
+M13 vg_13 vg_13 GND GND sg13_lv_nmos w=1.6u l=5u ng=8 m=1
+M12 vg_5_6 vg_5_6 vg_13 GND sg13_lv_nmos w=1.6u l=5u ng=8 m=1
+M13D GND vg_13 GND GND sg13_lv_nmos w=2.6u l=5u ng=13 m=2
+M12D GND vg_5_6 GND GND sg13_lv_nmos w=2.6u l=5u ng=13 m=2
+M6D 2V0 vg_5_6 2V0 2V0 sg13_lv_pmos w=15.9u l=5u ng=12 m=2
+M5D 2V0 vs_1_2 2V0 2V0 sg13_lv_pmos w=9.275u l=5u ng=7 m=2
+M11D GND vg_1c_2c GND GND sg13_lv_nmos w=2.6u l=6u ng=13 m=2
+M9D 2V0 vg_3c_4c 2V0 2V0 sg13_lv_pmos w=2.52u l=6u ng=12 m=2
+M10D GND vg_3c_4c GND GND sg13_lv_nmos w=5.25u l=5u ng=7 m=2
+M3CD GND vg_3c_4c GND GND sg13_lv_nmos w=15.25u l=1u ng=61 m=1
+M3D GND GND GND GND sg13_lv_nmos w=0.5u l=1u ng=1 m=86
+M4CD GND vg_3c_4c GND GND sg13_lv_nmos w=15.25u l=1u ng=61 m=1
+M1CD 2V0 vg_1c_2c 2V0 2V0 sg13_lv_pmos w=22u l=0.25u ng=110 m=1
+M2CD 2V0 vg_1c_2c 2V0 2V0 sg13_lv_pmos w=22u l=0.25u ng=110 m=1
+M1D 2V0 vs_1_2 2V0 2V0 sg13_lv_pmos w=115u l=0.25u ng=115 m=1
+M2D 2V0 vs_1_2 2V0 2V0 sg13_lv_pmos w=115u l=0.25u ng=115 m=1
+M4D GND GND GND GND sg13_lv_nmos w=0.5u l=1u ng=1 m=86
+M7D GND 2V0 GND GND sg13_hv_nmos w=8.4u l=0.6u ng=14 m=56
+M8D 2V0 GND 2V0 2V0 sg13_hv_pmos w=0.6u l=0.6u ng=1 m=56
+R21 OUT1 OUT rppd w=2.21e-6 l=10.0e-6 m=1 b=0
+.ENDS
+
+
+* expanding   symbol:  TRX_LVS.sym # of pins=2
+** sym_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/TRX_LVS.sym
+** sch_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/TRX_LVS.sch
+.SUBCKT TRX_LVS ANTP ANTN
+*.PININFO ANTP:B ANTN:B
+Rm1 ANTN ANTP res_topmetal2 w=626e-6 l=100e-6
+.ENDS
+
+
+* expanding   symbol:  BALUN_MULT_10GSE_50GD_LVS.sym # of pins=5
+** sym_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/BALUN_MULT_10GSE_50GD_LVS.sym
+** sch_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/BALUN_MULT_10GSE_50GD_LVS.sch
+.SUBCKT BALUN_MULT_10GSE_50GD_LVS OUTP OUTN 1V65 RFIN GND
+*.PININFO 1V65:B GND:B RFIN:B OUTN:B OUTP:B
+C2 net1 GND cap_cmim w=7.8e-6 l=7.8e-6 m=1
+C1 net1 RFIN cap_cmim w=12e-6 l=12e-6 m=1
+C3 OUTN net3 cap_cmim w=4.7e-6 l=4.7e-6 m=1
+C7 1V65 B3 cap_cmim w=170e-6 l=25e-6 m=1
+Q4 B3 B3 GND sub! npn13G2l le=1e-06 we=70.0n m=1
+Q3 net2 B3 GND sub! npn13G2l le=1e-06 we=70.0n m=4
+Q1 net3 net1 net2 sub! npn13G2l le=1e-06 we=70.0n m=4
+Q2 OUTP B2 net2 sub! npn13G2l le=1e-06 we=70.0n m=4
+C5 1V65 B2 cap_cmim w=23e-6 l=25e-6 m=1
+C8_1 1V65 GND cap_cmim w=5e-6 l=20e-6 m=1
+R3 net1 B2 rppd w=2e-6 l=6.67e-6 m=3 b=0
+R1 B2 1V65 rppd w=2e-6 l=6.67e-6 m=6 b=0
+R2 B3 B2 rppd w=2e-6 l=6.67e-6 m=6 b=0
+Rm1 net3 1V65 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm2 OUTP 1V65 res_topmetal2 w=2.5e-6 l=2.5e-6
+.ENDS
+
+
+* expanding   symbol:  RFAMP_50GD_LVS.sym # of pins=6
+** sym_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/RFAMP_50GD_LVS.sym
+** sch_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/RFAMP_50GD_LVS.sch
+.SUBCKT RFAMP_50GD_LVS OUTP OUTN 2V4 INP GND INN
+*.PININFO 2V4:B GND:B OUTN:B OUTP:B INP:B INN:B
+Q5 net6 net5 net3 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q6 net4 INN net3 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q9 BIAS2 BIAS2 net1 sub! npn13G2l le=2.499e-06 we=70.0n m=1
+Q7 OUTN B11 net6 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q8 net2 B11 net4 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+R7 BIAS2 2V4 rppd w=2.5e-6 l=19e-6 m=2 b=0
+C10 INP net5 cap_cmim w=6.5e-6 l=6.5e-6 m=1
+C13 OUTP net2 cap_cmim w=3.5e-6 l=3.5e-6 m=1
+C14 2V4 B11 cap_cmim w=100.0e-6 l=15.0e-6 m=1
+C15 2V4 BIAS2 cap_cmim w=50.0e-6 l=23.0e-6 m=1
+C17_1 2V4 GND cap_cmim w=3.5e-6 l=10.0e-6 m=1
+R6 GND B11 rppd w=3e-6 l=13.6e-6 m=1 b=0
+R5 B11 2V4 rppd w=3e-6 l=13.6e-6 m=1 b=0
+R8 GND net1 rppd w=2.5e-6 l=10.53e-6 m=14 b=0
+R4 GND net3 rsil w=7e-6 l=38.8e-6 m=4 b=0
+Rm3 BIAS2 net5 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm4 BIAS2 INN res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm5 OUTN 2V4 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm6 net2 2V4 res_topmetal2 w=2.5e-6 l=2.5e-6
+.ENDS
+
+
+* expanding   symbol:  MULT_50GD_150GD_LVS.sym # of pins=6
+** sym_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/MULT_50GD_150GD_LVS.sym
+** sch_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/MULT_50GD_150GD_LVS.sch
+.SUBCKT MULT_50GD_150GD_LVS OUTP OUTN 1V65 INP GND INN
+*.PININFO 1V65:B GND:B OUTN:B OUTP:B INP:B INN:B
+Q10 net6 INP net3 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q11 net5 net1 net3 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q14 BIAS3 BIAS3 net2 sub! npn13G2l le=2.499e-06 we=70.0n m=1
+Q12 net7 B16 net6 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q13 net4 B16 net5 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+C21 OUTN net7 cap_cmim w=2.9e-6 l=2.9e-6 m=1
+C22 OUTP net4 cap_cmim w=2.9e-6 l=2.9e-6 m=1
+C20 INN net1 cap_cmim w=6.75e-6 l=6.75e-6 m=1
+C24 1V65 BIAS3 cap_cmim w=75e-6 l=20e-6 m=1
+C23 1V65 B16 cap_cmim w=100e-6 l=15e-6 m=1
+R10 B16 1V65 rppd w=3e-6 l=10.14e-6 m=18 b=0
+R11 GND B16 rppd w=3e-6 l=18.23e-6 m=1 b=0
+R13 GND net2 rppd w=2.5e-6 l=10.53e-6 m=14 b=0
+R12 BIAS3 1V65 rppd w=3e-6 l=10.14e-6 m=3 b=0
+R9 GND net3 rsil w=7e-6 l=38.8e-6 m=4 b=0
+Rm7 BIAS3 INP res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm8 BIAS3 net1 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm9 net7 1V65 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm10 net4 1V65 res_topmetal2 w=2.5e-6 l=2.5e-6
+.ENDS
+
+
+* expanding   symbol:  RFAMP_150GD_LVS.sym # of pins=6
+** sym_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/RFAMP_150GD_LVS.sym
+** sch_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/RFAMP_150GD_LVS.sch
+.SUBCKT RFAMP_150GD_LVS OUTP OUTN 2V4 INP GND INN
+*.PININFO 2V4:B GND:B OUTN:B OUTP:B INP:B INN:B
+Q15 net8 net7 net4 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q16 net5 net1 net4 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q19 BIAS4 BIAS4 net2 sub! npn13G2l le=2.499e-06 we=70.0n m=1
+Q17 net6 B21 net8 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q18 net3 B21 net5 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+R17 BIAS4 2V4 rppd w=3e-6 l=18.23e-6 m=2 b=0
+C28 INP GND cap_cmim w=4.05e-6 l=4.05e-6 m=1
+C29 INN GND cap_cmim w=4.05e-6 l=4.05e-6 m=1
+C30 OUTN net6 cap_cmim w=2.7e-6 l=2.7e-6 m=1
+C31 OUTP net3 cap_cmim w=2.7e-6 l=2.7e-6 m=1
+R18 GND net2 rppd w=2.5e-6 l=10.53e-6 m=14 b=0
+R15 B21 2V4 rppd w=3e-6 l=18.23e-6 m=2 b=0
+R16 GND B21 rppd w=3e-6 l=18.23e-6 m=1 b=0
+C33 2V4 BIAS4 cap_cmim w=100e-6 l=20e-6 m=1
+C32 2V4 B21 cap_cmim w=100e-6 l=15e-6 m=1
+R14 GND net4 rsil w=7e-6 l=38.8e-6 m=4 b=0
+Rm11 INP net7 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm12 INN net1 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm13 net7 BIAS4 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm14 net1 BIAS4 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm15 2V4 net6 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm16 2V4 net3 res_topmetal2 w=2.5e-6 l=2.5e-6
+.ENDS
+
+
+* expanding   symbol:  TXAMP_150GD_LVS.sym # of pins=6
+** sym_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/TXAMP_150GD_LVS.sym
+** sch_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/TXAMP_150GD_LVS.sch
+.SUBCKT TXAMP_150GD_LVS OUTP OUTN 2V4 INP GND INN
+*.PININFO 2V4:B GND:B OUTN:B OUTP:B INP:B INN:B
+Q28 net8 net7 net4 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q29 net5 net1 net4 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q32 BIAS4 BIAS4 net2 sub! npn13G2l le=2.499e-06 we=70.0n m=1
+Q30 net6 B21 net8 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q31 net3 B21 net5 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+R27 BIAS4 2V4 rppd w=3e-6 l=18.23e-6 m=2 b=0
+C44 INP GND cap_cmim w=4.05e-6 l=4.05e-6 m=1
+C45 INN GND cap_cmim w=4.05e-6 l=4.05e-6 m=1
+C46 OUTN net6 cap_cmim w=2.7e-6 l=2.7e-6 m=1
+C47 OUTP net3 cap_cmim w=2.7e-6 l=2.7e-6 m=1
+R28 GND net2 rppd w=2.5e-6 l=10.53e-6 m=14 b=0
+R25 B21 2V4 rppd w=3e-6 l=18.23e-6 m=2 b=0
+R26 GND B21 rppd w=3e-6 l=18.23e-6 m=1 b=0
+C49 2V4 BIAS4 cap_cmim w=100e-6 l=20e-6 m=1
+C48 2V4 B21 cap_cmim w=100e-6 l=15e-6 m=1
+R24 GND net4 rsil w=7e-6 l=38.8e-6 m=4 b=0
+Rm29 INP net7 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm30 INN net1 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm31 net7 BIAS4 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm32 net1 BIAS4 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm33 2V4 net6 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm34 2V4 net3 res_topmetal2 w=2.5e-6 l=2.5e-6
+.ENDS
+
+
+* expanding   symbol:  RXAMP_150GD_LVS.sym # of pins=6
+** sym_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/RXAMP_150GD_LVS.sym
+** sch_path: /foss/designs/mWATTBAT_RADAR_150GHz_TO_July2025/mWATTBAT/design_data/lvs/RXAMP_150GD_LVS.sch
+.SUBCKT RXAMP_150GD_LVS OUTP OUTN 2V4 INP GND INN
+*.PININFO 2V4:B GND:B OUTN:B OUTP:B INP:B INN:B
+Q33 net8 net7 net4 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q34 net5 net1 net4 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q37 BIAS4 BIAS4 net2 sub! npn13G2l le=2.499e-06 we=70.0n m=1
+Q35 net6 B21 net8 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+Q36 net3 B21 net5 sub! npn13G2l le=2.499e-06 we=70.0n m=4
+R32 BIAS4 2V4 rppd w=3e-6 l=18.23e-6 m=2 b=0
+C53 INP GND cap_cmim w=4.05e-6 l=4.05e-6 m=1
+C54 INN GND cap_cmim w=4.05e-6 l=4.05e-6 m=1
+C55 OUTN net6 cap_cmim w=2.7e-6 l=2.7e-6 m=1
+C56 OUTP net3 cap_cmim w=2.7e-6 l=2.7e-6 m=1
+R33 GND net2 rppd w=2.5e-6 l=10.53e-6 m=14 b=0
+R30 B21 2V4 rppd w=3e-6 l=18.23e-6 m=2 b=0
+R31 GND B21 rppd w=3e-6 l=18.23e-6 m=1 b=0
+C58 2V4 BIAS4 cap_cmim w=100e-6 l=20e-6 m=1
+C57 2V4 B21 cap_cmim w=100e-6 l=15e-6 m=1
+R29 GND net4 rsil w=7e-6 l=38.8e-6 m=4 b=0
+Rm35 INP net7 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm36 INN net1 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm37 net7 BIAS4 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm38 net1 BIAS4 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm39 2V4 net6 res_topmetal2 w=2.5e-6 l=2.5e-6
+Rm40 2V4 net3 res_topmetal2 w=2.5e-6 l=2.5e-6
+.ENDS
+
+.GLOBAL sub!
