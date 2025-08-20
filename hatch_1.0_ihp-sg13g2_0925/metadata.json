@@ -1,0 +1,14 @@
+{
+  "ProjectName": "FMD_QNC_hatch",
+  "Shuttle": "MPW 0.13µm Jul 2025(T593)",
+  "Technology": "SG13G2",
+  "Design": {
+    "DesignName": "FMD_QNC_hatch",
+    "FinalGdsName": "FMD_QNC_hacth.gds",
+    "TopCellName": "FMD_QNC_hatch",
+    "Width": "2.5mm",
+    "Height": "2.5mm",
+    "NumberOfSamples": "10"
+  },
+  "FinalWaferThickness": "200um"
+}
