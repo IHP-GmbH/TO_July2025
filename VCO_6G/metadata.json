@@ -1,0 +1,14 @@
+{
+  "ProjectName": "FMD_QNC_VCO_6G",
+  "Shuttle": "MPW 0.13µm Jul 2025(T593)",
+  "Technology": "SG13G2",
+  "Design": {
+    "DesignName": "FMD_QNC_VCO_6G",
+    "FinalGdsName": "FMD_QNC_VCO_6G.gds",
+    "TopCellName": "FMD_QNC_VCO_6G",
+    "Width": "1.910mm",
+    "Height": "0.860mm",
+    "NumberOfSamples": "10"
+  },
+  "FinalWaferThickness": "200um"
+}
