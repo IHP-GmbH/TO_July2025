@@ -1,66 +1,32 @@
--------------------LNA_120GHz--------------------
-
 Layer areas and percetages
+------------------------------------------------
 
-Total Area = 902500.0um^2
+Total Area = 1864850.0um^2
 
-Activ Area = 364636.044um^2
-Activ %    = 40.403% Min = 35 Max = 55
+Activ Area = 656888.014um^2
+Activ %    = 35.225% Min = 35 Max = 55
 
-GatPoly Area = 211199.446um^2
-GatPoly %    = 23.402% Min = 15
+GatPoly Area = 320922.312um^2
+GatPoly %    = 17.209% Min = 15
 
-Metal1 Area = 320508.043um^2
-Metal1 %    = 35.513% Min = 35 Max = 60
+Metal1 Area = 831160.637um^2
+Metal1 %    = 44.57% Min = 35 Max = 60
 
-Metal2 Area = 338428.069um^2
-Metal2 %    = 37.499% Min = 35 Max = 60
+Metal2 Area = 793064.042um^2
+Metal2 %    = 42.527% Min = 35 Max = 60
 
-Metal3 Area = 327166.135um^2
-Metal3 %    = 36.251% Min = 35 Max = 60
+Metal3 Area = 853438.668um^2
+Metal3 %    = 45.764% Min = 35 Max = 60
 
-Metal4 Area = 321630.798um^2
-Metal4 %    = 35.638% Min = 35 Max = 60
+Metal4 Area = 861603.384um^2
+Metal4 %    = 46.202% Min = 35 Max = 60
 
-Metal5 Area = 322515.225um^2
-Metal5 %    = 35.736% Min = 35 Max = 60
+Metal5 Area = 877069.37um^2
+Metal5 %    = 47.032% Min = 35 Max = 60
 
-TopMetal1 Area = 318188.01300000004um^2
-TopMetal1 %    = 35.256% Min = 25 Max = 70
+TopMetal1 Area = 649169.281um^2
+TopMetal1 %    = 34.811% Min = 25 Max = 70
 
-TopMetal2 Area = 402656.843um^2
-TopMetal2 %    = 44.616% Min = 25 Max = 70
+TopMetal2 Area = 841891.171um^2
+TopMetal2 %    = 45.145% Min = 25 Max = 70
 
-
--------------------MULTI_X5_60GHz-----------------------------
-
-Layer areas and percetages
-
-Total Area = 902500.0um^2
-
-Activ Area = 362731.29um^2
-Activ %    = 40.192% Min = 35 Max = 55
-
-GatPoly Area = 209717.866um^2
-GatPoly %    = 23.237% Min = 15
-
-Metal1 Area = 360243.794um^2
-Metal1 %    = 39.916% Min = 35 Max = 60
-
-Metal2 Area = 324723.19299999997um^2
-Metal2 %    = 35.98% Min = 35 Max = 60
-
-Metal3 Area = 331992.582um^2
-Metal3 %    = 36.786% Min = 35 Max = 60
-
-Metal4 Area = 340679.305um^2
-Metal4 %    = 37.748% Min = 35 Max = 60
-
-Metal5 Area = 332708.019um^2
-Metal5 %    = 36.865% Min = 35 Max = 60
-
-TopMetal1 Area = 275229.588um^2
-TopMetal1 %    = 30.496% Min = 25 Max = 70
-
-TopMetal2 Area = 386582.648um^2
-TopMetal2 %    = 42.835% Min = 25 Max = 70
