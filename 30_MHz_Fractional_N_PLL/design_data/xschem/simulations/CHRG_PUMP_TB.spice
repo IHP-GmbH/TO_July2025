@@ -1,0 +1,112 @@
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/CHRG_PUMP_TB.sch
+**.subckt CHRG_PUMP_TB
+V1 VDD GND 1.2
+V4 up GND PULSE(0 1.2 .2NS .2NS .2NS 4NS 10NS)
+V5 down GND PULSE(0 1.2 .2NS .2NS .2NS 0.02NS 10NS)
+x2 VDD bias_p up vout_cp down bias_n GND CHRG_PUMP
+x1 vout_cp vout GND LOOP_FILTER
+x3 VDD VDD GND GND net1 bias_n bias_p net2 BIAS_GEN
+V7 net1 GND 1.2
+V8 net2 GND 0
+**** begin user architecture code
+
+
+.param temp=27
+
+.control
+save v(up) v(down) v(vout_cp) v(vout)
+tran 1n 500n uic
+
+write TRAN_CHRG_PUMP.raw
+.endc
+
+
+ .lib cornerMOSlv.lib mos_tt
+
+
+.lib /foss/pdks/ihp-sg13g2/libs.tech/ngspice/models/cornerRES.lib res_typ_stat
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  CHRG_PUMP.sym # of pins=7
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/CHRG_PUMP.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/CHRG_PUMP.sch
+.subckt CHRG_PUMP VP bias_p up vout down bias_n VN
+*.ipin bias_p
+*.ipin up
+*.ipin down
+*.ipin bias_n
+*.iopin VN
+*.iopin VP
+*.opin vout
+XM1 net1 bias_n VN VN sg13_lv_nmos w=1.2u l=0.13u ng=1 m=1
+XM2 vout down net1 VN sg13_lv_nmos w=1.2u l=0.13u ng=1 m=1
+XM3 vout net3 net2 VP sg13_lv_pmos w=0.15u l=0.13u ng=1 m=1
+XM4 net2 bias_p VP VP sg13_lv_pmos w=0.15u l=0.13u ng=1 m=1
+x1 VP up net3 VN INV
+.ends
+
+
+* expanding   symbol:  LOOP_FILTER.sym # of pins=3
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/LOOP_FILTER.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/LOOP_FILTER.sch
+.subckt LOOP_FILTER vin vout VN
+*.iopin VN
+*.ipin vin
+*.opin vout
+XR1 vin vout rhigh w=0.6e-6 l=0.96e-6 m=1 b=0
+XM1 VN net1 VN VN sg13_lv_nmos w=0.5u l=0.650u ng=1 m=15
+XM2 VN vout VN VN sg13_lv_nmos w=0.15u l=0.13u ng=1 m=1
+XM3 VN net1 VN VN sg13_lv_nmos w=0.5u l=0.650u ng=1 m=15
+XM4 VN vout VN VN sg13_lv_nmos w=0.15u l=0.13u ng=1 m=1
+XR2 vin net1 rhigh w=0.5e-6 l=0.96e-6 m=1 b=0
+XM5 VN vin VN VN sg13_lv_nmos w=1.5u l=0.650u ng=1 m=15
+XM6 VN vin VN VN sg13_lv_nmos w=1.5u l=0.650u ng=1 m=15
+.ends
+
+
+* expanding   symbol:  BIAS_GEN.sym # of pins=8
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/BIAS_GEN.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/BIAS_GEN.sch
+.subckt BIAS_GEN VPWR VPB VGND VNB en bias_n bias_p enb
+*.ipin en
+*.opin bias_n
+*.iopin VNB
+*.iopin VGND
+*.iopin VPB
+*.iopin VPWR
+*.ipin enb
+*.opin bias_p
+XM1 bias_p kick kick_sw VNB sg13_lv_nmos w=0.5u l=0.15u ng=1 m=1
+XM2 kick_sw en VGND VNB sg13_lv_nmos w=0.5u l=0.15u ng=1 m=1
+XM3 kick bias_n VGND VNB sg13_lv_nmos w=1.0u l=1.0u ng=1 m=1
+XM4 bias_p bias_n net1 VNB sg13_lv_nmos w=1.0u l=1.0u ng=1 m=1
+XM5 bias_n enb VGND VNB sg13_lv_nmos w=0.5u l=0.15u ng=1 m=1
+XM6 bias_n bias_n VGND VNB sg13_lv_nmos w=1.0u l=1.0u ng=1 m=1
+XM7 kick kick dio_mid VPB sg13_lv_pmos w=0.5u l=0.15u ng=1 m=1
+XM8 bias_p bias_p VPWR VPB sg13_lv_pmos w=2.0u l=1.0u ng=1 m=1
+XM9 bias_p en VPWR VPB sg13_lv_pmos w=0.5u l=0.15u ng=1 m=1
+XM10 bias_n bias_p res_bot VPB sg13_lv_pmos w=4.0u l=1.0u ng=1 m=1
+XM11 kick en VPWR VPB sg13_lv_pmos w=0.5u l=0.15u ng=1 m=1
+XM12 dio_mid dio_mid VPWR VPB sg13_lv_pmos w=0.5u l=0.15u ng=1 m=1
+XR1 res_bot VPWR rhigh w=1.0e-6 l=12.0e-6 m=1 b=0
+XR2 VGND net1 rhigh w=1.0e-6 l=12.0e-6 m=1 b=0
+.ends
+
+
+* expanding   symbol:  INV.sym # of pins=4
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/INV.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/INV.sch
+.subckt INV VP IN OUT VN
+*.iopin VN
+*.iopin VP
+*.ipin IN
+*.opin OUT
+XM1 OUT IN VN VN sg13_lv_nmos w=0.15u l=0.13u ng=1 m=1
+XM2 OUT IN VP VP sg13_lv_pmos w=0.3u l=0.13u ng=1 m=1
+.ends
+
+.GLOBAL GND
+.GLOBAL VDD
+.end

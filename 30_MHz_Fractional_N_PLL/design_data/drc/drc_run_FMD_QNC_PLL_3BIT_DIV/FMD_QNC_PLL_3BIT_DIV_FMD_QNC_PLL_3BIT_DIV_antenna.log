@@ -1,0 +1,6 @@
+# Logfile created on 2025-09-02 16:30:01 +0200 by logger.rb/v1.5.3
+2025-09-02 16:30:01 +0200: Memory Usage (417428K) : Starting running IHP-SG13G2 Klayout DRC Antenna runset on /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/gds/FMD_QNC_PLL_3BIT_DIV.gds
+2025-09-02 16:30:01 +0200: Memory Usage (417428K) : Ruby Version for klayout: 3.2.3
+2025-09-02 16:30:01 +0200: Memory Usage (420692K) : Loading database to memory is complete.
+2025-09-02 16:30:01 +0200: Memory Usage (420692K) : IHP-SG13G2 Klayout DRC Antenna runset output at: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/gds/drc_run_FMD_QNC_PLL_3BIT_DIV/FMD_QNC_PLL_3BIT_DIV_FMD_QNC_PLL_3BIT_DIV_antenna.lyrdb
+2025-09-02 16:30:01 +0200: Memory Usage (420692K) : Evaluate switches.

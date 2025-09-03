@@ -1,0 +1,22 @@
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/PFD.sch
+.SUBCKT PFD vdd up vss down ref_clk vco_clk
+*.PININFO vdd:B ref_clk:I vss:B vco_clk:I up:O down:O
+M1 net2 vco_clk vss vss sg13_lv_nmos w=0.36u l=0.15u ng=1 m=1
+M4 net1 ref_clk net2 vss sg13_lv_nmos w=1.8u l=0.15u ng=1 m=1
+M5 net3 ref_clk net1 vss sg13_lv_nmos w=0.84u l=0.15u ng=1 m=1
+M9 net3 ref_clk ref_clk vdd sg13_lv_pmos w=0.64u l=0.15u ng=1 m=1
+M11 net7 net3 vss vss sg13_lv_nmos w=0.36u l=0.15u ng=1 m=1
+M12 vdd net3 net7 vdd sg13_lv_pmos w=0.72u l=0.15u ng=1 m=1
+M13 up net7 vss vss sg13_lv_nmos w=0.48u l=0.15u ng=1 m=1
+M14 vdd net7 up vdd sg13_lv_pmos w=0.96u l=0.15u ng=1 m=1
+M3 net1 ref_clk vdd vdd sg13_lv_pmos w=0.64u l=0.15u ng=1 m=1
+M6 net4 vco_clk vdd vdd sg13_lv_pmos w=0.64u l=0.15u ng=1 m=1
+M7 net4 vco_clk net5 vss sg13_lv_nmos w=1.8u l=0.15u ng=1 m=1
+M19 net5 ref_clk vss vss sg13_lv_nmos w=0.36u l=0.15u ng=1 m=1
+M8 net6 vco_clk net4 vss sg13_lv_nmos w=0.84u l=0.15u ng=1 m=1
+M10 net6 vco_clk vco_clk vdd sg13_lv_pmos w=0.64u l=0.15u ng=1 m=1
+M15 vdd net6 net8 vdd sg13_lv_pmos w=0.72u l=0.15u ng=1 m=1
+M16 net8 net6 vss vss sg13_lv_nmos w=0.36u l=0.15u ng=1 m=1
+M17 vdd net8 down vdd sg13_lv_pmos w=0.96u l=0.15u ng=1 m=1
+M18 down net8 vss vss sg13_lv_nmos w=0.48u l=0.15u ng=1 m=1
+.ENDS

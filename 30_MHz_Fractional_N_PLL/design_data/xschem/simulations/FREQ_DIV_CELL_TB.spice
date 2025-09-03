@@ -1,0 +1,109 @@
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/FREQ_DIV_CELL_TB.sch
+
+.lib /foss/pdks/ihp-sg13g2/libs.tech/ngspice/models/cornerMOSlv.lib mos_tt
+.include /foss/pdks/ihp-sg13g2/libs.ref/sg13g2_stdcell/spice/sg13g2_stdcell.spice
+
+**.subckt FREQ_DIV_CELL_TB
+x1 VDD GND DIV net1 CLK_IN Cout DIV net2 freq_div_cell
+Vs VDD GND 1.2
+Vclk CLK_IN GND dc 0 ac 0 pulse(0, 1.2, 0, 100p, 100p, 6.25n, 12.5n)
+x3 net2 VDD VSS sg13g2_tiehi
+x2 net1 VDD VSS sg13g2_tiehi
+* noconn Cout
+x5 DIV CLK_OUT net3 net3 net4 VDD GND dff_nclk
+x6 net4 VDD VSS sg13g2_tiehi
+* noconn CLK_OUT
+**** begin user architecture code
+
+
+.meas tran tperiod_in TRIG v(clk_in) VAL=0.5 FALL=1 TARG v(clk_in) VAL=0.5 FALL=2
+.meas tran freq_in PARAM = '1e-6/tperiod_in'
+
+.meas tran tperiod_out TRIG v(clk_out) VAL=0.5 FALL=1 TARG v(clk_out) VAL=0.5 FALL=2
+.meas tran freq_out PARAM = '1e-6/tperiod_out'
+
+
+
+
+.param temp=27
+
+Vvss VSS 0 0
+
+.control
+save v(clk_in) v(clk_out) v(div) v(cout)
+tran 50p 50n
+
+write TRAN_FREQ_DIV_CELL.raw
+.endc
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  freq_div_cell.sym # of pins=8
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/freq_div_cell.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/freq_div_cell.sch
+.subckt freq_div_cell VDD VSS DIV Cin CLK Cout nRST BIT
+*.ipin Cin
+*.ipin CLK
+*.ipin nRST
+*.ipin BIT
+*.opin DIV
+*.opin Cout
+*.iopin VSS
+*.iopin VDD
+x2 CLK net2 net1 net3 nRST VDD VSS DFF_nCLK
+x3 net2 BIT VDD VSS DIV sg13g2_xor2_1
+* noconn #net3
+x1 net2 net1 Cin VDD VSS Cout HALF_ADD
+.ends
+
+
+* expanding   symbol:  dff_nclk.sym # of pins=7
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/dff_nclk.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/dff_nclk.sch
+.subckt dff_nclk nCLK Q D nQ nRST VDD VSS
+*.ipin nCLK
+*.ipin D
+*.ipin nRST
+*.opin Q
+*.opin nQ
+*.iopin VSS
+*.iopin VDD
+x1 net1 D Q nQ nRST VDD VSS sg13g2_dfrbp_1
+x2 nCLK VDD VSS net1 sg13g2_inv_1
+.ends
+
+
+* expanding   symbol:  DFF_nCLK.sym # of pins=7
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/DFF_nCLK.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/DFF_nCLK.sch
+.subckt DFF_nCLK nCLK Q D nQ nRST VDD VSS
+*.ipin nCLK
+*.ipin D
+*.ipin nRST
+*.opin Q
+*.opin nQ
+*.iopin VSS
+*.iopin VDD
+x1 net1 D Q nQ nRST VDD VSS sg13g2_dfrbp_1
+x2 nCLK VDD VSS net1 sg13g2_inv_1
+.ends
+
+
+* expanding   symbol:  HALF_ADD.sym # of pins=6
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/HALF_ADD.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/HALF_ADD.sch
+.subckt HALF_ADD inB sum inA VDD VSS cout
+*.ipin inA
+*.ipin inB
+*.opin sum
+*.opin cout
+*.iopin VSS
+*.iopin VDD
+x1 inA inB VDD VSS sum sg13g2_xor2_1
+x2 inA inB VDD VSS cout sg13g2_and2_1
+.ends
+
+.GLOBAL GND
+.end

@@ -1,0 +1,46 @@
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/DFF_nCLK_TB.sch
+
+.lib /foss/pdks/ihp-sg13g2/libs.tech/ngspice/models/cornerMOSlv.lib mos_tt
+.include /foss/pdks/ihp-sg13g2/libs.ref/sg13g2_stdcell/spice/sg13g2_stdcell.spice
+
+**.subckt DFF_nCLK_TB
+Vdin D GND dc 0 ac 0 pulse(0, 1.2, 0, 100p, 100p, 12.5n, 25n)
+Vclk nCLK GND dc 0 ac 0 pulse(0, 1.2, 0, 100p, 100p, 6.25n, 12.5n)
+Vrst nRST GND dc 0 ac 0 pulse(0, 1.2, 0, 100p, 100p, 40n, 75n)
+* noconn nQ
+* noconn Q
+x1 nCLK Q D nQ nRST net1 GND DFF_nCLK
+Vs net1 GND 1.2
+**** begin user architecture code
+
+
+.param temp=27
+
+.control
+save v(nclk) v(d) v(nrst) v(q) v(nq)
+tran 50p 75n
+
+write TRAN_DFF_nCLK.raw
+.endc
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  DFF_nCLK.sym # of pins=7
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/DFF_nCLK.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/DFF_nCLK.sch
+.subckt DFF_nCLK nCLK Q D nQ nRST VDD VSS
+*.ipin nCLK
+*.ipin D
+*.ipin nRST
+*.opin Q
+*.opin nQ
+*.iopin VSS
+*.iopin VDD
+x1 net1 D Q nQ nRST VDD VSS sg13g2_dfrbp_1
+x2 nCLK VDD VSS net1 sg13g2_inv_1
+.ends
+
+.GLOBAL GND
+.end

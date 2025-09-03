@@ -1,0 +1,2611 @@
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+#====================================================================================================================
+#--------------------------------------------- IHP-SG13G2 DRC RULE DECK ---------------------------------------------
+#====================================================================================================================
+require 'time'
+require 'logger'
+require 'json'
+require 'pathname'
+
+exec_start_time = Time.now
+
+# Custom formatter including timestamp and memory usage
+formatter = proc do |_severity, datetime, _progname, msg|
+  memory_usage = "#{RBA::Timer.memory_size / 1024}K"
+  "#{datetime}: Memory Usage (#{memory_usage}) : #{msg}\n"
+end
+
+# Create file logger
+file_logger = Logger.new($log)
+file_logger.formatter = formatter
+
+# Create stdout logger
+stdout_logger = Logger.new($stdout)
+stdout_logger.formatter = formatter
+
+# MultiLogger class to broadcast to multiple loggers
+class MultiLogger
+  def initialize(*targets)
+    @targets = targets
+  end
+
+  def info(msg)
+    @targets.each { |t| t.info(msg) }
+  end
+
+  def warn(msg)
+    @targets.each { |t| t.warn(msg) }
+  end
+
+  def error(msg)
+    @targets.each { |t| t.error(msg) }
+  end
+end
+
+# Use the multi-logger for your application
+logger = MultiLogger.new(stdout_logger, file_logger)
+
+#================================================
+#----------------- FILE SETUP -------------------
+#================================================
+
+logger.info("Starting running IHP-SG13G2 Klayout DRC runset on #{$input}")
+logger.info("Ruby Version for klayout: #{RUBY_VERSION}")
+
+if $input
+  if $topcell
+    source($input, $topcell)
+  else
+    source($input)
+  end
+end
+
+logger.info('Loading database to memory is complete.')
+
+if $report
+  logger.info("IHP-SG13G2 Klayout DRC runset output at: #{$report}")
+  report('DRC Run Report at', $report)
+else
+  layout_dir = Pathname.new(RBA::CellView.active.filename).parent.realpath
+  report_path = layout_dir.join('sg13g2_drc_main.lyrdb').to_s
+  logger.info("IHP-SG13G2 Klayout DRC runset output at default location: #{report_path}")
+  report('DRC Run Report at', report_path)
+end
+
+#================================================
+#------------------ SWITCHES --------------------
+#================================================
+
+logger.info('Evaluate switches.')
+
+def bool_check?(obj)
+  obj.to_s.downcase == 'true'
+end
+
+TABLE_NAME = $table_name || 'main'
+
+logger.info("table_name selected  #{TABLE_NAME}")
+
+# Run mode setup
+def setup_run_mode(run_mode)
+  case run_mode
+  when 'tiling'
+    tiles(500.um)
+    tile_borders(30.um)
+  when 'flat'
+    flat
+  else
+    deep
+  end
+end
+
+# threads
+threads($thr.to_i)
+logger.info("Klayout will use #{$thr} thread(s)")
+
+# Run mode
+setup_run_mode($run_mode)
+logger.info("#{$run_mode} mode is enabled for #{TABLE_NAME} table.")
+
+# FEOL
+FEOL = !bool_check?($no_feol)
+logger.info("FEOL enabled: #{FEOL}")
+
+# BEOL
+BEOL = !bool_check?($no_beol)
+logger.info("BEOL enabled: #{BEOL}")
+
+# OFFGRID
+OFFGRID = !bool_check?($no_offgrid)
+logger.info("OffGrid enabled: #{OFFGRID}")
+
+# PreCheck DRC
+PRECHECK_DRC = bool_check?($precheck_drc)
+logger.info("PreCheck DRC enabled: #{PRECHECK_DRC}")
+
+# Connectivity rules
+conn_tables = %w[main nwell nbulay]
+CONNECTIVITY_RULES = conn_tables.include?(TABLE_NAME)
+logger.info("CONNECTIVITY_RULES enabled: #{CONNECTIVITY_RULES} for table #{TABLE_NAME}")
+
+#================================================
+#------------- LAYERS DEFINITIONS ---------------
+#================================================
+
+# %include layers_def.drc
+
+#================================================
+# -------------------- UTILS --------------------
+#================================================
+
+# Method to get DRC values from JSON files
+def get_drc_values(logger)
+  tech_rules = {}
+  if $drc_json && $drc_json != $drc_json_default
+    begin
+      tech_drc_content = File.read($drc_json)
+      tech_drc_data = JSON.parse(tech_drc_content)
+      tech_rules = tech_drc_data['drc_rules'] || {}
+      logger.info("Loaded TECH DRC rules values from #{$drc_json}")
+    rescue StandardError => e
+      logger.error("Error reading TECH DRC rules from #{$drc_json}: #{e.message}")
+    end
+  end
+
+  begin
+    default_drc_content = File.read($drc_json_default)
+    default_drc_data = JSON.parse(default_drc_content)
+    default_rules = default_drc_data['drc_rules'] || {}
+    logger.info("Loaded default DRC rules values from #{$drc_json_default}")
+  rescue StandardError => e
+    logger.error("Error reading default DRC rules from #{$drc_json_default}: #{e.message}")
+    return {}
+  end
+
+  merged_rules = tech_rules.merge(default_rules)
+
+  # Report any fallback rules used
+  missing_keys = default_rules.keys - tech_rules.keys
+  unless missing_keys.empty?
+    logger.warn('The following rules values were missing in tech json and default values were used:')
+    missing_keys.each { |rule| logger.warn("  - #{rule}") }
+  end
+
+  merged_rules
+end
+
+# Extract DRC rules values from the JSON file
+drc_rules = get_drc_values(logger)
+
+#================================================
+#-------------- COMMON DERIVATIONS --------------
+#================================================
+
+# === LAYOUT EXTENT ===
+CHIP = extent.sized(0.0)
+chip_area = CHIP.area
+chip_bbox = CHIP.bbox
+chip_w = chip_bbox.width
+chip_l = chip_bbox.height
+
+logger.info("Total area of the design is #{chip_area} um^2.")
+logger.info("The design dimensions are #{chip_w} µm * #{chip_l} µm.")
+
+# Enable tiling if chip area exceeds 100,000 µm²
+en_tiles = chip_area > 1_000_000.um2
+
+# === General Derivations ===
+logger.info('Starting general IHP-SG13G2 derivations.')
+
+# Pwell
+logger.info('Starting Pwell derivations')
+pwell_allowed = CHIP.not(pwell_block)
+digisub_gap = digisub_drw.not(digisub_drw.sized(-1.nm))
+pwell = pwell_allowed.not(nwell_drw).not(digisub_gap)
+
+# nBulay
+nbulay_tables = %w[main nbulay nwell activfiller schottkydiode]
+if nbulay_tables.include?(TABLE_NAME)
+  nbulay_gen_sized = nwell_drw.sized(-1.5.um).sized(0.5.um)
+  nbuLay_gen = nbulay_gen_sized.not(nbulay_block.join(res_drw))
+  nbuLay_gen_nbulay = nbuLay_gen.join(nbulay_drw)
+end
+
+# n activ
+nact_pact_tables = %w[main pwellblock gatpoly cont latchup nwell nbulay]
+if nact_pact_tables.include?(TABLE_NAME)
+  logger.info('Starting n-Activ derivations')
+  nactiv  = activ_drw.not(psd_drw.join(nsd_block))
+end
+
+# p activ
+pact_pact_tables = %w[main pwellblock gatpoly cont npnsubstratetie latchup  nwell nbulay]
+if pact_pact_tables.include?(TABLE_NAME)
+  logger.info('Starting p-Activ derivations')
+  pactiv  = activ_drw.and(psd_drw)
+end
+
+# p tap
+ptap_tables = %w[main pwellblock npnsubstratetie latchup nwell nbulay]
+if ptap_tables.include?(TABLE_NAME)
+  logger.info('Starting ptap derivations')
+  ptap = pactiv.and(pwell)
+end
+
+# n tap
+ntap_tables = %w[main nwell nbulay]
+if ntap_tables.include?(TABLE_NAME)
+  logger.info('Starting ntap derivations')
+  ntap = nactiv.and(nwell_drw)
+end
+
+# activ FETs
+pact_fet_tables = %w[main gatpoly nwell nbulay]
+if pact_fet_tables.include?(TABLE_NAME)
+  logger.info('Starting pact FET derivations')
+  pact_fet = pactiv.and(nwell_drw)
+end
+
+nact_fet_tables = %w[main pwellblock gatpoly latchup nwell nbulay]
+if nact_fet_tables.include?(TABLE_NAME)
+  logger.info('Starting nact FET derivations')
+  nact_fet = nactiv.and(pwell)
+end
+
+# Gate FETs
+gate_tables = %w[main gatpoly nwell nbulay]
+if gate_tables.include?(TABLE_NAME)
+  logger.info('Starting Gate derivations')
+  res_mk = polyres_drw.join(res_drw)
+  ngate = nact_fet.and(gatpoly_drw)
+  pgate = pact_fet.and(gatpoly_drw)
+end
+
+# Cont derivations
+cont_tables = %w[main cont contbar schottkydiode]
+if cont_tables.include?(TABLE_NAME)
+  logger.info('Starting cont/contbar general derivations')
+  cont_nseal = cont_drw.not(edgeseal_drw)
+  contbar = cont_nseal.non_squares
+  cont_sq = cont_nseal.not(contbar)
+  cont_nseal.forget
+end
+
+# Pad derivations
+pad_tables = %w[main pad solderbump copperpillar]
+if pad_tables.include?(TABLE_NAME)
+  logger.info('Starting pad general derivations')
+  cu_pillarpad = passiv_pillar.and(dfpad_pillar).and(topmetal2_drw)
+  sbumppad = dfpad_sbump.and(passiv_sbump).and(topmetal2_drw)
+  pad = passiv_drw.and(dfpad_drw).and(topmetal2_drw)
+end
+
+# DRC tolerance value
+drc_tole = 0.005.um
+
+#================================================
+#------------- LAYERS CONNECTIONS ---------------
+#================================================
+
+if CONNECTIVITY_RULES
+  logger.info('Starting IHP-SG13G2 DRC connectivity related derivations.')
+
+  # Wells
+  nwell_ring_niso = nwell_drw.with_holes.not(nbulay_drw)
+  nwell_holes = nwell_drw.holes.not(nwell_drw)
+  isoPWell  = nbulay_drw.and(nwell_holes)
+  pwell_sub = pwell.not(isoPWell).join(nwell_ring_niso)
+
+  # conn layers
+  poly_con      = gatpoly_drw.not(res_mk)
+  metal1_con    = metal1_drw.not(metal1_res)
+  metal2_con    = metal2_drw.not(metal2_res)
+  metal3_con    = metal3_drw.not(metal3_res)
+  metal4_con    = metal4_drw.not(metal4_res)
+  metal5_con    = metal5_drw.not(metal5_res)
+  topmetal1_con = topmetal1_drw.not(topmetal1_res).not(ind_drw)
+  topmetal2_con = topmetal2_drw.not(topmetal2_res).not(ind_drw)
+
+  # Mimcap
+  mim_via = vmim_drw.join(topvia1_drw).and(mim_drw)
+  topvia1_n_cap = topvia1_drw.not(mim_via)
+
+  logger.info('Starting IHP-SG13G2 DRC connectivity setup')
+  # Inter-layer
+  connect(pwell_sub, pwell)
+  connect(pwell, ptap)
+  connect(nwell_drw, ntap)
+  connect(cont_drw, nactiv)
+  connect(cont_drw, pactiv)
+  connect(nbulay_drw, nbuLay_gen_nbulay)
+  connect(nbuLay_gen_nbulay, nwell_drw)
+  connect(ntap, cont_drw)
+  connect(ptap, cont_drw)
+  connect(poly_con, cont_drw)
+  connect(nact_fet, cont_drw)
+  connect(pact_fet, cont_drw)
+  connect(cont_drw, metal1_con)
+  connect(metal1_con, via1_drw)
+  connect(via1_drw, metal2_con)
+  connect(metal2_con, via2_drw)
+  connect(via2_drw, metal3_con)
+  connect(metal3_con, via3_drw)
+  connect(via3_drw, metal4_con)
+  connect(metal4_con, via4_drw)
+  connect(via4_drw, metal5_con)
+  connect(metal5_con, topvia1_n_cap)
+  connect(topvia1_n_cap, topmetal1_con)
+  connect(topmetal1_con, topvia2_drw)
+  connect(topvia2_drw, topmetal2_con)
+
+  # nwell nets
+  nwell_nets = nwell_drw.nets
+end
+
+#================================================
+#------------ PRE-DEFINED FUNCTIONS -------------
+#================================================
+
+def get_circle(polygon_check)
+  maybe_circle1 = polygon_check.with_bbox_aspect_ratio(1)
+  maybe_circle2 = maybe_circle1.select { |polygon| polygon.num_points >= 16 }
+  # Circle detection based on area ratio of bounding box to shape area ≈ 4/π ≈ 1.2732
+  # (Derived from: (d^2) / (π * d^2 / 4) = 4/π)
+  maybe_circle2.without_holes.with_area_ratio(1.270, 1.276)
+end
+
+def get_octagon(polygon_check)
+  maybe_oct1 = polygon_check.with_bbox_aspect_ratio(1)
+  maybe_oct2 = maybe_oct1.select { |polygon| polygon.num_points == 8 }
+  h_edges_check = maybe_oct2.edges.with_angle(0, absolute)
+  maybe_oct3 = maybe_oct2.interacting(h_edges_check, 2, 2)
+  v_edges_check = maybe_oct3.edges.with_angle(90, absolute)
+  maybe_oct4 = maybe_oct3.interacting(v_edges_check, 2, 2)
+  diag_edges_check = maybe_oct4.edges.with_angle(44.5, 45.5, absolute)
+  maybe_oct4.interacting(diag_edges_check, 4, 4)
+end
+
+#================================================
+#----------------- MAIN RUNSET ------------------
+#================================================
+
+logger.info('Starting IHP-SG13G2 DRC rules.')
+
+# === FEOL ===
+logger.info('Running all FEOL rules') if FEOL
+# === BEOL ===
+logger.info('Running all BEOL rules') if BEOL
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+#================================================
+#---------------- 3.2. Forbidden ----------------
+#================================================
+
+logger.info('Starting 3.2. FORBIDDEN table')
+
+forb_lays = {
+  'biwind' => biwind_drw,
+  'pemwind' => pemwind_drw,
+  'baspoly' => baspoly_drw,
+  'deepco' => deepco_drw,
+  'pempoly' => pempoly_drw,
+  'empoly' => empoly_drw,
+  'ldmos' => ldmos_drw,
+  'pbiwind' => pbiwind_drw,
+  'nodrc' => nodrc_drw,
+  'flash' => flash_drw,
+  'colwind' => colwind_drw
+}
+
+# Iterate through each layer and output the forbidden rule
+forb_lays.each do |forb_lay, lay|
+  logger.info("Executing rule forbidden.#{forb_lay}")
+  lay.output("forbidden.#{forb_lay}",
+             "forbidden.#{forb_lay} : 3.2. #{forb_lay} is forbidden in designs submitted for all 0.13 um techs.")
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if FEOL
+  #================================================
+  #------------------ 5.1 NWell -------------------
+  #================================================
+
+  logger.info('Starting 5.1 NWell table')
+
+  # Nwell derivations
+
+  if !PRECHECK_DRC && CONNECTIVITY_RULES
+    # Rule NW.b: Min. NWell space or notch (same net). NWell regions separated by less than this value will be merged. is 0.62 um
+    logger.info('Executing rule NW.b')
+    nw_b_value = drc_rules['NW_b'].to_f
+    nw_b_l = nwell_nets.space(nw_b_value.um, props_eq)
+    nw_b_l.output('NW.b',
+                  "5.1.NW.b : Min. NWell space or notch (same net). NWell regions separated by less than this value will be merged. is #{nw_b_value} um")
+    nw_b_l.forget
+
+    # Rule NW.b1: Min. PWell width between NWell regions (different net)  is 1.80 um
+    logger.info('Executing rule NW.b1')
+    nw_b1_value = drc_rules['NW_b1'].to_f
+    nw_b1_l1 = nwell_nets.space(nw_b1_value.um, props_ne)
+    nw_b1_l2 = pwell_block.interacting(nwell_drw)
+    nw_b1_l3 = nw_b1_l2.sep(nwell_drw, nw_b1_value.um, without_touching_edges)
+    nw_b1 = nw_b1_l1.join(nw_b1_l3)
+    nw_b1.output('NW.b1', "5.1.NW.b1 : Min. PWell width between NWell regions (different net)  is #{nw_b1_value} um")
+    nw_b1_l1.forget
+    nw_b1_l2.forget
+    nw_b1_l3.forget
+    nw_b1.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if FEOL
+  #================================================
+  #------------------ 5.2 PWell:block -------------
+  #================================================
+
+  logger.info('Starting 5.2 PWell:block')
+
+  # Pwell:block derivations
+
+  unless PRECHECK_DRC
+    # Rule PWB.e: Min. PWell:block space to (N+Activ not inside ThickGateOx) in PWell is 0.31 um
+    logger.info('Executing rule PWB.e')
+    pwb_e_value = drc_rules['PWB_e'].to_f
+    pwb_e_l1 = nact_fet.not(thickgateox_drw)
+    pwb_l = pwell_block.sep(pwb_e_l1, pwb_e_value.um, euclidian)
+    pwb_l.output('PWB.e',
+                 "5.2. PWB.e Min. PWell:block space to (N+Activ not inside ThickGateOx) in PWell is #{pwb_e_value} um")
+    pwb_e_l1.forget
+    pwb_l.forget
+
+    # Rule PWB.e1: Min. PWell:block space to (N+Activ inside ThickGateOx) in PWell is 0.62 um
+    logger.info('Executing rule PWB.e1')
+    pwb_e1_value = drc_rules['PWB_e1'].to_f
+    pwb_e1_l1 = nact_fet.and(thickgateox_drw)
+    pwb_e1_l = pwell_block.sep(pwb_e1_l1, pwb_e1_value.um, euclidian)
+    pwb_e1_l.output('PWB.e1',
+                    "5.2. PWB.e1 Min. PWell:block space to (N+Activ inside ThickGateOx) in PWell is #{pwb_e1_value} um")
+    pwb_e1_l1.forget
+    pwb_e1_l.forget
+
+    # Rule PWB.f: Min. PWell:block space to (P+Activ not inside ThickGateOx) in PWell is 0.24 um
+    logger.info('Executing rule PWB.f')
+    pwb_f_value = drc_rules['PWB_f'].to_f
+    pwb_f_l1 = ptap.not(thickgateox_drw)
+    pwb_f_l = pwell_block.sep(pwb_f_l1, pwb_f_value.um, euclidian)
+    pwb_f_l.output('PWB.f',
+                   "5.2. PWB.f Min. PWell:block space to (P+Activ not inside ThickGateOx) in PWell is #{pwb_f_value} um")
+    pwb_f_l1.forget
+    pwb_f_l.forget
+
+    # Rule PWB.f1: Min. PWell:block space to (P+Activ inside ThickGateOx) in PWell 0.62 um
+    logger.info('Executing rule PWB.f1')
+    pwb_f1_value = drc_rules['PWB_f1'].to_f
+    schottky_nbl_mk = recog_diode.and(thickgateox_drw).and(salblock_drw).and(nsd_block)
+    schottky_nbl_rec = nbulay_drw.not(nwell_drw).not_outside(schottky_nbl_mk)
+    schottky_nbl1 = ptap.holes.covering(schottky_nbl_rec)
+
+    pwb_f1_l1 = ptap.and(thickgateox_drw)
+    pwb_f1_l2 = pwell_block.outside(schottky_nbl1)
+    pwb_f1_l = pwb_f1_l2.sep(pwb_f1_l1, pwb_f1_value.um, euclidian)
+    pwb_f1_l.output('PWB.f1',
+                    "5.2. PWB.f1 Min. PWell:block space to (P+Activ inside ThickGateOx) in PWell #{pwb_f1_value} um")
+    pwb_f1_l1.forget
+    pwb_f1_l2.forget
+    pwb_f1_l.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+if FEOL
+  #================================================
+  #------------------ 5.3 nBuLay ------------------
+  #================================================
+
+  logger.info('Starting 5.3 nBuLay table')
+
+  if !PRECHECK_DRC && CONNECTIVITY_RULES
+    # nBulay derivations
+    nbl_nets = nbuLay_gen_nbulay.nets
+    nactiv_nets = nactiv.nets
+    pactiv_nets = pactiv.nets
+    nbuLay_gen_nwell = nbuLay_gen_nbulay.interacting(nwell_drw)
+
+
+    # Rule NBL.b: Min. nBuLay space or notch (same net) is 1.50 um
+    logger.info('Executing rule NBL.b')
+    nbl_b_value = drc_rules['NBL_b'].to_f
+    nbl_b = nbl_nets.space(nbl_b_value.um, props_eq)
+    nbl_b.output('NBL.b', "5.3.NBL.b : Min. nBuLay space or notch (same net) is #{nbl_b_value} um")
+    nbl_b.forget
+
+    # Rule NBL.c: Min. PWell width between nBuLay regions (different net) is 3.20 um
+    logger.info('Executing rule NBL.c')
+    nbl_c_value = drc_rules['NBL_c'].to_f
+    nbl_c_l1 = nbl_nets.space(nbl_c_value.um, props_ne)
+    nbl_c_l2 = pwell_block.interacting(nbuLay_gen_nwell)
+    nbl_c_l3 = nbl_c_l2.sep(nbuLay_gen_nwell, nbl_c_value.um, euclidian, without_touching_edges)
+    nbl_c = nbl_c_l1.join(nbl_c_l3)
+    nbl_c.output('NBL.c', "5.3.NBL.c : Min. PWell width between nBuLay regions (different net) is #{nbl_c_value} um")
+    nbl_c_l1.forget
+    nbl_c_l2.forget
+    nbl_c_l3.forget
+    nbl_c.forget
+
+    # Rule NBL.d: Min. PWell width between nBuLay and NWell (different net) is 2.20 um
+    logger.info('Executing rule NBL.d')
+    nbl_d_value = drc_rules['NBL_d'].to_f
+    nbl_d_l1 = nbl_nets.sep(nwell_nets, nbl_d_value.um, props_ne)
+    nbl_d_l2 = pwell_block.interacting(nwell_drw)
+    nbl_d_l3 = nbl_d_l2.sep(nbuLay_gen_nwell, nbl_d_value.um, euclidian, without_touching_edges)
+    nbl_d = nbl_d_l1.join(nbl_d_l3)
+    nbl_d.output('NBL.d',
+                 "5.3.NBL.d : Min. PWell width between nBuLay and NWell (different net) is #{nbl_d_value} um")
+    nbl_d_l1.forget
+    nbl_d_l2.forget
+    nbl_d_l3.forget
+    nbl_d.forget
+
+    # Rule NBL.e: Min. nBuLay space to unrelated N+Activ is 1.00 um
+    logger.info('Executing rule NBL.e')
+    nbl_e_value = drc_rules['NBL_e'].to_f
+    nbl_e = nbl_nets.sep(nactiv_nets, nbl_e_value.um, props_ne)
+    nbl_e.output('NBL.e', "5.3.NBL.e : Min. nBuLay space to unrelated N+Activ is #{nbl_e_value} um")
+    nbl_e.forget
+
+    # Rule NBL.f: Min. nBuLay space to unrelated P+Activ is 0.50 um
+    logger.info('Executing rule NBL.f')
+    nbl_f_value = drc_rules['NBL_f'].to_f
+    nbl_f = nbl_nets.sep(pactiv_nets, nbl_f_value.um, props_ne)
+    nbl_f.output('NBL.f', "5.3.NBL.f : Min. nBuLay space to unrelated P+Activ is #{nbl_f_value} um")
+    nbl_f.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if FEOL
+  #================================================
+  #------------------ 5.5. Activ ------------------
+  #================================================
+
+  logger.info('Starting 5.5. Activ table')
+
+  # Activ derivations
+
+  # Rule Act.a: Min. Activ width is 0.15µm
+  logger.info('Executing rule Act.a')
+  act_a_value = drc_rules['Act_a'].to_f
+  acta_l1 = activ_drw.width(act_a_value.um, euclidian)
+  acta_l1.output('Act.a', "5.5. Act.a : Min. Activ width : #{act_a_value} µm")
+  acta_l1.forget
+
+  # Rule Act.b:  Min. Activ space or notch is 0.21µm.
+  logger.info('Executing rule Act.b')
+  act_b_value = drc_rules['Act_b'].to_f
+  actb_l1 = activ_drw.space(act_b_value.um, euclidian)
+  actb_l1.output('Act.b', "5.5. Act.b : Min. Activ space or notch: #{act_b_value} µm.")
+  actb_l1.forget
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if FEOL
+  #================================================
+  #------------------ 5.6 Activ:filler ------------
+  #================================================
+
+  logger.info('Starting 5.6 Activ:filler table')
+
+  # Activ:filler derivations
+  afil_c_g = cont_drw.join(gatpoly_drw)
+  afil_d_g = nwell_drw.join(nbulay_drw)
+
+  # Enable tiling mode for large designs
+  if en_tiles
+    # Run mode
+    setup_run_mode('tiling')
+    logger.info('Tiling mode is enabled for Activ:filler table.')
+  end
+
+  # Rule AFil.c1: Min. Activ:filler space to Activ is 0.42 um
+  logger.info('Executing rule AFil.c1')
+  afil_c1_value = drc_rules['AFil_c1'].to_f
+  afil_c1 = activ_drw.sep(activ_filler, afil_c1_value.um, euclidian)
+  afil_c1.output('AFil.c1', "5.6. AFil.c1 Min. Activ:filler space to Activ is #{afil_c1_value} um")
+  afil_c1.forget
+
+  unless PRECHECK_DRC
+    # Rule AFil.c: Min. Activ:filler space to Cont, GatPoly is 1.10 um
+    logger.info('Executing rule AFil.c')
+    afil_c_value = drc_rules['AFil_c'].to_f
+    afil_c_l = afil_c_g.sep(activ_filler, afil_c_value.um, euclidian)
+    afil_c_l.output('AFil.c', "5.6. AFil.c Min. Activ:filler space to Cont, GatPoly is #{afil_c_value} um")
+    afil_c_g.forget
+    afil_c_l.forget
+
+    # Rule AFil.d: Min. Activ:filler space to NWell, nBuLay is 1.00 um
+    logger.info('Executing rule AFil.d')
+    afil_d_value = drc_rules['AFil_d'].to_f
+    afil_d_l1 = afil_d_g.sep(activ_filler, afil_d_value.um, euclidian)
+    afil_d_l2 = nwell_drw.enclosing(activ_filler, afil_d_value.um, euclidian)
+    afil_d_l3 = nbuLay_gen_nbulay.enclosing(activ_filler, afil_d_value.um, euclidian)
+    afil_d_l = afil_d_l1.join(afil_d_l2).join(afil_d_l3)
+    afil_d_l.output('AFil.d', "5.6. AFil.d Min. Activ:filler space to NWell, nBuLay is #{afil_d_value} um")
+    afil_d_g.forget
+    afil_d_l1.forget
+    afil_d_l2.forget
+    afil_d_l3.forget
+    afil_d_l.forget
+
+    # Rule AFil.e: Min. Activ:filler space to TRANS is 1.00 um
+    logger.info('Executing rule AFil.e')
+    afil_e_value = drc_rules['AFil_e'].to_f
+    afil_e = trans_drw.sep(activ_filler, afil_e_value.um, euclidian)
+    afil_e.output('AFil.e', "5.6. AFil.e Min. Activ:filler space to TRANS is #{afil_e_value} um")
+    afil_e.forget
+
+    # Rule AFil.j: Min. nSD:block and SalBlock enclosure of Activ:filler inside PWell:block is 0.25 um
+    logger.info('Executing rule AFil.j')
+    afil_j_value = drc_rules['AFil_j'].to_f
+    afil_j_l1 = nsd_block.and(pwell_block)
+    afil_j_l2 = salblock_drw.and(pwell_block)
+    afil_j_l3 = afil_j_l1.enclosing(activ_filler, afil_j_value.um, euclidian)
+    afil_j_l4 = afil_j_l2.enclosing(activ_filler, afil_j_value.um, euclidian)
+    afil_j_l = afil_j_l3.join(afil_j_l4)
+    afil_j_l.output('AFil.j',
+                    "5.6. AFil.j Min. nSD:block and SalBlock enclosure of Activ:filler inside PWell:block is #{afil_j_value} um")
+    afil_j_l1.forget
+    afil_j_l2.forget
+    afil_j_l3.forget
+    afil_j_l4.forget
+    afil_j_l.forget
+  end
+
+  if en_tiles
+    # Run mode
+    setup_run_mode($run_mode)
+    logger.info("#{$run_mode} mode is enabled after Activ:filler table.")
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if FEOL
+  #================================================
+  #--------------- 5.7. ThickGateOx ---------------
+  #================================================
+
+  logger.info('Starting 5.7. ThickGateOx table')
+
+  # ThickGateOx derivations
+
+  # Rule TGO.f: Min. ThickGateOx width is 0.86µm
+  logger.info('Executing rule TGO.f')
+  tgo_f_value = drc_rules['TGO_f'].to_f
+  tgof_l1 = thickgateox_drw.width(tgo_f_value.um, euclidian)
+  tgof_l1.output('TGO.f', "5.7. TGO.f : Min. ThickGateOx width: #{tgo_f_value} µm")
+  tgof_l1.forget
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if FEOL
+  #================================================
+  #----------------- 5.8. GatPoly -----------------
+  #================================================
+
+  logger.info('Starting 5.8. GatPoly table')
+
+  # GatPoly derivations
+
+  # Rule Gat.a: Min. GatPoly width is 0.13µm
+  logger.info('Executing rule Gat.a')
+  gat_a_value = drc_rules['Gat_a'].to_f
+  gata_l1 = gatpoly_drw.width(gat_a_value.um, euclidian)
+  gata_l1.output('Gat.a', "5.8. Gat.a : Min. GatPoly width: #{gat_a_value} µm")
+  gata_l1.forget
+
+  # Rule Gat.b: Min. GatPoly space or notch is 0.18µm.
+  logger.info('Executing rule Gat.b')
+  gat_b_value = drc_rules['Gat_b'].to_f
+  gatb_l1 = gatpoly_drw.space(gat_b_value.um, euclidian)
+  gatb_l1.output('Gat.b', "5.8. Gat.b :Min. GatPoly space or notch: #{gat_b_value} µm.")
+  gatb_l1.forget
+
+  # Rule Gat.d: Min. GatPoly space to Activ is 0.07µm.
+  logger.info('Executing rule Gat.d')
+  gat_d_value = drc_rules['Gat_d'].to_f
+  gatd_l1 = gatpoly_drw.sep(activ_drw, gat_d_value.um, euclidian)
+  gatd_l1.output('Gat.d', "5.8. Gat.d :Min. GatPoly space to Activ: #{gat_d_value} µm.")
+  gatd_l1.forget
+
+  unless PRECHECK_DRC
+    # Rule Gat.a1: Min. GatPoly width for channel length of 1.2 V NFET is 0.13 um
+    logger.info('Executing rule Gat.a1')
+    gat_a1_value = drc_rules['Gat_a1'].to_f
+    ngate_lv = ngate.not(thickgateox_drw)
+    gat_a1 = ngate_lv.edges.inside_part(activ_drw).width(gat_a1_value.um, euclidian)
+    gat_a1.output('Gat.a1', "5.8. Gat.a1 Min. GatPoly width for channel length of 1.2V NFET is #{gat_a1_value} um")
+    gat_a1.forget
+
+    # Rule Gat.a2: Min. GatPoly width for channel length of 1.2 V PFET is 0.13 um
+    logger.info('Executing rule Gat.a2')
+    gat_a2_value = drc_rules['Gat_a2'].to_f
+    pgate_lv = pgate.not(thickgateox_drw)
+    gat_a2 = pgate_lv.edges.inside_part(activ_drw).width(gat_a2_value.um, euclidian)
+    gat_a2.output('Gat.a2', "5.8. Gat.a2 Min. GatPoly width for channel length of 1.2V PFET is #{gat_a2_value} um")
+    gat_a2.forget
+
+    # Rule Gat.g: Min. GatPoly width for 45-degree bent shapes if the bend GatPoly length is > 0.39 µm is 0.16 um
+    logger.info('Executing rule Gat.g')
+    gat_g_value = drc_rules['Gat_g'].to_f
+    gat_g_length = drc_rules['Gat_g_min'].to_f
+    gat_g_p1 = gatpoly_drw.edges.with_angle(45, absolute)
+    gat_g_p2 = gat_g_p1.with_length(gat_g_length.um, nil)
+    gat_g = gat_g_p2.width(gat_g_value.um, euclidian)
+    gat_g.output('Gat.g',
+                 "5.8. Gat.g Min. GatPoly width for 45-degree bent shapes if the bend GatPoly,length is > 0.39 µm is #{gat_g_value} um")
+    gat_g_p1.forget
+    gat_g_p2.forget
+    gat_g.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if FEOL
+  #================================================
+  #----------------- 5.9 GatPoly:filler -----------
+  #================================================
+
+  logger.info('Starting 5.9 GatPoly:filler')
+
+  # GatPoly filler derivations
+  gfil_d_g = activ_drw.join(gatpoly_drw).join(cont_drw).join(psd_drw).join(nsd_block).join(salblock_drw)
+  gfil_e_g = nwell_drw.join(nbulay_drw)
+
+  # Enable tiling mode for large designs
+  if en_tiles
+    # Run mode
+    setup_run_mode('tiling')
+    logger.info('Tiling mode is enabled for GatPoly:filler table.')
+  end
+
+  # Rule GFil.d: Min. GatPoly:filler space to Activ, GatPoly, Cont, pSD, nSD:block, SalBlock is 1.1 um
+  logger.info('Executing rule GFil.d')
+  gfil_d_value = drc_rules['GFil_d'].to_f
+  gfil_d = gfil_d_g.sep(gatpoly_filler, gfil_d_value.um, euclidian)
+  gfil_d.output('GFil.d',
+                "5.9. GFil.d : Min. GatPoly:filler space to Activ, GatPoly, Cont, pSD, nSD:block, SalBlock is #{gfil_d_value} um")
+  gfil_d_g.forget
+  gfil_d.forget
+
+  unless PRECHECK_DRC
+    # Rule GFil.e: Min. GatPoly:filler space to NWell, nBuLay is 1.10 um
+    logger.info('Executing rule GFil.e')
+    gfil_e_value = drc_rules['GFil_e'].to_f
+    gfil_e_l = gfil_e_g.sep(gatpoly_filler, gfil_e_value.um, euclidian)
+    gfil_e_l.output('GFil.e', "5.9. GFil.e Min. GatPoly:filler space to NWell, nBuLay is #{gfil_e_value} um")
+    gfil_e_l.forget
+
+    # Rule GFil.i: Max. GatPoly:nofill area (µm²) is 400um x 400um
+    logger.info('Executing rule GFil.i')
+    gfil_i_value = drc_rules['GFil_i'].to_f
+    gfil_i = gatpoly_nofill.with_bbox_max(gfil_i_value.um + 0.001.um, nil)
+    gfil_i.output('GFil.i', "5.9. GFil.i Max. GatPoly:nofill area (µm²) is #{gfil_i_value} um x #{gfil_i_value} um")
+    gfil_i.forget
+  end
+
+  if en_tiles
+    # Run mode
+    setup_run_mode($run_mode)
+    logger.info("#{$run_mode} mode is enabled after GatPoly:filler table.")
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if FEOL
+  #================================================
+  #----------------- 5.10 pSD ---------------------
+  #================================================
+
+  logger.info('Starting 5.10 pSD table')
+
+  # pSD derivations
+
+  unless PRECHECK_DRC
+    # Rule pSD.c1: Min. pSD enclosure of P+Activ in PWell is 0.03 um
+    logger.info('Executing rule pSD.c1')
+    psd_c1_value = drc_rules['pSD_c1'].to_f
+    psd_c1_l1 = activ_drw.not_outside(psd_drw).and(pwell).outside(edgeseal_drw)
+    psd_c1_l = psd_c1_l1.enclosed(psd_drw, psd_c1_value.um, euclidian)
+    psd_c1_l.output('pSD.c1', "5.10. pSD.c1 Min. pSD enclosure of P+Activ in PWell is #{psd_c1_value} um")
+    psd_c1_l1.forget
+    psd_c1_l.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if FEOL
+  #==============================================
+  #----------------- 5.14. Cont -----------------
+  #==============================================
+
+  logger.info('Starting 5.14. Cont table')
+
+  # Cont derivations
+
+  # Rule Cnt.a: Min. and max. Cont width is 0.16µm
+  logger.info('Executing rule Cnt.a')
+  cnt_a_value = drc_rules['Cnt_a'].to_f
+  cnt_a_l = cont_sq.without_bbox_width(cnt_a_value.um)
+  cnt_a_l.output('Cnt.a', "5.14. Cnt.a : Min. and max. Cont width: #{cnt_a_value} µm")
+  cnt_a_l.forget
+
+  # Rule Cnt.b: Min. Cont space is 0.18µm
+  logger.info('Executing rule Cnt.b')
+  cnt_b_value = drc_rules['Cnt_b'].to_f
+  cnt_b_l = cont_sq.space(cnt_b_value.um, euclidian)
+  cnt_b_l.output('Cnt.b', "5.14. Cnt.b : Min. Cont space: #{cnt_b_value} µm")
+  cnt_b_l.forget
+
+  unless PRECHECK_DRC
+    # Rule Cnt.c: Min. Activ enclosure of Cont is 0.07 um
+    logger.info('Executing rule Cnt.c')
+    cnt_c_value = drc_rules['Cnt_c'].to_f
+    cnt_c_l = cont_sq.enclosed(activ_drw, cnt_c_value.um, euclidian)
+    cnt_c_l.output('Cnt.c', "5.14. Cnt.c Min. Activ enclosure of Cont is #{cnt_c_value} um")
+    cnt_c_l.forget
+
+    # Rule Cnt.d: Min. GatPoly enclosure of Cont is 0.07 um
+    logger.info('Executing rule Cnt.d')
+    cnt_d_value = drc_rules['Cnt_d'].to_f
+    cnt_d_l = cont_sq.enclosed(gatpoly_drw, cnt_d_value.um, euclidian)
+    cnt_d_l.output('Cnt.d', "5.14. Cnt.d Min. GatPoly enclosure of Cont is #{cnt_d_value} um")
+    cnt_d_l.forget
+
+    # Rule Cnt.e: Min. Cont on GatPoly space to Activ is 0.14 um
+    logger.info('Executing rule Cnt.e')
+    cnt_e_value = drc_rules['Cnt_e'].to_f
+    cnt_e_l1 = cont_sq.and(gatpoly_drw)
+    cnt_e_l = cnt_e_l1.sep(activ_drw, cnt_e_value.um, euclidian)
+    cnt_e_l.output('Cnt.e', "5.14. Cnt.e Min. Cont on GatPoly space to Activ is #{cnt_e_value} um")
+    cnt_e_l1.forget
+    cnt_e_l.forget
+
+    # Rule Cnt.g1: Min. pSD space to Cont on nSD-Activ is 0.09 um
+    logger.info('Executing rule Cnt.g1')
+    cnt_g1_value = drc_rules['Cnt_g1'].to_f
+    cnt_g1_l1 = cont_sq.and(nactiv)
+    cnt_g1_l = cnt_g1_l1.sep(psd_drw, cnt_g1_value.um, euclidian)
+    cnt_g1_l.output('Cnt.g1', "5.14. Cnt.g1 Min. pSD space to Cont on nSD-Activ is #{cnt_g1_value} um")
+    cnt_g1_l1.forget
+    cnt_g1_l.forget
+
+    # Rule Cnt.g2: Min. pSD overlap of Cont on pSD-Activ is 0.09 um
+    logger.info('Executing rule Cnt.g2')
+    cnt_g2_value = drc_rules['Cnt_g2'].to_f
+    cnt_g2_l1 = cont_sq.and(pactiv)
+    cnt_g2_l = cnt_g2_l1.enclosed(psd_drw, cnt_g2_value.um, euclidian)
+    cnt_g2_l.output('Cnt.g2', "5.14. Cnt.g2 Min. pSD overlap of Cont on pSD-Activ is #{cnt_g2_value} um")
+    cnt_g2_l1.forget
+    cnt_g2_l.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if FEOL
+  #==============================================
+  #----------------- 5.15. ContBar --------------
+  #==============================================
+
+  logger.info('Starting 5.15. ContBar table')
+
+  # ContBar derivations
+
+  unless PRECHECK_DRC
+    # Rule CntB.b1: Min. ContBar space with common run > 5 µm is 0.36 um
+    logger.info('Executing rule CntB.b1')
+    cntb_b1_value = drc_rules['CntB_b1'].to_f
+    cntb_b1_length = drc_rules['CntB_b1_l'].to_f
+    cntb_b1_l = contbar.space(cntb_b1_value.um, projection_limits(cntb_b1_length.um + 0.001.um, nil))
+    cntb_b1_l.output('CntB.b1',
+                   "5.15. CntB.b1 Min. ContBar space with common run > #{cntb_b1_length} µm is #{cntb_b1_value} um")
+    cntb_b1_l.forget
+
+    # Rule CntB.h1: Min. Metal1 enclosure of ContBar is 0.05 um
+    logger.info('Executing rule CntB.h1')
+    cntb_h1_value = drc_rules['CntB_h1'].to_f
+    cntb_h1_l = contbar.enclosed(metal1_drw, cntb_h1_value.um, euclidian)
+    cntb_h1_l.output('CntB.h1', "5.15. CntB.h1 Min. Metal1 enclosure of ContBar is #{cntb_h1_value} um")
+    cntb_h1_l.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if BEOL
+  #================================================
+  #----------------- 5.16. Metal1 -----------------
+  #================================================
+
+  logger.info('Starting 5.16. Metal1 table')
+
+  # Metal1 derivations
+
+  # Rule M1.a: Min. Metal1 width is 0.16µm
+  logger.info('Executing rule M1.a')
+  m1_a_value = drc_rules['M1_a'].to_f
+  m1_a_l = metal1_drw.width(m1_a_value.um, euclidian)
+  m1_a_l.output('M1.a', "5.16. M1.a: Min. Metal1 width: #{m1_a_value} μm.")
+  m1_a_l.forget
+
+  # Rule M1.b: Min. Metal1 space or notch is 0.18µm
+  logger.info('Executing rule M1.b')
+  m1_b_value = drc_rules['M1_b'].to_f
+  m1_b_l = metal1_drw.space(m1_b_value.um, euclidian)
+  m1_b_l.output('M1.b', "5.16. M1.b: Min. Metal1 space or notch: #{m1_b_value}μm.")
+  m1_b_l.forget
+
+  unless PRECHECK_DRC
+    # Rule M1.e: Min. space of Metal1 lines if, at least one line is wider 
+    # than 0.3 µm and the parallel run is more than 1.0 µm is 0.22 um
+    logger.info('Executing rule M1.e')
+    m1_e_value = drc_rules['M1_e'].to_f
+    m1_e_width = drc_rules['M1_e_w'].to_f / 2
+    m1_e_length = drc_rules['M1_e_cr'].to_f
+    m1_e_l1 = metal1_drw.sized(-1 * m1_e_width.um).sized(m1_e_width.um)
+    m1_e_l = metal1_drw.sep(m1_e_l1, m1_e_value.um, projection_limits(m1_e_length.um + 0.001.um, nil))
+    m1_e_l.output('M1.e',
+                "5.16. M1.e Min. space of Metal1 lines if, at least one line is wider than #{m1_e_width} µm and the parallel run is more than #{m1_e_length} µm is #{m1_e_value} um")
+    m1_e_l1.forget
+    m1_e_l.forget
+
+    # Rule M1.f: Min. space of Metal1 lines if, at least one line is wider
+    # than 10.0 µm and the parallel run is more than 10.0 µm is 0.60 um
+    logger.info('Executing rule M1.f')
+    m1_f_value = drc_rules['M1_f'].to_f
+    m1_f_width = drc_rules['M1_f_w'].to_f / 2
+    m1_f_length = drc_rules['M1_f_cr'].to_f
+    m1_f_l1 = metal1_drw.sized(-1 * m1_f_width.um).sized(m1_f_width.um)
+    m1_f_l = metal1_drw.sep(m1_f_l1, m1_f_value.um, projection_limits(m1_f_length.um + 0.001.um, nil))
+    m1_f_l.output('M1.f',
+                "5.16. M1.f Min. space of Metal1 lines if, at least one line is wider than #{m1_f_width} µm and the parallel run is more than #{m1_f_length} µm is #{m1_f_value} um")
+    m1_f_l1.forget
+    m1_f_l.forget
+
+    # Rule M1.g: Min. 45-degree bent Metal1 width if the bent metal length is > 0.5 µm is 0.20 um
+    logger.info('Executing rule M1.g')
+    m1_g_value = drc_rules['M1_g'].to_f
+    m1_g_length = drc_rules['M1_g_min'].to_f
+    m1_g_l1 = metal1_drw.edges.with_angle(45, absolute)
+    m1_g_l2 = m1_g_l1.with_length(m1_g_length.um + 0.001.um, nil)
+    m1_g_l = m1_g_l2.width(m1_g_value.um, euclidian)
+    m1_g_l.output('M1.g',
+                "5.16. M1.g Min. 45-degree bent Metal1 width if the bent metal length is > #{m1_g_length} µm is #{m1_g_value} um")
+    m1_g_l1.forget
+    m1_g_l2.forget
+    m1_g_l.forget
+
+    # Rule M1.i: Min. space of Metal1 lines of which at least one is bent by 45-degree is 0.22 um
+    logger.info('Executing rule M1.i')
+    m1_i_value = drc_rules['M1_i'].to_f
+    m1_i_l1 = metal1_drw.edges.with_angle(45, absolute)
+    m1_i_l = metal1_drw.edges.sep(m1_i_l1, m1_i_value.um, euclidian)
+    m1_i_l.output('M1.i',
+                "5.16. M1.i Min. space of Metal1 lines of which at least one is bent by 45-degree is #{m1_i_value} um")
+    m1_i_l1.forget
+    m1_i_l.forget
+  end
+end
+
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if BEOL
+  #===============================================
+  #----------------- 5.17 Metaln -----------------
+  #===============================================
+
+  logger.info('Starting 5.17 Metaln table')
+
+  # Metaln derivations
+
+  # Metals/Vias lists
+  mets_lay = [metal2_drw, metal3_drw, metal4_drw, metal5_drw]
+  vias_lay = [via1_drw, via2_drw, via3_drw, via4_drw]
+  metal_start_index = 2
+
+  mets_lay.each_with_index do |met_lay, index|
+    via_lay = vias_lay[index]
+    met_no = index + metal_start_index
+
+    # Rule Mn.a: Min. Metaln width is 0.20µm
+    logger.info("Executing rule M#{met_no}.a")
+    mn_a_value = drc_rules['Mn_a'].to_f
+    mn_a_l = met_lay.width(mn_a_value.um, euclidian)
+    mn_a_l.output("M#{met_no}.a", "5.17. M#{met_no}.a: Min. Metal#{met_no} width: #{mn_a_value} μm.")
+    mn_a_l.forget
+
+    # Rule Mn.b: Min. Metaln space or notch is 0.21µm
+    logger.info("Executing rule M#{met_no}.b")
+    mn_b_value = drc_rules['Mn_b'].to_f
+    mn_b_l = met_lay.space(mn_b_value.um, euclidian)
+    mn_b_l.output("M#{met_no}.b", "5.17. M#{met_no}.b: Min. Metal#{met_no} space or notch: #{mn_b_value} μm.")
+    mn_b_l.forget
+
+    next if PRECHECK_DRC
+
+    # Rule Mn.e: Min. space of Metal(n) lines if, at least one line is wider than 0.39 µm and the parallel run is more than 1.0 µm is 0.24 um
+    logger.info("Executing rule M#{met_no}.e")
+    mn_e_value = drc_rules['Mn_e'].to_f
+    mn_e_width = drc_rules['Mn_e_w'].to_f / 2
+    mn_e_length = drc_rules['Mn_e_cr'].to_f
+    mn_e_l1 = met_lay.sized(-1 * mn_e_width.um).sized(mn_e_width.um)
+    mn_e_l = met_lay.sep(mn_e_l1, mn_e_value.um, projection_limits(mn_e_length.um + 0.001.um, nil))
+    mn_e_l.output("M#{met_no}.e",
+                "5.17. M#{met_no}.e Min. space of Metal#{met_no} lines if, at least one line is wider than #{mn_e_width} µm and the parallel run is more than #{mn_e_length} µm is #{mn_e_value} um")
+    mn_e_l1.forget
+    mn_e_l.forget
+
+    # Rule Mn.f: Min. space of Metal(n) lines if, at least one line is wider than 10.0 µm and the parallel run is more than 10.0 µm is 0.60 um
+    logger.info("Executing rule M#{met_no}.f")
+    mn_f_value = drc_rules['Mn_f'].to_f
+    mn_f_width = drc_rules['Mn_f_w'].to_f / 2
+    mn_f_length = drc_rules['Mn_f_cr'].to_f
+    mn_f_l1 = met_lay.sized(-1 * mn_f_width.um).sized(mn_f_width.um)
+    mn_f_l = met_lay.sep(mn_f_l1, mn_f_value.um, projection_limits(mn_f_length.um + 0.001.um, nil))
+    mn_f_l.output("M#{met_no}.f",
+                "5.17. M#{met_no}.f Min. space of Metal#{met_no} lines if, at least one line is wider than #{mn_f_width} µm and the parallel run is more than #{mn_f_length} µm is #{mn_f_value} um")
+    mn_f_l1.forget
+    mn_f_l.forget
+
+    # Rule Mn.g: Min. 45-degree bent Metal(n) width if the bent metal length is > 0.5 µm is 0.24 um
+    logger.info("Executing rule M#{met_no}.g")
+    mn_g_value = drc_rules['Mn_g'].to_f
+    mn_g_length = drc_rules['Mn_g_min'].to_f
+    mn_g_l1 = met_lay.edges.with_angle(45, absolute)
+    mn_g_l2 = mn_g_l1.with_length(mn_g_length.um + 0.001.um, nil)
+    mn_g_l = mn_g_l2.width(mn_g_value.um, euclidian)
+    mn_g_l.output("M#{met_no}.g",
+                "5.17. M#{met_no}.g Min. 45-degree bent Metal#{met_no} width if the bent metal length is > #{mn_g_length} µm is #{mn_g_value} um")
+    mn_g_l1.forget
+    mn_g_l2.forget
+    mn_g_l.forget
+
+    # Rule Mn.i: Min. space of Metal(n) lines of which at least one is bent by 45-degree is 0.24 um
+    logger.info("Executing rule M#{met_no}.i")
+    mn_i_value = drc_rules['Mn_i'].to_f
+    mn_i_l1 = met_lay.edges.with_angle(45, absolute)
+    mn_i_l = met_lay.edges.sep(mn_i_l1, mn_i_value.um, euclidian)
+    mn_i_l.output("M#{met_no}.i",
+                "5.17. M#{met_no}.i Min. space of Metal#{met_no} lines of which at least one is bent by 45-degree is #{mn_i_value} um")
+    mn_i_l1.forget
+    mn_i_l.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if BEOL
+  #================================================
+  #----------------- 5.18 Metaln:filler -----------
+  #================================================
+
+  logger.info('Starting 5.18 Metaln:filler table')
+
+  # Metaln:filler derivations
+
+  # Enable tiling mode for large designs
+  if en_tiles
+    # Run mode
+    setup_run_mode('tiling')
+    logger.info('Tiling mode is enabled for Metaln:filler table.')
+  end
+
+  # metalfiller lists
+  metalfillers_lay = [metal1_filler, metal2_filler, metal3_filler, metal4_filler, metal5_filler]
+  metal_lay = [metal1_drw, metal2_drw, metal3_drw, metal4_drw, metal5_drw]
+  metalfiller_start_index = 1
+
+  metalfillers_lay.zip(metal_lay).each_with_index do |(metalfiller_lay, metal_layer), index|
+    metalfiller_no = metalfiller_start_index + index
+
+    # Rule MFil.c: Min. Metal(n):filler space to Metal(n)  is 0.42 um
+    logger.info("Executing rule M#{metalfiller_no}Fil.c")
+    mfil_c_value = drc_rules['MFil_c'].to_f
+    mnfil_c_l = metal_layer.sep(metalfiller_lay, mfil_c_value.um, euclidian)
+    mnfil_c_l.output("M#{metalfiller_no}Fil.c",
+                   "5.18. M#{metalfiller_no}Fil.c : Min. Metal#{metalfiller_no}:filler space to Metal#{metalfiller_no} is #{mfil_c_value} um")
+    mnfil_c_l.forget
+
+    next if PRECHECK_DRC
+
+    # Rule MFil.a2: Max. Metal(n):filler width is 5.00 um
+    logger.info("Executing rule M#{metalfiller_no}Fil.a2")
+    mfil_a2_value = drc_rules['MFil_a2'].to_f
+    mnfil_a2_l = metalfiller_lay.with_bbox_max(mfil_a2_value.um + 0.001.um, nil)
+    mnfil_a2_l.output("M#{metalfiller_no}Fil.a2",
+                    "5.18. M#{metalfiller_no}Fil.a2 : Max. Metal#{metalfiller_no}:filler width is #{mfil_a2_value} um")
+    mnfil_a2_l.forget
+  end
+
+  if en_tiles
+    # Run mode
+    setup_run_mode($run_mode)
+    logger.info("#{$run_mode} mode is enabled after Metaln:filler table.")
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if BEOL
+  #==============================================
+  #----------------- 5.19. Via1 -----------------
+  #==============================================
+
+  logger.info('Starting 5.19. Via1 table')
+
+  # Via1 derivations
+  logger.info('Starting 5.19. Via1 table derivations')
+  via1_nseal = via1_drw.not(edgeseal_drw)
+
+  # Rule V1.a: Min. and max. Via1 width is 0.19µm
+  logger.info('Executing rule V1.a')
+  v1_a_value = drc_rules['V1_a'].to_f
+  v1a_l1 = via1_nseal.without_bbox_min(v1_a_value.um)
+  v1a_l2 = via1_nseal.without_bbox_max(v1_a_value.um)
+  v1a_l = v1a_l1.join(v1a_l2)
+  v1a_l.output('V1.a', "5.19. V1.a : Min. and max. Via1 width: #{v1_a_value} µm")
+  v1a_l1.forget
+  v1a_l2.forget
+  v1a_l.forget
+
+  # Rule V1.b: Min. Via1 space is 0.22µm
+  logger.info('Executing rule V1.b')
+  v1_b_value = drc_rules['V1_b'].to_f
+  v1b_l = via1_nseal.space(v1_b_value.um, euclidian)
+  v1b_l.output('V1.b', "5.19. V1.b : Min. Via1 space: #{v1_b_value} µm")
+  v1b_l.forget
+
+  unless PRECHECK_DRC
+    # Rule V1.c: Min. Metal1 enclosure of Via1 is 0.01 um
+    logger.info('Executing rule V1.c')
+    v1_c_value = drc_rules['V1_c'].to_f
+    v1_c_l = via1_nseal.enclosed(metal1_drw, v1_c_value.um, euclidian)
+    v1_c_l.output('V1.c', "5.19.  V1.c Min. Metal1 enclosure of Via1 is #{v1_c_value} um")
+    v1_c_l.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if BEOL
+  #===============================================
+  #------------------ 5.20. Vian -----------------
+  #===============================================
+
+  logger.info('Starting 5.20. Vian table')
+
+  # Vian and metal lists
+  vias_lay   = [via2_drw, via3_drw, via4_drw]
+  metals_lay = [metal2_drw, metal3_drw, metal4_drw]
+  via_start_index = 2
+
+  vias_lay.zip(metals_lay).each_with_index do |(via_lay, metal_lay), index|
+    via_no = via_start_index + index
+
+    # Vian derivations
+    vian_nseal = via_lay.not(edgeseal_drw)
+
+    # Rule Vn.a: Min. and max. Vian width is 0.19µm
+    logger.info("Executing rule V#{via_no}.a")
+    vn_a_value = drc_rules['Vn_a'].to_f
+    vn_a_l1 = vian_nseal.without_bbox_min(vn_a_value.um)
+    vn_a_l2 = vian_nseal.without_bbox_max(vn_a_value.um)
+    vn_a_l = vn_a_l1.join(vn_a_l2)
+    vn_a_l.output("V#{via_no}.a", "5.20. V#{via_no}.a : Min. and max. Via#{via_no} width: #{vn_a_value} µm")
+    vn_a_l1.forget
+    vn_a_l2.forget
+    vn_a_l.forget
+
+    # Rule Vn.b: Min. Vian space is 0.22µm
+    logger.info("Executing rule V#{via_no}.b")
+    vn_b_value = drc_rules['Vn_b'].to_f
+    vn_b_l = vian_nseal.space(vn_b_value.um, euclidian)
+    vn_b_l.output("V#{via_no}.b", "5.20. V#{via_no}.b : Min. Via#{via_no} space: #{vn_b_value} µm")
+    vn_b_l.forget
+
+    next if PRECHECK_DRC
+
+    # Rule Vn.c: Min. metal enclosure of Via is 0.005µm
+    logger.info("Executing rule V#{via_no}.c")
+    vn_c_value = drc_rules['Vn_c'].to_f
+    vn_c_l = via_lay.enclosed(metal_lay, vn_c_value.um, euclidian)
+    vn_c_l.output("V#{via_no}.c",
+                 "5.20. V#{via_no}.c : Min. Metal#{via_no} enclosure of Via#{via_no} is #{vn_c_value} µm")
+    vn_c_l.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if BEOL
+  #==============================================
+  #----------------- 5.21. TopVia1 --------------
+  #==============================================
+
+  logger.info('Starting 5.21. TopVia1 table')
+
+  # TopVia1 derivations
+  topvia1_nseal = topvia1_drw.not(edgeseal_drw)
+
+  # Rule TV1.a: Min. and max. TopVia1 width is 0.42µm
+  logger.info('Executing rule TV1.a')
+  tv1_a_value = drc_rules['TV1_a'].to_f
+  tv1_a_l1 = topvia1_nseal.without_bbox_min(tv1_a_value.um)
+  tv1_a_l2 = topvia1_nseal.without_bbox_max(tv1_a_value.um)
+  tv1_a_l = tv1_a_l1.join(tv1_a_l2)
+  tv1_a_l.output('TV1.a', "5.21. TV1.a : Min. and max. TopVia1 width: #{tv1_a_value} µm")
+  tv1_a_l1.forget
+  tv1_a_l2.forget
+  tv1_a_l.forget
+
+  # Rule TV1.b: Min. TopVia1 space is 0.42µm
+  logger.info('Executing rule TV1.b')
+  tv1_b_value = drc_rules['TV1_b'].to_f
+  tv1_b_l = topvia1_nseal.space(tv1_b_value.um, euclidian)
+  tv1_b_l.output('TV1.b', "5.21. TV1.b : Min. TopVia1 space: #{tv1_b_value} µm")
+  tv1_b_l.forget
+
+  unless PRECHECK_DRC
+    # Rule TV1.c: Min. Metal5 enclosure of TopVia is 0.10 um
+    logger.info('Executing rule TV1.c')
+    tv1_c_value = drc_rules['TV1_c'].to_f
+    tv1_c_l = topvia1_nseal.enclosed(metal5_drw, tv1_c_value.um, euclidian)
+    tv1_c_l.output('TV1.c', "5.21. TV1.c : Min. Metal5 enclosure of TopVia1 is #{tv1_c_value} um")
+    tv1_c_l.forget
+
+    # Rule TV1.d: Min. TopMetal1 enclosure of TopVia1 is 0.42 um
+    logger.info('Executing rule TV1.d')
+    tv1_d_value = drc_rules['TV1_d'].to_f
+    tv1_d_l = topvia1_nseal.enclosed(topmetal1_drw, tv1_d_value.um, euclidian)
+    tv1_d_l.output('TV1.d', "5.21. TV1.d : Min. TopMetal1 enclosure of TopVia1 is #{tv1_d_value} um")
+    tv1_d_l.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if BEOL
+  #===============================================
+  #--------------- 5.22. TopMetal1 ---------------
+  #===============================================
+
+  logger.info('Starting 5.22. TopMetal1 table')
+
+  # TopMetal1 derivations
+
+  # Rule TM1.a: Min. TopMetal1 width is 1.64µm
+  logger.info('Executing rule TM1.a')
+  tm1_a_value = drc_rules['TM1_a'].to_f
+  tm1_a_l = topmetal1_drw.width(tm1_a_value.um, euclidian)
+  tm1_a_l.output('TM1.a', "5.22. TM1.a: Min. TopMetal1 width: #{tm1_a_value} μm.")
+  tm1_a_l.forget
+
+  # Rule TM1.b: Min. TopMetal1 space or notch is 1.64µm
+  logger.info('Executing rule TM1.b')
+  tm1_b_value = drc_rules['TM1_b'].to_f
+  tm1_b_l = topmetal1_drw.space(tm1_b_value.um, euclidian)
+  tm1_b_l.output('TM1.b', "5.22. TM1.b: Min. TopMetal1 space or notch: #{tm1_b_value} μm.")
+  tm1_b_l.forget
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if BEOL
+  #================================================
+  #----------------- 5.23 TopMetal1:filler --------
+  #================================================
+
+  logger.info('Starting 5.23 TopMetal1:filler table')
+
+  # TopMetal1:filler derivations
+
+  # Enable tiling mode for large designs
+  if en_tiles
+    # Run mode
+    setup_run_mode('tiling')
+    logger.info('Tiling mode is enabled for TopMetal1:filler table.')
+  end
+
+  # Rule TM1Fil.c : Min. TopMetal1:filler space to TopMetal1 is 3 um
+  logger.info('Executing rule TM1Fil.c')
+  tm1fil_c_value = drc_rules['TM1Fil_c'].to_f
+  tm1fil_c_l = topmetal1_drw.sep(topmetal1_filler, tm1fil_c_value.um, euclidian)
+  tm1fil_c_l.output('TM1Fil.c', "5.23. TM1Fil.c : Min. TopMetal1:filler space to TopMetal1 is #{tm1fil_c_value} um")
+  tm1fil_c_l.forget
+
+  unless PRECHECK_DRC
+    # Rule TM1Fil.a1 : Max. TopMetal1:filler width is 10.00 um
+    logger.info('Executing rule TM1Fil.a1')
+    tm1fil_a1_value = drc_rules['TM1Fil_a1'].to_f
+    tm1fil_a1_l = topmetal1_filler.with_bbox_max(tm1fil_a1_value.um + 0.001.um, nil)
+    tm1fil_a1_l.output('TM1Fil.a1', "5.23. TM1Fil.a1 : Max. TopMetal1:filler width is #{tm1fil_a1_value} um")
+    tm1fil_a1_l.forget
+  end
+
+  if en_tiles
+    # Run mode
+    setup_run_mode($run_mode)
+    logger.info("#{$run_mode} mode is enabled after TopMetal1:filler table.")
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if BEOL
+  #==============================================
+  #----------------- 5.24. TopVia2 --------------
+  #==============================================
+
+  logger.info('Starting 5.24. TopVia2 table')
+
+  # TopVia2 derivations
+  topvia2_nseal = topvia2_drw.not(edgeseal_drw)
+
+  # Rule TV2.a: Min. and max. TopVia2 width is 0.90µm
+  logger.info('Executing rule TV2.a')
+  tv2_a_value = drc_rules['TV2_a'].to_f
+  tv2_a_l1 = topvia2_nseal.without_bbox_min(tv2_a_value.um)
+  tv2_a_l2 = topvia2_nseal.without_bbox_max(tv2_a_value.um)
+  tv2_a_l = tv2_a_l1.join(tv2_a_l2)
+  tv2_a_l.output('TV2.a', "5.24. TV2.a : Min. and max. TopVia2 width: #{tv2_a_value} µm")
+  tv2_a_l1.forget
+  tv2_a_l2.forget
+  tv2_a_l.forget
+
+  # Rule TV2.b: Min. TopVia2 space is 1.06µm
+  logger.info('Executing rule TV2.b')
+  tv2_b_value = drc_rules['TV2_b'].to_f
+  tv2_b_l = topvia2_nseal.space(tv2_b_value.um, euclidian)
+  tv2_b_l.output('TV2.b', "5.24. TV2.b : Min. TopVia2 space: #{tv2_b_value} µm")
+  tv2_b_l.forget
+
+  unless PRECHECK_DRC
+    # Rule TV2.c: Min. TopMetal1 enclosure of TopVia2 is 0.50 um
+    logger.info('Executing rule TV2.c')
+    tv2_c_value = drc_rules['TV2_c'].to_f
+    tv2_c_l = topvia2_nseal.enclosed(topmetal1_drw, tv2_c_value.um, euclidian)
+    tv2_c_l.output('TV2.c', "5.24. TV2.c : Min. TopMetal1 enclosure of TopVia2 is #{tv2_c_value} um")
+    tv2_c_l.forget
+
+    # Rule TV2.d: Min. TopMetal2 enclosure of TopVia2 is 0.50 um
+    logger.info('Executing rule TV2.d')
+    tv2_d_value = drc_rules['TV2_d'].to_f
+    tv2_d_l = topvia2_nseal.enclosed(topmetal2_drw, tv2_d_value.um, euclidian)
+    tv2_d_l.output('TV2.d', "5.24. TV2.d : Min. TopMetal2 enclosure of TopVia2 is #{tv2_d_value} um")
+    tv2_d_l.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if BEOL
+  #===============================================
+  #--------------- 5.25. TopMetal2 ---------------
+  #===============================================
+
+  logger.info('Starting 5.25. TopMetal2 table')
+
+  # TopMetal2 derivations
+
+  # Rule TM2.a: Min. TopMetal2 width is 2.00µm
+  logger.info('Executing rule TM2.a')
+  tm2_a_value = drc_rules['TM2_a'].to_f
+  tm2_a_l = topmetal2_drw.width(tm2_a_value.um, euclidian)
+  tm2_a_l.output('TM2.a', "5.25. TM2.a: Min. TopMetal2 width: #{tm2_a_value} μm.")
+  tm2_a_l.forget
+
+  # Rule TM2.b: Min. TopMetal2 space or notch is 2.00µm
+  logger.info('Executing rule TM2.b')
+  tm2_b_value = drc_rules['TM2_b'].to_f
+  tm2_b_l = topmetal2_drw.space(tm2_b_value.um, euclidian)
+  tm2_b_l.output('TM2.b', "5.25. TM2.b: Min. TopMetal2 space or notch: #{tm2_b_value} μm.")
+  tm2_b_l.forget
+
+  unless PRECHECK_DRC
+    # Rule TM2.bR: Min. space of TopMetal2 lines if, at least one line is 
+    # wider than 5.0 µm and the parallel run is more than 50.0 µm is 5.00 um
+    logger.info('Executing rule TM2.bR')
+    tm2_br_value = drc_rules['TM2_bR'].to_f
+    tm2_br_width = drc_rules['TM2_bR_w'].to_f / 2
+    tm2_br_length = drc_rules['TM2_bR_cr'].to_f
+    tm2_br_l1 = topmetal2_drw.not(ind_drw)
+    tm2_br_l2 = tm2_br_l1.sized(-1 * tm2_br_width.um).sized(tm2_br_width.um)
+    tm2_br_l = topmetal2_drw.sep(tm2_br_l2, tm2_br_value.um, projection_limits(tm2_br_length.um + 0.001.um, nil))
+    tm2_br_l.output('TM2.bR',
+                  "5.25. TM2.bR : Min. space of TopMetal2 lines if, at least one line is wider than #{tm2_br_width} µm
+                  and the parallel run is more than #{tm2_br_length} µm is #{tm2_br_value} um")
+    tm2_br_l1.forget
+    tm2_br_l2.forget
+    tm2_br_l.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if BEOL
+  #================================================
+  #----------------- 5.26 TopMetal2:filler --------
+  #================================================
+
+  logger.info('Starting 5.26 TopMetal2:filler table')
+
+  # TopMetal2:filler derivations
+
+  # Enable tiling mode for large designs
+  if en_tiles
+    # Run mode
+    setup_run_mode('tiling')
+    logger.info('Tiling mode is enabled for TopMetal2:filler table.')
+  end
+
+  # Rule TM2Fil.c : Min. TopMetal2:filler space to TopMetal2 is 3 um
+  logger.info('Executing rule TM2Fil.c')
+  tm2fil_c_value = drc_rules['TM2Fil_c'].to_f
+  tm2fil_c_l = topmetal2_drw.sep(topmetal2_filler, tm2fil_c_value.um, euclidian)
+  tm2fil_c_l.output('TM2Fil.c', "5.26. TM2Fil.c : Min. TopMetal2:filler space to TopMetal2 is #{tm2fil_c_value} um")
+  tm2fil_c_l.forget
+
+  unless PRECHECK_DRC
+    # Rule TM2Fil.a1: Max. TopMetal2:filler width
+    logger.info('Executing rule TM2Fil.a1')
+    tm2fil_a1_value = drc_rules['TM2Fil_a1'].to_f
+    tm2fil_a1_l = topmetal2_filler.with_bbox_max(tm2fil_a1_value.um + 0.001.um, nil)
+    tm2fil_a1_l.output('TM2Fil.a1', "5.26. TM2Fil.a1 : Max. TopMetal2:filler width is #{tm2fil_a1_value} um")
+    tm2fil_a1_l.forget
+  end
+
+  if en_tiles
+    # Run mode
+    setup_run_mode($run_mode)
+    logger.info("#{$run_mode} mode is enabled after TopMetal2:filler table.")
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if BEOL
+  #================================================
+  #----------------- 5.27. Passiv -----------------
+  #================================================
+
+  logger.info('Starting 5.27. Passiv table')
+
+  # Passiv derivations
+
+  # Rule Pas.a:Min. Passiv width is 2.10µm
+  logger.info('Executing rule Pas.a')
+  pas_a_value = drc_rules['Pas_a'].to_f
+  pas_a_l = passiv_drw.width(pas_a_value.um, euclidian)
+  pas_a_l.output('Pas.a', "5.27. Pas.a:Min. Passiv width: #{pas_a_value} µm")
+  pas_a_l.forget
+
+  # Rule Pas.b: Min. Passiv space or notch is 3.50µm
+  logger.info('Executing rule Pas.b')
+  pas_b_value = drc_rules['Pas_b'].to_f
+  pas_b_l = passiv_drw.space(pas_b_value.um, euclidian)
+  pas_b_l.output('Pas.b', "5.27. Pas.b: Min. Passiv space or notch: #{pas_b_value} µm")
+  pas_b_l.forget
+
+  unless PRECHECK_DRC
+    # Rule Pas.c: Min. TopMetal2 enclosure of Passiv is 2.10 um
+    logger.info('Executing rule Pas.c')
+    pas_c_value = drc_rules['Pas_c'].to_f
+    pas_c_l1 = passiv_drw.and(edgeseal_drw.holes)
+    pas_c_l2 = pas_c_l1.enclosed(topmetal2_drw, pas_c_value.um, euclidian).polygons
+    pas_c_l3 = pas_c_l1.not(topmetal2_drw)
+    pas_c_l = pas_c_l2.join(pas_c_l3)
+    pas_c_l.output('Pas.c',
+                 "5.27. Pas.c : Min. TopMetal2 enclosure of Passiv [Not checked outside of sealring (edge-seal-passive)] is #{pas_c_value} um ")
+    pas_c_l1.forget
+    pas_c_l2.forget
+    pas_c_l3.forget
+    pas_c_l.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if FEOL
+  #================================================
+  #------------- 6.1.3 NPN Substrate-Tie ----------
+  #================================================
+
+  logger.info('Starting 6.1.3 NPN Substrate-Tie table')
+
+  # NPN Substrate-Tie derivations
+
+  unless PRECHECK_DRC
+    # basic structure of npn
+    npn_mk = trans_drw.and(ptap.holes)
+
+    # Rule npn13G2.bR: Max. recommended total number of npn13G2 emitters per chip is 4000
+    logger.info('Executing rule npn13G2.bR ')
+    npn13g2_br_value = drc_rules['npn13G2_bR'].to_i
+    npn13g2_br_l1 = emwind_drw.and(activ_mask).and(nsd_block).and(npn_mk)
+    npn13g2_br_l = CHIP.interacting(npn13g2_br_l1, npn13g2_br_value + 1)
+    npn13g2_br_l.output('npn13G2.bR',
+                         "6.1.3. npn13G2.bR : Max. recommended total number of npn13G2 emitters per chip is #{npn13g2_br_value}")
+    npn13g2_br_l1.forget
+    npn13g2_br_l.forget
+
+    # Rule npn13G2L.cR: Max. recommended total number of npn13G2L emitters per chip is 800
+    logger.info('Executing rule npn13G2L.cR ')
+    npn13g2l_cr_value = drc_rules['npn13G2L_cR'].to_i
+    npn13g2l_cr_l1 = emwind_drw.and(activ_drw).and(npn_mk)
+    npn13g2l_cr_l = CHIP.interacting(npn13g2l_cr_l1, npn13g2l_cr_value + 1)
+    npn13g2l_cr_l.output('npn13G2L.cR',
+                         "6.1.3. npn13G2L.cR : Max. recommended total number of npn13G2L emitters per chip is #{npn13g2l_cr_value}")
+    npn13g2l_cr_l1.forget
+    npn13g2l_cr_l.forget
+
+    # Rule npn13G2V.cR: Max. recommended total number of npn13G2V emitters per chip is 800
+    logger.info('Executing rule npn13G2V.cR ')
+    npn13g2v_cr_value = drc_rules['npn13G2V_cR'].to_i
+    npn13g2v_cr_l1 = emwihv_drw.and(activ_drw).and(npn_mk)
+    npn13g2v_cr_l = CHIP.interacting(npn13g2v_cr_l1, npn13g2v_cr_value + 1)
+    npn13g2v_cr_l.output('npn13G2V.cR',
+                         "6.1.3. npn13G2V.cR : Max. recommended total number of npn13G2V emitters per chip is #{npn13g2v_cr_value}")
+    npn13g2v_cr_l1.forget
+    npn13g2v_cr_l.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if FEOL
+  #================================================
+  #------------------ 6.7 Schottky diode ----------
+  #================================================
+
+  logger.info('Starting 6.7 Schottky diode table')
+
+  unless PRECHECK_DRC
+    # Schottky diode derivations
+    contbar_nbulay = contbar.and(nbuLay_gen_nbulay)
+
+    # Rule Sdiod.d: Min. and max. ContBar width inside nBuLay is 0.30 um
+    logger.info('Executing rule Sdiod.d')
+    sdiod_d_value = drc_rules['Sdiod_d'].to_f
+    sdiod_d_l = contbar_nbulay.without_bbox_min(sdiod_d_value.um)
+    sdiod_d_l.output('Sdiod.d', "6.7. Sdiod.d : Min. and max. ContBar width inside nBuLay is #{sdiod_d_value} um")
+    sdiod_d_l.forget
+
+    # Rule Sdiod.e: Min. and max. ContBar length inside nBuLay is 1.00 um
+    logger.info('Executing rule Sdiod.e')
+    sdiod_e_value = drc_rules['Sdiod_e'].to_f
+    sdiod_e_l = contbar_nbulay.without_bbox_max(sdiod_e_value.um)
+    sdiod_e_l.output('Sdiod.e', "6.7. Sdiod.e : Min. and max. ContBar length inside nBuLay is #{sdiod_e_value} um")
+    sdiod_e_l.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if BEOL
+#===============================================
+# ------------------ 6.9.2 Copper Pillar -------
+#===============================================
+
+  logger.info('Starting 6.9.2 Copper Pillar table')
+
+  # copper pillar pad derivations
+
+  # Rule Padc.a: CuPillarPad size is 35 um
+  logger.info('Executing rule Padc.a')
+  padc_a_value = drc_rules['Padc_a'].to_f
+  padc_a_l1 = cu_pillarpad.width(padc_a_value.um - drc_tole, projection, projection_limits(nil, 10 * drc_tole)).polygons
+  padc_a_l2 = cu_pillarpad.with_bbox_width(nil, padc_a_value.um)
+  padc_a = padc_a_l1.join(padc_a_l2)
+  padc_a.output('Padc.a', "6.9. Padc.a : CuPillarPad size is #{padc_a_value} um")
+  padc_a_l1.forget
+  padc_a_l2.forget
+  padc_a.forget
+
+  # Rule Padc.b : Min. CuPillarPad space is 40 um
+  logger.info('Executing rule Padc.b')
+  padc_b_value = drc_rules['Padc_b'].to_f
+  padc_b = cu_pillarpad.space(padc_b_value.um, euclidian)
+  padc_b.output('Padc.b', "6.9. Padc.b : Min. CuPillarPad space is #{padc_b_value} um")
+  padc_b.forget
+
+  # Rule Padc.c: Min. TopMetal2 (within dfpad) enclosure of CuPillarPad is 7.5 um
+  logger.info('Executing rule Padc.c')
+  padc_c_value = drc_rules['Padc_c'].to_f
+  padc_c_l1 = cu_pillarpad.enclosed(topmetal2_drw, padc_c_value.um, projection).polygons
+  padc_c_l2 = dfpad_pillar.and(passiv_pillar).not(topmetal2_drw)
+  padc_c = padc_c_l1.join(padc_c_l2)
+  padc_c.output('Padc.c', "6.9. Padc.c : Min. TopMetal2 (within dfpad) enclosure of CuPillarPad is #{padc_c_value} um")
+  padc_c_l1.forget
+  padc_c_l2.forget
+  padc_c.forget
+
+  # Rule Padc.f: Allowed passivation opening shape Circle
+  logger.info('Executing rule Padb.f')
+  padc_f_l1 = get_circle(cu_pillarpad)
+  padc_f = cu_pillarpad.not(padc_f_l1)
+  padc_f.output('padc.f', '6.9.2. Padc.f: Allowed passivation opening shape Circle')
+  padc_f_l1.forget
+  padc_f.forget
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if BEOL
+#===============================================
+# ------------------ 6.9 Pad -------------------
+#===============================================
+
+  logger.info('Starting 6.9 Pad table')
+
+  # pad derivations
+
+  # Rule Pad.m: SBumpPad and CuPillarPad in same layout not allowed
+  logger.info('Executing rule Pad.m')
+  pad_m_l1 = CHIP.interacting(cu_pillarpad).interacting(sbumppad)
+  pad_m_l = cu_pillarpad.join(sbumppad).and(pad_m_l1)
+  pad_m_l.output('Pad.m', '6.9. Pad.m : SBumpPad and CuPillarPad in same layout not allowed')
+  pad_m_l1.forget
+  pad_m_l.forget
+
+  unless PRECHECK_DRC
+    # metal list with names
+    metals = [
+      [metal1_drw, 'M1'],
+      [metal2_drw, 'M2'],
+      [metal3_drw, 'M3'],
+      [metal4_drw, 'M4'],
+      [metal5_drw, 'M5'],
+      [topmetal1_drw, 'TM1'],
+      [topmetal2_drw, 'TM2']
+    ]
+
+    # Rule Pad.fR: Min. recommended Metaln exit length is 7.00 um
+    metals.each do |metal_lay, met_abbrev|
+      logger.info("Executing rule Pad.fR_#{met_abbrev}")
+      pad_fr_value = drc_rules['Pad_fR'].to_f
+      pad_fr_l1 = metal_lay.interacting(pad).not(dfpad_drw)
+      pad_fr_l2 = pad_fr_l1.edges.and(dfpad_drw)
+      pad_fr_l3 = pad_fr_l2.extended(in: pad_fr_value.um)
+      pad_fr_l = pad_fr_l3.not(pad_fr_l1)
+      pad_fr_l.output("Pad.fR_#{met_abbrev}",
+                    "6.9. Pad.fR_#{met_abbrev} : Min. recommended #{met_abbrev} exit length is #{pad_fr_value} um")
+      pad_fr_l1.forget
+      pad_fr_l2.forget
+      pad_fr_l3.forget
+      pad_fr_l.forget
+    end
+
+    # Rule Pad.i: dfpad without TopMetal2 not allowed
+    logger.info('Executing rule Pad.i')
+    pad_i_l = dfpad_drw.not(topmetal2_drw)
+    pad_i_l.output('Pad.i', '6.9. Pad.i : dfpad without TopMetal2 not allowed')
+    pad_i_l.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if BEOL
+  #================================================
+  #------------------ 6.9.1 Solder Bump -----------
+  #================================================
+
+  logger.info('Starting 6.9.1 Solder Bump')
+
+  # Solder Bump derivations
+
+  # Rule Padb.a: SBumpPad size is 60.00 um
+  logger.info('Executing rule Padb.a')
+  padb_a_value = drc_rules['Padb_a'].to_f
+  padb_a_l1 = sbumppad.width(padb_a_value.um - drc_tole, projection, projection_limits(nil, 10 * drc_tole)).polygons
+  padb_a_l2 = sbumppad.with_bbox_width(nil, padb_a_value.um)
+  padb_a = padb_a_l1.join(padb_a_l2)
+  padb_a.output('Padb.a', "6.9. Padb.a : SBumpPad size is #{padb_a_value} um")
+  padb_a_l1.forget
+  padb_a_l2.forget
+  padb_a.forget
+
+  # Rule Padb.b: Min. SBumpPad space is 70.00 um
+  logger.info('Executing rule Padb.b')
+  padb_b_value = drc_rules['Padb_b'].to_f
+  padb_b = sbumppad.space(padb_b_value.um, euclidian)
+  padb_b.output('Padb.b', "6.9. Padb.b : Min. SBumpPad space is #{padb_b_value} um")
+  padb_b.forget
+
+  # Rule Padb.c: Min. TopMetal2 (within dfpad) enclosure of SBumpPad is 10.00 um
+  logger.info('Executing rule Padb.c')
+  padb_c_value = drc_rules['Padb_c'].to_f
+  padb_c_l1 = sbumppad.enclosed(topmetal2_drw, padb_c_value.um - 2 * drc_tole, projection).polygons
+  padb_c_l2 = dfpad_sbump.and(passiv_sbump).not(topmetal2_drw)
+  padb_c = padb_c_l1.join(padb_c_l2)
+  padb_c.output('Padb.c', "6.9. Padb.c : Min. TopMetal2 (within dfpad) enclosure of SBumpPad is #{padb_c_value} um")
+  padb_c_l1.forget
+  padb_c_l2.forget
+  padb_c.forget
+
+  # Rule Padb.f: Allowed passivation opening shape Octagon , Circle
+  logger.info('Executing rule Padb.f')
+  padb_f_l1 = get_circle(sbumppad)
+  padb_f_l2 = get_octagon(sbumppad)
+  padb_f = sbumppad.not(padb_f_l1).not(padb_f_l2)
+  padb_f.output('padb.f', '6.9. Padb.f: Allowed passivation opening shape Octagon , Circle')
+  padb_f_l1.forget
+  padb_f_l2.forget
+  padb_f.forget
+
+  unless PRECHECK_DRC
+    # Rule Padb.d: Min. SBumpPad space to EdgeSeal is 50.00 um
+    logger.info('Executing rule Padb.d')
+    padb_d_value = drc_rules['Padb_d'].to_f
+    padb_d = sbumppad.sep(edgeseal_drw, padb_d_value.um, euclidian)
+    padb_d.output('Padb.d', "6.9. Padb.d : Min. SBumpPad space to EdgeSeal is #{padb_d_value} um")
+    padb_d.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+#===============================================
+# ------------------ 6.10 Sealring -------------
+#===============================================
+if BEOL
+
+  logger.info('Starting 6.10 Sealring table')
+
+  # Sealring derivations
+
+  # Enable tiling mode for large designs
+  if en_tiles
+    # Run mode
+    setup_run_mode('tiling')
+    logger.info('Tiling mode is enabled for Seal.l rule.')
+  end
+
+  # Get the layers from the layer definition file
+  def sructures_outside(layer_def_file, binding_context, boundary)
+    layer_names = []
+
+    File.readlines(layer_def_file).each do |line|
+      next unless line.strip =~ /^(\w+)\s*=\s*get_polygons\s*\(\s*\d+\s*,\s*\d+\s*\)/
+
+      var_name = Regexp.last_match(1)
+      layer_names << var_name
+    end
+
+    layers = layer_names.filter_map do |name|
+      if binding_context.local_variable_defined?(name.to_sym)
+        binding_context.local_variable_get(name.to_sym)
+      else
+        logger.warn("Skipping undefined layer variable: '#{name}'")
+        nil
+      end
+    end
+
+    layers.each do |layer|
+      seal_l = layer.not(boundary)
+      seal_l.output('Seal.l', '6.10. Seal.l : No structures outside sealring boundary allowed')
+      seal_l.forget
+    end
+  end
+
+  # Rule Seal.l : No structures outside sealring boundary allowed
+  logger.info('Executing rule Seal.l')
+  script_dir = File.expand_path(File.dirname(__FILE__))
+  layers_def_path = File.join(script_dir, 'layers_def.drc')
+  seal_l_l1 = edgeseal_bound.interacting(CHIP)
+  seal_l = sructures_outside(layers_def_path, binding, seal_l_l1) unless seal_l_l1.is_empty?
+  seal_l_l1.forget
+
+  if en_tiles
+    # Run mode
+    setup_run_mode($run_mode)
+    logger.info("#{$run_mode} mode is enabled after Seal.l rule.")
+  end
+
+  # Rule Seal.n : Sealring must be enclosed by an unbroken Passiv ring
+  logger.info('Executing rule Seal.n')
+  seal_n_l1 = passiv_drw.not(edgeseal_drw).holes
+  seal_n_l = edgeseal_drw.not(seal_n_l1)
+  seal_n_l.output('Seal.n', '6.10. seal.n : Sealring must be enclosed by an unbroken Passiv ring')
+  seal_n_l.forget
+  seal_n_l1.forget
+
+  unless PRECHECK_DRC
+    seal_b_lays = [metal1_drw, metal2_drw, metal3_drw, metal4_drw, metal5_drw, topmetal1_drw, topmetal2_drw,
+                     activ_drw, psd_drw]
+    seal_b_names = %w[metal1 metal2 metal3 metal4 metal5 topmetal1 topmetal2 activ psd]
+
+    # Rule Seal.b: Min. Activ space to EdgeSeal-Activ, EdgeSeal-pSD, EdgeSeal-Metal(n=1-5), EdgeSeal-TopMetal1,
+    # EdgeSeal-TopMetal2 is 4.90 um
+    seal_b_value = drc_rules['Seal_b'].to_f
+    seal_b_names.zip(seal_b_lays).each do |seal_b_lay, lay|
+      logger.info("Executing rule seal.b_#{seal_b_lay}")
+      seal_b_l1 = lay.and(edgeseal_drw)
+      seal_b_l = activ_drw.sep(seal_b_l1, seal_b_value.um, euclidian)
+      seal_b_l.output("Seal.b_#{seal_b_lay}",
+                    "6.10. Seal.b_#{seal_b_lay} : Min. Activ space to EdgeSeal-#{seal_b_lay} is #{seal_b_value} um")
+      seal_b_l1.forget
+      seal_b_l.forget
+    end
+
+    # Rule Seal.k: Min. EdgeSeal 45-degree corner length is 21.00 um
+    logger.info('Executing rule Seal.k')
+    seal_k_value = drc_rules['Seal_k'].to_f
+    seal_k_l1 = edgeseal_drw.edges.with_angle(45, absolute)
+    seal_k_l = seal_k_l1.with_length(nil, seal_k_value.um)
+    seal_k_l.output('Seal.k', "6.10. Seal.k : Min. EdgeSeal 45-degree corner length is #{seal_k_value} um")
+    seal_k_l1.forget
+    seal_k_l.forget
+
+    # Rule Seal.m : Only one sealring per chip allowed
+    logger.info('Executing rule Seal.m')
+    seal_m_l1 = CHIP.interacting(edgeseal_drw, 2)
+    seal_m_l = edgeseal_drw.and(seal_m_l1)
+    seal_m_l.output('Seal.m', '6.10. Seal.m : Only one sealring per chip allowed')
+    seal_m_l.forget
+    seal_m_l1.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if BEOL
+  #================================================
+  #--------------------- 6.11 MIM -----------------
+  #================================================
+
+  logger.info('Starting 6.11 MIM table')
+
+  # MIM derivations
+
+  unless PRECHECK_DRC
+    # Rule MIM.c: Min. Metal5 enclosure of MIM is 0.60 um
+    logger.info('Executing rule MIM.c')
+    mim_c_value = drc_rules['Mim_c'].to_f
+    mim_c_p1 = mim_drw.enclosed(metal5_drw, mim_c_value.um, euclidian).polygons
+    mim_c_p2 = mim_drw.not(metal5_drw)
+    mim_c = mim_c_p1.join(mim_c_p2)
+    mim_c.output('MIM.c', "6.11. MIM.c : Min. Metal5 enclosure of MIM is #{mim_c_value} um")
+    mim_c_p1.forget
+    mim_c_p2.forget
+    mim_c.forget
+
+    # Rule MIM.d: MIM enclosure of TopVia1 is 0.36 um
+    logger.info('Executing rule MIM.d')
+    mim_d_value = drc_rules['Mim_d'].to_f
+    mim_d = topvia1_drw.enclosed(mim_drw, mim_d_value.um, euclidian)
+    mim_d.output('MIM.d', "6.11. MIM.d : Min. MIM enclosure of TopVia1 is #{mim_d_value} um")
+    mim_d.forget
+
+    # Rule MIM.gR: Max. recommended total MIM area per chip (µm²) is 174800.00 µm²
+    logger.info('Executing rule MIM.gR')
+    mim_gr_value = drc_rules['Mim_gR'].to_f
+    mim_total_area = mim_drw.area
+    if mim_total_area > mim_gr_value.um
+      mim_drw.output('MIM.gR', "6.11. MIM.gR : Max. recommended total MIM area per chip (µm²) is #{mim_gr_value} µm², Total used MIM area is #{mim_total_area} µm²")
+    end
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if FEOL
+  #================================================
+  #----------------- 7.2 Latch-up -----------------
+  #================================================
+
+  logger.info('Starting 7.2 Latch-up table')
+
+  # Latch-up derivations
+
+  unless PRECHECK_DRC
+    logger.info("Executing rule LU.b")
+    # sizing of ptap in rule LU.b
+    lu_b_value = drc_rules['LU_b'].to_f
+    lu_b_ptap_sized = ptap
+    sz = 0.0
+    while sz < lu_b_value
+      lu_b_ptap_sized = lu_b_ptap_sized.sized(0.5.um, octagon_limit)
+      sz += 0.5
+    end
+
+    # Rule LU.b : Max. space from any portion of N+Activ inside PWell to an pSD-PWell tie is 20.00 um
+    lu_b = nact_fet.not_interacting(lu_b_ptap_sized)
+    lu_b.output('LU.b',
+                "7.2. LU.b : Max. space from any portion of N+Activ inside PWell to an pSD-PWell tie is #{lu_b_value} um")
+    lu_b.forget
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if BEOL
+  #================================================
+  #----------------- 7.3 Metal Slits --------------
+  #================================================
+
+  logger.info('Starting 7.3 Metal Slits table')
+
+  # Metal slits derivations
+
+  # metal slits lists
+  metals_slit_lays = [metal1_slit, metal2_slit, metal3_slit, metal4_slit, metal5_slit, topmetal1_slit, topmetal2_slit]
+  metals_abbrev = %w[M1 M2 M3 M4 M5 TM1 TM2]
+
+  unless PRECHECK_DRC
+    # Rule Slt.e1: No slits required on MIM
+    metals_slit_lays.zip(metals_abbrev).each do |met_slit_lay, met_abbrev|
+      logger.info("Executing rule Slt.e1_#{met_abbrev}")
+      slt_e1_l = mim_drw.and(met_slit_lay)
+      slt_e1_l.output("Slt.e1_#{met_abbrev}", "7.3. Slt.e1_#{met_abbrev} : No #{met_abbrev}:slit required on MIM")
+      slt_e1_l.forget
+    end
+  end
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+#===============================================
+# ------------------ 7.4. PIN ------------------
+#===============================================
+
+logger.info('Starting 7.4. PIN table')
+
+# Lists for pinLay and ruleNames
+pin_lay = [activ_pin, gatpoly_pin, metal1_pin, metal2_pin, metal3_pin, metal4_pin, metal5_pin, topmetal1_pin,
+           topmetal2_pin]
+drw_lay = [activ_drw, gatpoly_drw, metal1_drw, metal2_drw, metal3_drw, metal4_drw, metal5_drw, topmetal1_drw,
+           topmetal2_drw]
+rule_names = %w[a b e f_M2 f_M3 f_M4 f_M5 g h]
+layer_names = %w[activ gatpoly metal1 metal2 metal3 metal4 metal5 topmetal1 topmetal2]
+
+pin_lay.each_with_index do |lay_pin, index|
+  lay_drw = drw_lay[index]
+  pin_rule = rule_names[index]
+  layer_name = layer_names[index]
+
+  logger.info("Executing rule Pin.#{pin_rule}")
+  pin_l1 = lay_pin.not(lay_drw)
+  pin_l1.output("Pin.#{pin_rule}",
+                "Pin.#{pin_rule} : 7.4. Pin.#{pin_rule}: Min. #{layer_name} enclosure of #{layer_name}:pin = 0um")
+  pin_l1.forget
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+if BEOL
+  #================================================
+  #------------------- 9.1. LBE -------------------
+  #================================================
+
+  logger.info('Starting 9.1. LBE table')
+
+  # LBE derivations
+  lbe_in_seal = lbe_drw.inside(edgeseal_drw.holes)
+
+  # Rule LBE.a: Min. LBE width is 100.00µm
+  logger.info('Executing rule LBE.a')
+  lbe_a_value = drc_rules['LBE_a'].to_f
+  lbea_l1 = lbe_drw.width(lbe_a_value.um, euclidian)
+  lbea_l1.output('LBE.a', "9.1. LBE.a: Min. LBE width: #{lbe_a_value} µm")
+  lbea_l1.forget
+
+  # Rule LBE.b: Max. LBE width is 1500µm.
+  logger.info('Executing rule LBE.b')
+  lbe_b_value = drc_rules['LBE_b'].to_f
+  lbeb_l1 = lbe_drw.with_bbox_max(lbe_b_value.um + 0.001.um, nil)
+  lbeb_l1.output('LBE.b', "9.1. LBE.b: Max. LBE width: #{lbe_b_value} µm.")
+  lbeb_l1.forget
+
+  # Rule LBE.b1:  Max. LBE area (µm²) is 250000.
+  logger.info('Executing rule LBE.b1')
+  lbe_b1_value = drc_rules['LBE_b1'].to_f
+  lbeb1_l1 = lbe_drw.with_area(lbe_b1_value.um + 0.001.um, nil)
+  lbeb1_l1.output('LBE.b1', "9.1. LBE.b1: Max. LBE area (µm²): #{lbe_b1_value} .um")
+  lbeb1_l1.forget
+
+  # Rule LBE.c: Min. LBE space or notch is 100.00µm
+  logger.info('Executing rule LBE.c')
+  lbe_c_value = drc_rules['LBE_c'].to_f
+  lbec_l1 = lbe_drw.space(lbe_c_value.um, euclidian)
+  lbec_l1.output('LBE.c', "9.1. LBE.c: Min. LBE space or notch: #{lbe_c_value} µm")
+  lbec_l1.forget
+
+  # Rule LBE.d: Min. LBE space to inner edge of EdgeSeal is 150.00µm
+  logger.info('Executing rule LBE.d')
+  lbe_d_value = drc_rules['LBE_d'].to_f
+  lbed_l1 = lbe_in_seal.sep(edgeseal_drw, lbe_d_value.um, euclidian)
+  lbed_l1.output('LBE.d', "9.1. LBE.d: Min. LBE space to inner edge of EdgeSeal: #{lbe_d_value} µm")
+  lbed_l1.forget
+
+  # Rule LBE.h: No LBE ring allowed.
+  logger.info('Executing rule LBE.h')
+  lbeh_l1 = lbe_drw.interacting(lbe_drw.holes)
+  lbeh_l1.output('LBE.h', '9.1. LBE.h: No LBE ring allowed.')
+  lbeh_l1.forget
+
+end
+# frozen_string_literal: true
+
+#=========================================================================================
+# Copyright 2025 IHP PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#=========================================================================================
+
+exec_end_time = Time.now
+run_time = exec_end_time - exec_start_time
+logger.info("KLayout DRC run for table '#{$table_name}' completed in #{run_time.round(2)} seconds")

@@ -1,0 +1,15 @@
+02-Sep-2025 16:29:48 | INFO    | KLayout version detected: 0.30.2
+02-Sep-2025 16:29:48 | INFO    | Using DRC JSON file: /foss/designs/PDKs/IHP-Open-PDK/ihp-sg13g2/libs.tech/klayout/python/sg13g2_pycell_lib/sg13g2_tech_mod.json
+02-Sep-2025 16:29:48 | INFO    | Generating DRC rule deck using tables: ['3_2_forbidden.drc', '5_1_nwell.drc', '5_2_pwellblock.drc', '5_3_nbulay.drc', '5_5_activ.drc', '5_6_activfiller.drc', '5_7_thickgateox.drc', '5_8_gatpoly.drc', '5_9_gatpolyfiller.drc', '5_10_psd.drc', '5_14_cont.drc', '5_15_contbar.drc', '5_16_metal1.drc', '5_17_metaln.drc', '5_18_metalnfiller.drc', '5_19_via1.drc', '5_20_vian.drc', '5_21_topvia1.drc', '5_22_topmetal1.drc', '5_23_topmetal1filler.drc', '5_24_topvia2.drc', '5_25_topmetal2.drc', '5_26_topmetal2filler.drc', '5_27_passiv.drc', '6_1_npnsubstratetie.drc', '6_7_schottkydiode.drc', '6_9_copperpillar.drc', '6_9_pad.drc', '6_9_solderbump.drc', '6_10_sealring.drc', '6_11_mim.drc', '7_2_latchup.drc', '7_3_metalslits.drc', '7_4_pin.drc', '9_1_lbe.drc']
+02-Sep-2025 16:29:48 | INFO    | DRC output will be written to: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/gds/drc_run_FMD_QNC_PLL_3BIT_DIV
+02-Sep-2025 16:29:49 | INFO    | Running IHP-SG13G2 main checks on design /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/gds/FMD_QNC_PLL_3BIT_DIV.gds, topcell: FMD_QNC_PLL_3BIT_DIV
+02-Sep-2025 16:29:59 | INFO    | Running IHP-SG13G2 antenna checks on design /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/gds/FMD_QNC_PLL_3BIT_DIV.gds, topcell: FMD_QNC_PLL_3BIT_DIV
+02-Sep-2025 16:30:02 | INFO    | Completed running Antenna checks.
+02-Sep-2025 16:30:02 | INFO    | Running IHP-SG13G2 density checks on design /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/gds/FMD_QNC_PLL_3BIT_DIV.gds, topcell: FMD_QNC_PLL_3BIT_DIV
+02-Sep-2025 16:30:05 | INFO    | Completed running Density checks.
+02-Sep-2025 16:30:05 | INFO    | Running IHP-SG13G2 sg13g2_maximal checks on design /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/gds/FMD_QNC_PLL_3BIT_DIV.gds, topcell: FMD_QNC_PLL_3BIT_DIV
+02-Sep-2025 16:30:44 | INFO    | Completed running Sg13g2_maximal checks.
+02-Sep-2025 16:30:44 | INFO    | =====================================================================================
+02-Sep-2025 16:30:44 | INFO    | ✅ --- KLayout DRC Check Passed: No DRC violations detected in the layout. --- ✅
+02-Sep-2025 16:30:44 | INFO    | =====================================================================================
+02-Sep-2025 16:30:44 | INFO    | Total DRC Run time: 56.16 seconds (including execution, analysis, and reporting)

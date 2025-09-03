@@ -1,0 +1,30 @@
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/HALF_ADD.sch
+.SUBCKT HALF_ADD inB sum inA VDD VSS cout
+*.PININFO inA:I inB:I sum:O cout:O VSS:B VDD:B
+x1 inA inB VDD VSS sum sg13g2_xor2_1
+x2 inA inB VDD VSS cout sg13g2_and2_1
+.ENDS
+
+.SUBCKT sg13g2_xor2_1 A B VDD VSS X
+*.PININFO A:I B:I X:O VDD:B VSS:B
+MX0 net1 A VSS VSS sg13_lv_nmos m=1 w=550.00n l=130.00n ng=1
+MX4 X B net3 VSS sg13_lv_nmos m=1 w=740.00n l=130.00n ng=1
+MX6 X net1 VSS VSS sg13_lv_nmos m=1 w=740.00n l=130.00n ng=1
+MX8 net3 A VSS VSS sg13_lv_nmos m=1 w=740.00n l=130.00n ng=1
+MX9 net1 B VSS VSS sg13_lv_nmos m=1 w=550.00n l=130.00n ng=1
+MX1 net6 A VDD VDD sg13_lv_pmos m=1 w=1.000u l=130.00n ng=1
+MX2 net1 B net6 VDD sg13_lv_pmos m=1 w=1.000u l=130.00n ng=1
+MX3 net5 A VDD VDD sg13_lv_pmos m=1 w=1.12e-06 l=130.00n ng=1
+MX5 net5 B VDD VDD sg13_lv_pmos m=1 w=1.12e-06 l=130.00n ng=1
+MX7 X net1 net5 VDD sg13_lv_pmos m=1 w=1.12e-06 l=130.00n ng=1
+.ENDS
+
+.SUBCKT sg13g2_and2_1 A B VDD VSS X
+*.PININFO A:I B:I X:O VDD:B VSS:B
+MX0 net4 A net2 VSS sg13_lv_nmos m=1 w=640.00n l=130.00n ng=1
+MX2 X net4 VSS VSS sg13_lv_nmos m=1 w=740.00n l=130.00n ng=1
+MX3 net2 B VSS VSS sg13_lv_nmos m=1 w=640.00n l=130.00n ng=1
+MX1 net4 B VDD VDD sg13_lv_pmos m=1 w=840.00n l=130.00n ng=1
+MX4 VDD net4 X VDD sg13_lv_pmos m=1 w=1.12e-06 l=130.00n ng=1
+MX5 net4 A VDD VDD sg13_lv_pmos m=1 w=840.00n l=130.00n ng=1
+.ENDS

@@ -1,0 +1,92 @@
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/PLL_3BIT_DIV_PEX_TB.sch
+
+.lib /foss/pdks/ihp-sg13g2/libs.tech/ngspice/models/cornerMOSlv.lib mos_tt
+.lib /foss/pdks/ihp-sg13g2/libs.tech/ngspice/models/cornerRES.lib res_typ_stat
+.lib /foss/pdks/ihp-sg13g2/libs.tech/ngspice/models/cornerCAP.lib cap_typ
+.include ../../kpex/magic_RC/pll_3bitDiv.pex.spice
+
+**.subckt PLL_3BIT_DIV_PEX_TB
+V1 VDD GND 1.2
+V2 CLK_IN GND PULSE(0 1.2 50n 1n 1n 50n 100n)
+Va0 A0 GND dc {A0}
+Va1 A1 GND dc {A1}
+* noconn CLK_OUT
+Va2 A2 GND dc {A2}
+Vb0 B0 GND dc {B0}
+Vb1 B1 GND dc {B1}
+Vb2 B2 GND dc {B2}
+x1 CLK_IN CLK_OUT B0 B2 B1 VDD GND GND A1 A2 A0 PLL_3BIT_DIV_PEX
+**** begin user architecture code
+
+
+.param temp=27
+.options klu
+.options method=gear gmin=1e-10
+
+.control
+save v(x1.PFD_0.UP) v(x1.PFD_0.DOWN) v(clk_in) v(clk_out) v(x1.vco_wob_0.vctl)
+save v(x1.3bit_freq_divider_0.CLK_IN) v(x1.PFD_0.VCO_CLK) i(v1) v(vdd)
+
+tran 0.1n 2u
+write TRAN_PLL_3BIT_DIV_PEX_FTYP.raw
+.endc
+
+
+
+
+.param A0 = 1.2
+.param A1 = 0
+.param A2 = 0
+
+
+
+
+.param B0 = 1.2
+.param B1 = 0
+.param B2 = 0
+
+
+
+
+RLEAK_0019 x1.m3_17285_2698# VSS 1e11
+RLEAK_0011 x1.a_60922_21818# VSS 1e11
+RLEAK_0010 x1.a_60922_21796# VSS 1e11
+RLEAK_0005 x1.a_55948_56737# VSS 1e11
+RLEAK_0004 x1.a_52808_23573# VSS 1e11
+RLEAK_0013 x1.a_60922_23574# VSS 1e11
+RLEAK_0024 x1.m6_16847_2260# VSS 1e11
+RLEAK_0023 x1.m5_17331_2744# VSS 1e11
+RLEAK_0003 x1.a_52808_23551# VSS 1e11
+RLEAK_0027 x1.m7_16847_2260# VSS 1e11
+RLEAK_0012 x1.a_60922_23552# VSS 1e11
+RLEAK_0006 x1.a_56695_49467# VSS 1e11
+RLEAK_0017 x1.m2_17285_2698# VSS 1e11
+RLEAK_0018 x1.m3_16847_2260# VSS 1e11
+RLEAK_0021 x1.m4_17285_2698# VSS 1e11
+RLEAK_0001 x1.a_52808_21795# VSS 1e11
+RLEAK_0016 x1.m2_16847_2260# VSS 1e11
+RLEAK_0022 x1.m5_16847_2260# VSS 1e11
+RLEAK_0009 x1.a_60528_49446# VSS 1e11
+RLEAK_0020 x1.m4_16847_2260# VSS 1e11
+RLEAK_0007 x1.a_56828_53480# VSS 1e11
+RLEAK_0014 x1.m1_16847_2260# VSS 1e11
+RLEAK_0025 x1.m6_17427_2840# VSS 1e11
+RLEAK_0002 x1.a_52808_21817# VSS 1e11
+RLEAK_0015 x1.m1_17285_2698# VSS 1e11
+RLEAK_0026 x1.m6_60810_42209# VSS 1e11
+
+
+
+
+.ic V(VSS) = 0
+.ic V(VDD) = 1.2
+.ic V(x1.vco_wob_0.vctl) = 0.7
+*.ic V(x1.3bit_freq_divider_1.dff_nclk_0.nCLK) = 1.2
+*.ic V(x1.3bit_freq_divider_0.dff_nclk_0.nCLK) = 1.2
+
+
+**** end user architecture code
+**.ends
+.GLOBAL GND
+.GLOBAL VDD
+.end

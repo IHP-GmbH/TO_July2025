@@ -1,0 +1,12 @@
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/LOOP_FILTER.sch
+.SUBCKT LOOP_FILTER vin vout VN
+*.PININFO VN:B vin:I vout:O
+XR1 vin vout rhigh w=0.6e-6 l=0.96e-6 m=1 b=0
+M1 VN net1 VN VN sg13_lv_nmos w=0.5u l=0.650u ng=1 m=15
+M2 VN vout VN VN sg13_lv_nmos w=0.15u l=0.13u ng=1 m=1
+M3 VN net1 VN VN sg13_lv_nmos w=0.5u l=0.650u ng=1 m=15
+M4 VN vout VN VN sg13_lv_nmos w=0.15u l=0.13u ng=1 m=1
+XR2 vin net1 rhigh w=0.5e-6 l=0.96e-6 m=1 b=0
+M5 VN vin VN VN sg13_lv_nmos w=1.5u l=0.650u ng=1 m=15
+M6 VN vin VN VN sg13_lv_nmos w=1.5u l=0.650u ng=1 m=15
+.ENDS

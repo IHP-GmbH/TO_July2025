@@ -1,0 +1,111 @@
+
+Magic 8.3 revision 527 - Compiled on Sat May 24 11:19:49 AM CEST 2025.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+WARNING: RLIMIT_NOFILE is above 1024 and Tcl_Version<9 this may cause runtime issues [rlim_cur=1048576]
+Using NULL graphics device.
+Processing system .magicrc file
+Sourcing design .magicrc for technology ihp-sg13g2 ...
+2 Magic internal units = 1 Lambda
+Input style sg13g2(): scaleFactor=2, multiplier=2
+The following types are not handled by extraction and will be treated as non-electrical types:
+    fillfet sealcont difffill nemitter hvnemitter hvisodiffres sealvia1 sealvia2 sealvia3 sealvia4 sealvia5 sealvia6 pad seal thruvia 
+Scaled tech values by 2 / 1 to match internal grid scaling
+Loading "pex/pll_3bitDiv__pll_3bitDiv/magic_RC/pll_3bitDiv_MAGIC_RC_Script.tcl" from command line.
+Warning: Calma reading is not undoable!  I hope that's OK.
+Library written using GDS-II Release 6.0
+Library name: LIB
+Reading "$$$CONTEXT_INFO$$$".
+Reading "pmos$4".
+Reading "nmos$4".
+Reading "sg13g2_xor2_1".
+Reading "sg13g2_inv_1".
+Reading "sg13g2_dfrbp_1".
+Reading "sg13g2_and2_1".
+Reading "T2_Inverter".
+CIF file read warning: CIF style sg13g2(): units rescaled by factor of 5 / 1
+CIF file read warning: Input off lambda grid by 1/5; snapped to grid.
+Reading "pmos_bulk".
+Reading "nmos_bulk".
+Reading "dff_nclk".
+Reading "half_add".
+Reading "pmos$7".
+Reading "VCO_1".
+Reading "t2_nmos".
+Reading "t2_pmos".
+Reading "nmos".
+Reading "cmim".
+Reading "pmos$3".
+Reading "nmos$5".
+Reading "nmos$6".
+Reading "rhigh$1".
+Reading "pmos".
+Reading "pmos$2".
+Reading "pmos$1".
+Reading "nmos$1".
+Reading "nmos$2".
+Reading "freq_div_cell".
+Reading "sg13g2_nand2_1".
+Reading "sg13g2_or3_1".
+Reading "sg13g2_tiehi".
+Reading "nmos$1$1".
+Reading "pmos$6".
+Reading "pmos$1$1".
+Reading "nmos$7".
+Reading "nmos$1$2".
+Reading "rhigh$1$1".
+Reading "nmos$3".
+Reading "nmos$8".
+Reading "rhigh".
+Reading "nmos$9".
+Reading "pmos$9".
+Reading "pmos$2$1".
+Reading "pmos$3$1".
+Reading "nmos$1$3".
+Reading "nmos$2$1".
+Reading "nmos$3$1".
+Reading "vco_wob".
+Reading "Bias_gen".
+Making label "bias_p" on type metal1 in cell Bias_gen sticky.
+Making label "bias_n" on type metal1 in cell Bias_gen sticky.
+Making label "VGND" on type metal1 in cell Bias_gen sticky.
+Making label "VPWR" on type metal1 in cell Bias_gen sticky.
+Reading "3bit_freq_divider".
+Reading "bondpad$1".
+Reading "sealring".
+Reading "charge_pump".
+Reading "loop_filter".
+Reading "PFD".
+Reading "pll_3bitDiv".
+Extracting pll_3bitDiv into /foss/designs/PROJECTS/cmos-pll-ihp-sg13g2/Combined_Design/design_data/pex/pll_3bitDiv__pll_3bitDiv/magic_RC/pll_3bitDiv.ext:
+pll_3bitDiv: 62 warnings
+Total of 62 warnings.
+Port: name = X1 is new node 0x558a02a8ead0
+Location is (40881, 13620); drivepoint (40881, 13620)
+Port: name = X2 is new node 0x558a025a0350
+Location is (52577, 13751); drivepoint (52577, 13751)
+Port: name = CLK_OUT is new node 0x558a021d3770
+Location is (77807, 24454); drivepoint (77807, 24454)
+Port: name = Y0 is new node 0x558a0221f8c0
+Location is (78580, 33428); drivepoint (78580, 33428)
+Port: name = Y1 is new node 0x558a02a8f1d0
+Location is (78651, 52715); drivepoint (78651, 52715)
+Port: name = Y2 is new node 0x558a0243f390
+Location is (70284, 60526); drivepoint (70284, 60526)
+Port: name = nEN is new node 0x558a021d2f20
+Location is (55163, 60145); drivepoint (55163, 60145)
+Port: name = CLK_IN is new node 0x558a0221ef90
+Location is (31661, 37767); drivepoint (31661, 37767)
+Port: name = X0 is new node 0x558a02a8e830
+Location is (31648, 23903); drivepoint (31648, 23903)
+Port: name = VSS is new node 0x558a0243d770
+Location is (71036, 14441); drivepoint (71036, 14441)
+Port: name = VSS exists, forcing drivepoint
+Location is (71036, 14441); drivepoint (31797, 51997)
+Port: name = VDD is new node 0x558a0269a920
+Location is (40805, 60190); drivepoint (40805, 60190)
+Warning: via4 at 59619 56788 smaller than extract section allows
+Total Nets: 11
+Nets extracted: 11 (1.000000)
+Nets output: 11 (1.000000)
+exttospice finished.

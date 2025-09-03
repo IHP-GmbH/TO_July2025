@@ -1,0 +1,3 @@
+set symbol_path .
+set schematic_path .
+set xschem_sim_path ./simulations

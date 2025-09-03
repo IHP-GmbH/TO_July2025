@@ -1,0 +1,2227 @@
+GDS input file passed, running in LVS mode
+No explicit top cell specified, using top cell 'pll_3bitDiv'
+Calling MAGIC
+magic -dnull -noconsole -rcfile /foss/pdks/ihp-sg13g2/libs.tech/magic/ihp-sg13g2.magicrc pex/pll_3bitDiv__pll_3bitDiv/magic_RC/pll_3bitDiv_MAGIC_RC_Script.tcl, output file: pex/pll_3bitDiv__pll_3bitDiv/magic_RC/pll_3bitDiv_MAGIC_RC_Output.txt
+
+Magic 8.3 revision 527 - Compiled on Sat May 24 11:19:49 AM CEST 2025.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+WARNING: RLIMIT_NOFILE is above 1024 and Tcl_Version<9 this may cause runtime issues [rlim_cur=1048576]
+Using NULL graphics device.
+Processing system .magicrc file
+Sourcing design .magicrc for technology ihp-sg13g2 ...
+2 Magic internal units = 1 Lambda
+Input style sg13g2(): scaleFactor=2, multiplier=2
+The following types are not handled by extraction and will be treated as non-electrical types:
+    fillfet sealcont difffill nemitter hvnemitter hvisodiffres sealvia1 sealvia2 sealvia3 sealvia4 sealvia5 sealvia6 pad seal thruvia 
+Scaled tech values by 2 / 1 to match internal grid scaling
+Loading "pex/pll_3bitDiv__pll_3bitDiv/magic_RC/pll_3bitDiv_MAGIC_RC_Script.tcl" from command line.
+Warning: Calma reading is not undoable!  I hope that's OK.
+Library written using GDS-II Release 6.0
+Library name: LIB
+Reading "$$$CONTEXT_INFO$$$".
+Reading "sg13g2_and2_1".
+Reading "sg13g2_dfrbp_1".
+Reading "sg13g2_inv_1".
+Reading "sg13g2_xor2_1".
+Reading "nmos$4".
+Reading "pmos$4".
+Reading "half_add".
+CIF file read warning: CIF style sg13g2(): units rescaled by factor of 5 / 1
+Reading "dff_nclk".
+Reading "nmos_bulk".
+Reading "pmos_bulk".
+Reading "T2_Inverter".
+CIF file read warning: Input off lambda grid by 1/5; snapped to grid.
+Reading "nmos$3$1".
+Reading "nmos$2$1".
+Reading "nmos$1$3".
+Reading "pmos$3$1".
+Reading "pmos$2$1".
+Reading "pmos$9".
+Reading "nmos$9".
+Reading "rhigh".
+Reading "nmos$8".
+Reading "nmos$3".
+Reading "rhigh$1$1".
+Reading "nmos$1$2".
+Reading "nmos$7".
+Reading "pmos$1$1".
+Reading "pmos$6".
+Reading "nmos$1$1".
+Reading "sg13g2_tiehi".
+Reading "sg13g2_or3_1".
+Reading "sg13g2_nand2_1".
+Reading "freq_div_cell".
+Reading "nmos$2".
+Reading "nmos$1".
+Reading "pmos$1".
+Reading "pmos$2".
+Reading "pmos".
+Reading "rhigh$1".
+Reading "nmos$6".
+Reading "nmos$5".
+Reading "pmos$3".
+Reading "cmim".
+Reading "nmos".
+Reading "t2_pmos".
+Reading "t2_nmos".
+Reading "VCO_1".
+Reading "pmos$7".
+Reading "PFD".
+Reading "loop_filter".
+Reading "charge_pump".
+Reading "sealring".
+Reading "bondpad$1".
+Reading "3bit_freq_divider".
+Reading "Bias_gen".
+Making label "bias_p" on type metal1 in cell Bias_gen sticky.
+Making label "bias_n" on type metal1 in cell Bias_gen sticky.
+Making label "VGND" on type metal1 in cell Bias_gen sticky.
+Making label "VPWR" on type metal1 in cell Bias_gen sticky.
+Reading "vco_wob".
+Reading "pll_3bitDiv".
+Extracting pll_3bitDiv into /foss/designs/PROJECTS/cmos-pll-ihp-sg13g2/Combined_Design/design_data/pex/pll_3bitDiv__pll_3bitDiv/magic_RC/pll_3bitDiv.ext:
+pll_3bitDiv: 64 warnings
+Total of 64 warnings.
+Port: name = CLK_IN is new node 0x55d5a71a31d0
+Location is (21592, 35454); drivepoint (21592, 35454)
+Port: name = CLK_OUT is new node 0x55d5a71241c0
+Location is (81837, 21192); drivepoint (81837, 21192)
+Port: name = VDD is new node 0x55d5a69ed2b0
+Location is (38119, 65443); drivepoint (38119, 65443)
+Port: name = VSS is new node 0x55d5a6a264e0
+Location is (22658, 51181); drivepoint (22658, 51181)
+Port: name = nEN is new node 0x55d5a72e5fe0
+Location is (53580, 65710); drivepoint (53580, 65710)
+Port: name = Y0 is new node 0x55d5a6f954e0
+Location is (84663, 36920); drivepoint (84663, 36920)
+Port: name = Y1 is new node 0x55d5a6b51770
+Location is (84983, 51928); drivepoint (84983, 51928)
+Port: name = Y2 is new node 0x55d5a6cb3c50
+Location is (68749, 66402); drivepoint (68749, 66402)
+Port: name = X0 is new node 0x55d5a68e70e0
+Location is (23458, 20208); drivepoint (23458, 20208)
+Port: name = X1 is new node 0x55d5a6933230
+Location is (39044, 5114); drivepoint (39044, 5114)
+Port: name = X2 is new node 0x55d5a71a2ad0
+Location is (55647, 6594); drivepoint (55647, 6594)
+Port: name = VSS exists, forcing drivepoint
+Location is (22658, 51181); drivepoint (69175, 5864)
+Couldn't find wire at 55647 6594
+Error in extracting node X2
+Couldn't find wire at 39044 5114
+Error in extracting node X1
+Couldn't find wire at 23458 20208
+Error in extracting node X0
+Couldn't find wire at 68749 66402
+Error in extracting node Y2
+Couldn't find wire at 84983 51928
+Error in extracting node Y1
+Couldn't find wire at 84663 36920
+Error in extracting node Y0
+Couldn't find wire at 53580 65710
+Error in extracting node nEN
+Couldn't find wire at 69175 5864
+Error in extracting node VSS
+Couldn't find wire at 38119 65443
+Error in extracting node VDD
+Couldn't find wire at 81837 21192
+Error in extracting node CLK_OUT
+Couldn't find wire at 21592 35454
+Error in extracting node CLK_IN
+Total Nets: 11
+Nets extracted: 11 (1.000000)
+Nets output: 0 (0.000000)
+exttospice finished.
+MAGIC succeeded after 1.679s
+Report DB saved at: pex/pll_3bitDiv__pll_3bitDiv/magic_RC/pll_3bitDiv_MAGIC_report.rdb.gz
+SPICE netlist saved at: pex/pll_3bitDiv__pll_3bitDiv/magic_RC/pll_3bitDiv.pex.spice
+* NGSPICE file created from pll_3bitDiv.ext - technology: ihp-sg13g2
+
+.subckt pll_3bitDiv CLK_IN CLK_OUT VDD VSS nEN Y0 Y1 Y2 X0 X1 X2
+X0 PFD_0.VDD a_53968_20434# a_53899_20488# PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.19p ps=1.38u w=1u l=0.13u
+X1 PFD_0.VSS 3bit_freq_divider_1.dff_nclk_0.nCLK a_61488_20220# PFD_0.VSS sg13_lv_nmos ad=0.1428p pd=1.52u as=50.4f ps=0.66u w=0.42u l=0.13u
+X2 a_62119_20605# a_61691_20534# a_61394_20220# PFD_0.VSS sg13_lv_nmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X3 a_52924_22885# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X4 a_53065_20179# a_53738_20514# a_53702_20612# PFD_0.VDD sg13_lv_pmos ad=0.17695p pd=1.56u as=43.05f ps=0.625u w=0.42u l=0.13u
+X5 a_62119_22361# 3bit_freq_divider_1.dff_nclk_0.nCLK PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1533p pd=1.57u as=0.11785p ps=1.025u w=0.42u l=0.13u
+X6 a_53152_43159# PFD_0.VSS cap_cmim l=6.99u w=6.99u
+X7 PFD_0.VDD a_52950_22157# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q PFD_0.VDD sg13_lv_pmos ad=0.2016p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X8 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 3bit_freq_divider_1.sg13g2_nand2_1_0.Y PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.259p pd=2.18u as=0.259p ps=2.18u w=0.74u l=0.13u
+X9 PFD_0.VSS 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q a_61061_23234# PFD_0.VSS sg13_lv_nmos ad=0.1331p pd=1.12u as=0.1216p ps=1.02u w=0.64u l=0.13u
+X10 a_62879_24125# a_61887_24046# a_62654_23727# PFD_0.VDD sg13_lv_pmos ad=43.05f pd=0.625u as=0.17695p ps=1.56u w=0.42u l=0.13u
+X11 a_53022_43738# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=0.104p ps=1.34u w=0.2u l=0.13u
+X12 PFD_0.VSS a_55345_24897# 3bit_freq_divider_0.freq_div_cell_0.Cin PFD_0.VSS sg13_lv_nmos ad=0.1331p pd=1.12u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X13 a_64383_23434# a_64383_23628# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.1544p ps=1.235u w=0.74u l=0.13u
+X14 PFD_0.VDD a_53774_21934# a_53738_22270# PFD_0.VDD sg13_lv_pmos ad=0.19p pd=1.38u as=0.34p ps=2.68u w=1u l=0.13u
+X15 a_55485_23233# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.1216p pd=1.02u as=0.1331p ps=1.12u w=0.64u l=0.13u
+X16 a_64383_23300# a_64383_23628# a_64424_22200# PFD_0.VSS sg13_lv_nmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X17 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0.53383n ps=1.58949m w=1.5u l=0.65u
+X18 PFD_0.VDD a_53022_43738# a_57084_43159# PFD_0.VDD sg13_lv_pmos ad=0.104p pd=1.34u as=59f ps=0.74u w=0.2u l=0.13u
+X19 PFD_0.VDD a_51648_21103# 3bit_freq_divider_0.dff_nclk_0.nCLK PFD_0.VDD sg13_lv_pmos ad=0.3822p pd=1.84u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X20 a_64383_23434# a_64383_23628# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.19p ps=1.38u w=1u l=0.13u
+X21 a_54627_42591# vco_wob_0.vctl PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=65.99999f pd=0.74u as=0.102p ps=1.28u w=0.3u l=0.13u
+X22 a_59799_40285# 3bit_freq_divider_0.CLK_IN a_58515_40413# PFD_0.VDD sg13_lv_pmos ad=0.17p pd=1.68u as=0.1106p ps=0.945u w=0.5u l=0.13u
+X23 a_61972_23244# 3bit_freq_divider_1.freq_div_cell_0.Cin PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=88.8f pd=0.98u as=0.15245p ps=1.17u w=0.74u l=0.13u
+X24 a_54494_43159# a_53152_43159# a_54627_42591# PFD_0.VSS sg13_lv_nmos ad=0.11p pd=0.94u as=0.17p ps=1.68u w=0.5u l=0.13u
+X25 a_54427_40283# a_54489_40413# a_53147_40413# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.11p ps=0.94u w=0.5u l=0.13u
+X26 PFD_0.VDD 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.D a_54504_23771# PFD_0.VDD sg13_lv_pmos ad=0.1428p pd=1.52u as=79.8f ps=0.8u w=0.42u l=0.13u
+X27 a_53774_20178# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.1544p ps=1.235u w=0.74u l=0.13u
+X28 a_54504_20259# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.D a_55086_20219# PFD_0.VSS sg13_lv_nmos ad=0.1428p pd=1.52u as=50.4f ps=0.66u w=0.42u l=0.13u
+X29 charge_pump_0.bias_n charge_pump_0.bias_n PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.34p pd=2.68u as=0.34p ps=2.68u w=1u l=1u
+X30 PFD_0.VSS 3bit_freq_divider_0.freq_div_cell_0.Cout a_54434_21392# PFD_0.VSS sg13_lv_nmos ad=0.374p pd=2.46u as=0.17462p ps=1.185u w=0.55u l=0.13u
+X31 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q a_63463_23728# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.14505p ps=1.15u w=0.74u l=0.13u
+X32 a_47954_28913# PFD_0.VCO_CLK a_48909_28913# PFD_0.VSS sg13_lv_nmos ad=68.39999f pd=0.74u as=68.39999f ps=0.74u w=0.36u l=0.15u
+X33 a_54898_21129# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q a_54434_21392# PFD_0.VDD sg13_lv_pmos ad=0.1225p pd=1.245u as=0.34p ps=2.68u w=1u l=0.13u
+X34 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X35 a_51693_23426# 3bit_freq_divider_0.dff_nclk_0.nRST PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1533p pd=1.57u as=0.11785p ps=1.025u w=0.42u l=0.13u
+X36 3bit_freq_divider_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 3bit_freq_divider_1.dff_nclk_0.nCLK PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.259p pd=2.18u as=0.259p ps=2.18u w=0.74u l=0.13u
+X37 PFD_0.UP a_47777_29803# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.1632p pd=1.64u as=0.1632p ps=1.64u w=0.48u l=0.15u
+X38 PFD_0.VDD a_62654_23727# a_62900_23691# PFD_0.VDD sg13_lv_pmos ad=0.2163p pd=1.55u as=79.8f ps=0.8u w=0.42u l=0.13u
+X39 a_54504_23771# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.D a_55086_23731# PFD_0.VSS sg13_lv_nmos ad=0.1428p pd=1.52u as=50.4f ps=0.66u w=0.42u l=0.13u
+X40 a_60967_23234# 3bit_freq_divider_1.freq_div_cell_0.Cin PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1596p pd=1.22u as=0.2856p ps=2.36u w=0.84u l=0.13u
+X41 a_54602_23243# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.D PFD_0.VSS sg13_lv_nmos ad=88.8f pd=0.98u as=0.1628p ps=1.18u w=0.74u l=0.13u
+X42 a_54898_24641# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q a_54434_24904# PFD_0.VDD sg13_lv_pmos ad=0.1225p pd=1.245u as=0.34p ps=2.68u w=1u l=0.13u
+X43 PFD_0.VDD 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q a_60967_21478# PFD_0.VDD sg13_lv_pmos ad=0.1918p pd=1.5u as=0.1596p ps=1.22u w=0.84u l=0.13u
+X44 a_62221_24117# a_61691_24046# a_62119_24117# PFD_0.VDD sg13_lv_pmos ad=51.45f pd=0.665u as=79.8f ps=0.8u w=0.42u l=0.13u
+X45 a_58426_43159# a_57178_43159# 3bit_freq_divider_0.CLK_IN PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.1106p ps=0.945u w=0.5u l=0.13u
+X46 a_62246_20260# a_61887_20534# a_62119_20605# PFD_0.VSS sg13_lv_nmos ad=54.6f pd=0.68u as=79.8f ps=0.8u w=0.42u l=0.13u
+X47 a_52074_23051# a_51684_22692# a_51693_23426# PFD_0.VSS sg13_lv_nmos ad=54.6f pd=0.68u as=79.8f ps=0.8u w=0.42u l=0.13u
+X48 a_54504_22015# 3bit_freq_divider_0.dff_nclk_0.nCLK PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X49 PFD_0.VDD a_55345_23141# 3bit_freq_divider_0.freq_div_cell_0.Cout PFD_0.VDD sg13_lv_pmos ad=0.1918p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X50 a_64464_23130# a_64419_23326# a_64464_23052# PFD_0.VSS sg13_lv_nmos ad=48.3f pd=0.65u as=54.6f ps=0.68u w=0.42u l=0.13u
+X51 PFD_0.VSS a_63255_21488# 3bit_freq_divider_1.sg13g2_or3_1_0.A PFD_0.VSS sg13_lv_nmos ad=0.3108p pd=2.32u as=0.1628p ps=1.18u w=0.74u l=0.13u
+X52 a_61675_22886# 3bit_freq_divider_1.freq_div_cell_0.Cin PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1225p pd=1.245u as=0.36p ps=2.72u w=1u l=0.13u
+X53 PFD_0.VDD a_53022_43738# a_53085_40283# PFD_0.VDD sg13_lv_pmos ad=0.104p pd=1.34u as=59.75f ps=0.745u w=0.2u l=0.13u
+X54 a_53968_20434# a_53738_20514# a_54324_20259# PFD_0.VSS sg13_lv_nmos ad=79.8f pd=0.8u as=54.6f ps=0.68u w=0.42u l=0.13u
+X55 PFD_0.VSS 3bit_freq_divider_0.sg13g2_or3_1_0.B a_51648_21103# PFD_0.VSS sg13_lv_nmos ad=0.1045p pd=0.93u as=0.198p ps=1.27u w=0.55u l=0.13u
+X56 PFD_0.VDD 3bit_freq_divider_0.EN charge_pump_0.bias_p PFD_0.VDD sg13_lv_pmos ad=0.17p pd=1.68u as=0.17p ps=1.68u w=0.5u l=0.15u
+X57 a_55345_23141# 3bit_freq_divider_0.freq_div_cell_0.Cin a_55485_23233# PFD_0.VSS sg13_lv_nmos ad=0.2176p pd=1.96u as=0.1216p ps=1.02u w=0.64u l=0.13u
+X58 charge_pump_0.bias_n charge_pump_0.bias_p a_55862_56737# PFD_0.VDD sg13_lv_pmos ad=0.68p pd=4.68u as=0.38p ps=2.38u w=2u l=1u
+X59 a_53152_43159# a_52944_43077# a_53058_43159# PFD_0.VDD sg13_lv_pmos ad=0.1106p pd=0.945u as=0.17p ps=1.68u w=0.5u l=0.13u
+X60 PFD_0.VDD a_53022_43738# a_55769_40283# PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=59f ps=0.74u w=0.2u l=0.13u
+X61 3bit_freq_divider_1.sg13g2_tiehi_1.L_HI a_60584_24580# a_60385_24558# PFD_0.VDD sg13_lv_pmos ad=0.3927p pd=2.99u as=0.4657p ps=2.54u w=1.155u l=0.13u
+X62 a_54324_20259# a_53899_20488# a_54252_20259# PFD_0.VSS sg13_lv_nmos ad=54.6f pd=0.68u as=48.3f ps=0.65u w=0.42u l=0.13u
+X63 a_62270_24055# a_62119_24117# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.19p pd=1.38u as=0.34p ps=2.68u w=1u l=0.13u
+X64 a_62324_22016# a_62270_22299# a_62246_22016# PFD_0.VSS sg13_lv_nmos ad=48.3f pd=0.65u as=54.6f ps=0.68u w=0.42u l=0.13u
+X65 PFD_0.VDD 3bit_freq_divider_0.A2 a_52924_21129# PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X66 a_52944_43077# a_53147_40413# a_53085_40283# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.17p ps=1.68u w=0.5u l=0.13u
+X67 PFD_0.VSS a_53774_21934# a_53738_22270# PFD_0.VSS sg13_lv_nmos ad=0.1544p pd=1.235u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X68 a_46749_30782# PFD_0.Ref_CLK a_45579_29803# PFD_0.VSS sg13_lv_nmos ad=0.1428p pd=1.52u as=79.8f ps=0.8u w=0.42u l=0.15u
+X69 a_54400_43159# a_53152_43159# a_54494_43159# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.1106p ps=0.945u w=0.5u l=0.13u
+X70 3bit_freq_divider_1.freq_div_cell_0.Cin a_60967_24990# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.1918p ps=1.5u w=1.12u l=0.13u
+X71 a_55742_43159# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59.75f pd=0.745u as=0.104p ps=1.34u w=0.2u l=0.13u
+X72 a_53968_23946# a_53738_24026# a_54324_23771# PFD_0.VSS sg13_lv_nmos ad=79.8f pd=0.8u as=54.6f ps=0.68u w=0.42u l=0.13u
+X73 a_63038_20215# 3bit_freq_divider_1.dff_nclk_0.nCLK PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=47.25f pd=0.645u as=90.3f ps=0.85u w=0.42u l=0.13u
+X74 a_62900_20179# a_62654_20215# a_63038_20215# PFD_0.VSS sg13_lv_nmos ad=0.1428p pd=1.52u as=47.25f ps=0.645u w=0.42u l=0.13u
+X75 3bit_freq_divider_0.sg13g2_or3_1_0.C a_52886_24904# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.1628p pd=1.18u as=0.3108p ps=2.32u w=0.74u l=0.13u
+X76 PFD_0.VDD a_53022_43738# a_57111_40283# PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=59f ps=0.74u w=0.2u l=0.13u
+X77 a_48909_28913# PFD_0.VCO_CLK a_47954_28913# PFD_0.VSS sg13_lv_nmos ad=0.1224p pd=1.4u as=68.39999f ps=0.74u w=0.36u l=0.15u
+X78 a_54324_23771# a_53899_24000# a_54252_23771# PFD_0.VSS sg13_lv_nmos ad=54.6f pd=0.68u as=48.3f ps=0.65u w=0.42u l=0.13u
+X79 PFD_0.VSS vco_wob_0.vctl a_58454_40850# PFD_0.VSS sg13_lv_nmos ad=0.102p pd=1.28u as=65.99999f ps=0.74u w=0.3u l=0.13u
+X80 a_58453_40283# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=0.104p ps=1.34u w=0.2u l=0.13u
+X81 a_53899_22244# a_53774_21934# a_53065_21935# PFD_0.VDD sg13_lv_pmos ad=0.19p pd=1.38u as=0.17695p ps=1.56u w=1u l=0.13u
+X82 PFD_0.VDD 3bit_freq_divider_0.A0 a_52924_24641# PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X83 PFD_0.VDD a_64384_21091# 3bit_freq_divider_1.dff_nclk_0.nCLK PFD_0.VDD sg13_lv_pmos ad=0.3822p pd=1.84u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X84 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.D 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q a_61972_23244# PFD_0.VSS sg13_lv_nmos ad=0.1628p pd=1.18u as=88.8f ps=0.98u w=0.74u l=0.13u
+X85 PFD_0.VDD 3bit_freq_divider_1.sg13g2_tiehi_1.L_HI a_61878_24642# PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X86 3bit_freq_divider_1.sg13g2_or3_1_0.B a_63255_23244# a_63426_22886# PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X87 PFD_0.VSS vco_wob_0.vctl a_53022_43738# PFD_0.VSS sg13_lv_nmos ad=0.102p pd=1.28u as=65.99999f ps=0.74u w=0.3u l=0.13u
+X88 a_51729_23026# a_51631_22774# a_51693_23426# PFD_0.VDD sg13_lv_pmos ad=51.45f pd=0.665u as=79.8f ps=0.8u w=0.42u l=0.13u
+X89 a_53147_40413# PFD_0.VSS cap_cmim l=6.99u w=6.99u
+X90 a_57084_43159# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59.75f pd=0.745u as=0.104p ps=1.34u w=0.2u l=0.13u
+X91 a_61887_20534# a_61691_20534# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.1544p ps=1.235u w=0.74u l=0.13u
+X92 a_54400_43159# a_53152_43159# a_54494_43159# PFD_0.VDD sg13_lv_pmos ad=0.17p pd=1.68u as=0.11p ps=0.94u w=0.5u l=0.13u
+X93 a_62119_22361# a_61691_22290# a_61394_21976# PFD_0.VSS sg13_lv_nmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X94 a_52950_23913# a_53065_23691# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.2856p pd=2.36u as=0.2016p ps=1.5u w=0.84u l=0.13u
+X95 a_54504_20259# a_53738_20514# a_53968_20434# PFD_0.VDD sg13_lv_pmos ad=0.1428p pd=1.52u as=79.8f ps=0.8u w=0.42u l=0.13u
+X96 a_62119_24117# 3bit_freq_divider_1.dff_nclk_0.nCLK PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1533p pd=1.57u as=0.11785p ps=1.025u w=0.42u l=0.13u
+X97 PFD_0.VCO_CLK PFD_0.VCO_CLK a_46817_27899# PFD_0.VDD sg13_lv_pmos ad=60.8f pd=0.7u as=0.1088p ps=1.32u w=0.32u l=0.15u
+X98 PFD_0.VDD 3bit_freq_divider_0.CLK_IN 3bit_freq_divider_1.sg13g2_nand2_1_0.Y PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X99 PFD_0.VDD a_62900_21935# a_62879_22369# PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=43.05f ps=0.625u w=0.42u l=0.13u
+X100 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 3bit_freq_divider_1.sg13g2_nand2_1_0.Y PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.392p pd=2.94u as=0.392p ps=2.94u w=1.12u l=0.13u
+X101 a_53350_21129# 3bit_freq_divider_0.A2 a_52886_21392# PFD_0.VDD sg13_lv_pmos ad=0.1225p pd=1.245u as=0.34p ps=2.68u w=1u l=0.13u
+X102 a_58454_40850# a_58515_40413# a_57173_40413# PFD_0.VSS sg13_lv_nmos ad=0.17p pd=1.68u as=0.11p ps=0.94u w=0.5u l=0.13u
+X103 PFD_0.VSS 3bit_freq_divider_0.EN a_56055_21027# PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=66.6f ps=0.92u w=0.74u l=0.13u
+X104 PFD_0.VDD a_62654_23727# a_63463_23728# PFD_0.VDD sg13_lv_pmos ad=0.2016p pd=1.5u as=0.2856p ps=2.36u w=0.84u l=0.13u
+X105 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X106 a_55742_43159# a_54494_43159# a_55836_43159# PFD_0.VDD sg13_lv_pmos ad=0.17p pd=1.68u as=0.11p ps=0.94u w=0.5u l=0.13u
+X107 a_62654_21971# a_61887_22290# a_62270_22299# PFD_0.VSS sg13_lv_nmos ad=0.2017p pd=1.48u as=0.19397p ps=1.29u w=0.64u l=0.13u
+X108 PFD_0.VSS a_62900_20179# a_62848_20215# PFD_0.VSS sg13_lv_nmos ad=90.3f pd=0.85u as=54.6f ps=0.68u w=0.42u l=0.13u
+X109 PFD_0.VSS 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VSS sg13_lv_nmos ad=0.259p pd=2.18u as=0.259p ps=2.18u w=0.74u l=0.13u
+X110 a_61394_23732# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.D PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X111 a_62848_20215# a_61691_20534# a_62654_20215# PFD_0.VSS sg13_lv_nmos ad=54.6f pd=0.68u as=0.2017p ps=1.48u w=0.42u l=0.13u
+X112 a_53774_21934# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.1544p ps=1.235u w=0.74u l=0.13u
+X113 a_53054_23243# 3bit_freq_divider_0.A1 3bit_freq_divider_0.sg13g2_or3_1_0.B PFD_0.VSS sg13_lv_nmos ad=88.8f pd=0.98u as=0.1628p ps=1.18u w=0.74u l=0.13u
+X114 a_53350_24641# 3bit_freq_divider_0.A0 a_52886_24904# PFD_0.VDD sg13_lv_pmos ad=0.1225p pd=1.245u as=0.34p ps=2.68u w=1u l=0.13u
+X115 PFD_0.VDD a_53022_43738# a_58426_43159# PFD_0.VDD sg13_lv_pmos ad=0.104p pd=1.34u as=59f ps=0.74u w=0.2u l=0.13u
+X116 a_56038_24617# a_55941_24882# 3bit_freq_divider_0.sg13g2_tiehi_1.L_HI PFD_0.VDD sg13_lv_pmos ad=0.4657p pd=2.54u as=0.3927p ps=2.99u w=1.155u l=0.13u
+X117 PFD_0.VDD 3bit_freq_divider_0.dff_nclk_0.nCLK a_53445_20214# PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=79.8f ps=0.8u w=0.42u l=0.13u
+X118 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X119 a_57112_40850# vco_wob_0.vctl PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=65.99999f pd=0.74u as=0.102p ps=1.28u w=0.3u l=0.13u
+X120 a_60584_24580# a_60385_24717# a_60479_25023# PFD_0.VSS sg13_lv_nmos ad=0.27427p pd=2.28u as=0.2307p ps=1.615u w=0.795u l=0.13u
+X121 PFD_0.VSS a_61707_21488# 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.D PFD_0.VSS sg13_lv_nmos ad=0.3108p pd=2.32u as=0.1628p ps=1.18u w=0.74u l=0.13u
+X122 a_63255_25000# 3bit_freq_divider_1.A0 a_63223_24642# PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.1225p ps=1.245u w=1u l=0.13u
+X123 PFD_0.VDD a_51648_24041# a_51685_23725# PFD_0.VDD sg13_lv_pmos ad=0.2163p pd=1.55u as=79.8f ps=0.8u w=0.42u l=0.13u
+X124 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q a_63463_20216# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2016p ps=1.5u w=1.12u l=0.13u
+X125 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.D a_54434_21392# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.1628p pd=1.18u as=0.3108p ps=2.32u w=0.74u l=0.13u
+X126 PFD_0.VSS 3bit_freq_divider_1.A0 a_63255_25000# PFD_0.VSS sg13_lv_nmos ad=0.15245p pd=1.17u as=0.17462p ps=1.185u w=0.55u l=0.13u
+X127 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X128 a_48909_28913# PFD_0.VCO_CLK a_47954_28913# PFD_0.VSS sg13_lv_nmos ad=68.39999f pd=0.74u as=0.1224p ps=1.4u w=0.36u l=0.15u
+X129 PFD_0.VDD a_62270_20543# a_62221_20605# PFD_0.VDD sg13_lv_pmos ad=0.11785p pd=1.025u as=51.45f ps=0.665u w=0.42u l=0.13u
+X130 a_62246_22016# a_61887_22290# a_62119_22361# PFD_0.VSS sg13_lv_nmos ad=54.6f pd=0.68u as=79.8f ps=0.8u w=0.42u l=0.13u
+X131 PFD_0.VDD 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q a_63426_21130# PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X132 PFD_0.VDD 3bit_freq_divider_0.freq_div_cell_0.Cout a_54898_21129# PFD_0.VDD sg13_lv_pmos ad=0.36p pd=2.72u as=0.1225p ps=1.245u w=1u l=0.13u
+X133 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X134 a_64362_24865# a_64459_24995# a_64731_24890# PFD_0.VDD sg13_lv_pmos ad=0.2442p pd=2.06u as=0.4657p ps=2.54u w=0.66u l=0.13u
+X135 a_55831_40413# a_57173_40413# a_57112_40850# PFD_0.VSS sg13_lv_nmos ad=0.11p pd=0.94u as=0.17p ps=1.68u w=0.5u l=0.13u
+X136 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X137 a_47777_29803# a_46749_30782# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.1224p pd=1.4u as=0.1224p ps=1.4u w=0.36u l=0.15u
+X138 a_55086_21975# 3bit_freq_divider_0.dff_nclk_0.nCLK PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=50.4f pd=0.66u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X139 PFD_0.VDD 3bit_freq_divider_0.sg13g2_tiehi_1.L_HI a_54898_24641# PFD_0.VDD sg13_lv_pmos ad=0.36p pd=2.72u as=0.1225p ps=1.245u w=1u l=0.13u
+X140 a_53445_21970# a_53065_21935# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=0.2163p ps=1.55u w=0.42u l=0.13u
+X141 PFD_0.VSS 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q a_52886_23148# PFD_0.VSS sg13_lv_nmos ad=0.374p pd=2.46u as=0.17462p ps=1.185u w=0.55u l=0.13u
+X142 a_64384_21091# 3bit_freq_divider_1.sg13g2_or3_1_0.A PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.198p pd=1.27u as=0.13395p ps=1.12u w=0.55u l=0.13u
+X143 a_63255_23244# 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.17462p pd=1.185u as=0.374p ps=2.46u w=0.55u l=0.13u
+X144 a_54494_43159# a_53152_43159# a_54400_43159# PFD_0.VDD sg13_lv_pmos ad=0.1106p pd=0.945u as=0.17p ps=1.68u w=0.5u l=0.13u
+X145 a_63426_24642# 3bit_freq_divider_1.A0 PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X146 a_62270_20543# a_62119_20605# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.19397p pd=1.29u as=0.1825p ps=1.325u w=0.64u l=0.13u
+X147 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X148 PFD_0.VSS vco_wob_0.vctl a_58653_42591# PFD_0.VSS sg13_lv_nmos ad=0.102p pd=1.28u as=65.99999f ps=0.74u w=0.3u l=0.13u
+X149 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.nQ a_62654_21971# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2775p pd=2.23u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X150 a_58653_42591# a_57178_43159# 3bit_freq_divider_0.CLK_IN PFD_0.VSS sg13_lv_nmos ad=0.17p pd=1.68u as=0.11p ps=0.94u w=0.5u l=0.13u
+X151 PFD_0.VDD a_64383_23889# a_64384_24445# PFD_0.VDD sg13_lv_pmos ad=0.2016p pd=1.5u as=0.2856p ps=2.36u w=0.84u l=0.13u
+X152 a_51708_21299# 3bit_freq_divider_0.sg13g2_or3_1_0.A PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.22p pd=1.44u as=0.3822p ps=1.84u w=1u l=0.13u
+X153 PFD_0.VSS 3bit_freq_divider_0.dff_nclk_0.nRST a_52074_23129# PFD_0.VSS sg13_lv_nmos ad=0.1825p pd=1.325u as=48.3f ps=0.65u w=0.42u l=0.13u
+X154 a_53147_40413# a_54489_40413# a_54427_40283# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.17p ps=1.68u w=0.5u l=0.13u
+X155 PFD_0.VDD 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VDD sg13_lv_pmos ad=0.392p pd=2.94u as=0.392p ps=2.94u w=1.12u l=0.13u
+X156 a_57178_43159# PFD_0.VSS cap_cmim l=6.99u w=6.99u
+X157 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.51p pd=3.68u as=0 ps=0 w=1.5u l=0.65u
+X158 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X159 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X160 a_62879_20613# a_61887_20534# a_62654_20215# PFD_0.VDD sg13_lv_pmos ad=43.05f pd=0.625u as=0.17695p ps=1.56u w=0.42u l=0.13u
+X161 a_61887_22290# a_61691_22290# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.1544p ps=1.235u w=0.74u l=0.13u
+X162 PFD_0.VSS a_52950_22157# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q PFD_0.VSS sg13_lv_nmos ad=0.14505p pd=1.15u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X163 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X164 a_63520_25000# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=88.8f pd=0.98u as=0.15245p ps=1.17u w=0.74u l=0.13u
+X165 a_53702_24124# a_53445_23726# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=43.05f pd=0.625u as=79.8f ps=0.8u w=0.42u l=0.13u
+X166 a_61707_25000# 3bit_freq_divider_1.sg13g2_tiehi_1.L_HI PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.17462p pd=1.185u as=0.374p ps=2.46u w=0.55u l=0.13u
+X167 PFD_0.VDD 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_61691_22290# PFD_0.VDD sg13_lv_pmos ad=0.19p pd=1.38u as=0.34p ps=2.68u w=1u l=0.13u
+X168 PFD_0.VDD 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q a_54472_21129# PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X169 PFD_0.VSS 3bit_freq_divider_0.freq_div_cell_0.Cin a_54602_23243# PFD_0.VSS sg13_lv_nmos ad=0.15245p pd=1.17u as=88.8f ps=0.98u w=0.74u l=0.13u
+X170 PFD_0.VSS a_51648_24041# a_51648_24438# PFD_0.VSS sg13_lv_nmos ad=0.14505p pd=1.15u as=0.187p ps=1.78u w=0.55u l=0.13u
+X171 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X172 a_53147_40413# a_54489_40413# a_54427_40283# PFD_0.VDD sg13_lv_pmos ad=0.1106p pd=0.945u as=0.11p ps=0.94u w=0.5u l=0.13u
+X173 a_62270_20543# a_62119_20605# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.19p pd=1.38u as=0.34p ps=2.68u w=1u l=0.13u
+X174 a_51648_21103# 3bit_freq_divider_0.sg13g2_or3_1_0.C a_51708_21413# PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.1275p ps=1.255u w=1u l=0.13u
+X175 PFD_0.VDD 3bit_freq_divider_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_51631_22774# PFD_0.VDD sg13_lv_pmos ad=0.19p pd=1.38u as=0.34p ps=2.68u w=1u l=0.13u
+X176 PFD_0.VSS vco_wob_0.vctl a_53086_40850# PFD_0.VSS sg13_lv_nmos ad=0.102p pd=1.28u as=65.99999f ps=0.74u w=0.3u l=0.13u
+X177 a_59800_40852# vco_wob_0.vctl PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=65.99999f pd=0.74u as=0.102p ps=1.28u w=0.3u l=0.13u
+X178 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X179 a_53085_40283# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=0.104p ps=1.34u w=0.2u l=0.13u
+X180 a_62654_23727# a_61887_24046# a_62270_24055# PFD_0.VSS sg13_lv_nmos ad=0.2017p pd=1.48u as=0.19397p ps=1.29u w=0.64u l=0.13u
+X181 3bit_freq_divider_0.EN sg13g2_inv_1_0.A PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.392p pd=2.94u as=0.392p ps=2.94u w=1.12u l=0.13u
+X182 PFD_0.VDD a_58734_56203# a_58734_56203# PFD_0.VDD sg13_lv_pmos ad=0.17p pd=1.68u as=0.17p ps=1.68u w=0.5u l=0.15u
+X183 PFD_0.VDD a_64383_23706# a_64817_23685# PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=43.05f ps=0.625u w=0.42u l=0.13u
+X184 PFD_0.VDD 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q a_54472_24641# PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X185 PFD_0.VSS 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VSS sg13_lv_nmos ad=0.259p pd=2.18u as=0.259p ps=2.18u w=0.74u l=0.13u
+X186 a_55862_56737# PFD_0.VDD rhigh l=12u w=1u
+X187 PFD_0.VDD a_46817_27899# a_45658_27900# PFD_0.VDD sg13_lv_pmos ad=0.1224p pd=1.4u as=68.39999f ps=0.74u w=0.36u l=0.15u
+X188 3bit_freq_divider_1.sg13g2_or3_1_0.B 3bit_freq_divider_1.A1 a_63520_23244# PFD_0.VSS sg13_lv_nmos ad=0.1628p pd=1.18u as=88.8f ps=0.98u w=0.74u l=0.13u
+X189 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X190 a_54489_40413# a_55831_40413# a_55769_40283# PFD_0.VDD sg13_lv_pmos ad=0.1106p pd=0.945u as=0.11p ps=0.94u w=0.5u l=0.13u
+X191 a_57084_43159# a_55836_43159# a_57178_43159# PFD_0.VDD sg13_lv_pmos ad=0.17p pd=1.68u as=0.11p ps=0.94u w=0.5u l=0.13u
+X192 a_63223_24642# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1225p pd=1.245u as=0.36p ps=2.72u w=1u l=0.13u
+X193 3bit_freq_divider_0.CLK_IN a_57178_43159# a_58426_43159# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.11p ps=0.94u w=0.5u l=0.13u
+X194 a_58515_40413# 3bit_freq_divider_0.CLK_IN a_59800_40852# PFD_0.VSS sg13_lv_nmos ad=0.11p pd=0.94u as=0.17p ps=1.68u w=0.5u l=0.13u
+X195 PFD_0.VDD a_62654_20215# a_62900_20179# PFD_0.VDD sg13_lv_pmos ad=0.2163p pd=1.55u as=79.8f ps=0.8u w=0.42u l=0.13u
+X196 a_53086_40850# a_53147_40413# a_52944_43077# PFD_0.VSS sg13_lv_nmos ad=0.17p pd=1.68u as=0.11p ps=0.94u w=0.5u l=0.13u
+X197 a_64424_22294# 3bit_freq_divider_1.dff_nclk_0.D a_64424_22200# PFD_0.VSS sg13_lv_nmos ad=50.4f pd=0.66u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X198 a_61488_23732# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.D a_61394_23732# PFD_0.VSS sg13_lv_nmos ad=50.4f pd=0.66u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X199 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 3bit_freq_divider_1.sg13g2_nand2_1_0.Y PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.259p pd=2.18u as=0.259p ps=2.18u w=0.74u l=0.13u
+X200 a_61061_21478# 3bit_freq_divider_1.freq_div_cell_0.Cout a_60967_21478# PFD_0.VSS sg13_lv_nmos ad=0.1216p pd=1.02u as=0.2176p ps=1.96u w=0.64u l=0.13u
+X201 PFD_0.VSS 3bit_freq_divider_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_51631_22774# PFD_0.VSS sg13_lv_nmos ad=0.1544p pd=1.235u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X202 a_62221_20605# a_61691_20534# a_62119_20605# PFD_0.VDD sg13_lv_pmos ad=51.45f pd=0.665u as=79.8f ps=0.8u w=0.42u l=0.13u
+X203 PFD_0.VDD a_53022_43738# a_54427_40283# PFD_0.VDD sg13_lv_pmos ad=0.104p pd=1.34u as=59.75f ps=0.745u w=0.2u l=0.13u
+X204 PFD_0.VSS a_53968_22190# a_53899_22244# PFD_0.VSS sg13_lv_nmos ad=0.1825p pd=1.325u as=0.19397p ps=1.29u w=0.64u l=0.13u
+X205 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X206 3bit_freq_divider_1.sg13g2_nand2_1_0.Y 3bit_freq_divider_0.CLK_IN a_60531_21028# PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=66.6f ps=0.92u w=0.74u l=0.13u
+X207 PFD_0.VSS a_55345_21385# 3bit_freq_divider_0.freq_div_cell_1.Cout PFD_0.VSS sg13_lv_nmos ad=0.1331p pd=1.12u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X208 a_59097_54704# 3bit_freq_divider_0.EN PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.17p pd=1.68u as=0.17p ps=1.68u w=0.5u l=0.15u
+X209 a_52114_22293# 3bit_freq_divider_0.dff_nclk_0.D a_51684_22284# PFD_0.VSS sg13_lv_nmos ad=50.4f pd=0.66u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X210 a_51693_23075# a_51693_23426# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.19p pd=1.38u as=0.34p ps=2.68u w=1u l=0.13u
+X211 PFD_0.VDD a_64383_23889# a_64383_23706# PFD_0.VDD sg13_lv_pmos ad=0.2163p pd=1.55u as=79.8f ps=0.8u w=0.42u l=0.13u
+X212 a_61061_24990# 3bit_freq_divider_1.sg13g2_tiehi_1.L_HI a_60967_24990# PFD_0.VSS sg13_lv_nmos ad=0.1216p pd=1.02u as=0.2176p ps=1.96u w=0.64u l=0.13u
+X213 a_58515_40413# PFD_0.VSS cap_cmim l=6.99u w=6.99u
+X214 a_54472_21129# 3bit_freq_divider_0.freq_div_cell_0.Cout PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X215 a_61887_22290# a_61691_22290# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.19p ps=1.38u w=1u l=0.13u
+X216 PFD_0.VDD a_53022_43738# a_53058_43159# PFD_0.VDD sg13_lv_pmos ad=0.104p pd=1.34u as=59f ps=0.74u w=0.2u l=0.13u
+X217 a_61878_24642# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X218 PFD_0.VSS 3bit_freq_divider_1.dff_nclk_0.nCLK a_61488_21976# PFD_0.VSS sg13_lv_nmos ad=0.1428p pd=1.52u as=50.4f ps=0.66u w=0.42u l=0.13u
+X219 a_54400_43159# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=59f ps=0.74u w=0.2u l=0.13u
+X220 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q a_63463_20216# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.14505p ps=1.15u w=0.74u l=0.13u
+X221 a_54434_23148# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.17462p pd=1.185u as=0.15245p ps=1.17u w=0.55u l=0.13u
+X222 PFD_0.VDD a_53022_43738# a_55769_40283# PFD_0.VDD sg13_lv_pmos ad=0.104p pd=1.34u as=59.75f ps=0.745u w=0.2u l=0.13u
+X223 3bit_freq_divider_0.dff_nclk_0.D a_51648_24041# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.7616p pd=3.6u as=0.2163p ps=1.55u w=1.12u l=0.13u
+X224 3bit_freq_divider_1.freq_div_cell_0.Cout a_60967_23234# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.1331p ps=1.12u w=0.74u l=0.13u
+X225 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X226 a_54472_24641# 3bit_freq_divider_0.sg13g2_tiehi_1.L_HI PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X227 a_55485_24989# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.1216p pd=1.02u as=0.1331p ps=1.12u w=0.64u l=0.13u
+X228 PFD_0.VCO_CLK a_51648_24438# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.14505p ps=1.15u w=0.74u l=0.13u
+X229 a_62900_21935# 3bit_freq_divider_1.dff_nclk_0.nCLK PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=79.8f ps=0.8u w=0.42u l=0.13u
+X230 a_53774_21934# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.19p ps=1.38u w=1u l=0.13u
+X231 a_55742_43159# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=59f ps=0.74u w=0.2u l=0.13u
+X232 a_53899_22244# a_53738_22270# a_53065_21935# PFD_0.VSS sg13_lv_nmos ad=0.19397p pd=1.29u as=0.2017p ps=1.48u w=0.64u l=0.13u
+X233 a_64383_23889# a_64383_23628# a_64419_23326# PFD_0.VDD sg13_lv_pmos ad=0.17695p pd=1.56u as=0.19p ps=1.38u w=1u l=0.13u
+X234 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.nQ a_62654_23727# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2775p pd=2.23u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X235 3bit_freq_divider_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 3bit_freq_divider_0.dff_nclk_0.nCLK PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.392p pd=2.94u as=0.392p ps=2.94u w=1.12u l=0.13u
+X236 a_58426_43159# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59.75f pd=0.745u as=0.104p ps=1.34u w=0.2u l=0.13u
+X237 PFD_0.VSS 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q a_53054_23243# PFD_0.VSS sg13_lv_nmos ad=0.15245p pd=1.17u as=88.8f ps=0.98u w=0.74u l=0.13u
+X238 PFD_0.VSS 3bit_freq_divider_1.A2 a_63255_21488# PFD_0.VSS sg13_lv_nmos ad=0.15245p pd=1.17u as=0.17462p ps=1.185u w=0.55u l=0.13u
+X239 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X240 a_52950_20401# a_53065_20179# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.2856p pd=2.36u as=0.2016p ps=1.5u w=0.84u l=0.13u
+X241 a_62119_20605# 3bit_freq_divider_1.dff_nclk_0.nCLK PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1533p pd=1.57u as=0.11785p ps=1.025u w=0.42u l=0.13u
+X242 a_60531_21028# 3bit_freq_divider_0.EN PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=66.6f pd=0.92u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X243 PFD_0.VDD a_52950_20401# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q PFD_0.VDD sg13_lv_pmos ad=0.2016p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X244 a_47777_29803# a_46749_30782# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1224p pd=1.4u as=68.39999f ps=0.74u w=0.36u l=0.15u
+X245 PFD_0.VSS a_52950_23913# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q PFD_0.VSS sg13_lv_nmos ad=0.14505p pd=1.15u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X246 a_51693_23075# a_51693_23426# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.19397p pd=1.29u as=0.1825p ps=1.325u w=0.64u l=0.13u
+X247 PFD_0.VDD 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_61691_24046# PFD_0.VDD sg13_lv_pmos ad=0.19p pd=1.38u as=0.34p ps=2.68u w=1u l=0.13u
+X248 a_54602_24999# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.D PFD_0.VSS sg13_lv_nmos ad=88.8f pd=0.98u as=0.1628p ps=1.18u w=0.74u l=0.13u
+X249 a_53065_21935# a_53738_22270# a_53702_22368# PFD_0.VDD sg13_lv_pmos ad=0.17695p pd=1.56u as=43.05f ps=0.625u w=0.42u l=0.13u
+X250 PFD_0.VSS vco_wob_0.vctl a_53285_42591# PFD_0.VSS sg13_lv_nmos ad=0.102p pd=1.28u as=65.99999f ps=0.74u w=0.3u l=0.13u
+X251 PFD_0.VDD a_62654_20215# a_63463_20216# PFD_0.VDD sg13_lv_pmos ad=0.2016p pd=1.5u as=0.2856p ps=2.36u w=0.84u l=0.13u
+X252 a_53285_42591# a_52944_43077# a_53152_43159# PFD_0.VSS sg13_lv_nmos ad=0.17p pd=1.68u as=0.11p ps=0.94u w=0.5u l=0.13u
+X253 PFD_0.VDD 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q a_60967_23234# PFD_0.VDD sg13_lv_pmos ad=0.1918p pd=1.5u as=0.1596p ps=1.22u w=0.84u l=0.13u
+X254 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.D a_61707_25000# a_61878_24642# PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X255 3bit_freq_divider_1.freq_div_cell_1.Cout a_60967_21478# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.1918p ps=1.5u w=1.12u l=0.13u
+X256 a_54842_49733# a_54357_49278# charge_pump_0.vout PFD_0.VDD sg13_lv_pmos ad=55.5f pd=0.74u as=0.1005p ps=1.34u w=0.15u l=0.13u
+X257 a_54494_43159# PFD_0.VSS cap_cmim l=6.99u w=6.99u
+X258 a_61707_25000# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q a_61675_24642# PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.1225p ps=1.245u w=1u l=0.13u
+X259 a_61394_20220# 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.D PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X260 PFD_0.VDD 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.D a_54504_22015# PFD_0.VDD sg13_lv_pmos ad=0.1428p pd=1.52u as=79.8f ps=0.8u w=0.42u l=0.13u
+X261 a_55345_23141# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1596p pd=1.22u as=0.1918p ps=1.5u w=0.84u l=0.13u
+X262 charge_pump_0.bias_n sg13g2_inv_1_0.A PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.17p pd=1.68u as=0.17p ps=1.68u w=0.5u l=0.15u
+X263 a_53022_43738# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59.75f pd=0.745u as=59f ps=0.74u w=0.2u l=0.13u
+X264 PFD_0.VSS 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q a_61707_25000# PFD_0.VSS sg13_lv_nmos ad=0.15245p pd=1.17u as=0.17462p ps=1.185u w=0.55u l=0.13u
+X265 3bit_freq_divider_0.sg13g2_or3_1_0.A a_52886_21392# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.1628p pd=1.18u as=0.3108p ps=2.32u w=0.74u l=0.13u
+X266 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X267 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X268 a_54427_40283# a_54489_40413# a_53147_40413# PFD_0.VDD sg13_lv_pmos ad=0.17p pd=1.68u as=0.1106p ps=0.945u w=0.5u l=0.13u
+X269 a_54252_20259# 3bit_freq_divider_0.dff_nclk_0.nCLK PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=48.3f pd=0.65u as=0.1825p ps=1.325u w=0.42u l=0.13u
+X270 a_54427_40283# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=0.104p ps=1.34u w=0.2u l=0.13u
+X271 a_55345_24897# 3bit_freq_divider_0.sg13g2_tiehi_1.L_HI a_55485_24989# PFD_0.VSS sg13_lv_nmos ad=0.2176p pd=1.96u as=0.1216p ps=1.02u w=0.64u l=0.13u
+X272 3bit_freq_divider_1.CLK_OUT a_64384_24445# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.14505p ps=1.15u w=0.74u l=0.13u
+X273 a_54504_20259# a_53774_20178# a_53968_20434# PFD_0.VSS sg13_lv_nmos ad=0.1428p pd=1.52u as=79.8f ps=0.8u w=0.42u l=0.13u
+X274 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X275 PFD_0.VSS a_51685_23725# a_52119_23653# PFD_0.VSS sg13_lv_nmos ad=90.3f pd=0.85u as=54.6f ps=0.68u w=0.42u l=0.13u
+X276 PFD_0.VDD 3bit_freq_divider_1.freq_div_cell_0.Cout a_61878_21130# PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X277 a_52950_22157# a_53065_21935# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.187p pd=1.78u as=0.14505p ps=1.15u w=0.55u l=0.13u
+X278 a_55969_42591# vco_wob_0.vctl PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=65.99999f pd=0.74u as=0.102p ps=1.28u w=0.3u l=0.13u
+X279 a_55836_43159# a_54494_43159# a_55969_42591# PFD_0.VSS sg13_lv_nmos ad=0.11p pd=0.94u as=0.17p ps=1.68u w=0.5u l=0.13u
+X280 a_55770_40850# vco_wob_0.vctl PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=65.99999f pd=0.74u as=0.102p ps=1.28u w=0.3u l=0.13u
+X281 a_62654_23727# a_61691_24046# a_62270_24055# PFD_0.VDD sg13_lv_pmos ad=0.17695p pd=1.56u as=0.19p ps=1.38u w=1u l=0.13u
+X282 a_64714_21414# 3bit_freq_divider_1.sg13g2_or3_1_0.B a_64714_21300# PFD_0.VDD sg13_lv_pmos ad=0.1275p pd=1.255u as=0.22p ps=1.44u w=1u l=0.13u
+X283 PFD_0.VDD a_51648_24041# a_51648_24438# PFD_0.VDD sg13_lv_pmos ad=0.2016p pd=1.5u as=0.2856p ps=2.36u w=0.84u l=0.13u
+X284 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X285 a_55831_40413# PFD_0.VSS cap_cmim l=6.99u w=6.99u
+X286 a_52924_21129# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X287 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X288 a_55769_40283# a_55831_40413# a_54489_40413# PFD_0.VDD sg13_lv_pmos ad=0.17p pd=1.68u as=0.1106p ps=0.945u w=0.5u l=0.13u
+X289 PFD_0.VSS a_62654_21971# a_63463_21972# PFD_0.VSS sg13_lv_nmos ad=0.14505p pd=1.15u as=0.187p ps=1.78u w=0.55u l=0.13u
+X290 a_54252_23771# 3bit_freq_divider_0.dff_nclk_0.nCLK PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=48.3f pd=0.65u as=0.1825p ps=1.325u w=0.42u l=0.13u
+X291 PFD_0.VDD a_45658_27900# PFD_0.DOWN PFD_0.VDD sg13_lv_pmos ad=0.1088p pd=1.32u as=60.8f ps=0.7u w=0.32u l=0.15u
+X292 3bit_freq_divider_1.dff_nclk_0.D a_64383_23889# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.7616p pd=3.6u as=0.2163p ps=1.55u w=1.12u l=0.13u
+X293 a_45658_27900# a_46817_27899# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=68.39999f pd=0.74u as=0.1224p ps=1.4u w=0.36u l=0.15u
+X294 PFD_0.VSS 3bit_freq_divider_0.dff_nclk_0.nCLK a_53539_21970# PFD_0.VSS sg13_lv_nmos ad=90.3f pd=0.85u as=47.25f ps=0.645u w=0.42u l=0.13u
+X295 a_53539_21970# a_53065_21935# a_53445_21970# PFD_0.VSS sg13_lv_nmos ad=47.25f pd=0.645u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X296 PFD_0.VDD 3bit_freq_divider_0.dff_nclk_0.nCLK a_53968_22190# PFD_0.VDD sg13_lv_pmos ad=0.11785p pd=1.025u as=0.1533p ps=1.57u w=0.42u l=0.13u
+X297 a_54504_23771# a_53774_23690# a_53968_23946# PFD_0.VSS sg13_lv_nmos ad=0.1428p pd=1.52u as=79.8f ps=0.8u w=0.42u l=0.13u
+X298 PFD_0.VSS a_53968_23946# a_53899_24000# PFD_0.VSS sg13_lv_nmos ad=0.1825p pd=1.325u as=0.19397p ps=1.29u w=0.64u l=0.13u
+X299 a_52924_22885# a_52886_23148# 3bit_freq_divider_0.sg13g2_or3_1_0.B PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X300 a_52886_23148# 3bit_freq_divider_0.A1 PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.17462p pd=1.185u as=0.15245p ps=1.17u w=0.55u l=0.13u
+X301 a_58453_40283# a_58515_40413# a_57173_40413# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.11p ps=0.94u w=0.5u l=0.13u
+X302 a_63520_21488# 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=88.8f pd=0.98u as=0.15245p ps=1.17u w=0.74u l=0.13u
+X303 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.nQ a_62654_23727# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.7616p pd=3.6u as=0.2163p ps=1.55u w=1.12u l=0.13u
+X304 a_54427_40283# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59.75f pd=0.745u as=59f ps=0.74u w=0.2u l=0.13u
+X305 a_64731_24890# a_64398_24796# 3bit_freq_divider_1.dff_nclk_0.nRST PFD_0.VDD sg13_lv_pmos ad=0.4657p pd=2.54u as=0.3927p ps=2.99u w=1.155u l=0.13u
+X306 a_61707_21488# 3bit_freq_divider_1.freq_div_cell_0.Cout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.17462p pd=1.185u as=0.374p ps=2.46u w=0.55u l=0.13u
+X307 PFD_0.VDD a_53968_22190# a_53899_22244# PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.19p ps=1.38u w=1u l=0.13u
+X308 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X309 a_52924_24641# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X310 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X311 a_54489_40413# a_55831_40413# a_55770_40850# PFD_0.VSS sg13_lv_nmos ad=0.11p pd=0.94u as=0.17p ps=1.68u w=0.5u l=0.13u
+X312 PFD_0.VDD a_52950_23913# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q PFD_0.VDD sg13_lv_pmos ad=0.2016p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X313 a_61887_24046# a_61691_24046# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.19p ps=1.38u w=1u l=0.13u
+X314 charge_pump_0.vout vco_wob_0.vctl rhigh l=0.96u w=0.6u
+X315 PFD_0.VDD a_53065_21935# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.nQ PFD_0.VDD sg13_lv_pmos ad=0.2163p pd=1.55u as=0.7616p ps=3.6u w=1.12u l=0.13u
+X316 a_53152_43159# a_52944_43077# a_53058_43159# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.11p ps=0.94u w=0.5u l=0.13u
+X317 PFD_0.VDD a_51685_23725# a_51721_23684# PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=43.05f ps=0.625u w=0.42u l=0.13u
+X318 PFD_0.VDD a_53774_23690# a_53738_24026# PFD_0.VDD sg13_lv_pmos ad=0.19p pd=1.38u as=0.34p ps=2.68u w=1u l=0.13u
+X319 a_55836_43159# a_54494_43159# a_55742_43159# PFD_0.VDD sg13_lv_pmos ad=0.1106p pd=0.945u as=0.17p ps=1.68u w=0.5u l=0.13u
+X320 a_55769_40283# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59.75f pd=0.745u as=59f ps=0.74u w=0.2u l=0.13u
+X321 a_56013_24979# a_56137_24678# a_56038_24617# PFD_0.VDD sg13_lv_pmos ad=0.2442p pd=2.06u as=0.4657p ps=2.54u w=0.66u l=0.13u
+X322 PFD_0.VDD 3bit_freq_divider_0.freq_div_cell_0.Cin a_55345_23141# PFD_0.VDD sg13_lv_pmos ad=0.2856p pd=2.36u as=0.1596p ps=1.22u w=0.84u l=0.13u
+X323 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X324 a_48909_28913# PFD_0.Ref_CLK PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.1224p pd=1.4u as=0.1224p ps=1.4u w=0.36u l=0.15u
+X325 a_64464_23052# a_64383_23434# a_64383_23300# PFD_0.VSS sg13_lv_nmos ad=54.6f pd=0.68u as=79.8f ps=0.8u w=0.42u l=0.13u
+X326 a_56055_21027# 3bit_freq_divider_0.CLK_IN 3bit_freq_divider_0.sg13g2_nand2_1_0.Y PFD_0.VSS sg13_lv_nmos ad=66.6f pd=0.92u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X327 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X328 a_61972_25000# 3bit_freq_divider_1.sg13g2_tiehi_1.L_HI PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=88.8f pd=0.98u as=0.15245p ps=1.17u w=0.74u l=0.13u
+X329 a_63255_21488# 3bit_freq_divider_1.A2 a_63223_21130# PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.1225p ps=1.245u w=1u l=0.13u
+X330 a_51648_21103# 3bit_freq_divider_0.sg13g2_or3_1_0.C PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.187p pd=1.78u as=0.1045p ps=0.93u w=0.55u l=0.13u
+X331 a_53899_24000# a_53738_24026# a_53065_23691# PFD_0.VSS sg13_lv_nmos ad=0.19397p pd=1.29u as=0.2017p ps=1.48u w=0.64u l=0.13u
+X332 PFD_0.VSS 3bit_freq_divider_0.freq_div_cell_0.Cin a_54434_23148# PFD_0.VSS sg13_lv_nmos ad=0.374p pd=2.46u as=0.17462p ps=1.185u w=0.55u l=0.13u
+X333 charge_pump_0.vout PFD_0.DOWN a_54747_49259# PFD_0.VSS sg13_lv_nmos ad=0.408p pd=3.08u as=0.207p ps=1.545u w=1.2u l=0.13u
+X334 a_52119_23843# 3bit_freq_divider_0.dff_nclk_0.nRST PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=47.25f pd=0.645u as=90.3f ps=0.85u w=0.42u l=0.13u
+X335 PFD_0.UP a_47777_29803# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1088p pd=1.32u as=60.8f ps=0.7u w=0.32u l=0.15u
+X336 a_53054_24999# 3bit_freq_divider_0.A0 3bit_freq_divider_0.sg13g2_or3_1_0.C PFD_0.VSS sg13_lv_nmos ad=88.8f pd=0.98u as=0.1628p ps=1.18u w=0.74u l=0.13u
+X337 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X338 a_57178_43159# a_55836_43159# a_57084_43159# PFD_0.VDD sg13_lv_pmos ad=0.1106p pd=0.945u as=0.17p ps=1.68u w=0.5u l=0.13u
+X339 PFD_0.VDD a_55345_21385# 3bit_freq_divider_0.freq_div_cell_1.Cout PFD_0.VDD sg13_lv_pmos ad=0.1918p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X340 PFD_0.VDD 3bit_freq_divider_1.dff_nclk_0.nCLK a_61394_23732# PFD_0.VDD sg13_lv_pmos ad=0.1428p pd=1.52u as=79.8f ps=0.8u w=0.42u l=0.13u
+X341 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X342 a_57084_43159# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=59f ps=0.74u w=0.2u l=0.13u
+X343 a_53065_21935# a_53774_21934# a_53722_21970# PFD_0.VSS sg13_lv_nmos ad=0.2017p pd=1.48u as=54.6f ps=0.68u w=0.42u l=0.13u
+X344 a_53968_22190# a_53774_21934# a_54352_22360# PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=51.45f ps=0.665u w=0.42u l=0.13u
+X345 a_53702_20612# a_53445_20214# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=43.05f pd=0.625u as=79.8f ps=0.8u w=0.42u l=0.13u
+X346 PFD_0.VDD a_53022_43738# a_58426_43159# PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=59.75f ps=0.745u w=0.2u l=0.13u
+X347 PFD_0.VSS vco_wob_0.vctl a_59800_40852# PFD_0.VSS sg13_lv_nmos ad=0.102p pd=1.28u as=65.99999f ps=0.74u w=0.3u l=0.13u
+X348 a_59799_40285# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=0.104p ps=1.34u w=0.2u l=0.13u
+X349 a_60967_24990# 3bit_freq_divider_1.sg13g2_tiehi_1.L_HI PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1596p pd=1.22u as=0.2856p ps=2.36u w=0.84u l=0.13u
+X350 PFD_0.VDD a_53022_43738# a_53085_40283# PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=59f ps=0.74u w=0.2u l=0.13u
+X351 a_53722_21970# a_53445_21970# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=54.6f pd=0.68u as=90.3f ps=0.85u w=0.42u l=0.13u
+X352 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X353 PFD_0.VSS vco_wob_0.vctl a_54428_40850# PFD_0.VSS sg13_lv_nmos ad=0.102p pd=1.28u as=65.99999f ps=0.74u w=0.3u l=0.13u
+X354 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X355 PFD_0.VSS 3bit_freq_divider_1.dff_nclk_0.nCLK a_62324_23772# PFD_0.VSS sg13_lv_nmos ad=0.1825p pd=1.325u as=48.3f ps=0.65u w=0.42u l=0.13u
+X356 PFD_0.VDD a_55345_24897# 3bit_freq_divider_0.freq_div_cell_0.Cin PFD_0.VDD sg13_lv_pmos ad=0.1918p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X357 PFD_0.VSS a_63255_23244# 3bit_freq_divider_1.sg13g2_or3_1_0.B PFD_0.VSS sg13_lv_nmos ad=0.3108p pd=2.32u as=0.1628p ps=1.18u w=0.74u l=0.13u
+X358 a_61675_24642# 3bit_freq_divider_1.sg13g2_tiehi_1.L_HI PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1225p pd=1.245u as=0.36p ps=2.72u w=1u l=0.13u
+X359 a_53058_43159# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59.75f pd=0.745u as=0.104p ps=1.34u w=0.2u l=0.13u
+X360 PFD_0.VDD 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q a_63426_22886# PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X361 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 3bit_freq_divider_0.CLK_IN PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X362 a_53968_22190# a_53738_22270# a_54324_22015# PFD_0.VSS sg13_lv_nmos ad=79.8f pd=0.8u as=54.6f ps=0.68u w=0.42u l=0.13u
+X363 a_63426_21130# 3bit_freq_divider_1.A2 PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X364 a_57173_40413# PFD_0.VSS cap_cmim l=6.99u w=6.99u
+X365 a_61394_21976# 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.D PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X366 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X367 a_54324_22015# a_53899_22244# a_54252_22015# PFD_0.VSS sg13_lv_nmos ad=54.6f pd=0.68u as=48.3f ps=0.65u w=0.42u l=0.13u
+X368 a_59800_40852# 3bit_freq_divider_0.CLK_IN a_58515_40413# PFD_0.VSS sg13_lv_nmos ad=0.17p pd=1.68u as=0.11p ps=0.94u w=0.5u l=0.13u
+X369 a_58734_56203# a_58536_54976# a_58536_54976# PFD_0.VDD sg13_lv_pmos ad=0.17p pd=1.68u as=0.17p ps=1.68u w=0.5u l=0.15u
+X370 a_54428_40850# a_54489_40413# a_53147_40413# PFD_0.VSS sg13_lv_nmos ad=0.17p pd=1.68u as=0.11p ps=0.94u w=0.5u l=0.13u
+X371 a_52950_23913# a_53065_23691# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.187p pd=1.78u as=0.14505p ps=1.15u w=0.55u l=0.13u
+X372 a_64383_23300# a_64383_23434# a_64424_22200# PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X373 PFD_0.VSS 3bit_freq_divider_1.sg13g2_or3_1_0.B a_64384_21091# PFD_0.VSS sg13_lv_nmos ad=0.1045p pd=0.93u as=0.198p ps=1.27u w=0.55u l=0.13u
+X374 PFD_0.VSS 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q a_52886_24904# PFD_0.VSS sg13_lv_nmos ad=0.374p pd=2.46u as=0.17462p ps=1.185u w=0.55u l=0.13u
+X375 PFD_0.VDD 3bit_freq_divider_0.dff_nclk_0.nRST a_51684_22284# PFD_0.VDD sg13_lv_pmos ad=0.1428p pd=1.52u as=79.8f ps=0.8u w=0.42u l=0.13u
+X376 PFD_0.VDD charge_pump_0.bias_p charge_pump_0.bias_p PFD_0.VDD sg13_lv_pmos ad=0.68p pd=4.68u as=0.68p ps=4.68u w=2u l=1u
+X377 a_64459_24995# a_64459_24995# a_64338_24910# PFD_0.VSS sg13_lv_nmos ad=0.102p pd=1.28u as=0.2307p ps=1.615u w=0.3u l=0.13u
+X378 PFD_0.VDD 3bit_freq_divider_0.dff_nclk_0.nCLK a_53445_21970# PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=79.8f ps=0.8u w=0.42u l=0.13u
+X379 PFD_0.VDD PFD_0.UP a_54357_49278# PFD_0.VDD sg13_lv_pmos ad=0.102p pd=1.28u as=0.102p ps=1.28u w=0.3u l=0.13u
+X380 PFD_0.VSS a_62654_23727# a_63463_23728# PFD_0.VSS sg13_lv_nmos ad=0.14505p pd=1.15u as=0.187p ps=1.78u w=0.55u l=0.13u
+X381 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X382 a_53899_24000# a_53774_23690# a_53065_23691# PFD_0.VDD sg13_lv_pmos ad=0.19p pd=1.38u as=0.17695p ps=1.56u w=1u l=0.13u
+X383 PFD_0.VDD 3bit_freq_divider_0.dff_nclk_0.nCLK a_53968_23946# PFD_0.VDD sg13_lv_pmos ad=0.11785p pd=1.025u as=0.1533p ps=1.57u w=0.42u l=0.13u
+X384 a_53539_23726# a_53065_23691# a_53445_23726# PFD_0.VSS sg13_lv_nmos ad=47.25f pd=0.645u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X385 PFD_0.VSS 3bit_freq_divider_0.dff_nclk_0.nCLK a_53539_23726# PFD_0.VSS sg13_lv_nmos ad=90.3f pd=0.85u as=47.25f ps=0.645u w=0.42u l=0.13u
+X386 a_57311_42591# vco_wob_0.vctl PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=65.99999f pd=0.74u as=0.102p ps=1.28u w=0.3u l=0.13u
+X387 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.D 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q a_61972_25000# PFD_0.VSS sg13_lv_nmos ad=0.1628p pd=1.18u as=88.8f ps=0.98u w=0.74u l=0.13u
+X388 3bit_freq_divider_1.sg13g2_or3_1_0.C a_63255_25000# a_63426_24642# PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X389 a_57178_43159# a_55836_43159# a_57311_42591# PFD_0.VSS sg13_lv_nmos ad=0.11p pd=0.94u as=0.17p ps=1.68u w=0.5u l=0.13u
+X390 a_45579_29803# PFD_0.Ref_CLK a_45451_28860# PFD_0.VSS sg13_lv_nmos ad=0.1224p pd=1.4u as=68.39999f ps=0.74u w=0.36u l=0.15u
+X391 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q a_63463_21972# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2016p ps=1.5u w=1.12u l=0.13u
+X392 PFD_0.VSS 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_61691_24046# PFD_0.VSS sg13_lv_nmos ad=0.1544p pd=1.235u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X393 PFD_0.VDD 3bit_freq_divider_1.dff_nclk_0.nRST a_64424_22200# PFD_0.VDD sg13_lv_pmos ad=0.1428p pd=1.52u as=79.8f ps=0.8u w=0.42u l=0.13u
+X394 PFD_0.VDD a_64419_23326# a_64809_23027# PFD_0.VDD sg13_lv_pmos ad=0.11785p pd=1.025u as=51.45f ps=0.665u w=0.42u l=0.13u
+X395 a_64338_24910# a_64362_24865# a_64398_24796# PFD_0.VSS sg13_lv_nmos ad=0.2307p pd=1.615u as=0.27427p ps=2.28u w=0.795u l=0.13u
+X396 a_62654_20215# a_61887_20534# a_62270_20543# PFD_0.VSS sg13_lv_nmos ad=0.2017p pd=1.48u as=0.19397p ps=1.29u w=0.64u l=0.13u
+X397 PFD_0.DOWN a_45658_27900# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=60.8f pd=0.7u as=60.8f ps=0.7u w=0.32u l=0.15u
+X398 a_54472_22885# a_54434_23148# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.D PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X399 PFD_0.VDD 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q a_53350_22885# PFD_0.VDD sg13_lv_pmos ad=0.36p pd=2.72u as=0.1225p ps=1.245u w=1u l=0.13u
+X400 PFD_0.VSS 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VSS sg13_lv_nmos ad=0.259p pd=2.18u as=0.259p ps=2.18u w=0.74u l=0.13u
+X401 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 3bit_freq_divider_1.sg13g2_nand2_1_0.Y PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.392p pd=2.94u as=0.392p ps=2.94u w=1.12u l=0.13u
+X402 a_51648_24041# a_51684_22692# a_51693_23075# PFD_0.VSS sg13_lv_nmos ad=0.2017p pd=1.48u as=0.19397p ps=1.29u w=0.64u l=0.13u
+X403 PFD_0.VDD a_62900_23691# a_62879_24125# PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=43.05f ps=0.625u w=0.42u l=0.13u
+X404 PFD_0.VSS 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q a_61707_21488# PFD_0.VSS sg13_lv_nmos ad=0.15245p pd=1.17u as=0.17462p ps=1.185u w=0.55u l=0.13u
+X405 a_45579_29803# PFD_0.Ref_CLK a_45451_28860# PFD_0.VSS sg13_lv_nmos ad=68.39999f pd=0.74u as=68.39999f ps=0.74u w=0.36u l=0.15u
+X406 PFD_0.VSS 3bit_freq_divider_1.dff_nclk_0.nRST a_64424_22294# PFD_0.VSS sg13_lv_nmos ad=0.1428p pd=1.52u as=50.4f ps=0.66u w=0.42u l=0.13u
+X407 a_45579_29803# PFD_0.Ref_CLK PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1088p pd=1.32u as=60.8f ps=0.7u w=0.32u l=0.15u
+X408 PFD_0.VSS 3bit_freq_divider_0.sg13g2_tiehi_1.L_HI a_54602_24999# PFD_0.VSS sg13_lv_nmos ad=0.15245p pd=1.17u as=88.8f ps=0.98u w=0.74u l=0.13u
+X409 a_63223_21130# 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1225p pd=1.245u as=0.36p ps=2.72u w=1u l=0.13u
+X410 a_58515_40413# 3bit_freq_divider_0.CLK_IN a_59799_40285# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.17p ps=1.68u w=0.5u l=0.13u
+X411 a_53085_40283# a_53147_40413# a_52944_43077# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.11p ps=0.94u w=0.5u l=0.13u
+X412 a_58515_40413# 3bit_freq_divider_0.CLK_IN a_59799_40285# PFD_0.VDD sg13_lv_pmos ad=0.1106p pd=0.945u as=0.11p ps=0.94u w=0.5u l=0.13u
+X413 a_61488_20220# 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.D a_61394_20220# PFD_0.VSS sg13_lv_nmos ad=50.4f pd=0.66u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X414 a_62654_20215# a_61691_20534# a_62270_20543# PFD_0.VDD sg13_lv_pmos ad=0.17695p pd=1.56u as=0.19p ps=1.38u w=1u l=0.13u
+X415 a_54494_43159# a_53152_43159# a_54400_43159# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.11p ps=0.94u w=0.5u l=0.13u
+X416 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X417 a_55742_43159# a_54494_43159# a_55836_43159# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.1106p ps=0.945u w=0.5u l=0.13u
+X418 a_46817_27899# PFD_0.VCO_CLK a_47954_28913# PFD_0.VSS sg13_lv_nmos ad=0.1428p pd=1.52u as=79.8f ps=0.8u w=0.42u l=0.15u
+X419 PFD_0.VSS 3bit_freq_divider_0.dff_nclk_0.nRST a_52114_22293# PFD_0.VSS sg13_lv_nmos ad=0.1428p pd=1.52u as=50.4f ps=0.66u w=0.42u l=0.13u
+X420 PFD_0.VSS a_53065_21935# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.nQ PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.2775p ps=2.23u w=0.74u l=0.13u
+X421 PFD_0.VDD a_53022_43738# a_58453_40283# PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=59f ps=0.74u w=0.2u l=0.13u
+X422 a_54352_22360# a_53899_22244# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=51.45f pd=0.665u as=0.11785p ps=1.025u w=0.42u l=0.13u
+X423 PFD_0.VSS a_61707_23244# 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.D PFD_0.VSS sg13_lv_nmos ad=0.3108p pd=2.32u as=0.1628p ps=1.18u w=0.74u l=0.13u
+X424 a_54357_49278# PFD_0.UP PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.1005p pd=1.34u as=0.1005p ps=1.34u w=0.15u l=0.13u
+X425 a_53968_23946# a_53774_23690# a_54352_24116# PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=51.45f ps=0.665u w=0.42u l=0.13u
+X426 PFD_0.VDD 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VDD sg13_lv_pmos ad=0.392p pd=2.94u as=0.392p ps=2.94u w=1.12u l=0.13u
+X427 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.17p pd=1.68u as=0 ps=0 w=0.5u l=0.65u
+X428 a_53065_23691# a_53774_23690# a_53722_23726# PFD_0.VSS sg13_lv_nmos ad=0.2017p pd=1.48u as=54.6f ps=0.68u w=0.42u l=0.13u
+X429 a_61878_21130# 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X430 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.D a_54434_23148# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.1628p pd=1.18u as=0.3108p ps=2.32u w=0.74u l=0.13u
+X431 PFD_0.VDD 3bit_freq_divider_0.EN a_58536_54976# PFD_0.VDD sg13_lv_pmos ad=0.17p pd=1.68u as=0.17p ps=1.68u w=0.5u l=0.15u
+X432 a_57084_43159# a_55836_43159# a_57178_43159# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.1106p ps=0.945u w=0.5u l=0.13u
+X433 PFD_0.VDD 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_61691_20534# PFD_0.VDD sg13_lv_pmos ad=0.19p pd=1.38u as=0.34p ps=2.68u w=1u l=0.13u
+X434 a_53722_23726# a_53445_23726# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=54.6f pd=0.68u as=90.3f ps=0.85u w=0.42u l=0.13u
+X435 a_55086_20219# 3bit_freq_divider_0.dff_nclk_0.nCLK PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=50.4f pd=0.66u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X436 3bit_freq_divider_0.CLK_IN PFD_0.VSS cap_cmim l=6.99u w=6.99u
+X437 3bit_freq_divider_0.CLK_IN a_57178_43159# a_58426_43159# PFD_0.VDD sg13_lv_pmos ad=0.1106p pd=0.945u as=0.17p ps=1.68u w=0.5u l=0.13u
+X438 PFD_0.UP a_47777_29803# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=60.8f pd=0.7u as=0.1088p ps=1.32u w=0.32u l=0.15u
+X439 a_62879_22369# a_61887_22290# a_62654_21971# PFD_0.VDD sg13_lv_pmos ad=43.05f pd=0.625u as=0.17695p ps=1.56u w=0.42u l=0.13u
+X440 PFD_0.VDD a_47777_29803# PFD_0.UP PFD_0.VDD sg13_lv_pmos ad=60.8f pd=0.7u as=60.8f ps=0.7u w=0.32u l=0.15u
+X441 PFD_0.VSS 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q a_61061_21478# PFD_0.VSS sg13_lv_nmos ad=0.1331p pd=1.12u as=0.1216p ps=1.02u w=0.64u l=0.13u
+X442 a_51600_24907# a_51622_24863# 3bit_freq_divider_0.dff_nclk_0.nRST PFD_0.VDD sg13_lv_pmos ad=0.4657p pd=2.54u as=0.3927p ps=2.99u w=1.155u l=0.13u
+X443 PFD_0.VSS 3bit_freq_divider_1.dff_nclk_0.nRST a_64464_23130# PFD_0.VSS sg13_lv_nmos ad=0.1825p pd=1.325u as=48.3f ps=0.65u w=0.42u l=0.13u
+X444 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.17p pd=1.68u as=0 ps=0 w=0.5u l=0.65u
+X445 PFD_0.VDD a_46749_30782# a_47777_29803# PFD_0.VDD sg13_lv_pmos ad=68.39999f pd=0.74u as=0.1224p ps=1.4u w=0.36u l=0.15u
+X446 a_55485_21477# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.1216p pd=1.02u as=0.1331p ps=1.12u w=0.64u l=0.13u
+X447 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X448 PFD_0.VSS vco_wob_0.vctl a_55969_42591# PFD_0.VSS sg13_lv_nmos ad=0.102p pd=1.28u as=65.99999f ps=0.74u w=0.3u l=0.13u
+X449 a_55969_42591# a_54494_43159# a_55836_43159# PFD_0.VSS sg13_lv_nmos ad=0.17p pd=1.68u as=0.11p ps=0.94u w=0.5u l=0.13u
+X450 PFD_0.VSS vco_wob_0.vctl a_55770_40850# PFD_0.VSS sg13_lv_nmos ad=0.102p pd=1.28u as=65.99999f ps=0.74u w=0.3u l=0.13u
+X451 a_53022_43738# vco_wob_0.vctl PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=65.99999f pd=0.74u as=0.102p ps=1.28u w=0.3u l=0.13u
+X452 a_55769_40283# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=0.104p ps=1.34u w=0.2u l=0.13u
+X453 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.nQ a_62654_20215# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2775p pd=2.23u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X454 a_55086_23731# 3bit_freq_divider_0.dff_nclk_0.nCLK PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=50.4f pd=0.66u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X455 PFD_0.VSS 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q a_61061_24990# PFD_0.VSS sg13_lv_nmos ad=0.1331p pd=1.12u as=0.1216p ps=1.02u w=0.64u l=0.13u
+X456 PFD_0.VSS a_64383_23706# a_64419_23654# PFD_0.VSS sg13_lv_nmos ad=90.3f pd=0.85u as=54.6f ps=0.68u w=0.42u l=0.13u
+X457 a_61972_21488# 3bit_freq_divider_1.freq_div_cell_0.Cout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=88.8f pd=0.98u as=0.15245p ps=1.17u w=0.74u l=0.13u
+X458 PFD_0.VDD a_53022_43738# a_53058_43159# PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=59.75f ps=0.745u w=0.2u l=0.13u
+X459 PFD_0.VSS vco_wob_0.vctl PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.1005p pd=1.34u as=0 ps=0 w=0.15u l=0.13u
+X460 a_54434_24904# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.17462p pd=1.185u as=0.15245p ps=1.17u w=0.55u l=0.13u
+X461 a_53445_23726# a_53065_23691# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=0.2163p ps=1.55u w=0.42u l=0.13u
+X462 a_54400_43159# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59.75f pd=0.745u as=0.104p ps=1.34u w=0.2u l=0.13u
+X463 a_51684_22692# a_51631_22774# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.19p ps=1.38u w=1u l=0.13u
+X464 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X465 a_57111_40283# a_57173_40413# a_55831_40413# PFD_0.VDD sg13_lv_pmos ad=0.17p pd=1.68u as=0.1106p ps=0.945u w=0.5u l=0.13u
+X466 a_63255_25000# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.17462p pd=1.185u as=0.374p ps=2.46u w=0.55u l=0.13u
+X467 charge_pump_0.bias_p a_58536_54976# a_59097_54704# PFD_0.VSS sg13_lv_nmos ad=0.17p pd=1.68u as=0.17p ps=1.68u w=0.5u l=0.15u
+X468 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X469 3bit_freq_divider_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 3bit_freq_divider_1.dff_nclk_0.nCLK PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.392p pd=2.94u as=0.392p ps=2.94u w=1.12u l=0.13u
+X470 PFD_0.VSS a_52950_20401# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q PFD_0.VSS sg13_lv_nmos ad=0.14505p pd=1.15u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X471 PFD_0.VSS vco_wob_0.vctl a_57112_40850# PFD_0.VSS sg13_lv_nmos ad=0.102p pd=1.28u as=65.99999f ps=0.74u w=0.3u l=0.13u
+X472 a_62119_22361# a_61887_22290# a_61394_21976# PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X473 a_64383_23706# 3bit_freq_divider_1.dff_nclk_0.nRST PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=79.8f ps=0.8u w=0.42u l=0.13u
+X474 a_57111_40283# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=0.104p ps=1.34u w=0.2u l=0.13u
+X475 a_51693_23426# a_51684_22692# a_51684_22284# PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X476 a_58454_40850# vco_wob_0.vctl PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=65.99999f pd=0.74u as=0.102p ps=1.28u w=0.3u l=0.13u
+X477 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.nQ a_62654_20215# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.7616p pd=3.6u as=0.2163p ps=1.55u w=1.12u l=0.13u
+X478 PFD_0.VDD a_62654_21971# a_62900_21935# PFD_0.VDD sg13_lv_pmos ad=0.2163p pd=1.55u as=79.8f ps=0.8u w=0.42u l=0.13u
+X479 a_54504_22015# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.D a_55086_21975# PFD_0.VSS sg13_lv_nmos ad=0.1428p pd=1.52u as=50.4f ps=0.66u w=0.42u l=0.13u
+X480 a_55770_40850# a_55831_40413# a_54489_40413# PFD_0.VSS sg13_lv_nmos ad=0.17p pd=1.68u as=0.11p ps=0.94u w=0.5u l=0.13u
+X481 a_54602_21487# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.D PFD_0.VSS sg13_lv_nmos ad=88.8f pd=0.98u as=0.1628p ps=1.18u w=0.74u l=0.13u
+X482 a_56039_25022# a_56013_24979# a_55941_24882# PFD_0.VSS sg13_lv_nmos ad=0.2307p pd=1.615u as=0.27427p ps=2.28u w=0.795u l=0.13u
+X483 a_51685_23725# a_51648_24041# a_52119_23843# PFD_0.VSS sg13_lv_nmos ad=0.1428p pd=1.52u as=47.25f ps=0.645u w=0.42u l=0.13u
+X484 a_54898_22885# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q a_54434_23148# PFD_0.VDD sg13_lv_pmos ad=0.1225p pd=1.245u as=0.34p ps=2.68u w=1u l=0.13u
+X485 a_51693_23426# a_51631_22774# a_51684_22284# PFD_0.VSS sg13_lv_nmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X486 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X487 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.D a_61707_21488# a_61878_21130# PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X488 PFD_0.VSS 3bit_freq_divider_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_64383_23628# PFD_0.VSS sg13_lv_nmos ad=0.1544p pd=1.235u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X489 PFD_0.VSS 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q a_53054_24999# PFD_0.VSS sg13_lv_nmos ad=0.15245p pd=1.17u as=88.8f ps=0.98u w=0.74u l=0.13u
+X490 a_61887_20534# a_61691_20534# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.19p ps=1.38u w=1u l=0.13u
+X491 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X492 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X493 a_64714_21300# 3bit_freq_divider_1.sg13g2_or3_1_0.A PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.22p pd=1.44u as=0.3822p ps=1.84u w=1u l=0.13u
+X494 a_54504_20259# 3bit_freq_divider_0.dff_nclk_0.nCLK PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X495 a_61707_21488# 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q a_61675_21130# PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.1225p ps=1.245u w=1u l=0.13u
+X496 PFD_0.VDD 3bit_freq_divider_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_64383_23628# PFD_0.VDD sg13_lv_pmos ad=0.19p pd=1.38u as=0.34p ps=2.68u w=1u l=0.13u
+X497 a_51684_22692# a_51631_22774# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.1544p ps=1.235u w=0.74u l=0.13u
+X498 a_57111_40283# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59.75f pd=0.745u as=59f ps=0.74u w=0.2u l=0.13u
+X499 a_57112_40850# a_57173_40413# a_55831_40413# PFD_0.VSS sg13_lv_nmos ad=0.17p pd=1.68u as=0.11p ps=0.94u w=0.5u l=0.13u
+X500 PFD_0.VDD a_53774_20178# a_53738_20514# PFD_0.VDD sg13_lv_pmos ad=0.19p pd=1.38u as=0.34p ps=2.68u w=1u l=0.13u
+X501 PFD_0.VDD a_51693_23075# a_51729_23026# PFD_0.VDD sg13_lv_pmos ad=0.11785p pd=1.025u as=51.45f ps=0.665u w=0.42u l=0.13u
+X502 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X503 a_45451_28860# PFD_0.Ref_CLK a_45579_29803# PFD_0.VSS sg13_lv_nmos ad=68.39999f pd=0.74u as=68.39999f ps=0.74u w=0.36u l=0.15u
+X504 a_55345_21385# 3bit_freq_divider_0.freq_div_cell_0.Cout a_55485_21477# PFD_0.VSS sg13_lv_nmos ad=0.2176p pd=1.96u as=0.1216p ps=1.02u w=0.64u l=0.13u
+X505 a_57173_40413# a_58515_40413# a_58454_40850# PFD_0.VSS sg13_lv_nmos ad=0.11p pd=0.94u as=0.17p ps=1.68u w=0.5u l=0.13u
+X506 charge_pump_0.bias_p charge_pump_0.bias_n a_56742_53480# PFD_0.VSS sg13_lv_nmos ad=0.34p pd=2.68u as=0.34p ps=2.68u w=1u l=1u
+X507 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X508 a_62270_22299# a_62119_22361# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.19p pd=1.38u as=0.34p ps=2.68u w=1u l=0.13u
+X509 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X510 a_64817_23685# a_64383_23434# a_64383_23889# PFD_0.VDD sg13_lv_pmos ad=43.05f pd=0.625u as=0.17695p ps=1.56u w=0.42u l=0.13u
+X511 a_51648_24041# a_51631_22774# a_51693_23075# PFD_0.VDD sg13_lv_pmos ad=0.17695p pd=1.56u as=0.19p ps=1.38u w=1u l=0.13u
+X512 PFD_0.VDD a_45658_27900# PFD_0.DOWN PFD_0.VDD sg13_lv_pmos ad=60.8f pd=0.7u as=0.1088p ps=1.32u w=0.32u l=0.15u
+X513 3bit_freq_divider_1.freq_div_cell_0.Cout a_60967_23234# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.1918p ps=1.5u w=1.12u l=0.13u
+X514 a_64419_23844# 3bit_freq_divider_1.dff_nclk_0.nRST PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=47.25f pd=0.645u as=90.3f ps=0.85u w=0.42u l=0.13u
+X515 3bit_freq_divider_1.sg13g2_or3_1_0.C 3bit_freq_divider_1.A0 a_63520_25000# PFD_0.VSS sg13_lv_nmos ad=0.1628p pd=1.18u as=88.8f ps=0.98u w=0.74u l=0.13u
+X516 PFD_0.VSS a_64383_23889# a_64384_24445# PFD_0.VSS sg13_lv_nmos ad=0.14505p pd=1.15u as=0.187p ps=1.78u w=0.55u l=0.13u
+X517 a_64384_21091# 3bit_freq_divider_1.sg13g2_or3_1_0.C a_64714_21414# PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.1275p ps=1.255u w=1u l=0.13u
+X518 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X519 PFD_0.VSS a_53968_20434# a_53899_20488# PFD_0.VSS sg13_lv_nmos ad=0.1825p pd=1.325u as=0.19397p ps=1.29u w=0.64u l=0.13u
+X520 a_45451_28860# PFD_0.Ref_CLK a_45579_29803# PFD_0.VSS sg13_lv_nmos ad=68.39999f pd=0.74u as=68.39999f ps=0.74u w=0.36u l=0.15u
+X521 PFD_0.VDD 3bit_freq_divider_1.dff_nclk_0.nCLK a_61394_20220# PFD_0.VDD sg13_lv_pmos ad=0.1428p pd=1.52u as=79.8f ps=0.8u w=0.42u l=0.13u
+X522 a_54489_40413# PFD_0.VSS cap_cmim l=6.99u w=6.99u
+X523 PFD_0.VSS a_53065_23691# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.nQ PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.2775p ps=2.23u w=0.74u l=0.13u
+X524 a_53899_20488# a_53774_20178# a_53065_20179# PFD_0.VDD sg13_lv_pmos ad=0.19p pd=1.38u as=0.17695p ps=1.56u w=1u l=0.13u
+X525 a_52074_23129# a_51693_23075# a_52074_23051# PFD_0.VSS sg13_lv_nmos ad=48.3f pd=0.65u as=54.6f ps=0.68u w=0.42u l=0.13u
+X526 a_62324_23772# a_62270_24055# a_62246_23772# PFD_0.VSS sg13_lv_nmos ad=48.3f pd=0.65u as=54.6f ps=0.68u w=0.42u l=0.13u
+X527 PFD_0.VDD PFD_0.Ref_CLK a_45579_29803# PFD_0.VDD sg13_lv_pmos ad=60.8f pd=0.7u as=0.1088p ps=1.32u w=0.32u l=0.15u
+X528 a_54352_24116# a_53899_24000# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=51.45f pd=0.665u as=0.11785p ps=1.025u w=0.42u l=0.13u
+X529 PFD_0.VDD 3bit_freq_divider_0.A1 a_52924_22885# PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X530 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.D 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q a_61972_21488# PFD_0.VSS sg13_lv_nmos ad=0.1628p pd=1.18u as=88.8f ps=0.98u w=0.74u l=0.13u
+X531 PFD_0.VDD 3bit_freq_divider_1.freq_div_cell_0.Cin a_61878_22886# PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X532 PFD_0.VSS a_53774_23690# a_53738_24026# PFD_0.VSS sg13_lv_nmos ad=0.1544p pd=1.235u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X533 a_54489_40413# a_55831_40413# a_55769_40283# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.17p ps=1.68u w=0.5u l=0.13u
+X534 a_61061_23234# 3bit_freq_divider_1.freq_div_cell_0.Cin a_60967_23234# PFD_0.VSS sg13_lv_nmos ad=0.1216p pd=1.02u as=0.2176p ps=1.96u w=0.64u l=0.13u
+X535 a_55862_56737# charge_pump_0.bias_p charge_pump_0.bias_n PFD_0.VDD sg13_lv_pmos ad=0.38p pd=2.38u as=0.68p ps=4.68u w=2u l=1u
+X536 a_62900_21935# a_62654_21971# a_63038_21971# PFD_0.VSS sg13_lv_nmos ad=0.1428p pd=1.52u as=47.25f ps=0.645u w=0.42u l=0.13u
+X537 a_63038_21971# 3bit_freq_divider_1.dff_nclk_0.nCLK PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=47.25f pd=0.645u as=90.3f ps=0.85u w=0.42u l=0.13u
+X538 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X539 3bit_freq_divider_0.dff_nclk_0.D a_51648_24041# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2775p pd=2.23u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X540 a_51721_24988# a_51721_24988# a_52065_24890# PFD_0.VSS sg13_lv_nmos ad=0.102p pd=1.28u as=0.2307p ps=1.615u w=0.3u l=0.13u
+X541 PFD_0.VSS a_55345_23141# 3bit_freq_divider_0.freq_div_cell_0.Cout PFD_0.VSS sg13_lv_nmos ad=0.1331p pd=1.12u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X542 a_52886_24904# 3bit_freq_divider_0.A0 PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.17462p pd=1.185u as=0.15245p ps=1.17u w=0.55u l=0.13u
+X543 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X544 a_55831_40413# a_57173_40413# a_57111_40283# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.17p ps=1.68u w=0.5u l=0.13u
+X545 a_54504_23771# 3bit_freq_divider_0.dff_nclk_0.nCLK PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X546 a_62119_24117# a_61691_24046# a_61394_23732# PFD_0.VSS sg13_lv_nmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X547 PFD_0.VSS 3bit_freq_divider_1.dff_nclk_0.nCLK a_61488_23732# PFD_0.VSS sg13_lv_nmos ad=0.1428p pd=1.52u as=50.4f ps=0.66u w=0.42u l=0.13u
+X548 3bit_freq_divider_0.EN sg13g2_inv_1_0.A PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.259p pd=2.18u as=0.259p ps=2.18u w=0.74u l=0.13u
+X549 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X550 a_59799_40285# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59.75f pd=0.745u as=59f ps=0.74u w=0.2u l=0.13u
+X551 a_53899_20488# a_53738_20514# a_53065_20179# PFD_0.VSS sg13_lv_nmos ad=0.19397p pd=1.29u as=0.2017p ps=1.48u w=0.64u l=0.13u
+X552 PFD_0.VSS PFD_0.VCO_CLK a_45451_28860# PFD_0.VSS sg13_lv_nmos ad=0.1224p pd=1.4u as=0.1224p ps=1.4u w=0.36u l=0.15u
+X553 PFD_0.VSS a_46817_27899# a_45658_27900# PFD_0.VSS sg13_lv_nmos ad=0.1224p pd=1.4u as=0.1224p ps=1.4u w=0.36u l=0.15u
+X554 a_53054_21487# 3bit_freq_divider_0.A2 3bit_freq_divider_0.sg13g2_or3_1_0.A PFD_0.VSS sg13_lv_nmos ad=88.8f pd=0.98u as=0.1628p ps=1.18u w=0.74u l=0.13u
+X555 a_53350_22885# 3bit_freq_divider_0.A1 a_52886_23148# PFD_0.VDD sg13_lv_pmos ad=0.1225p pd=1.245u as=0.34p ps=2.68u w=1u l=0.13u
+X556 PFD_0.VSS vco_wob_0.vctl a_57311_42591# PFD_0.VSS sg13_lv_nmos ad=0.102p pd=1.28u as=65.99999f ps=0.74u w=0.3u l=0.13u
+X557 a_62900_23691# 3bit_freq_divider_1.dff_nclk_0.nCLK PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=79.8f ps=0.8u w=0.42u l=0.13u
+X558 a_53774_23690# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.19p ps=1.38u w=1u l=0.13u
+X559 a_57311_42591# a_55836_43159# a_57178_43159# PFD_0.VSS sg13_lv_nmos ad=0.17p pd=1.68u as=0.11p ps=0.94u w=0.5u l=0.13u
+X560 a_58653_42591# vco_wob_0.vctl PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=65.99999f pd=0.74u as=0.102p ps=1.28u w=0.3u l=0.13u
+X561 a_55831_40413# a_57173_40413# a_57111_40283# PFD_0.VDD sg13_lv_pmos ad=0.1106p pd=0.945u as=0.11p ps=0.94u w=0.5u l=0.13u
+X562 a_60967_21478# 3bit_freq_divider_1.freq_div_cell_0.Cout PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1596p pd=1.22u as=0.2856p ps=2.36u w=0.84u l=0.13u
+X563 PFD_0.VSS a_62900_21935# a_62848_21971# PFD_0.VSS sg13_lv_nmos ad=90.3f pd=0.85u as=54.6f ps=0.68u w=0.42u l=0.13u
+X564 a_58426_43159# a_57178_43159# 3bit_freq_divider_0.CLK_IN PFD_0.VDD sg13_lv_pmos ad=0.17p pd=1.68u as=0.11p ps=0.94u w=0.5u l=0.13u
+X565 3bit_freq_divider_0.CLK_IN a_57178_43159# a_58653_42591# PFD_0.VSS sg13_lv_nmos ad=0.11p pd=0.94u as=0.17p ps=1.68u w=0.5u l=0.13u
+X566 PFD_0.VDD 3bit_freq_divider_0.dff_nclk_0.nCLK a_53968_20434# PFD_0.VDD sg13_lv_pmos ad=0.11785p pd=1.025u as=0.1533p ps=1.57u w=0.42u l=0.13u
+X567 a_62119_24117# a_61887_24046# a_61394_23732# PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X568 a_54747_49259# charge_pump_0.bias_n PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.207p pd=1.545u as=0.408p ps=3.08u w=1.2u l=0.13u
+X569 PFD_0.VDD a_53022_43738# a_54400_43159# PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=59.75f ps=0.745u w=0.2u l=0.13u
+X570 PFD_0.VDD a_53022_43738# a_53022_43738# PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=59f ps=0.74u w=0.2u l=0.13u
+X571 PFD_0.VSS 3bit_freq_divider_1.dff_nclk_0.nCLK a_62324_20260# PFD_0.VSS sg13_lv_nmos ad=0.1825p pd=1.325u as=48.3f ps=0.65u w=0.42u l=0.13u
+X572 a_62848_21971# a_61691_22290# a_62654_21971# PFD_0.VSS sg13_lv_nmos ad=54.6f pd=0.68u as=0.2017p ps=1.48u w=0.42u l=0.13u
+X573 a_63255_23244# 3bit_freq_divider_1.A1 a_63223_22886# PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.1225p ps=1.245u w=1u l=0.13u
+X574 a_53774_23690# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.1544p ps=1.235u w=0.74u l=0.13u
+X575 PFD_0.VSS 3bit_freq_divider_0.sg13g2_tiehi_1.L_HI a_54434_24904# PFD_0.VSS sg13_lv_nmos ad=0.374p pd=2.46u as=0.17462p ps=1.185u w=0.55u l=0.13u
+X576 a_60385_24558# a_60385_24947# a_60385_24717# PFD_0.VDD sg13_lv_pmos ad=0.4657p pd=2.54u as=0.2442p ps=2.06u w=0.66u l=0.13u
+X577 PFD_0.VSS 3bit_freq_divider_1.A1 a_63255_23244# PFD_0.VSS sg13_lv_nmos ad=0.15245p pd=1.17u as=0.17462p ps=1.185u w=0.55u l=0.13u
+X578 a_58453_40283# a_58515_40413# a_57173_40413# PFD_0.VDD sg13_lv_pmos ad=0.17p pd=1.68u as=0.1106p ps=0.945u w=0.5u l=0.13u
+X579 a_46749_30782# PFD_0.Ref_CLK PFD_0.Ref_CLK PFD_0.VDD sg13_lv_pmos ad=0.1088p pd=1.32u as=60.8f ps=0.7u w=0.32u l=0.15u
+X580 a_61675_21130# 3bit_freq_divider_1.freq_div_cell_0.Cout PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1225p pd=1.245u as=0.36p ps=2.72u w=1u l=0.13u
+X581 a_52119_23653# a_51631_22774# a_51648_24041# PFD_0.VSS sg13_lv_nmos ad=54.6f pd=0.68u as=0.2017p ps=1.48u w=0.42u l=0.13u
+X582 a_52950_22157# a_53065_21935# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.2856p pd=2.36u as=0.2016p ps=1.5u w=0.84u l=0.13u
+X583 PFD_0.VCO_CLK a_51648_24438# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2016p ps=1.5u w=1.12u l=0.13u
+X584 3bit_freq_divider_1.dff_nclk_0.D a_64383_23889# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2775p pd=2.23u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X585 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 3bit_freq_divider_1.sg13g2_nand2_1_0.Y PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.392p pd=2.94u as=0.392p ps=2.94u w=1.12u l=0.13u
+X586 PFD_0.VDD a_62900_20179# a_62879_20613# PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=43.05f ps=0.625u w=0.42u l=0.13u
+X587 a_55345_21385# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1596p pd=1.22u as=0.1918p ps=1.5u w=0.84u l=0.13u
+X588 PFD_0.VDD a_53065_20179# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.nQ PFD_0.VDD sg13_lv_pmos ad=0.2163p pd=1.55u as=0.7616p ps=3.6u w=1.12u l=0.13u
+X589 a_51648_21103# 3bit_freq_divider_0.sg13g2_or3_1_0.A PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.198p pd=1.27u as=0.13395p ps=1.12u w=0.55u l=0.13u
+X590 PFD_0.VSS a_51648_21103# 3bit_freq_divider_0.dff_nclk_0.nCLK PFD_0.VSS sg13_lv_nmos ad=0.13395p pd=1.12u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X591 a_52944_43077# a_53147_40413# a_53085_40283# PFD_0.VDD sg13_lv_pmos ad=0.1106p pd=0.945u as=0.11p ps=0.94u w=0.5u l=0.13u
+X592 a_59799_40285# 3bit_freq_divider_0.CLK_IN a_58515_40413# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.11p ps=0.94u w=0.5u l=0.13u
+X593 a_53065_23691# a_53738_24026# a_53702_24124# PFD_0.VDD sg13_lv_pmos ad=0.17695p pd=1.56u as=43.05f ps=0.625u w=0.42u l=0.13u
+X594 a_54504_22015# a_53738_22270# a_53968_22190# PFD_0.VDD sg13_lv_pmos ad=0.1428p pd=1.52u as=79.8f ps=0.8u w=0.42u l=0.13u
+X595 PFD_0.VDD a_53022_43738# a_54400_43159# PFD_0.VDD sg13_lv_pmos ad=0.104p pd=1.34u as=59f ps=0.74u w=0.2u l=0.13u
+X596 PFD_0.VDD a_62654_21971# a_63463_21972# PFD_0.VDD sg13_lv_pmos ad=0.2016p pd=1.5u as=0.2856p ps=2.36u w=0.84u l=0.13u
+X597 a_47954_28913# PFD_0.VCO_CLK PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1088p pd=1.32u as=60.8f ps=0.7u w=0.32u l=0.15u
+X598 PFD_0.VDD 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q a_60967_24990# PFD_0.VDD sg13_lv_pmos ad=0.1918p pd=1.5u as=0.1596p ps=1.22u w=0.84u l=0.13u
+X599 a_52950_20401# a_53065_20179# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.187p pd=1.78u as=0.14505p ps=1.15u w=0.55u l=0.13u
+X600 a_53086_40850# vco_wob_0.vctl PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=65.99999f pd=0.74u as=0.102p ps=1.28u w=0.3u l=0.13u
+X601 a_62246_23772# a_61887_24046# a_62119_24117# PFD_0.VSS sg13_lv_nmos ad=54.6f pd=0.68u as=79.8f ps=0.8u w=0.42u l=0.13u
+X602 PFD_0.VDD 3bit_freq_divider_0.freq_div_cell_0.Cin a_54898_22885# PFD_0.VDD sg13_lv_pmos ad=0.36p pd=2.72u as=0.1225p ps=1.245u w=1u l=0.13u
+X603 PFD_0.VDD a_53022_43738# a_57111_40283# PFD_0.VDD sg13_lv_pmos ad=0.104p pd=1.34u as=59.75f ps=0.745u w=0.2u l=0.13u
+X604 a_48909_28913# PFD_0.VCO_CLK a_47954_28913# PFD_0.VSS sg13_lv_nmos ad=68.39999f pd=0.74u as=68.39999f ps=0.74u w=0.36u l=0.15u
+X605 PFD_0.VSS 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q a_52886_21392# PFD_0.VSS sg13_lv_nmos ad=0.374p pd=2.46u as=0.17462p ps=1.185u w=0.55u l=0.13u
+X606 a_55345_24897# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1596p pd=1.22u as=0.1918p ps=1.5u w=0.84u l=0.13u
+X607 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X608 a_58453_40283# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59.75f pd=0.745u as=59f ps=0.74u w=0.2u l=0.13u
+X609 3bit_freq_divider_0.sg13g2_or3_1_0.B a_52886_23148# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.1628p pd=1.18u as=0.3108p ps=2.32u w=0.74u l=0.13u
+X610 PFD_0.VSS a_62654_20215# a_63463_20216# PFD_0.VSS sg13_lv_nmos ad=0.14505p pd=1.15u as=0.187p ps=1.78u w=0.55u l=0.13u
+X611 a_63255_21488# 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.17462p pd=1.185u as=0.374p ps=2.46u w=0.55u l=0.13u
+X612 a_54252_22015# 3bit_freq_divider_0.dff_nclk_0.nCLK PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=48.3f pd=0.65u as=0.1825p ps=1.325u w=0.42u l=0.13u
+X613 a_63426_22886# 3bit_freq_divider_1.A1 PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X614 PFD_0.VDD a_53022_43738# a_55742_43159# PFD_0.VDD sg13_lv_pmos ad=0.104p pd=1.34u as=59f ps=0.74u w=0.2u l=0.13u
+X615 a_51685_23725# 3bit_freq_divider_0.dff_nclk_0.nRST PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=79.8f ps=0.8u w=0.42u l=0.13u
+X616 a_53539_20214# a_53065_20179# a_53445_20214# PFD_0.VSS sg13_lv_nmos ad=47.25f pd=0.645u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X617 PFD_0.VSS 3bit_freq_divider_0.dff_nclk_0.nCLK a_53539_20214# PFD_0.VSS sg13_lv_nmos ad=90.3f pd=0.85u as=47.25f ps=0.645u w=0.42u l=0.13u
+X618 PFD_0.VDD 3bit_freq_divider_0.EN 3bit_freq_divider_0.sg13g2_nand2_1_0.Y PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X619 a_54504_22015# a_53774_21934# a_53968_22190# PFD_0.VSS sg13_lv_nmos ad=0.1428p pd=1.52u as=79.8f ps=0.8u w=0.42u l=0.13u
+X620 3bit_freq_divider_1.sg13g2_or3_1_0.A a_63255_21488# a_63426_21130# PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X621 a_52924_21129# a_52886_21392# 3bit_freq_divider_0.sg13g2_or3_1_0.A PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X622 PFD_0.VDD 3bit_freq_divider_1.dff_nclk_0.nCLK a_61394_21976# PFD_0.VDD sg13_lv_pmos ad=0.1428p pd=1.52u as=79.8f ps=0.8u w=0.42u l=0.13u
+X623 a_57178_43159# a_55836_43159# a_57084_43159# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.11p ps=0.94u w=0.5u l=0.13u
+X624 PFD_0.VSS 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_61691_20534# PFD_0.VSS sg13_lv_nmos ad=0.1544p pd=1.235u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X625 a_53968_20434# a_53774_20178# a_54352_20604# PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=51.45f ps=0.665u w=0.42u l=0.13u
+X626 a_64419_23326# a_64383_23300# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.19397p pd=1.29u as=0.1825p ps=1.325u w=0.64u l=0.13u
+X627 a_52944_43077# a_53147_40413# a_53086_40850# PFD_0.VSS sg13_lv_nmos ad=0.11p pd=0.94u as=0.17p ps=1.68u w=0.5u l=0.13u
+X628 3bit_freq_divider_1.sg13g2_nand2_1_0.Y 3bit_freq_divider_0.EN PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X629 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X630 a_47954_28913# PFD_0.VCO_CLK a_46817_27899# PFD_0.VSS sg13_lv_nmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.15u
+X631 a_62270_22299# a_62119_22361# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.19397p pd=1.29u as=0.1825p ps=1.325u w=0.64u l=0.13u
+X632 a_62900_23691# a_62654_23727# a_63038_23727# PFD_0.VSS sg13_lv_nmos ad=0.1428p pd=1.52u as=47.25f ps=0.645u w=0.42u l=0.13u
+X633 a_63038_23727# 3bit_freq_divider_1.dff_nclk_0.nCLK PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=47.25f pd=0.645u as=90.3f ps=0.85u w=0.42u l=0.13u
+X634 PFD_0.VDD a_53022_43738# a_53022_43738# PFD_0.VDD sg13_lv_pmos ad=0.104p pd=1.34u as=59.75f ps=0.745u w=0.2u l=0.13u
+X635 a_52924_24641# a_52886_24904# 3bit_freq_divider_0.sg13g2_or3_1_0.C PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X636 a_56137_24678# a_56137_24678# a_56039_25022# PFD_0.VSS sg13_lv_nmos ad=0.102p pd=1.28u as=0.2307p ps=1.615u w=0.3u l=0.13u
+X637 a_45579_29803# PFD_0.Ref_CLK a_45451_28860# PFD_0.VSS sg13_lv_nmos ad=68.39999f pd=0.74u as=0.1224p ps=1.4u w=0.36u l=0.15u
+X638 PFD_0.VSS a_45658_27900# PFD_0.DOWN PFD_0.VSS sg13_lv_nmos ad=0.1632p pd=1.64u as=0.1632p ps=1.64u w=0.48u l=0.15u
+X639 a_52944_43077# PFD_0.VSS cap_cmim l=6.99u w=6.99u
+X640 a_53702_22368# a_53445_21970# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=43.05f pd=0.625u as=79.8f ps=0.8u w=0.42u l=0.13u
+X641 a_63520_23244# 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=88.8f pd=0.98u as=0.15245p ps=1.17u w=0.74u l=0.13u
+X642 a_61707_23244# 3bit_freq_divider_1.freq_div_cell_0.Cin PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.17462p pd=1.185u as=0.374p ps=2.46u w=0.55u l=0.13u
+X643 a_51759_25014# a_51721_24988# a_51600_24907# PFD_0.VDD sg13_lv_pmos ad=0.2442p pd=2.06u as=0.4657p ps=2.54u w=0.66u l=0.13u
+X644 PFD_0.VDD a_53968_23946# a_53899_24000# PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.19p ps=1.38u w=1u l=0.13u
+X645 PFD_0.VDD 3bit_freq_divider_0.freq_div_cell_0.Cout a_55345_21385# PFD_0.VDD sg13_lv_pmos ad=0.2856p pd=2.36u as=0.1596p ps=1.22u w=0.84u l=0.13u
+X646 PFD_0.VSS 3bit_freq_divider_0.freq_div_cell_0.Cout a_54602_21487# PFD_0.VSS sg13_lv_nmos ad=0.15245p pd=1.17u as=88.8f ps=0.98u w=0.74u l=0.13u
+X647 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X648 a_53058_43159# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=59f ps=0.74u w=0.2u l=0.13u
+X649 PFD_0.VSS a_64384_21091# 3bit_freq_divider_1.dff_nclk_0.nCLK PFD_0.VSS sg13_lv_nmos ad=0.13395p pd=1.12u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X650 PFD_0.VDD a_62270_22299# a_62221_22361# PFD_0.VDD sg13_lv_pmos ad=0.11785p pd=1.025u as=51.45f ps=0.665u w=0.42u l=0.13u
+X651 PFD_0.VSS vco_wob_0.vctl a_54627_42591# PFD_0.VSS sg13_lv_nmos ad=0.102p pd=1.28u as=65.99999f ps=0.74u w=0.3u l=0.13u
+X652 a_51721_23684# a_51684_22692# a_51648_24041# PFD_0.VDD sg13_lv_pmos ad=43.05f pd=0.625u as=0.17695p ps=1.56u w=0.42u l=0.13u
+X653 a_54627_42591# a_53152_43159# a_54494_43159# PFD_0.VSS sg13_lv_nmos ad=0.17p pd=1.68u as=0.11p ps=0.94u w=0.5u l=0.13u
+X654 a_51684_22284# 3bit_freq_divider_0.dff_nclk_0.D PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X655 a_61887_24046# a_61691_24046# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.1544p ps=1.235u w=0.74u l=0.13u
+X656 PFD_0.VDD a_53065_23691# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.nQ PFD_0.VDD sg13_lv_pmos ad=0.2163p pd=1.55u as=0.7616p ps=3.6u w=1.12u l=0.13u
+X657 a_53445_20214# a_53065_20179# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=0.2163p ps=1.55u w=0.42u l=0.13u
+X658 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X659 PFD_0.VDD 3bit_freq_divider_0.sg13g2_tiehi_1.L_HI a_55345_24897# PFD_0.VDD sg13_lv_pmos ad=0.2856p pd=2.36u as=0.1596p ps=1.22u w=0.84u l=0.13u
+X660 3bit_freq_divider_1.sg13g2_or3_1_0.A 3bit_freq_divider_1.A2 a_63520_21488# PFD_0.VSS sg13_lv_nmos ad=0.1628p pd=1.18u as=88.8f ps=0.98u w=0.74u l=0.13u
+X661 PFD_0.VDD 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q a_54472_22885# PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X662 3bit_freq_divider_1.CLK_OUT a_64384_24445# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2016p ps=1.5u w=1.12u l=0.13u
+X663 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X664 a_53065_20179# a_53774_20178# a_53722_20214# PFD_0.VSS sg13_lv_nmos ad=0.2017p pd=1.48u as=54.6f ps=0.68u w=0.42u l=0.13u
+X665 a_64424_22200# 3bit_freq_divider_1.dff_nclk_0.D PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X666 a_63223_22886# 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1225p pd=1.245u as=0.36p ps=2.72u w=1u l=0.13u
+X667 a_61488_21976# 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.D a_61394_21976# PFD_0.VSS sg13_lv_nmos ad=50.4f pd=0.66u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X668 PFD_0.VSS a_62900_23691# a_62848_23727# PFD_0.VSS sg13_lv_nmos ad=90.3f pd=0.85u as=54.6f ps=0.68u w=0.42u l=0.13u
+X669 a_53722_20214# a_53445_20214# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=54.6f pd=0.68u as=90.3f ps=0.85u w=0.42u l=0.13u
+X670 a_64383_23706# a_64383_23889# a_64419_23844# PFD_0.VSS sg13_lv_nmos ad=0.1428p pd=1.52u as=47.25f ps=0.645u w=0.42u l=0.13u
+X671 PFD_0.VSS 3bit_freq_divider_1.dff_nclk_0.nCLK a_62324_22016# PFD_0.VSS sg13_lv_nmos ad=0.1825p pd=1.325u as=48.3f ps=0.65u w=0.42u l=0.13u
+X672 a_62848_23727# a_61691_24046# a_62654_23727# PFD_0.VSS sg13_lv_nmos ad=54.6f pd=0.68u as=0.2017p ps=1.48u w=0.42u l=0.13u
+X673 PFD_0.VDD charge_pump_0.bias_p a_54842_49733# PFD_0.VDD sg13_lv_pmos ad=0.1005p pd=1.34u as=55.5f ps=0.74u w=0.15u l=0.13u
+X674 PFD_0.VSS a_56887_49467# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=95f pd=0.88u as=0 ps=0 w=0.5u l=0.65u
+X675 a_46817_27899# PFD_0.VCO_CLK PFD_0.VCO_CLK PFD_0.VDD sg13_lv_pmos ad=0.1088p pd=1.32u as=60.8f ps=0.7u w=0.32u l=0.15u
+X676 a_57173_40413# a_58515_40413# a_58453_40283# PFD_0.VDD sg13_lv_pmos ad=0.1106p pd=0.945u as=0.11p ps=0.94u w=0.5u l=0.13u
+X677 a_64384_21091# 3bit_freq_divider_1.sg13g2_or3_1_0.C PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.187p pd=1.78u as=0.1045p ps=0.93u w=0.55u l=0.13u
+X678 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 3bit_freq_divider_1.sg13g2_nand2_1_0.Y PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.259p pd=2.18u as=0.259p ps=2.18u w=0.74u l=0.13u
+X679 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.51p pd=3.68u as=0 ps=0 w=1.5u l=0.65u
+X680 a_53285_42591# vco_wob_0.vctl PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=65.99999f pd=0.74u as=0.102p ps=1.28u w=0.3u l=0.13u
+X681 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.D a_54434_24904# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.1628p pd=1.18u as=0.3108p ps=2.32u w=0.74u l=0.13u
+X682 a_54504_23771# a_53738_24026# a_53968_23946# PFD_0.VDD sg13_lv_pmos ad=0.1428p pd=1.52u as=79.8f ps=0.8u w=0.42u l=0.13u
+X683 a_61878_22886# 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X684 PFD_0.Ref_CLK PFD_0.Ref_CLK a_46749_30782# PFD_0.VDD sg13_lv_pmos ad=60.8f pd=0.7u as=0.1088p ps=1.32u w=0.32u l=0.15u
+X685 a_53058_43159# a_52944_43077# a_53152_43159# PFD_0.VDD sg13_lv_pmos ad=0.17p pd=1.68u as=0.11p ps=0.94u w=0.5u l=0.13u
+X686 a_53152_43159# a_52944_43077# a_53285_42591# PFD_0.VSS sg13_lv_nmos ad=0.11p pd=0.94u as=0.17p ps=1.68u w=0.5u l=0.13u
+X687 a_54434_21392# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.17462p pd=1.185u as=0.15245p ps=1.17u w=0.55u l=0.13u
+X688 PFD_0.VSS a_63255_25000# 3bit_freq_divider_1.sg13g2_or3_1_0.C PFD_0.VSS sg13_lv_nmos ad=0.3108p pd=2.32u as=0.1628p ps=1.18u w=0.74u l=0.13u
+X689 a_47954_28913# PFD_0.VCO_CLK a_48909_28913# PFD_0.VSS sg13_lv_nmos ad=68.39999f pd=0.74u as=68.39999f ps=0.74u w=0.36u l=0.15u
+X690 PFD_0.VDD 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q a_63426_24642# PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X691 3bit_freq_divider_1.freq_div_cell_1.Cout a_60967_21478# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.1331p ps=1.12u w=0.74u l=0.13u
+X692 a_53085_40283# a_53147_40413# a_52944_43077# PFD_0.VDD sg13_lv_pmos ad=0.17p pd=1.68u as=0.1106p ps=0.945u w=0.5u l=0.13u
+X693 a_54472_22885# 3bit_freq_divider_0.freq_div_cell_0.Cin PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X694 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X695 a_64383_23300# 3bit_freq_divider_1.dff_nclk_0.nRST PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.1533p pd=1.57u as=0.11785p ps=1.025u w=0.42u l=0.13u
+X696 a_55769_40283# a_55831_40413# a_54489_40413# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.11p ps=0.94u w=0.5u l=0.13u
+X697 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q a_63463_21972# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.14505p ps=1.15u w=0.74u l=0.13u
+X698 a_54428_40850# vco_wob_0.vctl PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=65.99999f pd=0.74u as=0.102p ps=1.28u w=0.3u l=0.13u
+X699 PFD_0.VDD PFD_0.VCO_CLK a_47954_28913# PFD_0.VDD sg13_lv_pmos ad=60.8f pd=0.7u as=0.1088p ps=1.32u w=0.32u l=0.15u
+X700 a_54352_20604# a_53899_20488# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=51.45f pd=0.665u as=0.11785p ps=1.025u w=0.42u l=0.13u
+X701 charge_pump_0.vout a_56887_49467# rhigh l=0.96u w=0.5u
+X702 a_55836_43159# a_54494_43159# a_55742_43159# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.11p ps=0.94u w=0.5u l=0.13u
+X703 PFD_0.VDD a_53022_43738# a_58453_40283# PFD_0.VDD sg13_lv_pmos ad=0.104p pd=1.34u as=59.75f ps=0.745u w=0.2u l=0.13u
+X704 3bit_freq_divider_1.freq_div_cell_0.Cin a_60967_24990# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.1331p ps=1.12u w=0.74u l=0.13u
+X705 PFD_0.VSS 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q a_53054_21487# PFD_0.VSS sg13_lv_nmos ad=0.15245p pd=1.17u as=88.8f ps=0.98u w=0.74u l=0.13u
+X706 PFD_0.VSS 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_61691_22290# PFD_0.VSS sg13_lv_nmos ad=0.1544p pd=1.235u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X707 PFD_0.VDD 3bit_freq_divider_0.dff_nclk_0.nCLK a_53445_23726# PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=79.8f ps=0.8u w=0.42u l=0.13u
+X708 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X709 a_54472_21129# a_54434_21392# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.D PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X710 PFD_0.VDD 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q a_53350_21129# PFD_0.VDD sg13_lv_pmos ad=0.36p pd=2.72u as=0.1225p ps=1.245u w=1u l=0.13u
+X711 a_57111_40283# a_57173_40413# a_55831_40413# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.11p ps=0.94u w=0.5u l=0.13u
+X712 a_52065_24890# a_51759_25014# a_51622_24863# PFD_0.VSS sg13_lv_nmos ad=0.2307p pd=1.615u as=0.27427p ps=2.28u w=0.795u l=0.13u
+X713 a_62270_24055# a_62119_24117# PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.19397p pd=1.29u as=0.1825p ps=1.325u w=0.64u l=0.13u
+X714 a_58426_43159# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=59f ps=0.74u w=0.2u l=0.13u
+X715 a_57173_40413# a_58515_40413# a_58453_40283# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.17p ps=1.68u w=0.5u l=0.13u
+X716 PFD_0.VDD a_53022_43738# a_59799_40285# PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=59f ps=0.74u w=0.2u l=0.13u
+X717 a_64383_23889# a_64383_23434# a_64419_23326# PFD_0.VSS sg13_lv_nmos ad=0.2017p pd=1.48u as=0.19397p ps=1.29u w=0.64u l=0.13u
+X718 a_53085_40283# a_53022_43738# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=59.75f pd=0.745u as=59f ps=0.74u w=0.2u l=0.13u
+X719 PFD_0.VDD a_53022_43738# a_54427_40283# PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=59f ps=0.74u w=0.2u l=0.13u
+X720 PFD_0.VDD a_53022_43738# a_59799_40285# PFD_0.VDD sg13_lv_pmos ad=0.104p pd=1.34u as=59.75f ps=0.745u w=0.2u l=0.13u
+X721 a_62221_22361# a_61691_22290# a_62119_22361# PFD_0.VDD sg13_lv_pmos ad=51.45f pd=0.665u as=79.8f ps=0.8u w=0.42u l=0.13u
+X722 a_56742_53480# PFD_0.VSS rhigh l=12u w=1u
+X723 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q a_63463_23728# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2016p ps=1.5u w=1.12u l=0.13u
+X724 a_53147_40413# a_54489_40413# a_54428_40850# PFD_0.VSS sg13_lv_nmos ad=0.11p pd=0.94u as=0.17p ps=1.68u w=0.5u l=0.13u
+X725 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.D a_61707_23244# a_61878_22886# PFD_0.VDD sg13_lv_pmos ad=0.3808p pd=2.92u as=0.2128p ps=1.5u w=1.12u l=0.13u
+X726 PFD_0.VDD a_62270_24055# a_62221_24117# PFD_0.VDD sg13_lv_pmos ad=0.11785p pd=1.025u as=51.45f ps=0.665u w=0.42u l=0.13u
+X727 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+X728 a_54472_24641# a_54434_24904# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.D PFD_0.VDD sg13_lv_pmos ad=0.2128p pd=1.5u as=0.3808p ps=2.92u w=1.12u l=0.13u
+X729 PFD_0.VDD 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q a_53350_24641# PFD_0.VDD sg13_lv_pmos ad=0.36p pd=2.72u as=0.1225p ps=1.245u w=1u l=0.13u
+X730 a_53058_43159# a_52944_43077# a_53152_43159# PFD_0.VDD sg13_lv_pmos ad=0.11p pd=0.94u as=0.1106p ps=0.945u w=0.5u l=0.13u
+X731 PFD_0.VDD 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.D a_54504_20259# PFD_0.VDD sg13_lv_pmos ad=0.1428p pd=1.52u as=79.8f ps=0.8u w=0.42u l=0.13u
+X732 a_61707_23244# 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q a_61675_22886# PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.1225p ps=1.245u w=1u l=0.13u
+X733 a_64419_23326# a_64383_23300# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.19p pd=1.38u as=0.34p ps=2.68u w=1u l=0.13u
+X734 a_51708_21413# 3bit_freq_divider_0.sg13g2_or3_1_0.B a_51708_21299# PFD_0.VDD sg13_lv_pmos ad=0.1275p pd=1.255u as=0.22p ps=1.44u w=1u l=0.13u
+X735 PFD_0.VSS 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q a_61707_23244# PFD_0.VSS sg13_lv_nmos ad=0.15245p pd=1.17u as=0.17462p ps=1.185u w=0.55u l=0.13u
+X736 PFD_0.VSS a_53065_20179# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.nQ PFD_0.VSS sg13_lv_nmos ad=0.2516p pd=2.16u as=0.2775p ps=2.23u w=0.74u l=0.13u
+X737 a_62324_20260# a_62270_20543# a_62246_20260# PFD_0.VSS sg13_lv_nmos ad=48.3f pd=0.65u as=54.6f ps=0.68u w=0.42u l=0.13u
+X738 a_62900_20179# 3bit_freq_divider_1.dff_nclk_0.nCLK PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=79.8f ps=0.8u w=0.42u l=0.13u
+X739 a_55836_43159# PFD_0.VSS cap_cmim l=6.99u w=6.99u
+X740 a_53774_20178# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.34p pd=2.68u as=0.19p ps=1.38u w=1u l=0.13u
+X741 PFD_0.VSS a_53774_20178# a_53738_20514# PFD_0.VSS sg13_lv_nmos ad=0.1544p pd=1.235u as=0.2516p ps=2.16u w=0.74u l=0.13u
+X742 PFD_0.VDD a_53022_43738# a_55742_43159# PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=59.75f ps=0.745u w=0.2u l=0.13u
+X743 a_45579_29803# PFD_0.Ref_CLK a_46749_30782# PFD_0.VSS sg13_lv_nmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.15u
+X744 a_62119_20605# a_61887_20534# a_61394_20220# PFD_0.VDD sg13_lv_pmos ad=79.8f pd=0.8u as=0.1428p ps=1.52u w=0.42u l=0.13u
+X745 a_62654_21971# a_61691_22290# a_62270_22299# PFD_0.VDD sg13_lv_pmos ad=0.17695p pd=1.56u as=0.19p ps=1.38u w=1u l=0.13u
+X746 a_60479_25023# a_60385_24947# a_60385_24947# PFD_0.VSS sg13_lv_nmos ad=0.2307p pd=1.615u as=0.102p ps=1.28u w=0.3u l=0.13u
+X747 a_64809_23027# a_64383_23628# a_64383_23300# PFD_0.VDD sg13_lv_pmos ad=51.45f pd=0.665u as=79.8f ps=0.8u w=0.42u l=0.13u
+X748 3bit_freq_divider_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 3bit_freq_divider_0.dff_nclk_0.nCLK PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.259p pd=2.18u as=0.259p ps=2.18u w=0.74u l=0.13u
+X749 a_64419_23654# a_64383_23628# a_64383_23889# PFD_0.VSS sg13_lv_nmos ad=54.6f pd=0.68u as=0.2017p ps=1.48u w=0.42u l=0.13u
+X750 PFD_0.VSS vco_wob_0.vctl PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.1005p pd=1.34u as=0 ps=0 w=0.15u l=0.13u
+X751 a_52886_21392# 3bit_freq_divider_0.A2 PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.17462p pd=1.185u as=0.15245p ps=1.17u w=0.55u l=0.13u
+X752 a_58536_54976# charge_pump_0.bias_n PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.34p pd=2.68u as=0.34p ps=2.68u w=1u l=1u
+X753 PFD_0.VSS a_61707_25000# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.D PFD_0.VSS sg13_lv_nmos ad=0.3108p pd=2.32u as=0.1628p ps=1.18u w=0.74u l=0.13u
+X754 PFD_0.VDD a_53022_43738# a_57084_43159# PFD_0.VDD sg13_lv_pmos ad=59f pd=0.74u as=59.75f ps=0.745u w=0.2u l=0.13u
+X755 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.nQ a_62654_21971# PFD_0.VDD PFD_0.VDD sg13_lv_pmos ad=0.7616p pd=3.6u as=0.2163p ps=1.55u w=1.12u l=0.13u
+X756 PFD_0.VDD 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VDD sg13_lv_pmos ad=0.392p pd=2.94u as=0.392p ps=2.94u w=1.12u l=0.13u
+X757 PFD_0.VSS charge_pump_0.vout PFD_0.VSS PFD_0.VSS sg13_lv_nmos ad=0.285p pd=1.88u as=0 ps=0 w=1.5u l=0.65u
+C0 a_61691_20534# a_62654_20215# 0.02302f
+C1 a_61691_22290# a_62654_21971# 0.02302f
+C2 a_54427_40283# PFD_0.VDD 1.36925f
+C3 3bit_freq_divider_1.freq_div_cell_0.Cout a_60967_21478# 0.13034f
+C4 m6_60810_42209# PFD_0.VDD 0.03757f
+C5 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.D 3bit_freq_divider_0.freq_div_cell_0.Cin 0.084f
+C6 PFD_0.Ref_CLK a_47777_29803# 0.17902f
+C7 a_45579_29803# a_46749_30782# 0.25388f
+C8 a_53022_43738# PFD_0.VDD 13.1862f
+C9 a_60584_24580# PFD_0.VDD 0.10495f
+C10 a_64384_21091# PFD_0.VDD 0.34084f
+C11 a_63255_21488# PFD_0.VDD 0.26051f
+C12 a_64383_23434# 3bit_freq_divider_1.dff_nclk_0.nRST 0.126f
+C13 a_58515_40413# a_59800_40852# 0.21632f
+C14 3bit_freq_divider_1.dff_nclk_0.nCLK a_63426_21130# 0.03449f
+C15 3bit_freq_divider_0.dff_nclk_0.D a_51684_22284# 0.43097f
+C16 a_62270_24055# a_61691_24046# 0.04304f
+C17 a_61887_24046# a_61394_23732# 0.47248f
+C18 a_55345_23141# 3bit_freq_divider_0.freq_div_cell_0.Cout 0.13167f
+C19 a_55836_43159# a_57084_43159# 0.09926f
+C20 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.D a_61707_21488# 0.24715f
+C21 a_54504_22015# a_53774_21934# 0.17766f
+C22 3bit_freq_divider_0.sg13g2_or3_1_0.C a_51648_21103# 0.25034f
+C23 3bit_freq_divider_0.EN a_59097_54704# 0.03561f
+C24 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.60301f
+C25 3bit_freq_divider_1.CLK_OUT m5_17331_2744# 0.40842f
+C26 3bit_freq_divider_1.sg13g2_or3_1_0.C a_63426_24642# 0.10662f
+C27 PFD_0.DOWN PFD_0.Ref_CLK 0.06328f
+C28 a_53065_20179# a_53899_20488# 0.03957f
+C29 a_55769_40283# a_55831_40413# 0.12854f
+C30 a_57178_43159# a_58653_42591# 0.03205f
+C31 vco_wob_0.vctl a_55831_40413# 0.04109f
+C32 3bit_freq_divider_0.dff_nclk_0.nCLK a_53899_22244# 0.17328f
+C33 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VDD 0.3071f
+C34 3bit_freq_divider_1.A1 3bit_freq_divider_1.A2 2.64011f
+C35 a_53022_43738# a_57084_43159# 0.19696f
+C36 3bit_freq_divider_0.dff_nclk_0.D 3bit_freq_divider_0.dff_nclk_0.nRST 0.76289f
+C37 a_52944_43077# a_53086_40850# 0.23665f
+C38 3bit_freq_divider_0.sg13g2_nand2_1_0.Y a_55345_21385# 0.08797f
+C39 a_64398_24796# 3bit_freq_divider_1.dff_nclk_0.nRST 0.10221f
+C40 a_63426_22886# PFD_0.VDD 0.20834f
+C41 PFD_0.VCO_CLK PFD_0.VDD 1.82327f
+C42 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 3bit_freq_divider_0.EN 0.12847f
+C43 charge_pump_0.bias_p a_59097_54704# 0.04726f
+C44 a_53022_43738# a_53086_40850# 0.06371f
+C45 3bit_freq_divider_1.sg13g2_nand2_1_0.Y a_60967_23234# 0.08797f
+C46 a_62900_21935# a_61691_22290# 0.04324f
+C47 a_51648_21103# 3bit_freq_divider_0.sg13g2_or3_1_0.A 0.31317f
+C48 a_61394_21976# a_61887_22290# 0.47248f
+C49 a_55831_40413# PFD_0.VDD 1.08631f
+C50 PFD_0.Ref_CLK m3_17285_2698# 0.30224f
+C51 a_62270_22299# a_62119_22361# 0.70262f
+C52 m6_17427_2840# 3bit_freq_divider_0.A0 1.23795f
+C53 vco_wob_0.vctl a_57311_42591# 0.08436f
+C54 a_53445_23726# PFD_0.VDD 0.31261f
+C55 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.nQ 3bit_freq_divider_1.dff_nclk_0.nCLK 0.08552f
+C56 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.D 3bit_freq_divider_1.freq_div_cell_1.Cout 0.04623f
+C57 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.D a_61691_22290# 0.01446f
+C58 3bit_freq_divider_1.sg13g2_or3_1_0.A a_63426_21130# 0.10614f
+C59 3bit_freq_divider_0.freq_div_cell_0.Cout 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q 0.42266f
+C60 a_62900_23691# PFD_0.VDD 0.31029f
+C61 3bit_freq_divider_1.freq_div_cell_0.Cin 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q 0.22232f
+C62 a_63426_24642# 3bit_freq_divider_1.A1 0.01474f
+C63 a_61878_21130# 3bit_freq_divider_1.freq_div_cell_0.Cout 0.01011f
+C64 a_51648_24041# a_51684_22692# 0.40027f
+C65 a_53968_23946# a_53899_24000# 0.70262f
+C66 3bit_freq_divider_0.freq_div_cell_0.Cin a_54472_22885# 0.01011f
+C67 a_61691_24046# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.33731f
+C68 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.D 3bit_freq_divider_1.freq_div_cell_0.Cout 0.084f
+C69 a_56887_49467# charge_pump_0.vout 0.63953f
+C70 a_63255_25000# 3bit_freq_divider_1.A2 0.02709f
+C71 a_45658_27900# PFD_0.VDD 1.00659f
+C72 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.D a_54504_22015# 0.3562f
+C73 a_61691_20534# a_62900_20179# 0.04324f
+C74 a_63426_21130# PFD_0.VDD 0.20953f
+C75 a_61887_24046# a_62119_24117# 0.13068f
+C76 a_61675_24642# a_61707_25000# 0.0104f
+C77 a_56137_24678# a_56013_24979# 0.10864f
+C78 a_64383_23300# a_64419_23326# 0.70262f
+C79 a_55862_56737# charge_pump_0.bias_p 0.3307f
+C80 a_60967_23234# PFD_0.VDD 0.45855f
+C81 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q 1.0402f
+C82 a_51648_24041# 3bit_freq_divider_0.A0 0.0271f
+C83 PFD_0.VCO_CLK a_47954_28913# 1.24436f
+C84 a_51622_24863# 3bit_freq_divider_0.dff_nclk_0.nRST 0.10221f
+C85 3bit_freq_divider_0.dff_nclk_0.nCLK a_53445_20214# 0.26292f
+C86 3bit_freq_divider_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VDD 0.28742f
+C87 a_63463_21972# 3bit_freq_divider_1.dff_nclk_0.nCLK 0.05956f
+C88 3bit_freq_divider_1.dff_nclk_0.nCLK a_61887_22290# 0.18493f
+C89 vco_wob_0.vctl a_55770_40850# 0.05041f
+C90 a_47777_29803# PFD_0.VDD 1.07957f
+C91 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.D 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.40308f
+C92 3bit_freq_divider_0.freq_div_cell_0.Cout a_54472_21129# 0.01011f
+C93 a_56038_24617# a_56013_24979# 0.01952f
+C94 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.nQ 3bit_freq_divider_1.A2 0.04535f
+C95 a_62900_23691# a_61691_24046# 0.04324f
+C96 a_45451_28860# PFD_0.Ref_CLK 0.13923f
+C97 a_63255_25000# a_63426_24642# 0.36535f
+C98 a_64383_23889# a_64383_23628# 0.02302f
+C99 a_52924_22885# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q 0.01011f
+C100 a_51684_22692# a_51693_23426# 0.13068f
+C101 a_53445_20214# a_53738_20514# 0.04306f
+C102 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 3bit_freq_divider_0.freq_div_cell_0.Cin 0.25573f
+C103 a_52886_21392# PFD_0.VDD 0.26051f
+C104 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.nQ 0.08555f
+C105 a_63255_21488# 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q 0.12248f
+C106 a_55770_40850# PFD_0.VDD 0.01475f
+C107 3bit_freq_divider_0.CLK_IN a_58515_40413# 0.83094f
+C108 a_62654_20215# a_63463_20216# 0.09575f
+C109 3bit_freq_divider_1.freq_div_cell_0.Cout 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q 0.22232f
+C110 PFD_0.DOWN PFD_0.VDD 1.56226f
+C111 a_53445_23726# a_53774_23690# 0.04324f
+C112 3bit_freq_divider_0.A1 3bit_freq_divider_0.sg13g2_or3_1_0.B 0.27832f
+C113 a_53022_43738# a_55836_43159# 0.04103f
+C114 a_56013_24979# a_55941_24882# 0.14868f
+C115 3bit_freq_divider_1.sg13g2_or3_1_0.C 3bit_freq_divider_1.dff_nclk_0.nRST 0.57774f
+C116 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.A2 0.86741f
+C117 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.nQ PFD_0.VDD 0.18065f
+C118 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_61691_20534# 0.33731f
+C119 PFD_0.Ref_CLK m1_17285_2698# 0.01061f
+C120 a_62654_23727# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.nQ 0.05822f
+C121 a_53022_43738# a_52944_43077# 0.93638f
+C122 a_54504_23771# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.08213f
+C123 a_64383_23628# 3bit_freq_divider_1.dff_nclk_0.nRST 0.3268f
+C124 a_53022_43738# a_54427_40283# 0.18981f
+C125 a_59799_40285# 3bit_freq_divider_0.CLK_IN 0.11621f
+C126 a_53774_20178# a_53899_20488# 0.04304f
+C127 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.sg13g2_or3_1_0.B 0.58488f
+C128 a_57111_40283# a_57173_40413# 0.11922f
+C129 a_61887_20534# a_62270_20543# 0.66077f
+C130 vco_wob_0.vctl a_58515_40413# 0.02267f
+C131 a_64419_23326# PFD_0.VDD 0.2446f
+C132 a_53065_23691# PFD_0.VDD 0.44373f
+C133 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.D 0.21745f
+C134 a_52924_22885# 3bit_freq_divider_0.A1 0.02265f
+C135 a_51684_22692# PFD_0.VDD 0.19308f
+C136 a_61707_23244# a_61675_22886# 0.0104f
+C137 a_53968_23946# a_53738_24026# 0.13068f
+C138 a_62654_23727# 3bit_freq_divider_1.dff_nclk_0.nCLK 0.29516f
+C139 a_64459_24995# a_64362_24865# 0.10864f
+C140 a_51631_22774# a_51693_23075# 0.04255f
+C141 a_55345_24897# 3bit_freq_divider_0.sg13g2_tiehi_1.L_HI 0.21784f
+C142 a_61691_20534# a_62119_20605# 0.05314f
+C143 a_61691_22290# a_62119_22361# 0.05314f
+C144 a_58515_40413# PFD_0.VDD 1.36426f
+C145 a_51693_23426# 3bit_freq_divider_0.A1 0.01735f
+C146 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.D 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.40308f
+C147 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VDD 0.29872f
+C148 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q PFD_0.VDD 1.42273f
+C149 3bit_freq_divider_0.dff_nclk_0.nCLK a_52924_22885# 0.03415f
+C150 PFD_0.Ref_CLK a_45579_29803# 1.21724f
+C151 a_61691_20534# 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.D 0.01446f
+C152 a_63463_21972# PFD_0.VDD 0.2345f
+C153 3bit_freq_divider_0.A0 PFD_0.VDD 1.32697f
+C154 3bit_freq_divider_1.sg13g2_tiehi_1.L_HI a_61878_24642# 0.01011f
+C155 PFD_0.VDD a_61887_22290# 0.21577f
+C156 3bit_freq_divider_0.dff_nclk_0.nCLK a_53968_22190# 0.32534f
+C157 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.nQ a_52950_22157# 0.21609f
+C158 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q a_53065_21935# 0.01984f
+C159 3bit_freq_divider_1.sg13g2_or3_1_0.A 3bit_freq_divider_1.A2 0.10441f
+C160 a_59799_40285# PFD_0.VDD 1.38295f
+C161 3bit_freq_divider_1.dff_nclk_0.nCLK a_62270_20543# 0.17248f
+C162 charge_pump_0.bias_n PFD_0.VDD 0.83592f
+C163 a_55948_56737# PFD_0.VDD 0.31573f
+C164 a_53065_20179# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q 0.01984f
+C165 PFD_0.Ref_CLK PFD_0.UP 0.15472f
+C166 3bit_freq_divider_0.EN a_58734_56203# 0.07729f
+C167 a_53022_43738# a_55831_40413# 0.04637f
+C168 a_53899_22244# a_53774_21934# 0.04304f
+C169 a_53065_20179# a_53445_20214# 0.41048f
+C170 3bit_freq_divider_1.A0 m3_17285_2698# 0.2919f
+C171 a_54434_24904# a_54898_24641# 0.0104f
+C172 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.D a_54472_24641# 0.12185f
+C173 m4_16847_2260# m5_16847_2260# 0.2063p
+C174 vco_wob_0.vctl a_53147_40413# 0.04038f
+C175 3bit_freq_divider_0.freq_div_cell_0.Cout PFD_0.VDD 1.22849f
+C176 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_61691_22290# 0.33731f
+C177 3bit_freq_divider_1.dff_nclk_0.D 3bit_freq_divider_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.17618f
+C178 a_56013_24979# 3bit_freq_divider_0.sg13g2_tiehi_1.L_HI 0.02161f
+C179 a_55836_43159# a_57311_42591# 0.03153f
+C180 a_63426_21130# 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q 0.01011f
+C181 3bit_freq_divider_1.A2 PFD_0.VDD 1.18034f
+C182 a_51648_24041# 3bit_freq_divider_0.dff_nclk_0.D 0.09445f
+C183 3bit_freq_divider_0.sg13g2_or3_1_0.C a_52924_24641# 0.10662f
+C184 a_63463_23728# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q 0.12519f
+C185 3bit_freq_divider_0.A1 PFD_0.VDD 1.47452f
+C186 a_45451_28860# PFD_0.VDD 0.05543f
+C187 a_60385_24558# PFD_0.VDD 0.04481f
+C188 charge_pump_0.bias_n a_58536_54976# 0.02549f
+C189 charge_pump_0.bias_p a_58734_56203# 0.03822f
+C190 3bit_freq_divider_0.sg13g2_or3_1_0.B a_51648_21103# 0.26158f
+C191 a_53147_40413# PFD_0.VDD 0.81739f
+C192 a_53065_20179# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.nQ 0.0571f
+C193 3bit_freq_divider_1.dff_nclk_0.nCLK a_62270_22299# 0.17328f
+C194 3bit_freq_divider_1.freq_div_cell_0.Cout 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.01369f
+C195 m5_17331_2744# 3bit_freq_divider_0.A0 0.42278f
+C196 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 0.1064f
+C197 a_53065_23691# a_53774_23690# 0.02335f
+C198 a_52950_23913# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.nQ 0.21609f
+C199 3bit_freq_divider_0.dff_nclk_0.nCLK PFD_0.VDD 2.90191f
+C200 a_51759_25014# 3bit_freq_divider_0.dff_nclk_0.nRST 0.03098f
+C201 a_52886_24904# a_53350_24641# 0.0104f
+C202 a_63255_21488# a_63426_21130# 0.36535f
+C203 3bit_freq_divider_0.sg13g2_or3_1_0.C a_51693_23075# 0.01089f
+C204 a_54494_43159# a_55969_42591# 0.03153f
+C205 a_60479_25023# PFD_0.VDD 0.01215f
+C206 a_62654_23727# PFD_0.VDD 0.43765f
+C207 a_52924_21129# 3bit_freq_divider_0.A2 0.02265f
+C208 a_55345_24897# PFD_0.VDD 0.45478f
+C209 3bit_freq_divider_0.dff_nclk_0.nCLK a_53065_21935# 0.31904f
+C210 a_63426_24642# PFD_0.VDD 0.20944f
+C211 a_53065_23691# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q 0.02071f
+C212 a_54434_23148# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q 0.46099f
+C213 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VDD 0.27798f
+C214 a_62654_20215# a_62900_20179# 0.41048f
+C215 a_54434_24904# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.D 0.24715f
+C216 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.nQ 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q 0.02712f
+C217 a_61707_23244# 3bit_freq_divider_1.freq_div_cell_0.Cout 0.01154f
+C218 a_53738_20514# PFD_0.VDD 0.19386f
+C219 a_55345_23141# 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 0.08797f
+C220 3bit_freq_divider_1.A0 3bit_freq_divider_1.A2 0.0326f
+C221 a_53968_20434# PFD_0.VDD 0.2982f
+C222 a_54357_49278# PFD_0.VDD 0.31963f
+C223 3bit_freq_divider_0.dff_nclk_0.D a_51693_23426# 0.04146f
+C224 3bit_freq_divider_0.dff_nclk_0.nRST a_51693_23075# 0.16442f
+C225 3bit_freq_divider_0.EN 3bit_freq_divider_0.A2 0.11756f
+C226 charge_pump_0.vout charge_pump_0.bias_p 0.02402f
+C227 a_53086_40850# a_53147_40413# 0.04971f
+C228 3bit_freq_divider_1.sg13g2_tiehi_1.L_HI 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q 0.42892f
+C229 a_58515_40413# a_58454_40850# 0.03243f
+C230 a_64384_24445# a_64383_23889# 0.09575f
+C231 PFD_0.VCO_CLK a_45658_27900# 0.17296f
+C232 a_62270_20543# PFD_0.VDD 0.24492f
+C233 3bit_freq_divider_1.dff_nclk_0.D a_64383_23706# 0.12409f
+C234 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q 3bit_freq_divider_0.A0 0.24362f
+C235 a_54434_23148# 3bit_freq_divider_0.freq_div_cell_0.Cout 0.01154f
+C236 3bit_freq_divider_1.CLK_OUT m3_17285_2698# 0.2919f
+C237 a_64362_24865# PFD_0.VDD 0.08341f
+C238 a_56013_24979# PFD_0.VDD 0.11379f
+C239 a_64383_23434# 3bit_freq_divider_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.01473f
+C240 a_45579_29803# PFD_0.VDD 0.45874f
+C241 a_62900_21935# a_62654_21971# 0.41048f
+C242 3bit_freq_divider_1.sg13g2_nand2_1_0.Y 3bit_freq_divider_1.freq_div_cell_1.Cout 0.07626f
+C243 a_62654_23727# a_61691_24046# 0.02302f
+C244 3bit_freq_divider_1.A0 a_63426_24642# 0.01851f
+C245 a_61691_22290# a_61394_21976# 0.17766f
+C246 3bit_freq_divider_0.dff_nclk_0.nCLK a_52950_20401# 0.05883f
+C247 a_64383_23300# 3bit_freq_divider_1.dff_nclk_0.nRST 0.31482f
+C248 a_52924_24641# a_52886_24904# 0.36535f
+C249 a_64384_24445# 3bit_freq_divider_1.dff_nclk_0.nRST 0.04054f
+C250 a_51721_24988# a_51622_24863# 0.0229f
+C251 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.nQ a_53445_21970# 0.10118f
+C252 PFD_0.UP PFD_0.VDD 0.82664f
+C253 a_53738_22270# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.01324f
+C254 3bit_freq_divider_0.dff_nclk_0.D PFD_0.VDD 0.84532f
+C255 a_61707_21488# PFD_0.VDD 0.2676f
+C256 a_61394_23732# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.D 0.3562f
+C257 3bit_freq_divider_1.freq_div_cell_0.Cin 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q 0.42266f
+C258 a_51648_21103# PFD_0.VDD 0.34051f
+C259 PFD_0.VDD a_62270_22299# 0.26052f
+C260 m4_17285_2698# 3bit_freq_divider_1.A1 0.3817f
+C261 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.nQ a_62654_21971# 0.0571f
+C262 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q 3bit_freq_divider_0.A1 0.01869f
+C263 3bit_freq_divider_0.dff_nclk_0.nCLK a_53774_23690# 0.35198f
+C264 3bit_freq_divider_1.sg13g2_or3_1_0.C 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q 0.05745f
+C265 a_54627_42591# a_53152_43159# 0.03153f
+C266 PFD_0.VCO_CLK PFD_0.DOWN 0.20401f
+C267 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.D PFD_0.VDD 0.97078f
+C268 a_53022_43738# a_58515_40413# 0.06975f
+C269 a_53774_20178# a_53445_20214# 0.04324f
+C270 a_55831_40413# a_55770_40850# 0.03778f
+C271 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.D a_61878_24642# 0.12185f
+C272 3bit_freq_divider_1.dff_nclk_0.D a_64383_23434# 0.0175f
+C273 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q 0.08441f
+C274 3bit_freq_divider_0.EN charge_pump_0.bias_p 0.33628f
+C275 a_64383_23889# PFD_0.VDD 0.41974f
+C276 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q 3bit_freq_divider_1.A2 0.15836f
+C277 a_54747_49259# charge_pump_0.vout 0.13589f
+C278 sg13g2_inv_1_0.A 3bit_freq_divider_0.EN 0.24728f
+C279 vco_wob_0.vctl a_53285_42591# 0.08086f
+C280 a_53065_20179# PFD_0.VDD 0.42601f
+C281 3bit_freq_divider_0.freq_div_cell_0.Cout 3bit_freq_divider_0.freq_div_cell_1.Cout 0.09134f
+C282 3bit_freq_divider_1.freq_div_cell_1.Cout PFD_0.VDD 0.4595f
+C283 a_55345_24897# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q 0.30546f
+C284 a_59799_40285# a_53022_43738# 0.19389f
+C285 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q a_62654_21971# 0.01984f
+C286 a_61691_20534# a_61887_20534# 0.45047f
+C287 a_54627_42591# a_54494_43159# 0.22378f
+C288 a_54434_21392# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q 0.46099f
+C289 3bit_freq_divider_1.dff_nclk_0.nCLK a_61691_22290# 0.35569f
+C290 a_53968_22190# a_53774_21934# 0.05314f
+C291 a_64383_23434# a_64383_23706# 0.04306f
+C292 a_51631_22774# a_51685_23725# 0.04324f
+C293 a_54504_23771# PFD_0.VDD 0.38531f
+C294 a_53065_23691# a_53445_23726# 0.41048f
+C295 m7_16847_2260# 3bit_freq_divider_1.A1 1.40976f
+C296 PFD_0.VDD 3bit_freq_divider_1.dff_nclk_0.nRST 0.60883f
+C297 3bit_freq_divider_1.dff_nclk_0.nCLK a_61394_23732# 0.37259f
+C298 a_45658_27900# PFD_0.DOWN 0.61911f
+C299 sg13g2_inv_1_0.A charge_pump_0.bias_p 0.0229f
+C300 3bit_freq_divider_1.freq_div_cell_0.Cin 3bit_freq_divider_1.sg13g2_tiehi_1.L_HI 0.14552f
+C301 a_62270_24055# a_62654_23727# 0.03957f
+C302 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q 3bit_freq_divider_1.A1 0.18013f
+C303 3bit_freq_divider_0.dff_nclk_0.nCLK a_53738_22270# 0.18642f
+C304 a_55742_43159# PFD_0.VDD 1.36686f
+C305 a_62900_21935# 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.nQ 0.10118f
+C306 a_51622_24863# PFD_0.VDD 0.09559f
+C307 a_61691_20534# a_61394_20220# 0.17766f
+C308 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.D 0.05067f
+C309 a_63255_21488# 3bit_freq_divider_1.A2 0.39947f
+C310 a_52944_43077# a_53147_40413# 0.40206f
+C311 a_53085_40283# a_54489_40413# 0.01232f
+C312 a_54427_40283# a_53147_40413# 0.42019f
+C313 a_57111_40283# PFD_0.VDD 1.36202f
+C314 PFD_0.VCO_CLK 3bit_freq_divider_0.A0 0.1115f
+C315 a_53022_43738# a_53147_40413# 0.08011f
+C316 3bit_freq_divider_0.sg13g2_or3_1_0.C 3bit_freq_divider_0.A2 0.04643f
+C317 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.freq_div_cell_0.Cout 0.32366f
+C318 a_60528_49446# charge_pump_0.vout 0.01545f
+C319 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_53738_24026# 0.01324f
+C320 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.D a_53774_20178# 0.01446f
+C321 PFD_0.Ref_CLK m4_17285_2698# 0.39515f
+C322 3bit_freq_divider_1.dff_nclk_0.nCLK a_61691_20534# 0.35517f
+C323 a_53065_20179# a_52950_20401# 0.09575f
+C324 a_60385_24947# a_60385_24717# 0.10864f
+C325 a_54434_21392# a_54472_21129# 0.36535f
+C326 a_54472_22885# PFD_0.VDD 0.21321f
+C327 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.D a_53774_23690# 0.01446f
+C328 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 3bit_freq_divider_0.CLK_IN 0.2618f
+C329 a_53774_21934# PFD_0.VDD 0.69275f
+C330 3bit_freq_divider_0.sg13g2_or3_1_0.A 3bit_freq_divider_0.A2 0.2051f
+C331 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.D 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q 0.22983f
+C332 m7_16847_2260# m6_17427_2840# 25.5177f
+C333 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.D 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q 0.22983f
+C334 3bit_freq_divider_1.sg13g2_nand2_1_0.Y 3bit_freq_divider_1.freq_div_cell_0.Cout 0.3426f
+C335 a_63255_25000# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q 0.14987f
+C336 a_45451_28860# PFD_0.VCO_CLK 0.12714f
+C337 3bit_freq_divider_1.sg13g2_or3_1_0.C 3bit_freq_divider_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.28129f
+C338 a_51684_22692# 3bit_freq_divider_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.01473f
+C339 a_54434_21392# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.D 0.24715f
+C340 a_53065_21935# a_53774_21934# 0.02335f
+C341 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.D 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q 0.22983f
+C342 a_64384_21091# a_64714_21414# 0.014f
+C343 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.nQ 0.02712f
+C344 a_64383_23628# 3bit_freq_divider_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.33833f
+C345 3bit_freq_divider_0.EN 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.D 0.02092f
+C346 a_63255_23244# 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q 0.12248f
+C347 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q a_61707_21488# 0.46099f
+C348 a_64731_24890# PFD_0.VDD 0.04155f
+C349 3bit_freq_divider_1.freq_div_cell_0.Cin a_61878_22886# 0.01011f
+C350 a_62900_23691# 3bit_freq_divider_1.A2 0.01917f
+C351 a_52924_21129# 3bit_freq_divider_0.sg13g2_or3_1_0.A 0.10614f
+C352 a_62119_24117# 3bit_freq_divider_1.dff_nclk_0.nCLK 0.32742f
+C353 PFD_0.VDD a_61691_22290# 0.68813f
+C354 PFD_0.Ref_CLK m7_16847_2260# 1.44946f
+C355 a_54504_23771# a_53774_23690# 0.17766f
+C356 a_61707_23244# 3bit_freq_divider_1.freq_div_cell_0.Cin 0.12082f
+C357 a_61878_21130# 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.D 0.12185f
+C358 3bit_freq_divider_0.dff_nclk_0.nCLK a_53445_23726# 0.24213f
+C359 a_61394_23732# PFD_0.VDD 0.38531f
+C360 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.nQ 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q 0.02712f
+C361 a_51648_24041# a_51693_23075# 0.03957f
+C362 a_56742_53480# charge_pump_0.bias_p 0.04781f
+C363 a_56828_53480# charge_pump_0.bias_n 0.01798f
+C364 a_51759_25014# a_51721_24988# 0.10864f
+C365 a_56742_53480# sg13g2_inv_1_0.A 0.28042f
+C366 3bit_freq_divider_0.sg13g2_nand2_1_0.Y PFD_0.VDD 3.38843f
+C367 a_57173_40413# a_57112_40850# 0.03159f
+C368 a_51685_23725# 3bit_freq_divider_0.dff_nclk_0.nRST 0.25925f
+C369 a_63426_21130# 3bit_freq_divider_1.A2 0.02209f
+C370 3bit_freq_divider_1.freq_div_cell_0.Cout PFD_0.VDD 1.22849f
+C371 a_61878_24642# PFD_0.VDD 0.21401f
+C372 a_62654_23727# a_62900_23691# 0.41048f
+C373 m3_16847_2260# m4_16847_2260# 0.2063p
+C374 a_53774_20178# PFD_0.VDD 0.67672f
+C375 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q 3bit_freq_divider_1.freq_div_cell_1.Cout 0.2223f
+C376 a_51631_22774# a_51684_22284# 0.17766f
+C377 a_64424_22200# 3bit_freq_divider_1.dff_nclk_0.nRST 0.34882f
+C378 3bit_freq_divider_1.dff_nclk_0.D a_64383_23628# 0.03728f
+C379 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q 0.0844f
+C380 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.D PFD_0.VDD 0.97883f
+C381 a_61691_20534# PFD_0.VDD 0.67211f
+C382 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.nQ PFD_0.VDD 0.18755f
+C383 a_55862_56737# PFD_0.VDD 0.47223f
+C384 3bit_freq_divider_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 3bit_freq_divider_0.A1 0.02018f
+C385 a_54434_23148# a_54472_22885# 0.36535f
+C386 PFD_0.DOWN charge_pump_0.bias_n 0.01578f
+C387 a_57178_43159# 3bit_freq_divider_0.CLK_IN 0.20831f
+C388 a_53065_23691# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q 0.0119f
+C389 a_51631_22774# 3bit_freq_divider_0.dff_nclk_0.nRST 0.3267f
+C390 3bit_freq_divider_1.CLK_OUT 3bit_freq_divider_1.dff_nclk_0.nRST 0.07748f
+C391 a_61691_24046# a_61394_23732# 0.17766f
+C392 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.10701f
+C393 m3_17285_2698# 3bit_freq_divider_0.A0 0.30224f
+C394 a_51693_23426# a_51693_23075# 0.70262f
+C395 a_54434_21392# PFD_0.VDD 0.2676f
+C396 a_64383_23706# a_64383_23628# 0.04324f
+C397 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.D 0.40308f
+C398 3bit_freq_divider_0.dff_nclk_0.D PFD_0.VCO_CLK 0.01884f
+C399 a_51648_24438# 3bit_freq_divider_0.dff_nclk_0.nRST 0.04054f
+C400 a_53285_42591# a_52944_43077# 0.03491f
+C401 a_55742_43159# a_55836_43159# 0.42148f
+C402 a_61707_25000# a_61878_24642# 0.36535f
+C403 3bit_freq_divider_1.freq_div_cell_0.Cin 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.D 0.084f
+C404 a_54489_40413# a_54428_40850# 0.03943f
+C405 a_53899_24000# PFD_0.VDD 0.26493f
+C406 a_56887_49467# a_56695_49467# 0.01287f
+C407 vco_wob_0.vctl a_57178_43159# 0.026f
+C408 a_54400_43159# a_53152_43159# 0.09188f
+C409 a_53022_43738# a_53285_42591# 0.02036f
+C410 a_52924_24641# PFD_0.VDD 0.21522f
+C411 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.D 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.40308f
+C412 a_51759_25014# PFD_0.VDD 0.0834f
+C413 charge_pump_0.vout a_54842_49733# 0.02265f
+C414 3bit_freq_divider_0.dff_nclk_0.nCLK a_52886_21392# 0.10313f
+C415 3bit_freq_divider_1.sg13g2_tiehi_1.L_HI a_60385_24717# 0.02161f
+C416 a_62119_24117# PFD_0.VDD 0.32287f
+C417 a_63255_23244# 3bit_freq_divider_1.sg13g2_or3_1_0.B 0.23215f
+C418 vco_wob_0.vctl a_53152_43159# 0.02282f
+C419 a_53022_43738# a_55742_43159# 0.19603f
+C420 a_59799_40285# a_58515_40413# 0.46077f
+C421 a_61887_20534# a_62654_20215# 0.40027f
+C422 a_57111_40283# a_53022_43738# 0.18962f
+C423 3bit_freq_divider_1.dff_nclk_0.nCLK a_63463_20216# 0.05882f
+C424 3bit_freq_divider_0.A2 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q 0.17317f
+C425 3bit_freq_divider_0.CLK_IN a_58426_43159# 0.4131f
+C426 a_57178_43159# PFD_0.VDD 1.11494f
+C427 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.D a_61878_22886# 0.12185f
+C428 a_51684_22692# 3bit_freq_divider_0.A1 0.03873f
+C429 3bit_freq_divider_0.freq_div_cell_0.Cout 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.01369f
+C430 a_51693_23075# PFD_0.VDD 0.2446f
+C431 3bit_freq_divider_0.freq_div_cell_0.Cout 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q 0.22232f
+C432 3bit_freq_divider_1.sg13g2_or3_1_0.C a_64383_23434# 0.03556f
+C433 a_53152_43159# PFD_0.VDD 1.05457f
+C434 a_54400_43159# a_54494_43159# 0.42202f
+C435 a_53738_22270# a_53774_21934# 0.44698f
+C436 a_61707_23244# 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.D 0.24715f
+C437 PFD_0.DOWN a_54357_49278# 0.04759f
+C438 3bit_freq_divider_1.A0 m4_17285_2698# 0.3817f
+C439 3bit_freq_divider_0.dff_nclk_0.nCLK a_53065_23691# 0.29533f
+C440 vco_wob_0.vctl a_54494_43159# 0.0248f
+C441 m4_17285_2698# m5_17331_2744# 0.1814p
+C442 a_54434_23148# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.D 0.24715f
+C443 a_53058_43159# PFD_0.VDD 1.37421f
+C444 a_64383_23434# a_64383_23628# 0.44985f
+C445 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.D a_54504_20259# 0.3562f
+C446 3bit_freq_divider_0.A1 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q 0.15458f
+C447 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q PFD_0.VDD 1.66358f
+C448 a_63463_21972# 3bit_freq_divider_1.A2 0.01788f
+C449 a_52924_21129# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q 0.01011f
+C450 3bit_freq_divider_0.A0 3bit_freq_divider_0.A1 0.55463f
+C451 3bit_freq_divider_1.dff_nclk_0.nCLK a_62654_20215# 0.31114f
+C452 3bit_freq_divider_0.dff_nclk_0.D 3bit_freq_divider_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.17618f
+C453 3bit_freq_divider_0.sg13g2_or3_1_0.C 3bit_freq_divider_0.dff_nclk_0.nRST 0.57774f
+C454 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.freq_div_cell_0.Cin 0.32366f
+C455 a_51684_22284# 3bit_freq_divider_0.dff_nclk_0.nRST 0.34874f
+C456 PFD_0.VCO_CLK a_51622_24863# 0.02673f
+C457 a_62119_24117# a_61691_24046# 0.05314f
+C458 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.10701f
+C459 a_47777_29803# PFD_0.UP 0.62819f
+C460 a_57178_43159# a_57084_43159# 0.42665f
+C461 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.60301f
+C462 a_54494_43159# PFD_0.VDD 1.29885f
+C463 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q 1.03924f
+C464 a_55345_21385# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q 0.30546f
+C465 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.nQ 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q 0.02712f
+C466 a_57111_40283# a_55831_40413# 0.45955f
+C467 a_58426_43159# PFD_0.VDD 1.36969f
+C468 3bit_freq_divider_0.CLK_IN a_58653_42591# 0.2448f
+C469 3bit_freq_divider_1.A1 a_63255_23244# 0.39563f
+C470 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 3bit_freq_divider_0.freq_div_cell_0.Cin 0.01369f
+C471 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q a_61878_22886# 0.02559f
+C472 3bit_freq_divider_1.freq_div_cell_0.Cout 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q 0.42266f
+C473 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 3bit_freq_divider_0.freq_div_cell_1.Cout 0.07626f
+C474 m1_17285_2698# 3bit_freq_divider_0.A0 0.01061f
+C475 a_53899_24000# a_53774_23690# 0.04304f
+C476 3bit_freq_divider_0.sg13g2_or3_1_0.B 3bit_freq_divider_0.A2 0.33008f
+C477 a_52950_22157# PFD_0.VDD 0.2364f
+C478 PFD_0.DOWN PFD_0.UP 0.20773f
+C479 a_61707_23244# 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q 0.46099f
+C480 3bit_freq_divider_1.A0 m7_16847_2260# 1.40976f
+C481 3bit_freq_divider_1.A0 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q 0.20944f
+C482 a_61707_25000# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q 0.46099f
+C483 3bit_freq_divider_1.sg13g2_nand2_1_0.Y 3bit_freq_divider_1.freq_div_cell_0.Cin 0.25573f
+C484 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.freq_div_cell_0.Cout 0.32366f
+C485 a_52950_22157# a_53065_21935# 0.09575f
+C486 3bit_freq_divider_1.dff_nclk_0.nCLK a_62654_21971# 0.31887f
+C487 vco_wob_0.vctl a_58653_42591# 0.08336f
+C488 a_53738_24026# PFD_0.VDD 0.22151f
+C489 a_56695_49467# charge_pump_0.vout 0.02916f
+C490 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.D a_61394_21976# 0.3562f
+C491 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.dff_nclk_0.D 0.04354f
+C492 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q a_60967_24990# 0.30546f
+C493 a_58734_56203# PFD_0.VDD 0.35557f
+C494 a_55345_23141# 3bit_freq_divider_0.freq_div_cell_0.Cin 0.13034f
+C495 PFD_0.Ref_CLK 3bit_freq_divider_0.EN 0.09396f
+C496 3bit_freq_divider_1.A1 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q 0.15164f
+C497 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q a_52924_24641# 0.02246f
+C498 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.A1 0.26228f
+C499 a_63463_23728# 3bit_freq_divider_1.A1 0.03561f
+C500 a_63463_20216# PFD_0.VDD 0.2331f
+C501 3bit_freq_divider_1.sg13g2_nand2_1_0.Y a_60967_21478# 0.08797f
+C502 a_62654_23727# 3bit_freq_divider_1.A2 0.02178f
+C503 a_61887_20534# a_62900_20179# 0.04306f
+C504 a_61887_24046# 3bit_freq_divider_1.dff_nclk_0.nCLK 0.18489f
+C505 3bit_freq_divider_0.dff_nclk_0.D a_51684_22692# 0.0175f
+C506 3bit_freq_divider_0.sg13g2_or3_1_0.C a_52886_24904# 0.23357f
+C507 3bit_freq_divider_1.dff_nclk_0.D a_64383_23300# 0.04146f
+C508 3bit_freq_divider_1.CLK_OUT m4_17285_2698# 0.3817f
+C509 a_64384_24445# 3bit_freq_divider_1.dff_nclk_0.D 0.2233f
+C510 a_61394_23732# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.08213f
+C511 a_51600_24907# a_51759_25014# 0.01952f
+C512 a_54504_20259# PFD_0.VDD 0.36995f
+C513 vco_wob_0.vctl charge_pump_0.vout 0.05724f
+C514 a_46817_27899# PFD_0.VDD 1.02029f
+C515 a_54434_21392# 3bit_freq_divider_0.freq_div_cell_1.Cout 0.01154f
+C516 a_58734_56203# a_58536_54976# 0.19076f
+C517 a_51648_24041# a_51685_23725# 0.41048f
+C518 a_62270_24055# a_62119_24117# 0.70262f
+C519 a_64714_21300# PFD_0.VDD 0.01263f
+C520 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.D 3bit_freq_divider_0.EN 0.02119f
+C521 a_61675_21130# a_61707_21488# 0.0104f
+C522 3bit_freq_divider_1.freq_div_cell_0.Cin PFD_0.VDD 1.21632f
+C523 a_64383_23889# a_64419_23326# 0.03957f
+C524 3bit_freq_divider_0.dff_nclk_0.D 3bit_freq_divider_0.A0 0.1238f
+C525 a_62654_20215# PFD_0.VDD 0.42601f
+C526 m2_17285_2698# m3_17285_2698# 0.20496p
+C527 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.60301f
+C528 PFD_0.VDD 3bit_freq_divider_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.28742f
+C529 3bit_freq_divider_0.dff_nclk_0.nCLK a_53738_20514# 0.18358f
+C530 charge_pump_0.vout PFD_0.VDD 0.06128f
+C531 3bit_freq_divider_0.dff_nclk_0.nCLK a_53968_20434# 0.32507f
+C532 a_61887_22290# a_62270_22299# 0.66077f
+C533 a_62900_21935# 3bit_freq_divider_1.dff_nclk_0.nCLK 0.27425f
+C534 3bit_freq_divider_1.sg13g2_or3_1_0.C 3bit_freq_divider_1.sg13g2_or3_1_0.B 1.00414f
+C535 vco_wob_0.vctl a_57112_40850# 0.05026f
+C536 3bit_freq_divider_1.dff_nclk_0.nCLK a_62900_20179# 0.2629f
+C537 a_60967_21478# PFD_0.VDD 0.45855f
+C538 a_48909_28913# PFD_0.Ref_CLK 0.12375f
+C539 a_45451_28860# a_45579_29803# 0.44406f
+C540 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.D 3bit_freq_divider_1.dff_nclk_0.nCLK 0.21745f
+C541 a_55836_43159# a_57178_43159# 0.91818f
+C542 a_53738_20514# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.01324f
+C543 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_61887_20534# 0.01324f
+C544 a_51648_24041# a_51631_22774# 0.02302f
+C545 a_64419_23326# 3bit_freq_divider_1.dff_nclk_0.nRST 0.16457f
+C546 3bit_freq_divider_1.sg13g2_nand2_1_0.Y 3bit_freq_divider_0.EN 0.12799f
+C547 a_53738_20514# a_53968_20434# 0.13068f
+C548 3bit_freq_divider_1.CLK_OUT m7_16847_2260# 1.40976f
+C549 3bit_freq_divider_0.CLK_IN 3bit_freq_divider_0.EN 0.41907f
+C550 3bit_freq_divider_0.A2 PFD_0.VDD 0.25402f
+C551 3bit_freq_divider_0.dff_nclk_0.D 3bit_freq_divider_0.A1 0.11556f
+C552 a_53738_24026# a_53774_23690# 0.44698f
+C553 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.nQ 0.0874f
+C554 a_53445_23726# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.nQ 0.10118f
+C555 3bit_freq_divider_1.dff_nclk_0.nCLK a_63255_23244# 0.10223f
+C556 PFD_0.VDD a_62654_21971# 0.4336f
+C557 m6_60810_42209# a_57178_43159# 0.08511f
+C558 a_52944_43077# a_53152_43159# 0.3548f
+C559 a_53022_43738# a_57178_43159# 0.04298f
+C560 a_51648_24041# a_51648_24438# 0.09575f
+C561 a_46817_27899# a_47954_28913# 0.22374f
+C562 a_64398_24796# a_64459_24995# 0.0229f
+C563 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_61394_20220# 0.08213f
+C564 a_53968_22190# a_54504_22015# 0.45825f
+C565 3bit_freq_divider_1.dff_nclk_0.D PFD_0.VDD 0.84615f
+C566 3bit_freq_divider_1.freq_div_cell_0.Cin a_61707_25000# 0.01154f
+C567 a_53968_23946# PFD_0.VDD 0.32286f
+C568 a_53058_43159# a_52944_43077# 0.08875f
+C569 a_53022_43738# a_53152_43159# 0.08218f
+C570 a_51708_21413# a_51648_21103# 0.014f
+C571 a_63463_23728# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.nQ 0.21609f
+C572 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.D 3bit_freq_divider_1.sg13g2_nand2_1_0.Y 0.05125f
+C573 3bit_freq_divider_0.dff_nclk_0.D 3bit_freq_divider_0.dff_nclk_0.nCLK 0.04354f
+C574 a_61887_24046# PFD_0.VDD 0.22153f
+C575 a_52924_21129# PFD_0.VDD 0.20953f
+C576 3bit_freq_divider_1.freq_div_cell_0.Cin a_60967_24990# 0.13167f
+C577 3bit_freq_divider_1.A1 3bit_freq_divider_1.sg13g2_or3_1_0.B 0.13266f
+C578 a_53022_43738# a_53058_43159# 0.24146f
+C579 a_58453_40283# a_57173_40413# 0.46167f
+C580 a_61887_20534# a_62119_20605# 0.13068f
+C581 a_54494_43159# a_55836_43159# 0.88103f
+C582 3bit_freq_divider_0.dff_nclk_0.nCLK a_51648_21103# 0.33244f
+C583 a_64383_23300# a_64383_23434# 0.13068f
+C584 a_53445_21970# PFD_0.VDD 0.30838f
+C585 a_60967_23234# 3bit_freq_divider_1.freq_div_cell_0.Cout 0.13167f
+C586 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.60301f
+C587 a_61707_23244# a_61878_22886# 0.36535f
+C588 a_55345_21385# PFD_0.VDD 0.45855f
+C589 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q 1.03922f
+C590 3bit_freq_divider_1.sg13g2_or3_1_0.C 3bit_freq_divider_1.A1 0.16352f
+C591 a_51631_22774# a_51693_23426# 0.05331f
+C592 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.D 0.21603f
+C593 3bit_freq_divider_0.EN PFD_0.VDD 6.40652f
+C594 a_64383_23706# PFD_0.VDD 0.30655f
+C595 a_52886_23148# 3bit_freq_divider_0.sg13g2_or3_1_0.B 0.23215f
+C596 a_53022_43738# a_54494_43159# 0.04f
+C597 a_53445_21970# a_53065_21935# 0.41048f
+C598 3bit_freq_divider_0.freq_div_cell_0.Cin 3bit_freq_divider_0.sg13g2_tiehi_1.L_HI 0.14552f
+C599 PFD_0.UP a_54357_49278# 0.30851f
+C600 a_61394_20220# a_62119_20605# 0.45825f
+C601 a_61394_21976# a_62119_22361# 0.45825f
+C602 a_53085_40283# PFD_0.VDD 1.35573f
+C603 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.nQ PFD_0.VDD 0.18275f
+C604 a_51685_23725# PFD_0.VDD 0.30547f
+C605 a_53022_43738# a_58426_43159# 0.10045f
+C606 a_54434_24904# 3bit_freq_divider_0.freq_div_cell_0.Cin 0.01154f
+C607 PFD_0.Ref_CLK a_46749_30782# 0.97391f
+C608 3bit_freq_divider_0.dff_nclk_0.nCLK a_53065_20179# 0.31132f
+C609 a_60385_24947# PFD_0.VDD 0.11858f
+C610 a_61878_21130# PFD_0.VDD 0.21321f
+C611 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q a_54472_22885# 0.02559f
+C612 a_61394_20220# 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.D 0.3562f
+C613 a_62900_21935# PFD_0.VDD 0.30801f
+C614 a_63463_20216# 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q 0.12389f
+C615 a_54504_22015# PFD_0.VDD 0.38024f
+C616 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.nQ a_53065_21935# 0.0571f
+C617 m1_17285_2698# m2_17285_2698# 0.20496p
+C618 a_62900_20179# PFD_0.VDD 0.30479f
+C619 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_53774_21934# 0.33731f
+C620 3bit_freq_divider_1.sg13g2_nand2_1_0.Y 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.10521f
+C621 3bit_freq_divider_1.dff_nclk_0.nCLK a_62119_20605# 0.32732f
+C622 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.D PFD_0.VDD 0.97883f
+C623 charge_pump_0.bias_p PFD_0.VDD 2.67087f
+C624 a_61887_24046# a_61691_24046# 0.45047f
+C625 a_52924_22885# a_52886_23148# 0.36535f
+C626 3bit_freq_divider_0.sg13g2_or3_1_0.C 3bit_freq_divider_0.sg13g2_or3_1_0.B 1.00414f
+C627 sg13g2_inv_1_0.A PFD_0.VDD 3.87548f
+C628 3bit_freq_divider_0.EN a_58536_54976# 0.21462f
+C629 a_53065_20179# a_53738_20514# 0.40027f
+C630 3bit_freq_divider_0.dff_nclk_0.nCLK a_54504_23771# 0.37259f
+C631 a_64424_22200# 3bit_freq_divider_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.0838f
+C632 a_55769_40283# a_54489_40413# 0.45379f
+C633 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.D 0.21745f
+C634 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_61394_21976# 0.08213f
+C635 a_57178_43159# a_57311_42591# 0.22378f
+C636 vco_wob_0.vctl a_54489_40413# 0.04184f
+C637 a_52886_21392# a_53350_21129# 0.0104f
+C638 a_51631_22774# PFD_0.VDD 0.62631f
+C639 PFD_0.VDD 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.nQ 0.18067f
+C640 a_63255_25000# 3bit_freq_divider_1.sg13g2_or3_1_0.C 0.23357f
+C641 a_63255_23244# PFD_0.VDD 0.25835f
+C642 a_51648_24041# 3bit_freq_divider_0.dff_nclk_0.nRST 0.30513f
+C643 a_62654_20215# 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q 0.01984f
+C644 a_64383_23434# PFD_0.VDD 0.19308f
+C645 a_53968_23946# a_53774_23690# 0.05314f
+C646 charge_pump_0.bias_p a_58536_54976# 0.38944f
+C647 charge_pump_0.bias_n a_59097_54704# 0.01331f
+C648 a_51648_24438# PFD_0.VDD 0.24104f
+C649 3bit_freq_divider_0.sg13g2_or3_1_0.B 3bit_freq_divider_0.sg13g2_or3_1_0.A 0.72102f
+C650 a_51708_21299# PFD_0.VDD 0.01263f
+C651 a_61691_22290# a_61887_22290# 0.45047f
+C652 a_54489_40413# PFD_0.VDD 1.15543f
+C653 a_56137_24678# a_55941_24882# 0.0229f
+C654 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.11142f
+C655 3bit_freq_divider_1.dff_nclk_0.nCLK a_62119_22361# 0.32758f
+C656 a_53065_23691# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.nQ 0.05822f
+C657 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q a_60967_21478# 0.30546f
+C658 vco_wob_0.vctl a_55969_42591# 0.0811f
+C659 3bit_freq_divider_1.sg13g2_nand2_1_0.Y 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.D 0.05067f
+C660 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VDD 0.27798f
+C661 a_51684_22284# a_51693_23426# 0.45825f
+C662 3bit_freq_divider_1.dff_nclk_0.D a_64424_22200# 0.43097f
+C663 a_64384_21091# a_64714_21300# 0.02055f
+C664 a_60385_24717# PFD_0.VDD 0.11381f
+C665 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q PFD_0.VDD 1.41895f
+C666 a_63463_23728# PFD_0.VDD 0.2349f
+C667 3bit_freq_divider_0.freq_div_cell_0.Cin PFD_0.VDD 1.21627f
+C668 a_64362_24865# 3bit_freq_divider_1.dff_nclk_0.nRST 0.03098f
+C669 3bit_freq_divider_0.dff_nclk_0.nCLK a_53774_21934# 0.35569f
+C670 a_64398_24796# PFD_0.VDD 0.09559f
+C671 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.sg13g2_or3_1_0.B 0.58488f
+C672 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.D 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.40308f
+C673 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.D 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q 0.22983f
+C674 3bit_freq_divider_1.freq_div_cell_1.Cout a_61707_21488# 0.01154f
+C675 a_55969_42591# PFD_0.VDD 0.0108f
+C676 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q a_62654_21971# 0.0119f
+C677 a_52886_23148# PFD_0.VDD 0.25998f
+C678 a_53445_23726# a_53738_24026# 0.04306f
+C679 m3_17285_2698# m4_17285_2698# 0.20496p
+C680 a_63255_25000# 3bit_freq_divider_1.A1 0.01849f
+C681 3bit_freq_divider_0.freq_div_cell_0.Cout 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 0.3426f
+C682 a_53899_20488# PFD_0.VDD 0.24492f
+C683 m6_17427_2840# 3bit_freq_divider_1.A1 1.19758f
+C684 3bit_freq_divider_1.CLK_OUT 3bit_freq_divider_1.dff_nclk_0.D 0.01884f
+C685 a_51693_23426# 3bit_freq_divider_0.dff_nclk_0.nRST 0.3148f
+C686 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.sg13g2_or3_1_0.C 0.13894f
+C687 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.60301f
+C688 a_61887_24046# a_62270_24055# 0.66077f
+C689 a_53899_24000# a_53065_23691# 0.03957f
+C690 a_55862_56737# charge_pump_0.bias_n 0.34812f
+C691 a_55862_56737# a_55948_56737# 0.0609f
+C692 a_62119_20605# PFD_0.VDD 0.2982f
+C693 a_48909_28913# a_47954_28913# 0.39061f
+C694 PFD_0.VCO_CLK a_46817_27899# 0.92547f
+C695 3bit_freq_divider_1.freq_div_cell_0.Cin 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.01369f
+C696 m2_16847_2260# m3_16847_2260# 0.2063p
+C697 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.D 3bit_freq_divider_0.freq_div_cell_0.Cout 0.084f
+C698 3bit_freq_divider_0.sg13g2_or3_1_0.C PFD_0.VDD 0.20391f
+C699 a_51684_22284# PFD_0.VDD 0.36995f
+C700 vco_wob_0.vctl a_54428_40850# 0.04894f
+C701 m4_17285_2698# 3bit_freq_divider_0.A0 0.39515f
+C702 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.D PFD_0.VDD 0.9437f
+C703 a_53445_21970# a_53738_22270# 0.04306f
+C704 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.nQ 3bit_freq_divider_1.A1 0.01108f
+C705 a_46749_30782# PFD_0.VDD 1.12191f
+C706 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.D a_54504_23771# 0.3562f
+C707 vco_wob_0.vctl a_60528_49446# 0.01545f
+C708 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 0.23907f
+C709 a_64383_23300# a_64383_23628# 0.05314f
+C710 a_63255_25000# a_63223_24642# 0.0104f
+C711 3bit_freq_divider_1.sg13g2_nand2_1_0.Y 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.11142f
+C712 3bit_freq_divider_1.sg13g2_tiehi_1.L_HI PFD_0.VDD 0.7718f
+C713 a_55345_21385# 3bit_freq_divider_0.freq_div_cell_1.Cout 0.13166f
+C714 a_52924_24641# 3bit_freq_divider_0.A0 0.02265f
+C715 a_51684_22692# a_51693_23075# 0.66077f
+C716 a_64383_23889# 3bit_freq_divider_1.dff_nclk_0.nRST 0.30513f
+C717 a_61878_21130# 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q 0.02559f
+C718 3bit_freq_divider_0.freq_div_cell_1.Cout 3bit_freq_divider_0.EN 0.01552f
+C719 3bit_freq_divider_0.dff_nclk_0.nRST PFD_0.VDD 0.60215f
+C720 3bit_freq_divider_0.freq_div_cell_0.Cout a_54434_21392# 0.12082f
+C721 3bit_freq_divider_0.dff_nclk_0.nCLK a_53774_20178# 0.35517f
+C722 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.10521f
+C723 a_54428_40850# PFD_0.VDD 0.01457f
+C724 3bit_freq_divider_1.sg13g2_or3_1_0.A 3bit_freq_divider_1.sg13g2_or3_1_0.B 0.72102f
+C725 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.A1 0.23798f
+C726 PFD_0.VDD a_62119_22361# 0.31854f
+C727 3bit_freq_divider_0.sg13g2_or3_1_0.A PFD_0.VDD 0.12791f
+C728 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.D 3bit_freq_divider_0.dff_nclk_0.nCLK 0.21745f
+C729 a_45658_27900# a_46817_27899# 0.43194f
+C730 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.nQ 0.02505f
+C731 a_53968_22190# a_53899_22244# 0.70262f
+C732 a_53738_22270# a_54504_22015# 0.47248f
+C733 a_64731_24890# a_64362_24865# 0.01952f
+C734 a_53085_40283# a_52944_43077# 0.45412f
+C735 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.nQ 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q 0.02712f
+C736 a_53774_20178# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.33731f
+C737 a_54434_23148# 3bit_freq_divider_0.freq_div_cell_0.Cin 0.12082f
+C738 a_64383_23434# a_64424_22200# 0.47248f
+C739 a_53774_20178# a_53738_20514# 0.44698f
+C740 a_53022_43738# a_53085_40283# 0.23019f
+C741 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.nQ a_53445_20214# 0.10118f
+C742 a_55831_40413# a_57112_40850# 0.23035f
+C743 a_53774_20178# a_53968_20434# 0.05314f
+C744 a_61887_24046# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.01324f
+C745 3bit_freq_divider_1.sg13g2_or3_1_0.B PFD_0.VDD 0.10974f
+C746 m7_16847_2260# 3bit_freq_divider_0.A0 1.44946f
+C747 vco_wob_0.vctl a_57173_40413# 0.03129f
+C748 a_60385_24947# a_60584_24580# 0.0229f
+C749 PFD_0.Ref_CLK m6_17427_2840# 1.23795f
+C750 a_52950_23913# PFD_0.VDD 0.24052f
+C751 a_54472_21129# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q 0.02559f
+C752 vco_wob_0.vctl a_54627_42591# 0.07714f
+C753 3bit_freq_divider_1.freq_div_cell_0.Cin a_60967_23234# 0.13034f
+C754 3bit_freq_divider_1.sg13g2_tiehi_1.L_HI a_61707_25000# 0.12082f
+C755 3bit_freq_divider_0.freq_div_cell_0.Cin 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q 0.22232f
+C756 3bit_freq_divider_0.sg13g2_tiehi_1.L_HI a_55941_24882# 0.12404f
+C757 3bit_freq_divider_1.sg13g2_or3_1_0.C PFD_0.VDD 0.19202f
+C758 PFD_0.VDD 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.29872f
+C759 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.nQ a_63463_20216# 0.21609f
+C760 a_53899_24000# 3bit_freq_divider_0.dff_nclk_0.nCLK 0.17312f
+C761 a_61394_20220# a_61887_20534# 0.47248f
+C762 a_61691_20534# a_62270_20543# 0.04304f
+C763 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.D 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q 0.22983f
+C764 a_61691_22290# a_62270_22299# 0.04304f
+C765 a_57173_40413# PFD_0.VDD 0.98193f
+C766 3bit_freq_divider_1.dff_nclk_0.nCLK a_61394_21976# 0.37259f
+C767 3bit_freq_divider_1.sg13g2_tiehi_1.L_HI a_60967_24990# 0.21784f
+C768 a_64383_23628# PFD_0.VDD 0.62587f
+C769 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VDD 0.30706f
+C770 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.D 0.21603f
+C771 a_51693_23075# 3bit_freq_divider_0.A1 0.01284f
+C772 a_54627_42591# PFD_0.VDD 0.01623f
+C773 a_53065_23691# a_53738_24026# 0.40027f
+C774 3bit_freq_divider_0.CLK_IN a_59800_40852# 0.13041f
+C775 a_61887_24046# a_62900_23691# 0.04306f
+C776 a_52886_24904# PFD_0.VDD 0.28115f
+C777 a_61878_22886# PFD_0.VDD 0.21321f
+C778 m1_16847_2260# m2_16847_2260# 0.2063p
+C779 a_53899_22244# PFD_0.VDD 0.26052f
+C780 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q 3bit_freq_divider_1.A2 0.21293f
+C781 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q a_52950_22157# 0.12389f
+C782 3bit_freq_divider_1.freq_div_cell_0.Cout a_61707_21488# 0.12082f
+C783 a_61707_23244# PFD_0.VDD 0.2676f
+C784 3bit_freq_divider_1.dff_nclk_0.nCLK a_61887_20534# 0.18209f
+C785 a_54427_40283# a_54489_40413# 0.12991f
+C786 a_58453_40283# PFD_0.VDD 1.38336f
+C787 3bit_freq_divider_0.sg13g2_tiehi_1.L_HI a_54472_24641# 0.01011f
+C788 3bit_freq_divider_1.CLK_OUT a_64398_24796# 0.02652f
+C789 3bit_freq_divider_0.sg13g2_or3_1_0.C 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q 0.05745f
+C790 a_53899_22244# a_53065_21935# 0.03957f
+C791 a_53022_43738# a_54489_40413# 0.05403f
+C792 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.D 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 0.04726f
+C793 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.nQ a_62654_20215# 0.0571f
+C794 a_56137_24678# PFD_0.VDD 0.11858f
+C795 a_54434_24904# a_54472_24641# 0.36535f
+C796 a_55345_23141# PFD_0.VDD 0.45855f
+C797 3bit_freq_divider_0.CLK_IN 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q 0.02001f
+C798 vco_wob_0.vctl a_59800_40852# 0.05123f
+C799 a_55836_43159# a_55969_42591# 0.22378f
+C800 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.nQ 0.02503f
+C801 3bit_freq_divider_1.A0 3bit_freq_divider_1.sg13g2_or3_1_0.C 0.12518f
+C802 3bit_freq_divider_1.dff_nclk_0.nCLK a_61394_20220# 0.37259f
+C803 3bit_freq_divider_1.sg13g2_nand2_1_0.Y 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.D 0.04726f
+C804 3bit_freq_divider_1.A1 PFD_0.VDD 0.44908f
+C805 a_64731_24890# 3bit_freq_divider_1.dff_nclk_0.nRST 0.01267f
+C806 a_53350_22885# a_52886_23148# 0.0104f
+C807 a_62654_23727# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q 0.02071f
+C808 a_60584_24580# a_60385_24717# 0.14868f
+C809 a_54434_21392# a_54898_21129# 0.0104f
+C810 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.D a_54472_21129# 0.12185f
+C811 a_52886_21392# 3bit_freq_divider_0.A2 0.39847f
+C812 a_56038_24617# PFD_0.VDD 0.0448f
+C813 a_63255_23244# a_63426_22886# 0.36535f
+C814 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q a_63426_24642# 0.02246f
+C815 3bit_freq_divider_1.freq_div_cell_0.Cout 3bit_freq_divider_1.freq_div_cell_1.Cout 0.09134f
+C816 a_53065_20179# a_53774_20178# 0.02335f
+C817 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.D 0.22983f
+C818 a_48909_28913# PFD_0.VCO_CLK 0.1514f
+C819 PFD_0.VCO_CLK a_51648_24438# 0.11636f
+C820 a_51600_24907# 3bit_freq_divider_0.dff_nclk_0.nRST 0.01267f
+C821 a_63255_21488# a_63223_21130# 0.0104f
+C822 a_55941_24882# PFD_0.VDD 0.10494f
+C823 a_54489_40413# a_55831_40413# 0.72984f
+C824 a_52924_21129# a_52886_21392# 0.36535f
+C825 a_54434_24904# 3bit_freq_divider_0.sg13g2_tiehi_1.L_HI 0.12082f
+C826 a_56039_25022# PFD_0.VDD 0.01215f
+C827 3bit_freq_divider_0.dff_nclk_0.nCLK a_52950_22157# 0.05957f
+C828 a_52924_22885# 3bit_freq_divider_0.sg13g2_or3_1_0.B 0.10697f
+C829 a_52950_23913# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q 0.12519f
+C830 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q PFD_0.VDD 1.42261f
+C831 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q a_63426_22886# 0.01011f
+C832 3bit_freq_divider_1.A0 3bit_freq_divider_1.A1 1.97044f
+C833 PFD_0.VDD a_61394_21976# 0.38024f
+C834 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_53774_23690# 0.33731f
+C835 a_53445_20214# PFD_0.VDD 0.30479f
+C836 a_54842_49733# PFD_0.VDD 0.03367f
+C837 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.D PFD_0.VDD 0.97083f
+C838 m5_17331_2744# 3bit_freq_divider_1.A1 0.40842f
+C839 a_63255_25000# PFD_0.VDD 0.26507f
+C840 3bit_freq_divider_0.dff_nclk_0.nCLK a_53738_24026# 0.18638f
+C841 3bit_freq_divider_1.dff_nclk_0.D a_64419_23326# 0.01591f
+C842 a_53065_21935# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q 0.0119f
+C843 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.sg13g2_nand2_1_0.Y 0.23907f
+C844 3bit_freq_divider_0.dff_nclk_0.D a_51693_23075# 0.01591f
+C845 charge_pump_0.vout charge_pump_0.bias_n 0.23558f
+C846 a_56828_53480# sg13g2_inv_1_0.A 0.06208f
+C847 a_54472_24641# PFD_0.VDD 0.214f
+C848 3bit_freq_divider_1.sg13g2_tiehi_1.L_HI a_60584_24580# 0.12404f
+C849 a_57173_40413# a_58454_40850# 0.22936f
+C850 a_61887_20534# PFD_0.VDD 0.19386f
+C851 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q a_52886_24904# 0.14987f
+C852 a_64459_24995# PFD_0.VDD 0.08543f
+C853 a_51631_22774# 3bit_freq_divider_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.33833f
+C854 a_64383_23628# a_64424_22200# 0.17766f
+C855 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.nQ PFD_0.VDD 0.18065f
+C856 PFD_0.Ref_CLK PFD_0.VDD 2.49441f
+C857 a_63463_21972# a_62654_21971# 0.09575f
+C858 3bit_freq_divider_0.dff_nclk_0.nCLK a_54504_20259# 0.37259f
+C859 a_61887_22290# a_62654_21971# 0.40027f
+C860 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.sg13g2_or3_1_0.A 0.48568f
+C861 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.nQ PFD_0.VDD 0.18204f
+C862 a_61394_20220# PFD_0.VDD 0.36995f
+C863 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.nQ a_62900_20179# 0.10118f
+C864 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.D a_54472_22885# 0.12185f
+C865 a_54472_21129# PFD_0.VDD 0.21321f
+C866 3bit_freq_divider_1.sg13g2_nand2_1_0.Y 3bit_freq_divider_0.CLK_IN 0.2618f
+C867 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.D a_53774_21934# 0.01446f
+C868 3bit_freq_divider_1.A0 a_63255_25000# 0.39999f
+C869 a_51759_25014# a_51622_24863# 0.14868f
+C870 a_61707_25000# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.D 0.24715f
+C871 a_51648_24041# PFD_0.VDD 0.41893f
+C872 a_54504_20259# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.08213f
+C873 a_64384_21091# 3bit_freq_divider_1.sg13g2_or3_1_0.B 0.26158f
+C874 a_61691_24046# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.D 0.01446f
+C875 3bit_freq_divider_1.A0 m6_17427_2840# 1.19758f
+C876 3bit_freq_divider_0.sg13g2_or3_1_0.B PFD_0.VDD 0.11082f
+C877 a_53738_20514# a_54504_20259# 0.47248f
+C878 a_51684_22692# a_51685_23725# 0.04306f
+C879 a_60967_23234# 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q 0.30546f
+C880 m5_17331_2744# m6_17427_2840# 84.0579f
+C881 a_53968_20434# a_54504_20259# 0.45825f
+C882 a_52950_20401# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q 0.12389f
+C883 3bit_freq_divider_1.dff_nclk_0.nCLK PFD_0.VDD 2.89514f
+C884 3bit_freq_divider_0.A1 3bit_freq_divider_0.A2 0.01072f
+C885 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.D PFD_0.VDD 0.9437f
+C886 a_53738_22270# a_53899_22244# 0.66077f
+C887 3bit_freq_divider_1.A2 a_62654_21971# 0.02368f
+C888 PFD_0.VCO_CLK 3bit_freq_divider_0.dff_nclk_0.nRST 0.06912f
+C889 3bit_freq_divider_0.sg13g2_tiehi_1.L_HI PFD_0.VDD 0.77158f
+C890 3bit_freq_divider_1.sg13g2_or3_1_0.C a_64384_21091# 0.25034f
+C891 a_53285_42591# a_53152_43159# 0.22378f
+C892 a_53022_43738# a_57173_40413# 0.04406f
+C893 3bit_freq_divider_0.EN 3bit_freq_divider_0.A0 0.11772f
+C894 a_54434_24904# PFD_0.VDD 0.27564f
+C895 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.nQ 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q 0.02712f
+C896 a_54489_40413# a_55770_40850# 0.23444f
+C897 vco_wob_0.vctl 3bit_freq_divider_0.CLK_IN 0.50349f
+C898 charge_pump_0.vout a_54357_49278# 0.01432f
+C899 a_51721_24988# PFD_0.VDD 0.08543f
+C900 a_51685_23725# 3bit_freq_divider_0.A0 0.02143f
+C901 a_64383_23300# PFD_0.VDD 0.29403f
+C902 3bit_freq_divider_0.EN charge_pump_0.bias_n 0.02661f
+C903 PFD_0.Ref_CLK m5_17331_2744# 0.42278f
+C904 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.A2 0.64366f
+C905 a_64384_24445# PFD_0.VDD 0.24105f
+C906 a_52924_22885# PFD_0.VDD 0.20953f
+C907 a_54504_22015# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.08213f
+C908 3bit_freq_divider_1.CLK_OUT 3bit_freq_divider_1.A1 0.01478f
+C909 a_55948_56737# 3bit_freq_divider_0.EN 0.0294f
+C910 a_62270_20543# a_62654_20215# 0.03957f
+C911 a_51684_22692# a_51631_22774# 0.45006f
+C912 3bit_freq_divider_0.freq_div_cell_0.Cout a_55345_21385# 0.13034f
+C913 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.D 3bit_freq_divider_0.sg13g2_nand2_1_0.Y 0.05125f
+C914 a_62900_21935# a_61887_22290# 0.04306f
+C915 3bit_freq_divider_1.sg13g2_or3_1_0.B a_63426_22886# 0.10697f
+C916 a_64383_23434# a_64419_23326# 0.66077f
+C917 a_58453_40283# a_53022_43738# 0.19288f
+C918 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.nQ a_52950_20401# 0.21609f
+C919 a_53968_22190# PFD_0.VDD 0.31854f
+C920 3bit_freq_divider_1.sg13g2_nand2_1_0.Y PFD_0.VDD 3.38844f
+C921 a_53968_23946# 3bit_freq_divider_0.dff_nclk_0.nCLK 0.32517f
+C922 3bit_freq_divider_0.CLK_IN PFD_0.VDD 1.60757f
+C923 a_56742_53480# a_56828_53480# 0.09853f
+C924 a_51693_23426# PFD_0.VDD 0.29403f
+C925 a_55742_43159# a_54494_43159# 0.10275f
+C926 3bit_freq_divider_0.sg13g2_or3_1_0.C 3bit_freq_divider_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.28129f
+C927 a_51684_22284# 3bit_freq_divider_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.0838f
+C928 3bit_freq_divider_0.dff_nclk_0.nCLK a_52924_21129# 0.03449f
+C929 3bit_freq_divider_0.EN 3bit_freq_divider_0.A1 0.5347f
+C930 charge_pump_0.bias_n charge_pump_0.bias_p 1.09436f
+C931 a_55948_56737# charge_pump_0.bias_p 0.02673f
+C932 3bit_freq_divider_1.dff_nclk_0.nCLK a_61691_24046# 0.35198f
+C933 sg13g2_inv_1_0.A charge_pump_0.bias_n 0.06869f
+C934 a_61887_24046# a_62654_23727# 0.40027f
+C935 a_63463_21972# 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.nQ 0.21609f
+C936 a_46749_30782# a_47777_29803# 0.4544f
+C937 3bit_freq_divider_0.dff_nclk_0.nCLK a_53445_21970# 0.27428f
+C938 a_54400_43159# PFD_0.VDD 1.37065f
+C939 PFD_0.DOWN a_54747_49259# 0.01456f
+C940 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q a_54472_24641# 0.02559f
+C941 a_63255_23244# a_63223_22886# 0.0104f
+C942 a_62900_21935# 3bit_freq_divider_1.A2 0.0145f
+C943 3bit_freq_divider_1.sg13g2_or3_1_0.A PFD_0.VDD 0.12797f
+C944 a_57173_40413# a_55831_40413# 0.7336f
+C945 a_53085_40283# a_53147_40413# 0.10818f
+C946 a_55769_40283# PFD_0.VDD 1.37334f
+C947 vco_wob_0.vctl PFD_0.VDD 0.2823f
+C948 a_53022_43738# a_59800_40852# 0.01439f
+C949 3bit_freq_divider_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 3bit_freq_divider_0.dff_nclk_0.nRST 0.16209f
+C950 a_51648_24438# 3bit_freq_divider_0.A0 0.01187f
+C951 a_62119_24117# a_61394_23732# 0.45825f
+C952 a_54504_23771# a_53738_24026# 0.47248f
+C953 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.nQ 0.08742f
+C954 3bit_freq_divider_0.freq_div_cell_1.Cout 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q 0.2223f
+C955 3bit_freq_divider_1.CLK_OUT m6_17427_2840# 1.19758f
+C956 3bit_freq_divider_1.A2 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.nQ 0.04365f
+C957 3bit_freq_divider_0.dff_nclk_0.nCLK a_54504_22015# 0.37259f
+C958 3bit_freq_divider_0.freq_div_cell_0.Cin 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q 0.42266f
+C959 a_51631_22774# 3bit_freq_divider_0.A1 0.02271f
+C960 a_63255_23244# 3bit_freq_divider_1.A2 0.01433f
+C961 a_63463_21972# 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q 0.12389f
+C962 3bit_freq_divider_1.A1 a_63426_22886# 0.01971f
+C963 a_52886_23148# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q 0.12248f
+C964 a_53065_21935# PFD_0.VDD 0.43552f
+C965 3bit_freq_divider_0.sg13g2_or3_1_0.A a_52886_21392# 0.23182f
+C966 m7_16847_2260# m6_16847_2260# 39.787f
+C967 3bit_freq_divider_0.sg13g2_tiehi_1.L_HI 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q 0.42892f
+C968 a_51684_22692# 3bit_freq_divider_0.sg13g2_or3_1_0.C 0.03556f
+C969 a_51684_22692# a_51684_22284# 0.47248f
+C970 a_62270_22299# a_62654_21971# 0.03957f
+C971 vco_wob_0.vctl a_53086_40850# 0.04284f
+C972 a_54434_24904# 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q 0.46099f
+C973 3bit_freq_divider_1.freq_div_cell_1.Cout a_60967_21478# 0.13166f
+C974 a_58536_54976# PFD_0.VDD 0.98046f
+C975 3bit_freq_divider_0.freq_div_cell_0.Cout 3bit_freq_divider_0.freq_div_cell_0.Cin 0.10559f
+C976 a_54357_49278# charge_pump_0.bias_p 0.01013f
+C977 a_53147_40413# a_54489_40413# 0.35714f
+C978 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q 3bit_freq_divider_1.A2 0.20327f
+C979 a_57084_43159# PFD_0.VDD 1.35049f
+C980 3bit_freq_divider_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 3bit_freq_divider_1.dff_nclk_0.nRST 0.16234f
+C981 a_62270_24055# 3bit_freq_divider_1.dff_nclk_0.nCLK 0.17312f
+C982 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q a_61878_24642# 0.02559f
+C983 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q 1.04018f
+C984 a_64383_23300# a_64424_22200# 0.45825f
+C985 a_51684_22692# 3bit_freq_divider_0.dff_nclk_0.nRST 0.126f
+C986 3bit_freq_divider_0.sg13g2_or3_1_0.C 3bit_freq_divider_0.A0 0.41386f
+C987 a_60385_24558# a_60385_24717# 0.01952f
+C988 a_54434_23148# a_54898_22885# 0.0104f
+C989 3bit_freq_divider_1.A0 PFD_0.VDD 0.55412f
+C990 a_61707_25000# PFD_0.VDD 0.27566f
+C991 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.D 0.40308f
+C992 a_61691_24046# PFD_0.VDD 0.69635f
+C993 a_64383_23889# 3bit_freq_divider_1.dff_nclk_0.D 0.09445f
+C994 a_52886_23148# 3bit_freq_divider_0.A1 0.39847f
+C995 a_56742_53480# charge_pump_0.bias_n 0.05592f
+C996 a_47954_28913# PFD_0.VDD 0.45155f
+C997 3bit_freq_divider_0.CLK_IN a_58454_40850# 0.02056f
+C998 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.D 3bit_freq_divider_0.freq_div_cell_1.Cout 0.04623f
+C999 a_60967_24990# PFD_0.VDD 0.4548f
+C1000 3bit_freq_divider_0.dff_nclk_0.D a_51685_23725# 0.12409f
+C1001 a_52950_20401# PFD_0.VDD 0.2331f
+C1002 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.freq_div_cell_0.Cin 0.32366f
+C1003 a_61878_21130# a_61707_21488# 0.36535f
+C1004 3bit_freq_divider_1.CLK_OUT a_64384_24445# 0.1244f
+C1005 a_52950_23913# a_53065_23691# 0.09575f
+C1006 a_62654_23727# 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q 0.0119f
+C1007 3bit_freq_divider_0.dff_nclk_0.nRST 3bit_freq_divider_0.A0 0.14477f
+C1008 a_62654_23727# a_63463_23728# 0.09575f
+C1009 3bit_freq_divider_0.dff_nclk_0.nCLK a_52886_23148# 0.10223f
+C1010 a_55345_24897# 3bit_freq_divider_0.freq_div_cell_0.Cin 0.13167f
+C1011 3bit_freq_divider_1.dff_nclk_0.nCLK a_64384_21091# 0.33258f
+C1012 3bit_freq_divider_0.dff_nclk_0.nCLK a_53899_20488# 0.17248f
+C1013 3bit_freq_divider_1.dff_nclk_0.nCLK a_63255_21488# 0.10313f
+C1014 a_54434_23148# PFD_0.VDD 0.2676f
+C1015 a_61887_22290# a_62119_22361# 0.13068f
+C1016 a_53968_23946# a_54504_23771# 0.45825f
+C1017 3bit_freq_divider_1.dff_nclk_0.D 3bit_freq_divider_1.dff_nclk_0.nRST 0.7629f
+C1018 a_53774_23690# PFD_0.VDD 0.70098f
+C1019 3bit_freq_divider_0.CLK_IN 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q 0.02001f
+C1020 3bit_freq_divider_1.sg13g2_or3_1_0.C a_64419_23326# 0.01089f
+C1021 3bit_freq_divider_0.sg13g2_or3_1_0.C 3bit_freq_divider_0.A1 0.20623f
+C1022 a_51684_22284# 3bit_freq_divider_0.A1 0.0269f
+C1023 a_53738_22270# a_53968_22190# 0.13068f
+C1024 vco_wob_0.vctl a_58454_40850# 0.04998f
+C1025 a_64383_23889# a_64383_23706# 0.41048f
+C1026 3bit_freq_divider_0.EN 3bit_freq_divider_1.freq_div_cell_1.Cout 0.01552f
+C1027 a_64419_23326# a_64383_23628# 0.04304f
+C1028 3bit_freq_divider_0.dff_nclk_0.D a_51631_22774# 0.03728f
+C1029 3bit_freq_divider_1.A0 m5_17331_2744# 0.40842f
+C1030 a_53738_20514# a_53899_20488# 0.66077f
+C1031 a_53968_20434# a_53899_20488# 0.70262f
+C1032 m5_16847_2260# m6_16847_2260# 0.13106p
+C1033 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q PFD_0.VDD 1.68952f
+C1034 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.sg13g2_or3_1_0.C 0.13894f
+C1035 3bit_freq_divider_1.dff_nclk_0.nCLK 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.60301f
+C1036 3bit_freq_divider_0.dff_nclk_0.nRST 3bit_freq_divider_0.A1 0.08188f
+C1037 m6_60810_42209# 3bit_freq_divider_0.CLK_IN 0.11742f
+C1038 3bit_freq_divider_0.dff_nclk_0.D a_51648_24438# 0.2233f
+C1039 a_57173_40413# a_58515_40413# 0.58365f
+C1040 a_53022_43738# 3bit_freq_divider_0.CLK_IN 0.16863f
+C1041 PFD_0.VDD a_64424_22200# 0.36995f
+C1042 a_64383_23706# 3bit_freq_divider_1.dff_nclk_0.nRST 0.25925f
+C1043 a_64398_24796# a_64362_24865# 0.14868f
+C1044 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK a_61887_22290# 0.01324f
+C1045 a_53147_40413# a_54428_40850# 0.23834f
+C1046 3bit_freq_divider_1.dff_nclk_0.nCLK a_63426_22886# 0.03415f
+C1047 a_53058_43159# a_53152_43159# 0.42803f
+C1048 a_51708_21299# a_51648_21103# 0.02055f
+C1049 vco_wob_0.vctl a_55836_43159# 0.02497f
+C1050 a_62900_23691# 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.nQ 0.10118f
+C1051 a_51600_24907# PFD_0.VDD 0.04155f
+C1052 a_62270_24055# PFD_0.VDD 0.26494f
+C1053 a_53774_20178# a_54504_20259# 0.17766f
+C1054 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q PFD_0.VDD 1.4225f
+C1055 a_53022_43738# a_54400_43159# 0.19723f
+C1056 a_58453_40283# a_58515_40413# 0.10827f
+C1057 3bit_freq_divider_1.sg13g2_or3_1_0.B 3bit_freq_divider_1.A2 0.1586f
+C1058 a_62270_20543# a_62119_20605# 0.70262f
+C1059 m3_17285_2698# 3bit_freq_divider_1.A1 0.2919f
+C1060 3bit_freq_divider_1.CLK_OUT PFD_0.VDD 0.38178f
+C1061 3bit_freq_divider_0.dff_nclk_0.nCLK 3bit_freq_divider_0.sg13g2_or3_1_0.A 0.48568f
+C1062 a_52886_24904# 3bit_freq_divider_0.A0 0.40762f
+C1063 a_55769_40283# a_53022_43738# 0.19098f
+C1064 a_53738_22270# PFD_0.VDD 0.21577f
+C1065 vco_wob_0.vctl m6_60810_42209# 0.05504f
+C1066 a_64383_23889# a_64383_23434# 0.40027f
+C1067 3bit_freq_divider_1.freq_div_cell_0.Cin 3bit_freq_divider_1.freq_div_cell_0.Cout 0.10559f
+C1068 vco_wob_0.vctl a_53022_43738# 0.09057f
+C1069 3bit_freq_divider_1.sg13g2_or3_1_0.A a_64384_21091# 0.31317f
+C1070 a_63255_21488# 3bit_freq_divider_1.sg13g2_or3_1_0.A 0.23182f
+C1071 a_54494_43159# a_53152_43159# 0.77984f
+C1072 a_52886_21392# 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q 0.12248f
+C1073 3bit_freq_divider_1.sg13g2_nand2_1_0.Y 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK 0.1064f
+C1074 a_57178_43159# a_58426_43159# 0.1057f
+C1075 a_55836_43159# PFD_0.VDD 1.00781f
+C1076 3bit_freq_divider_0.freq_div_cell_1.Cout PFD_0.VDD 0.4595f
+C1077 a_53899_24000# a_53738_24026# 0.66077f
+C1078 a_62900_23691# 3bit_freq_divider_1.dff_nclk_0.nCLK 0.24211f
+C1079 a_55345_23141# 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q 0.30546f
+C1080 a_53445_21970# a_53774_21934# 0.04324f
+C1081 a_53738_22270# a_53065_21935# 0.40027f
+C1082 a_52944_43077# PFD_0.VDD 0.7984f
+C1083 m7_16847_2260# PFD_0.VSS 93.0612f
+C1084 m6_60810_42209# PFD_0.VSS 1.80367f
+C1085 m6_17427_2840# PFD_0.VSS 0.10708p
+C1086 m6_16847_2260# PFD_0.VSS 0.11472p
+C1087 m5_17331_2744# PFD_0.VSS 79.2024f
+C1088 m5_16847_2260# PFD_0.VSS 84.4749f
+C1089 m4_17285_2698# PFD_0.VSS 84.41901f
+C1090 m4_16847_2260# PFD_0.VSS 89.24989f
+C1091 m3_17285_2698# PFD_0.VSS 91.8291f
+C1092 m3_16847_2260# PFD_0.VSS 96.21301f
+C1093 m2_17285_2698# PFD_0.VSS 0.10557p
+C1094 m2_16847_2260# PFD_0.VSS 0.10679p
+C1095 m1_17285_2698# PFD_0.VSS 0.22685p
+C1096 m1_16847_2260# PFD_0.VSS 0.22893p
+C1097 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.nQ PFD_0.VSS 0.08893f $ **FLOATING
+C1098 a_62900_20179# PFD_0.VSS 0.34783f $ **FLOATING
+C1099 a_63463_20216# PFD_0.VSS 0.43565f $ **FLOATING
+C1100 a_62654_20215# PFD_0.VSS 0.80634f $ **FLOATING
+C1101 a_62119_20605# PFD_0.VSS 0.26895f $ **FLOATING
+C1102 a_62270_20543# PFD_0.VSS 0.16883f $ **FLOATING
+C1103 a_61887_20534# PFD_0.VSS 1.05953f $ **FLOATING
+C1104 a_61394_20220# PFD_0.VSS 0.13262f $ **FLOATING
+C1105 a_61691_20534# PFD_0.VSS 0.79964f $ **FLOATING
+C1106 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VSS 0.51487f $ **FLOATING
+C1107 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VSS 0.51489f $ **FLOATING
+C1108 a_54504_20259# PFD_0.VSS 0.13262f $ **FLOATING
+C1109 a_53899_20488# PFD_0.VSS 0.16883f $ **FLOATING
+C1110 a_53968_20434# PFD_0.VSS 0.26896f $ **FLOATING
+C1111 a_53738_20514# PFD_0.VSS 1.05953f $ **FLOATING
+C1112 a_53445_20214# PFD_0.VSS 0.34783f $ **FLOATING
+C1113 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.nQ PFD_0.VSS 0.08893f $ **FLOATING
+C1114 a_53774_20178# PFD_0.VSS 0.80054f $ **FLOATING
+C1115 a_53065_20179# PFD_0.VSS 0.80634f $ **FLOATING
+C1116 a_52950_20401# PFD_0.VSS 0.43566f $ **FLOATING
+C1117 a_64384_21091# PFD_0.VSS 0.59054f $ **FLOATING
+C1118 3bit_freq_divider_1.sg13g2_or3_1_0.A PFD_0.VSS 0.77543f $ **FLOATING
+C1119 a_63255_21488# PFD_0.VSS 0.38381f $ **FLOATING
+C1120 3bit_freq_divider_1.A2 PFD_0.VSS 0.12039p $ **FLOATING
+C1121 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.D PFD_0.VSS 0.49782f $ **FLOATING
+C1122 a_61707_21488# PFD_0.VSS 0.36496f $ **FLOATING
+C1123 3bit_freq_divider_1.freq_div_cell_1.Cout PFD_0.VSS 0.14556f $ **FLOATING
+C1124 a_60967_21478# PFD_0.VSS 0.27989f $ **FLOATING
+C1125 3bit_freq_divider_1.freq_div_cell_1.dff_nclk_0.Q PFD_0.VSS 2.25165f $ **FLOATING
+C1126 3bit_freq_divider_0.freq_div_cell_1.Cout PFD_0.VSS 0.14556f $ **FLOATING
+C1127 a_55345_21385# PFD_0.VSS 0.27989f $ **FLOATING
+C1128 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.D PFD_0.VSS 0.49784f $ **FLOATING
+C1129 a_54434_21392# PFD_0.VSS 0.36496f $ **FLOATING
+C1130 3bit_freq_divider_0.sg13g2_or3_1_0.A PFD_0.VSS 0.77447f $ **FLOATING
+C1131 a_51648_21103# PFD_0.VSS 0.59026f $ **FLOATING
+C1132 3bit_freq_divider_0.A2 PFD_0.VSS 91.68561f $ **FLOATING
+C1133 a_52886_21392# PFD_0.VSS 0.3838f $ **FLOATING
+C1134 3bit_freq_divider_0.freq_div_cell_1.dff_nclk_0.Q PFD_0.VSS 2.25169f $ **FLOATING
+C1135 a_60922_21796# PFD_0.VSS 0.03012f $ **FLOATING
+C1136 a_60922_21818# PFD_0.VSS 0.02768f $ **FLOATING
+C1137 a_52808_21795# PFD_0.VSS 0.03012f $ **FLOATING
+C1138 a_52808_21817# PFD_0.VSS 0.02768f $ **FLOATING
+C1139 3bit_freq_divider_1.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VSS 0.50854f $ **FLOATING
+C1140 a_64424_22200# PFD_0.VSS 0.12168f $ **FLOATING
+C1141 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.nQ PFD_0.VSS 0.07921f $ **FLOATING
+C1142 a_62900_21935# PFD_0.VSS 0.33549f $ **FLOATING
+C1143 a_63463_21972# PFD_0.VSS 0.42316f $ **FLOATING
+C1144 a_62654_21971# PFD_0.VSS 0.7639f $ **FLOATING
+C1145 a_62119_22361# PFD_0.VSS 0.25006f $ **FLOATING
+C1146 a_62270_22299# PFD_0.VSS 0.1501f $ **FLOATING
+C1147 a_61887_22290# PFD_0.VSS 1.02135f $ **FLOATING
+C1148 a_61394_21976# PFD_0.VSS 0.12168f $ **FLOATING
+C1149 a_61691_22290# PFD_0.VSS 0.77938f $ **FLOATING
+C1150 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VSS 0.47143f $ **FLOATING
+C1151 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VSS 0.47143f $ **FLOATING
+C1152 a_54504_22015# PFD_0.VSS 0.12168f $ **FLOATING
+C1153 a_53899_22244# PFD_0.VSS 0.1501f $ **FLOATING
+C1154 a_53968_22190# PFD_0.VSS 0.25006f $ **FLOATING
+C1155 a_53738_22270# PFD_0.VSS 1.02135f $ **FLOATING
+C1156 a_53445_21970# PFD_0.VSS 0.33549f $ **FLOATING
+C1157 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.nQ PFD_0.VSS 0.07921f $ **FLOATING
+C1158 a_53774_21934# PFD_0.VSS 0.78026f $ **FLOATING
+C1159 a_53065_21935# PFD_0.VSS 0.7639f $ **FLOATING
+C1160 a_52950_22157# PFD_0.VSS 0.4233f $ **FLOATING
+C1161 3bit_freq_divider_1.sg13g2_or3_1_0.B PFD_0.VSS 1.39257f $ **FLOATING
+C1162 a_64383_23300# PFD_0.VSS 0.25093f $ **FLOATING
+C1163 a_63255_23244# PFD_0.VSS 0.37914f $ **FLOATING
+C1164 3bit_freq_divider_1.A1 PFD_0.VSS 0.10102p $ **FLOATING
+C1165 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.D PFD_0.VSS 0.45601f $ **FLOATING
+C1166 a_61707_23244# PFD_0.VSS 0.36159f $ **FLOATING
+C1167 3bit_freq_divider_1.freq_div_cell_0.Cout PFD_0.VSS 1.80113f $ **FLOATING
+C1168 a_60967_23234# PFD_0.VSS 0.27786f $ **FLOATING
+C1169 a_64419_23326# PFD_0.VSS 0.1501f $ **FLOATING
+C1170 3bit_freq_divider_1.freq_div_cell_0.dff_nclk_0.Q PFD_0.VSS 2.24178f $ **FLOATING
+C1171 3bit_freq_divider_0.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VSS 0.50854f $ **FLOATING
+C1172 a_51684_22284# PFD_0.VSS 0.12168f $ **FLOATING
+C1173 3bit_freq_divider_0.freq_div_cell_0.Cout PFD_0.VSS 1.80115f $ **FLOATING
+C1174 a_55345_23141# PFD_0.VSS 0.27786f $ **FLOATING
+C1175 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.D PFD_0.VSS 0.45601f $ **FLOATING
+C1176 a_54434_23148# PFD_0.VSS 0.36159f $ **FLOATING
+C1177 3bit_freq_divider_0.sg13g2_or3_1_0.B PFD_0.VSS 1.39146f $ **FLOATING
+C1178 3bit_freq_divider_0.A1 PFD_0.VSS 94.7177f $ **FLOATING
+C1179 a_52886_23148# PFD_0.VSS 0.37912f $ **FLOATING
+C1180 3bit_freq_divider_0.freq_div_cell_0.dff_nclk_0.Q PFD_0.VSS 2.2418f $ **FLOATING
+C1181 a_64383_23628# PFD_0.VSS 0.82074f $ **FLOATING
+C1182 a_64383_23434# PFD_0.VSS 1.02665f $ **FLOATING
+C1183 a_60922_23552# PFD_0.VSS 0.03012f $ **FLOATING
+C1184 a_60922_23574# PFD_0.VSS 0.02768f $ **FLOATING
+C1185 a_52808_23551# PFD_0.VSS 0.03012f $ **FLOATING
+C1186 a_52808_23573# PFD_0.VSS 0.02768f $ **FLOATING
+C1187 a_51693_23426# PFD_0.VSS 0.25093f $ **FLOATING
+C1188 a_51693_23075# PFD_0.VSS 0.1501f $ **FLOATING
+C1189 a_64383_23706# PFD_0.VSS 0.33666f $ **FLOATING
+C1190 3bit_freq_divider_1.dff_nclk_0.D PFD_0.VSS 0.57206f $ **FLOATING
+C1191 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.nQ PFD_0.VSS 0.08281f $ **FLOATING
+C1192 a_62900_23691# PFD_0.VSS 0.33612f $ **FLOATING
+C1193 a_63463_23728# PFD_0.VSS 0.42235f $ **FLOATING
+C1194 a_62654_23727# PFD_0.VSS 0.76426f $ **FLOATING
+C1195 a_62119_24117# PFD_0.VSS 0.25006f $ **FLOATING
+C1196 a_62270_24055# PFD_0.VSS 0.1501f $ **FLOATING
+C1197 a_61887_24046# PFD_0.VSS 1.02191f $ **FLOATING
+C1198 a_61394_23732# PFD_0.VSS 0.12168f $ **FLOATING
+C1199 a_61691_24046# PFD_0.VSS 0.78738f $ **FLOATING
+C1200 3bit_freq_divider_1.dff_nclk_0.nCLK PFD_0.VSS 7.48134f $ **FLOATING
+C1201 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VSS 0.47246f $ **FLOATING
+C1202 a_51631_22774# PFD_0.VSS 0.82147f $ **FLOATING
+C1203 a_51684_22692# PFD_0.VSS 1.02713f $ **FLOATING
+C1204 3bit_freq_divider_1.sg13g2_nand2_1_0.Y PFD_0.VSS 2.56526f $ **FLOATING
+C1205 3bit_freq_divider_0.sg13g2_nand2_1_0.Y PFD_0.VSS 2.56527f $ **FLOATING
+C1206 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.sg13g2_dfrbp_1_0.CLK PFD_0.VSS 0.47246f $ **FLOATING
+C1207 a_54504_23771# PFD_0.VSS 0.12168f $ **FLOATING
+C1208 a_53899_24000# PFD_0.VSS 0.1501f $ **FLOATING
+C1209 a_53968_23946# PFD_0.VSS 0.25006f $ **FLOATING
+C1210 a_53738_24026# PFD_0.VSS 1.02191f $ **FLOATING
+C1211 a_53445_23726# PFD_0.VSS 0.33612f $ **FLOATING
+C1212 3bit_freq_divider_0.dff_nclk_0.nCLK PFD_0.VSS 7.50548f $ **FLOATING
+C1213 a_51685_23725# PFD_0.VSS 0.33666f $ **FLOATING
+C1214 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.nQ PFD_0.VSS 0.08281f $ **FLOATING
+C1215 a_53774_23690# PFD_0.VSS 0.78853f $ **FLOATING
+C1216 a_53065_23691# PFD_0.VSS 0.76426f $ **FLOATING
+C1217 a_52950_23913# PFD_0.VSS 0.42231f $ **FLOATING
+C1218 a_64383_23889# PFD_0.VSS 0.79267f $ **FLOATING
+C1219 a_64384_24445# PFD_0.VSS 0.41218f $ **FLOATING
+C1220 3bit_freq_divider_1.CLK_OUT PFD_0.VSS 92.2343f $ **FLOATING
+C1221 3bit_freq_divider_0.dff_nclk_0.D PFD_0.VSS 0.57206f $ **FLOATING
+C1222 a_51648_24041# PFD_0.VSS 0.7928f $ **FLOATING
+C1223 3bit_freq_divider_1.dff_nclk_0.nRST PFD_0.VSS 1.21235f $ **FLOATING
+C1224 a_64398_24796# PFD_0.VSS 0.17085f $ **FLOATING
+C1225 a_64338_24910# PFD_0.VSS 0.01158f $ **FLOATING
+C1226 a_64362_24865# PFD_0.VSS 0.18902f $ **FLOATING
+C1227 a_64459_24995# PFD_0.VSS 0.21807f $ **FLOATING
+C1228 a_51648_24438# PFD_0.VSS 0.41218f $ **FLOATING
+C1229 3bit_freq_divider_1.sg13g2_or3_1_0.C PFD_0.VSS 2.00849f $ **FLOATING
+C1230 a_63255_25000# PFD_0.VSS 0.38174f $ **FLOATING
+C1231 3bit_freq_divider_1.A0 PFD_0.VSS 92.142f $ **FLOATING
+C1232 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.D PFD_0.VSS 0.4595f $ **FLOATING
+C1233 a_61707_25000# PFD_0.VSS 0.36409f $ **FLOATING
+C1234 3bit_freq_divider_1.freq_div_cell_0.Cin PFD_0.VSS 1.81006f $ **FLOATING
+C1235 a_60967_24990# PFD_0.VSS 0.27856f $ **FLOATING
+C1236 3bit_freq_divider_1.freq_div_cell_2.dff_nclk_0.Q PFD_0.VSS 2.27033f $ **FLOATING
+C1237 a_60584_24580# PFD_0.VSS 0.16608f $ **FLOATING
+C1238 a_60385_24947# PFD_0.VSS 0.21087f $ **FLOATING
+C1239 a_56137_24678# PFD_0.VSS 0.21087f $ **FLOATING
+C1240 3bit_freq_divider_1.sg13g2_tiehi_1.L_HI PFD_0.VSS 1.60229f $ **FLOATING
+C1241 a_60385_24717# PFD_0.VSS 0.17977f $ **FLOATING
+C1242 a_60479_25023# PFD_0.VSS 0.01118f $ **FLOATING
+C1243 a_55941_24882# PFD_0.VSS 0.16608f $ **FLOATING
+C1244 3bit_freq_divider_0.dff_nclk_0.nRST PFD_0.VSS 1.20799f $ **FLOATING
+C1245 a_51622_24863# PFD_0.VSS 0.17085f $ **FLOATING
+C1246 3bit_freq_divider_0.freq_div_cell_0.Cin PFD_0.VSS 1.81006f $ **FLOATING
+C1247 a_55345_24897# PFD_0.VSS 0.27856f $ **FLOATING
+C1248 a_56039_25022# PFD_0.VSS 0.01118f $ **FLOATING
+C1249 a_56013_24979# PFD_0.VSS 0.17977f $ **FLOATING
+C1250 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.D PFD_0.VSS 0.4595f $ **FLOATING
+C1251 a_54434_24904# PFD_0.VSS 0.36409f $ **FLOATING
+C1252 3bit_freq_divider_0.sg13g2_or3_1_0.C PFD_0.VSS 2.00844f $ **FLOATING
+C1253 a_52065_24890# PFD_0.VSS 0.01158f $ **FLOATING
+C1254 a_51721_24988# PFD_0.VSS 0.21807f $ **FLOATING
+C1255 a_51759_25014# PFD_0.VSS 0.18902f $ **FLOATING
+C1256 3bit_freq_divider_0.A0 PFD_0.VSS 90.2415f $ **FLOATING
+C1257 a_52886_24904# PFD_0.VSS 0.38144f $ **FLOATING
+C1258 3bit_freq_divider_0.sg13g2_tiehi_1.L_HI PFD_0.VSS 1.60229f $ **FLOATING
+C1259 3bit_freq_divider_0.freq_div_cell_2.dff_nclk_0.Q PFD_0.VSS 2.27033f $ **FLOATING
+C1260 a_47954_28913# PFD_0.VSS 0.97627f $ **FLOATING
+C1261 a_46817_27899# PFD_0.VSS 1.26528f $ **FLOATING
+C1262 a_45658_27900# PFD_0.VSS 1.24513f $ **FLOATING
+C1263 PFD_0.VCO_CLK PFD_0.VSS 5.09845f $ **FLOATING
+C1264 a_48909_28913# PFD_0.VSS 1.03223f $ **FLOATING
+C1265 a_45451_28860# PFD_0.VSS 1.00878f $ **FLOATING
+C1266 a_47777_29803# PFD_0.VSS 1.2524f $ **FLOATING
+C1267 a_46749_30782# PFD_0.VSS 1.31435f $ **FLOATING
+C1268 a_45579_29803# PFD_0.VSS 0.97532f $ **FLOATING
+C1269 PFD_0.Ref_CLK PFD_0.VSS 93.6639f $ **FLOATING
+C1270 a_59799_40285# PFD_0.VSS 0.05072f $ **FLOATING
+C1271 a_58453_40283# PFD_0.VSS 0.04654f $ **FLOATING
+C1272 a_57111_40283# PFD_0.VSS 0.0474f $ **FLOATING
+C1273 a_55769_40283# PFD_0.VSS 0.04814f $ **FLOATING
+C1274 a_54427_40283# PFD_0.VSS 0.04567f $ **FLOATING
+C1275 a_53085_40283# PFD_0.VSS 0.07408f $ **FLOATING
+C1276 a_58515_40413# PFD_0.VSS 4.51596f $ **FLOATING
+C1277 a_57173_40413# PFD_0.VSS 4.66235f $ **FLOATING
+C1278 a_55831_40413# PFD_0.VSS 4.71205f $ **FLOATING
+C1279 a_54489_40413# PFD_0.VSS 5.15226f $ **FLOATING
+C1280 a_53147_40413# PFD_0.VSS 5.26745f $ **FLOATING
+C1281 a_59800_40852# PFD_0.VSS 0.75306f $ **FLOATING
+C1282 a_58454_40850# PFD_0.VSS 0.8045f $ **FLOATING
+C1283 a_57112_40850# PFD_0.VSS 0.81785f $ **FLOATING
+C1284 a_55770_40850# PFD_0.VSS 0.82955f $ **FLOATING
+C1285 a_54428_40850# PFD_0.VSS 0.82862f $ **FLOATING
+C1286 a_53086_40850# PFD_0.VSS 0.83893f $ **FLOATING
+C1287 a_58653_42591# PFD_0.VSS 0.65187f $ **FLOATING
+C1288 a_57311_42591# PFD_0.VSS 0.67139f $ **FLOATING
+C1289 a_55969_42591# PFD_0.VSS 0.6715f $ **FLOATING
+C1290 a_54627_42591# PFD_0.VSS 0.67644f $ **FLOATING
+C1291 a_53285_42591# PFD_0.VSS 0.68389f $ **FLOATING
+C1292 3bit_freq_divider_0.CLK_IN PFD_0.VSS 20.6212f $ **FLOATING
+C1293 a_57178_43159# PFD_0.VSS 5.00808f $ **FLOATING
+C1294 a_55836_43159# PFD_0.VSS 4.39926f $ **FLOATING
+C1295 a_54494_43159# PFD_0.VSS 4.398f $ **FLOATING
+C1296 a_53152_43159# PFD_0.VSS 4.66518f $ **FLOATING
+C1297 a_52944_43077# PFD_0.VSS 6.1695f $ **FLOATING
+C1298 a_58426_43159# PFD_0.VSS 0.05888f $ **FLOATING
+C1299 a_57084_43159# PFD_0.VSS 0.03844f $ **FLOATING
+C1300 a_55742_43159# PFD_0.VSS 0.04051f $ **FLOATING
+C1301 a_54400_43159# PFD_0.VSS 0.04084f $ **FLOATING
+C1302 a_53058_43159# PFD_0.VSS 0.05472f $ **FLOATING
+C1303 a_53022_43738# PFD_0.VSS 5.68098f $ **FLOATING
+C1304 a_54747_49259# PFD_0.VSS 0.16684f $ **FLOATING
+C1305 PFD_0.DOWN PFD_0.VSS 13.9137f $ **FLOATING
+C1306 a_60528_49446# PFD_0.VSS 0.16044f
+C1307 a_56695_49467# PFD_0.VSS 0.14015f
+C1308 vco_wob_0.vctl PFD_0.VSS 17.2852f $ **FLOATING
+C1309 a_56887_49467# PFD_0.VSS 8.04158f $ **FLOATING
+C1310 a_54357_49278# PFD_0.VSS 0.26592f $ **FLOATING
+C1311 PFD_0.UP PFD_0.VSS 12.6721f $ **FLOATING
+C1312 charge_pump_0.vout PFD_0.VSS 28.7608f $ **FLOATING
+C1313 a_56828_53480# PFD_0.VSS 2.32258f
+C1314 a_56742_53480# PFD_0.VSS 1.67237f $ **FLOATING
+C1315 a_59097_54704# PFD_0.VSS 0.1681f $ **FLOATING
+C1316 a_58536_54976# PFD_0.VSS 0.61525f $ **FLOATING
+C1317 a_58734_56203# PFD_0.VSS 0.05948f $ **FLOATING
+C1318 charge_pump_0.bias_p PFD_0.VSS 5.47872f $ **FLOATING
+C1319 charge_pump_0.bias_n PFD_0.VSS 6.55127f $ **FLOATING
+C1320 3bit_freq_divider_0.EN PFD_0.VSS 51.6717f $ **FLOATING
+C1321 sg13g2_inv_1_0.A PFD_0.VSS 0.10244p $ **FLOATING
+C1322 a_55948_56737# PFD_0.VSS 1.95792f
+C1323 a_55862_56737# PFD_0.VSS 0.99714f $ **FLOATING
+C1324 PFD_0.VDD PFD_0.VSS 0.19687p $ **FLOATING
+.ends
+

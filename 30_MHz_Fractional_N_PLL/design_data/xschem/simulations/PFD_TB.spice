@@ -1,0 +1,57 @@
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/PFD_TB.sch
+
+.lib /foss/pdks/ihp-sg13g2/libs.tech/ngspice/models/cornerMOSlv.lib mos_tt
+
+**.subckt PFD_TB
+Vs VDD GND 1.2
+Vclk CLK_IN GND dc 0 ac 0 pulse(0, 1.2, 4n, 100p, 100p, 6.25n, 12.5n)
+x1 VDD UP GND DOWN REF CLK_IN PFD
+Vclk1 REF GND dc 0 ac 0 pulse(0, 1.2, 2n, 100p, 100p, 6.25n, 12.5n)
+**** begin user architecture code
+
+
+.param temp=27
+
+.control
+save v(clk_in) v(ref) v(up) v(down)
+tran 50p 50n
+
+write TRAN_PFD_TB.raw
+.endc
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  PFD.sym # of pins=6
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/PFD.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/PFD.sch
+.subckt PFD vdd up vss down ref_clk vco_clk
+*.iopin vdd
+*.ipin ref_clk
+*.iopin vss
+*.ipin vco_clk
+*.opin up
+*.opin down
+XM1 net2 vco_clk vss vss sg13_lv_nmos w=0.36u l=0.15u ng=1 m=1
+XM4 net1 ref_clk net2 vss sg13_lv_nmos w=1.8u l=0.15u ng=1 m=1
+XM5 net3 ref_clk net1 vss sg13_lv_nmos w=0.84u l=0.15u ng=1 m=1
+XM9 net3 ref_clk ref_clk vdd sg13_lv_pmos w=0.64u l=0.15u ng=1 m=1
+XM11 net7 net3 vss vss sg13_lv_nmos w=0.36u l=0.15u ng=1 m=1
+XM12 vdd net3 net7 vdd sg13_lv_pmos w=0.72u l=0.15u ng=1 m=1
+XM13 up net7 vss vss sg13_lv_nmos w=0.48u l=0.15u ng=1 m=1
+XM14 vdd net7 up vdd sg13_lv_pmos w=0.96u l=0.15u ng=1 m=1
+XM3 net1 ref_clk vdd vdd sg13_lv_pmos w=0.64u l=0.15u ng=1 m=1
+XM6 net4 vco_clk vdd vdd sg13_lv_pmos w=0.64u l=0.15u ng=1 m=1
+XM7 net4 vco_clk net5 vss sg13_lv_nmos w=1.8u l=0.15u ng=1 m=1
+XM19 net5 ref_clk vss vss sg13_lv_nmos w=0.36u l=0.15u ng=1 m=1
+XM8 net6 vco_clk net4 vss sg13_lv_nmos w=0.84u l=0.15u ng=1 m=1
+XM10 net6 vco_clk vco_clk vdd sg13_lv_pmos w=0.64u l=0.15u ng=1 m=1
+XM15 vdd net6 net8 vdd sg13_lv_pmos w=0.72u l=0.15u ng=1 m=1
+XM16 net8 net6 vss vss sg13_lv_nmos w=0.36u l=0.15u ng=1 m=1
+XM17 vdd net8 down vdd sg13_lv_pmos w=0.96u l=0.15u ng=1 m=1
+XM18 down net8 vss vss sg13_lv_nmos w=0.48u l=0.15u ng=1 m=1
+.ends
+
+.GLOBAL GND
+.end

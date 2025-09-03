@@ -1,0 +1,19 @@
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/CHRG_PUMP.sch
+.SUBCKT CHRG_PUMP VP bias_p up vout down bias_n VN
+*.PININFO bias_p:I up:I down:I bias_n:I VN:B VP:B vout:O
+M1 net1 bias_n VN VN sg13_lv_nmos w=1.2u l=0.13u ng=1 m=1
+M2 vout down net1 VN sg13_lv_nmos w=1.2u l=0.13u ng=1 m=1
+M3 vout net3 net2 VP sg13_lv_pmos w=0.15u l=0.13u ng=1 m=1
+M4 net2 bias_p VP VP sg13_lv_pmos w=0.15u l=0.13u ng=1 m=1
+x1 VP up net3 VN INV
+.ENDS
+
+* expanding   symbol:  INV.sym # of pins=4
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/INV.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/INV.sch
+.SUBCKT INV VP IN OUT VN
+*.PININFO VN:B VP:B IN:I OUT:O
+M1 OUT IN VN VN sg13_lv_nmos w=0.15u l=0.13u ng=1 m=1
+M2 OUT IN VP VP sg13_lv_pmos w=0.3u l=0.13u ng=1 m=1
+.ENDS
+

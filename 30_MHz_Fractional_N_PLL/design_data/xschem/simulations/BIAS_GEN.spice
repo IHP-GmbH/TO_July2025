@@ -1,0 +1,18 @@
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/BIAS_GEN.sch
+.SUBCKT BIAS_GEN VPWR VPB VGND VNB en bias_n bias_p enb
+*.PININFO en:I bias_n:O VNB:B VGND:B VPB:B VPWR:B enb:I bias_p:O
+M1 bias_p kick kick_sw VNB sg13_lv_nmos w=0.5u l=0.15u ng=1 m=1
+M2 kick_sw en VGND VNB sg13_lv_nmos w=0.5u l=0.15u ng=1 m=1
+M3 kick bias_n VGND VNB sg13_lv_nmos w=1.0u l=1.0u ng=1 m=1
+M4 bias_p bias_n net1 VNB sg13_lv_nmos w=1.0u l=1.0u ng=1 m=1
+M5 bias_n enb VGND VNB sg13_lv_nmos w=0.5u l=0.15u ng=1 m=1
+M6 bias_n bias_n VGND VNB sg13_lv_nmos w=1.0u l=1.0u ng=1 m=1
+M7 kick kick dio_mid VPB sg13_lv_pmos w=0.5u l=0.15u ng=1 m=1
+M8 bias_p bias_p VPWR VPB sg13_lv_pmos w=2.0u l=1.0u ng=1 m=1
+M9 bias_p en VPWR VPB sg13_lv_pmos w=0.5u l=0.15u ng=1 m=1
+M10 bias_n bias_p res_bot VPB sg13_lv_pmos w=4.0u l=1.0u ng=1 m=1
+M11 kick en VPWR VPB sg13_lv_pmos w=0.5u l=0.15u ng=1 m=1
+M12 dio_mid dio_mid VPWR VPB sg13_lv_pmos w=0.5u l=0.15u ng=1 m=1
+XR1 res_bot VPWR rhigh w=1.0e-6 l=12.0e-6 m=1 b=0
+XR2 VGND net1 rhigh w=1.0e-6 l=12.0e-6 m=1 b=0
+.ENDS

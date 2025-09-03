@@ -1,0 +1,298 @@
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/PLL_3BIT_DIV.sch
+.SUBCKT FMD_QNC_PLL_3BIT_DIV CLK_IN CLK_OUT Y0 Y2 Y1 VDD VSS nEN X1 X2 X0
+*.PININFO VSS:B VDD:B CLK_IN:I CLK_OUT:O X0:I X1:I nEN:I X2:I Y0:I Y1:I Y2:I
+x3 VDD VDD VSS VSS EN BIAS_N BIAS_P nEN BIAS_GEN
+x5 VDD UP VSS DN CLK_IN DIV_OUT PFD
+x2 VDD BIAS_P UP VOUT_CP DN BIAS_N VSS CHRG_PUMP
+x1 VOUT_CP VCTRL VSS LOOP_FILTER
+x6 nEN VDD VSS EN sg13g2_inv_1
+x7 X0 VCO_OUT EN DIV_OUT X1 VDD VSS X2 3BIT_FREQ_DIV
+x9 Y0 VCO_OUT EN CLK_OUT Y1 VDD VSS Y2 3BIT_FREQ_DIV
+x4 VDD VSS VCTRL VCO_OUT 11STG_VCO
+.ENDS
+
+* expanding   symbol:  BIAS_GEN.sym # of pins=8
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/BIAS_GEN.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/BIAS_GEN.sch
+.SUBCKT BIAS_GEN VPWR VPB VGND VNB en bias_n bias_p enb
+*.PININFO en:I bias_n:O VNB:B VGND:B VPB:B VPWR:B enb:I bias_p:O
+M1 bias_p kick kick_sw VNB sg13_lv_nmos w=0.5u l=0.15u ng=1 m=1
+M2 kick_sw en VGND VNB sg13_lv_nmos w=0.5u l=0.15u ng=1 m=1
+M3 kick bias_n VGND VNB sg13_lv_nmos w=1.0u l=1.0u ng=1 m=1
+M4 bias_p bias_n net1 VNB sg13_lv_nmos w=1.0u l=1.0u ng=1 m=1
+M5 bias_n enb VGND VNB sg13_lv_nmos w=0.5u l=0.15u ng=1 m=1
+M6 bias_n bias_n VGND VNB sg13_lv_nmos w=1.0u l=1.0u ng=1 m=1
+M7 kick kick dio_mid VPB sg13_lv_pmos w=0.5u l=0.15u ng=1 m=1
+M8 bias_p bias_p VPWR VPB sg13_lv_pmos w=2.0u l=1.0u ng=1 m=1
+M9 bias_p en VPWR VPB sg13_lv_pmos w=0.5u l=0.15u ng=1 m=1
+M10 bias_n bias_p res_bot VPB sg13_lv_pmos w=4.0u l=1.0u ng=1 m=1
+M11 kick en VPWR VPB sg13_lv_pmos w=0.5u l=0.15u ng=1 m=1
+M12 dio_mid dio_mid VPWR VPB sg13_lv_pmos w=0.5u l=0.15u ng=1 m=1
+R1 res_bot VPWR rhigh w=1.0e-6 l=12.0e-6 m=1 b=0
+R2 VGND net1 rhigh w=1.0e-6 l=12.0e-6 m=1 b=0
+.ENDS
+
+* expanding   symbol:  PFD.sym # of pins=6
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/PFD.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/PFD.sch
+.SUBCKT PFD vdd up vss down ref_clk vco_clk
+*.PININFO vdd:B ref_clk:I vss:B vco_clk:I up:O down:O
+M1 net2 vco_clk vss vss sg13_lv_nmos w=0.36u l=0.15u ng=1 m=1
+M4 net1 ref_clk net2 vss sg13_lv_nmos w=1.8u l=0.15u ng=1 m=1
+M5 net3 ref_clk net1 vss sg13_lv_nmos w=0.84u l=0.15u ng=1 m=1
+M9 net3 ref_clk ref_clk vdd sg13_lv_pmos w=0.64u l=0.15u ng=1 m=1
+M11 net7 net3 vss vss sg13_lv_nmos w=0.36u l=0.15u ng=1 m=1
+M12 vdd net3 net7 vdd sg13_lv_pmos w=0.72u l=0.15u ng=1 m=1
+M13 up net7 vss vss sg13_lv_nmos w=0.48u l=0.15u ng=1 m=1
+M14 vdd net7 up vdd sg13_lv_pmos w=0.96u l=0.15u ng=1 m=1
+M3 net1 ref_clk vdd vdd sg13_lv_pmos w=0.64u l=0.15u ng=1 m=1
+M6 net4 vco_clk vdd vdd sg13_lv_pmos w=0.64u l=0.15u ng=1 m=1
+M7 net4 vco_clk net5 vss sg13_lv_nmos w=1.8u l=0.15u ng=1 m=1
+M19 net5 ref_clk vss vss sg13_lv_nmos w=0.36u l=0.15u ng=1 m=1
+M8 net6 vco_clk net4 vss sg13_lv_nmos w=0.84u l=0.15u ng=1 m=1
+M10 net6 vco_clk vco_clk vdd sg13_lv_pmos w=0.64u l=0.15u ng=1 m=1
+M15 vdd net6 net8 vdd sg13_lv_pmos w=0.72u l=0.15u ng=1 m=1
+M16 net8 net6 vss vss sg13_lv_nmos w=0.36u l=0.15u ng=1 m=1
+M17 vdd net8 down vdd sg13_lv_pmos w=0.96u l=0.15u ng=1 m=1
+M18 down net8 vss vss sg13_lv_nmos w=0.48u l=0.15u ng=1 m=1
+.ENDS
+
+* expanding   symbol:  CHRG_PUMP.sym # of pins=7
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/CHRG_PUMP.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/CHRG_PUMP.sch
+.SUBCKT CHRG_PUMP VP bias_p up vout down bias_n VN
+*.PININFO bias_p:I up:I down:I bias_n:I VN:B VP:B vout:O
+M1 net1 bias_n VN VN sg13_lv_nmos w=1.2u l=0.13u ng=1 m=1
+M2 vout down net1 VN sg13_lv_nmos w=1.2u l=0.13u ng=1 m=1
+M3 vout net3 net2 VP sg13_lv_pmos w=0.15u l=0.13u ng=1 m=1
+M4 net2 bias_p VP VP sg13_lv_pmos w=0.15u l=0.13u ng=1 m=1
+x1 VP up net3 VN INV
+.ENDS
+
+* expanding   symbol:  LOOP_FILTER.sym # of pins=3
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/LOOP_FILTER.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/LOOP_FILTER.sch
+.SUBCKT LOOP_FILTER vin vout VN
+*.PININFO VN:B vin:I vout:O
+R1 vin vout rhigh w=0.6e-6 l=0.96e-6 m=1 b=0
+M1 VN net1 VN VN sg13_lv_nmos w=0.5u l=0.650u ng=1 m=15
+M2 VN vout VN VN sg13_lv_nmos w=0.15u l=0.13u ng=1 m=1
+M3 VN net1 VN VN sg13_lv_nmos w=0.5u l=0.650u ng=1 m=15
+M4 VN vout VN VN sg13_lv_nmos w=0.15u l=0.13u ng=1 m=1
+R2 vin net1 rhigh w=0.5e-6 l=0.96e-6 m=1 b=0
+M5 VN vin VN VN sg13_lv_nmos w=1.5u l=0.650u ng=1 m=15
+M6 VN vin VN VN sg13_lv_nmos w=1.5u l=0.650u ng=1 m=15
+.ENDS
+
+* expanding   symbol:  3BIT_FREQ_DIV.sym # of pins=8
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/3BIT_FREQ_DIV.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/3BIT_FREQ_DIV.sch
+.SUBCKT 3BIT_FREQ_DIV A0 CLK_IN EN CLK_OUT A1 VDD VSS A2
+*.PININFO CLK_IN:I EN:I A0:I A1:I CLK_OUT:O VSS:B VDD:B A2:I
+x1 VDD VSS nEQ0 net1 CLK net2 DIV_RST A0 FREQ_DIV_CELL
+x2 VDD VSS nEQ1 net2 CLK net5 DIV_RST A1 FREQ_DIV_CELL
+x3 net1 VDD VSS sg13g2_tiehi
+x5 DIV_RST CLK_OUT net3 net3 net4 VDD VSS DFF_nCLK
+x6 net4 VDD VSS sg13g2_tiehi
+* noconn CLK_OUT
+x7 CLK_IN EN VDD VSS CLK sg13g2_nand2_1
+x4 nEQ2 nEQ1 nEQ0 VDD VSS DIV_RST sg13g2_or3_1
+x8 VDD VSS nEQ2 net5 CLK Cout DIV_RST A2 FREQ_DIV_CELL
+* noconn Cout
+.ENDS
+
+* expanding   symbol:  11STG_VCO.sym # of pins=4
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/11STG_VCO.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/11STG_VCO.sch
+.SUBCKT 11STG_VCO VPWR VGND vctl Vout
+*.PININFO VPWR:B VGND:B vctl:I Vout:O
+M21 mirror_pg mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M22 net1 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M23 net2 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M24 net3 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M25 mirror_pg vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M26 net9 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M28 net7 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M29 net13 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M30 net12 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M31 net10 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M32 net11 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M33 net15 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M34 net16 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M35 net20 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M36 net19 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M37 net24 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M38 net23 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M39 net21 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M40 net22 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M41 net31 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M42 net30 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M43 net28 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M44 net29 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M1 net8 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+C12 net4 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+C1 net5 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+C2 net6 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+C3 net14 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+C4 net26 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+C5 net17 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+C6 net18 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+C7 net25 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+C8 net27 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+C9 net32 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+C10 Vout VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+x1 net1 VPWR Vout net4 VGND net9 VCO_INV
+x2 net2 VPWR net4 net5 VGND net8 VCO_INV
+x3 net3 VPWR net5 net6 VGND net7 VCO_INV
+x4 net13 VPWR net6 net14 VGND net10 VCO_INV
+x5 net12 VPWR net14 net26 VGND net11 VCO_INV
+x6 net15 VPWR net26 net17 VGND net20 VCO_INV
+x7 net16 VPWR net17 net18 VGND net19 VCO_INV
+x8 net24 VPWR net18 net25 VGND net21 VCO_INV
+x9 net23 VPWR net25 net27 VGND net22 VCO_INV
+x10 net31 VPWR net27 net32 VGND net28 VCO_INV
+x11 net30 VPWR net32 Vout VGND net29 VCO_INV
+.ENDS
+
+* expanding   symbol:  INV.sym # of pins=4
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/INV.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/INV.sch
+.SUBCKT INV VP IN OUT VN
+*.PININFO VN:B VP:B IN:I OUT:O
+M1 OUT IN VN VN sg13_lv_nmos w=0.15u l=0.13u ng=1 m=1
+M2 OUT IN VP VP sg13_lv_pmos w=0.3u l=0.13u ng=1 m=1
+.ENDS
+
+* expanding   symbol:  FREQ_DIV_CELL.sym # of pins=8
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/FREQ_DIV_CELL.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/FREQ_DIV_CELL.sch
+.SUBCKT FREQ_DIV_CELL VDD VSS DIV Cin CLK Cout nRST BIT
+*.PININFO Cin:I CLK:I nRST:I BIT:I DIV:O Cout:O VSS:B VDD:B
+x2 CLK net2 net1 net3 nRST VDD VSS DFF_nCLK
+x3 net2 BIT VDD VSS DIV sg13g2_xor2_1
+* noconn #net3
+x1 net2 net1 Cin VDD VSS Cout HALF_ADD
+.ENDS
+
+* expanding   symbol:  DFF_nCLK.sym # of pins=7
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/DFF_nCLK.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/DFF_nCLK.sch
+.SUBCKT DFF_nCLK nCLK Q D nQ nRST VDD VSS
+*.PININFO nCLK:I D:I nRST:I Q:O nQ:O VSS:B VDD:B
+x1 net1 D Q nQ nRST VDD VSS sg13g2_dfrbp_1
+x2 nCLK VDD VSS net1 sg13g2_inv_1
+.ENDS
+
+* expanding   symbol:  VCO_INV.sym # of pins=6
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/VCO_INV.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/VCO_INV.sch
+.SUBCKT VCO_INV VPWR VPB A Y VNB VGND
+*.PININFO VPWR:B VGND:B A:I Y:O VPB:B VNB:B
+M2 Y A VPWR VPB sg13_lv_pmos w=2u l=0.13u ng=1 m=1
+M1 Y A VGND VNB sg13_lv_nmos w=1u l=0.13u ng=1 m=1
+.ENDS
+
+* expanding   symbol:  HALF_ADD.sym # of pins=6
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/HALF_ADD.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/HALF_ADD.sch
+.SUBCKT HALF_ADD inB sum inA VDD VSS cout
+*.PININFO inA:I inB:I sum:O cout:O VSS:B VDD:B
+x1 inA inB VDD VSS sum sg13g2_xor2_1
+x2 inA inB VDD VSS cout sg13g2_and2_1
+.ENDS
+
+.SUBCKT sg13g2_xor2_1 A B VDD VSS X
+*.PININFO A:I B:I X:O VDD:B VSS:B
+MX0 net1 A VSS VSS sg13_lv_nmos m=1 w=550.00n l=130.00n ng=1
+MX4 X B net3 VSS sg13_lv_nmos m=1 w=740.00n l=130.00n ng=1
+MX6 X net1 VSS VSS sg13_lv_nmos m=1 w=740.00n l=130.00n ng=1
+MX8 net3 A VSS VSS sg13_lv_nmos m=1 w=740.00n l=130.00n ng=1
+MX9 net1 B VSS VSS sg13_lv_nmos m=1 w=550.00n l=130.00n ng=1
+MX1 net6 A VDD VDD sg13_lv_pmos m=1 w=1.000u l=130.00n ng=1
+MX2 net1 B net6 VDD sg13_lv_pmos m=1 w=1.000u l=130.00n ng=1
+MX3 net5 A VDD VDD sg13_lv_pmos m=1 w=1.12e-06 l=130.00n ng=1
+MX5 net5 B VDD VDD sg13_lv_pmos m=1 w=1.12e-06 l=130.00n ng=1
+MX7 X net1 net5 VDD sg13_lv_pmos m=1 w=1.12e-06 l=130.00n ng=1
+.ENDS
+
+.SUBCKT sg13g2_and2_1 A B VDD VSS X
+*.PININFO A:I B:I X:O VDD:B VSS:B
+MX0 net4 A net2 VSS sg13_lv_nmos m=1 w=640.00n l=130.00n ng=1
+MX2 X net4 VSS VSS sg13_lv_nmos m=1 w=740.00n l=130.00n ng=1
+MX3 net2 B VSS VSS sg13_lv_nmos m=1 w=640.00n l=130.00n ng=1
+MX1 net4 B VDD VDD sg13_lv_pmos m=1 w=840.00n l=130.00n ng=1
+MX4 VDD net4 X VDD sg13_lv_pmos m=1 w=1.12e-06 l=130.00n ng=1
+MX5 net4 A VDD VDD sg13_lv_pmos m=1 w=840.00n l=130.00n ng=1
+.ENDS
+
+.SUBCKT sg13g2_dfrbp_1 CLK D Q Q_N RESET_B VDD VSS
+*.PININFO CLK:I D:I RESET_B:I Q:O Q_N:O VDD:B VSS:B
+MN13 net12 net2 VSS VSS sg13_lv_nmos m=1 w=420.00n l=130.00n ng=1
+MN14 net5 clkneg net12 VSS sg13_lv_nmos m=1 w=420.00n l=130.00n ng=1
+MN15 net2 net5 net11 VSS sg13_lv_nmos m=1 w=420.00n l=130.00n ng=1
+MN16 net11 RESET_B VSS VSS sg13_lv_nmos m=1 w=420.00n l=130.00n ng=1
+MN6 Q_N net5 VSS VSS sg13_lv_nmos m=1 w=740.00n l=130.00n ng=1
+MN0 Db D net10 VSS sg13_lv_nmos m=1 w=420.00n l=130.00n ng=1
+MN1 net10 RESET_B VSS VSS sg13_lv_nmos m=1 w=420.00n l=130.00n ng=1
+MN7 Db clkneg net6 VSS sg13_lv_nmos m=1 w=420.00n l=130.00n ng=1
+MN8 net6 clkpos net9 VSS sg13_lv_nmos m=1 w=420.00n l=130.00n ng=1
+MN9 net9 net4 net8 VSS sg13_lv_nmos m=1 w=420.00n l=130.00n ng=1
+MN10 net8 RESET_B VSS VSS sg13_lv_nmos m=1 w=420.00n l=130.00n ng=1
+MN11 net4 net6 VSS VSS sg13_lv_nmos m=1 w=640.00n l=130.00n ng=1
+MN2 clkneg CLK VSS VSS sg13_lv_nmos m=1 w=740.00n l=130.00n ng=1
+MN12 net4 clkpos net5 VSS sg13_lv_nmos m=1 w=640.00n l=130.00n ng=1
+MN3 clkpos clkneg VSS VSS sg13_lv_nmos m=1 w=740.00n l=130.00n ng=1
+MN4 Q net1 VSS VSS sg13_lv_nmos m=1 w=740.00n l=130.00n ng=1
+MN5 net1 net5 VSS VSS sg13_lv_nmos m=1 w=550.00n l=130.00n ng=1
+MP14 net5 clkpos net3 VDD sg13_lv_pmos m=1 w=420.00n l=130.00n ng=1
+MP15 net2 net5 VDD VDD sg13_lv_pmos m=1 w=420.00n l=130.00n ng=1
+MP16 net2 RESET_B VDD VDD sg13_lv_pmos m=1 w=420.00n l=130.00n ng=1
+MP6 Q_N net5 VDD VDD sg13_lv_pmos m=1 w=1.12u l=130.00n ng=1
+MP7 Db clkpos net6 VDD sg13_lv_pmos m=1 w=420.00n l=130.00n ng=1
+MP0 Db RESET_B VDD VDD sg13_lv_pmos m=1 w=420.00n l=130.00n ng=1
+MP1 Db D VDD VDD sg13_lv_pmos m=1 w=420.00n l=130.00n ng=1
+MP8 net7 net4 VDD VDD sg13_lv_pmos m=1 w=420.00n l=130.00n ng=1
+MP9 net6 clkneg net7 VDD sg13_lv_pmos m=1 w=420.00n l=130.00n ng=1
+MP10 net6 RESET_B VDD VDD sg13_lv_pmos m=1 w=420.00n l=130.00n ng=1
+MP2 clkneg CLK VDD VDD sg13_lv_pmos m=1 w=1.000u l=130.00n ng=1
+MP3 clkpos clkneg VDD VDD sg13_lv_pmos m=1 w=1.000u l=130.00n ng=1
+MP11 net4 net6 VDD VDD sg13_lv_pmos m=1 w=1.000u l=130.00n ng=1
+MP12 net4 clkneg net5 VDD sg13_lv_pmos m=1 w=1.000u l=130.00n ng=1
+MP4 Q net1 VDD VDD sg13_lv_pmos m=1 w=1.12u l=130.00n ng=1
+MP13 net3 net2 VDD VDD sg13_lv_pmos m=1 w=420.00n l=130.00n ng=1
+MP5 net1 net5 VDD VDD sg13_lv_pmos m=1 w=840.00n l=130.00n ng=1
+.ENDS
+
+.SUBCKT sg13g2_inv_1 A VDD VSS Y
+*.PININFO A:I Y:O VDD:B VSS:B
+MX1 Y A VSS VSS sg13_lv_nmos m=1 w=740.00n l=130.00n ng=1
+MX0 Y A VDD VDD sg13_lv_pmos m=1 w=1.12u l=130.00n ng=1
+.ENDS
+
+.SUBCKT sg13g2_tiehi L_HI VDD VSS
+*.PININFO L_HI:O VDD:B VSS:B
+MMN2 net3 net2 VSS VSS sg13_lv_nmos m=1 w=795.00n l=130.00n ng=1
+MMN1 net1 net1 VSS VSS sg13_lv_nmos m=1 w=300n l=130.00n ng=1
+MMP2 L_HI net3 VDD VDD sg13_lv_pmos m=1 w=1.155u l=130.00n ng=1
+MMP1 net2 net1 VDD VDD sg13_lv_pmos m=1 w=660.0n l=130.00n ng=1
+.ENDS
+
+.SUBCKT sg13g2_nand2_1 A B VDD VSS Y
+*.PININFO A:I B:I Y:O VDD:B VSS:B
+MP1 Y B VDD VDD sg13_lv_pmos m=1 w=1.12e-06 l=130.00n ng=1
+MP0 Y A VDD VDD sg13_lv_pmos m=1 w=1.12e-06 l=130.00n ng=1
+MN1 net1 B VSS VSS sg13_lv_nmos m=1 w=740.00n l=130.00n ng=1
+MN0 Y A net1 VSS sg13_lv_nmos m=1 w=740.00n l=130.00n ng=1
+.ENDS
+
+.SUBCKT sg13g2_or3_1 A B C VDD VSS X
+*.PININFO A:I B:I C:I X:O VDD:B VSS:B
+MX0 net1 C VSS VSS sg13_lv_nmos m=1 w=550.00n l=130.00n ng=1
+MX1 X net1 VSS VSS sg13_lv_nmos m=1 w=740.00n l=130.00n ng=1
+MX6 net1 B VSS VSS sg13_lv_nmos m=1 w=550.00n l=130.00n ng=1
+MX7 net1 A VSS VSS sg13_lv_nmos m=1 w=550.00n l=130.00n ng=1
+MX2 X net1 VDD VDD sg13_lv_pmos m=1 w=1.12e-06 l=130.00n ng=1
+MX3 net9 B net12 VDD sg13_lv_pmos m=1 w=1.000u l=130.00n ng=1
+MX4 net12 A VDD VDD sg13_lv_pmos m=1 w=1.000u l=130.00n ng=1
+MX5 net1 C net9 VDD sg13_lv_pmos m=1 w=1.000u l=130.00n ng=1
+.ENDS

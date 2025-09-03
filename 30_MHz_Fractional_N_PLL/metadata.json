@@ -1,0 +1,14 @@
+{
+  "ProjectName": "FMD_QNC_30_MHz_Fractional_N_PLL",
+  "Shuttle": "MPW 0.13µm Jul 2025(T593)",
+  "Technology": "SG13G2",
+  "Design": {
+    "DesignName": "FMD_QNC_30_MHz_Fractional_N_PLL",
+    "FinalGdsName": "FMD_QNC_PLL_3BIT_DIV.gds",
+    "TopCellName": "FMD_QNC_PLL_3BIT_DIV",
+    "Width": "0.4mm",
+    "Height": "0.4mm",
+    "NumberOfSamples": "10"
+  },
+  "FinalWaferThickness": "200um"
+}

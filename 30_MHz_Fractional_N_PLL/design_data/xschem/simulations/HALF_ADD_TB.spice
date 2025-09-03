@@ -1,0 +1,44 @@
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/HALF_ADD_TB.sch
+
+.lib /foss/pdks/ihp-sg13g2/libs.tech/ngspice/models/cornerMOSlv.lib mos_tt
+.include /foss/pdks/ihp-sg13g2/libs.ref/sg13g2_stdcell/spice/sg13g2_stdcell.spice
+
+**.subckt HALF_ADD_TB
+VinA A GND dc 0 ac 0 pulse(0, 1.2, 0, 100p, 100p, 6.25n, 12.5n)
+VinB B GND dc 0 ac 0 pulse(0, 1.2, 0, 100p, 100p, 12.5n, 25n)
+Vs net1 GND 1.2
+* noconn S
+* noconn C
+x1 A S B net1 GND C HALF_ADD
+**** begin user architecture code
+
+
+.param temp=27
+
+.control
+save v(a) v(b) v(s) v(c)
+tran 50p 50n
+
+write TRAN_HALF_ADD.raw
+.endc
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  HALF_ADD.sym # of pins=6
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/HALF_ADD.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/HALF_ADD.sch
+.subckt HALF_ADD inB sum inA VDD VSS cout
+*.ipin inA
+*.ipin inB
+*.opin sum
+*.opin cout
+*.iopin VSS
+*.iopin VDD
+x1 inA inB VDD VSS sum sg13g2_xor2_1
+x2 inA inB VDD VSS cout sg13g2_and2_1
+.ends
+
+.GLOBAL GND
+.end

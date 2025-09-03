@@ -1,0 +1,60 @@
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/11STG_VCO.sch
+.SUBCKT 11STG_VCO VPWR VGND vctl Vout
+*.PININFO VPWR:B VGND:B vctl:I Vout:O
+M21 mirror_pg mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M22 net1 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M23 net2 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M24 net3 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M25 mirror_pg vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M26 net9 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M28 net7 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M29 net13 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M30 net12 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M31 net10 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M32 net11 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M33 net15 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M34 net16 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M35 net20 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M36 net19 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M37 net24 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M38 net23 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M39 net21 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M40 net22 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M41 net31 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M42 net30 mirror_pg VPWR VPWR sg13_lv_pmos w=0.8u l=0.13u ng=1 m=1
+M43 net28 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M44 net29 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+M1 net8 vctl VGND VGND sg13_lv_nmos w=0.6u l=0.13u ng=1 m=1
+XC12 net4 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+XC1 net5 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+XC2 net6 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+XC3 net14 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+XC4 net26 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+XC5 net17 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+XC6 net18 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+XC7 net25 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+XC8 net27 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+XC9 net32 VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+XC10 Vout VGND cap_cmim w=6.99e-6 l=6.99e-6 m=1
+x1 net1 VPWR Vout net4 VGND net9 VCO_INV
+x2 net2 VPWR net4 net5 VGND net8 VCO_INV
+x3 net3 VPWR net5 net6 VGND net7 VCO_INV
+x4 net13 VPWR net6 net14 VGND net10 VCO_INV
+x5 net12 VPWR net14 net26 VGND net11 VCO_INV
+x6 net15 VPWR net26 net17 VGND net20 VCO_INV
+x7 net16 VPWR net17 net18 VGND net19 VCO_INV
+x8 net24 VPWR net18 net25 VGND net21 VCO_INV
+x9 net23 VPWR net25 net27 VGND net22 VCO_INV
+x10 net31 VPWR net27 net32 VGND net28 VCO_INV
+x11 net30 VPWR net32 Vout VGND net29 VCO_INV
+.ENDS
+
+* expanding   symbol:  VCO_INV.sym # of pins=6
+** sym_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/VCO_INV.sym
+** sch_path: /foss/designs/PROJECTS/TO_July2025/30_MHz_Fractional_N_PLL/design_data/xschem/VCO_INV.sch
+.SUBCKT VCO_INV VPWR VPB A Y VNB VGND
+*.PININFO VPWR:B VGND:B A:I Y:O VPB:B VNB:B
+M2 Y A VPWR VPB sg13_lv_pmos w=2u l=0.13u ng=1 m=1
+M1 Y A VGND VNB sg13_lv_nmos w=1u l=0.13u ng=1 m=1
+.ENDS
+
